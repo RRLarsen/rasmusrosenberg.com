@@ -1,0 +1,54 @@
+---
+import { getProfile } from '../lib/data';
+import Wordmark from './Wordmark.astro';
+
+const profile = await getProfile();
+const nav = [
+  { href: '/research/', label: 'Research' },
+  { href: '/blog-media/', label: 'Blog & Media' },
+  { href: '/expertise/', label: 'Expertise' },
+  { href: '/about/', label: 'About' },
+  { href: '/teaching/', label: 'Teaching' },
+  { href: '/contact/', label: 'Contact' },
+];
+const path = Astro.url.pathname;
+---
+<header class="wrap top sans">
+  <Wordmark name={profile.name} />
+  <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+  <nav id="site-nav" aria-label="Main">
+    {nav.map((item) => (
+      <a href={item.href} aria-current={path.startsWith(item.href) ? 'page' : undefined}>{item.label}</a>
+    ))}
+  </nav>
+</header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle')!;
+  const nav = document.getElementById('site-nav')!;
+  toggle.addEventListener('click', () => {
+    const open = toggle.getAttribute('aria-expanded') !== 'true';
+    toggle.setAttribute('aria-expanded', String(open));
+    nav.classList.toggle('open', open);
+  });
+</script>
+
+<style>
+  .top { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; padding-top: 1.1rem; padding-bottom: 1.1rem; }
+  nav { display: flex; gap: 1.5rem; flex-wrap: wrap; align-items: center; }
+  nav a { text-decoration: none; color: var(--on-deep-soft); }
+  nav a:hover, nav a[aria-current="page"] { color: var(--on-deep); text-decoration: underline; }
+  button {
+    font: inherit; background: none; color: var(--on-deep-soft); cursor: pointer;
+    border: 1px solid rgb(255 255 255 / 0.25); border-radius: 2rem; padding: 0.2rem 0.8rem;
+  }
+  button:hover { color: var(--on-deep); border-color: rgb(255 255 255 / 0.5); }
+  .menu-toggle { display: none; }
+
+  @media (max-width: 960px) {
+    .menu-toggle { display: inline-block; }
+    nav { display: none; flex-basis: 100%; flex-direction: column; align-items: flex-start; gap: 0.25rem; padding-top: 0.75rem; }
+    nav.open { display: flex; }
+    nav a { padding: 0.35rem 0; font-size: 1.0625rem; }
+  }
+</style>

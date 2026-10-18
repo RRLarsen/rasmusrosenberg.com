@@ -1,0 +1,47 @@
+# Consultancy areas, shown on the home page and the Expertise page, in this order.
+- id: law-and-personality-disorders
+  status: published
+  order: 1
+  title: Law and personality disorders
+  summary: >-
+    Guidance for legal teams on psychopathy and antisocial personality disorder,
+    including how to respond to expert evidence that presents these labels as
+    diagnoses with fixed prognoses.
+  details: >-
+    With over a decade of research on the history and scientific literature of
+    antisocial personality disorder (ASPD) and psychopathy, I offer an evidence-based
+    perspective on these highly contested constructs. I have consulted on cases in
+    North American courts where these labels are presented as medical diagnoses with
+    definitive prognostic claims, such as high risk or untreatability, and I advise
+    legal teams on how to respond effectively to expert evidence on ASPD and
+    psychopathy. I have also developed educational materials that help legal
+    professionals evaluate how these constructs are framed and used in court.
+
+- id: talks-and-lectures
+  status: published
+  order: 2
+  title: Talks and lectures
+  summary: >-
+    Talks on science and society, forensic psychology and epistemology, tailored to
+    courts, bar associations, universities and public audiences.
+  details: >-
+    With over a decade of experience as a university educator, I give talks and
+    lectures at the intersection of science and society, covering forensic
+    psychology and epistemology. Each presentation is grounded in current research
+    and tailored to its audience, with the aim of fostering critical thinking and
+    dialogue on pressing scientific and social issues.
+
+- id: ontology-and-taxonomy
+  status: published
+  order: 3
+  title: Ontology and taxonomy
+  summary: >-
+    Ontology development for structuring data in the health and cognitive sciences,
+    grounded in Basic Formal Ontology and OBO Foundry work.
+  details: >-
+    Through my research at the University of Toronto and as an Affiliated Scientist
+    at the National Center for Ontological Research, I have worked on ontology and
+    taxonomy development for data structuring and analysis in the health and
+    cognitive sciences, including projects in the Open Biological and Biomedical
+    Ontology (OBO) Foundry. I trained in Basic Formal Ontology (BFO) during my PhD at
+    the University at Buffalo, and take on consultancy work case by case.

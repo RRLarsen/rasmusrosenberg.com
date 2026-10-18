@@ -1,0 +1,454 @@
+# Media appearances: interviews, podcasts, press coverage and reviews of the book (CV section C.8).
+# summary and image (a thumbnail in public/images/media/) are shown on the Blog & Media page.
+# Thumbnails and most summaries come from each link's own preview data (its og:image and og:description).
+
+- id: 2026-uoft-magazine-can-a-test-tell
+  status: published
+  type: press
+  date: 2026-10-01
+  title: "Can a test really tell who’s dangerous?"
+  outlet: "University of Toronto Magazine"
+  url: https://magazine.utoronto.ca/research-ideas/psychopathy-test-canadian-courts/
+  summary: >-
+    A U of T study questions the reliability of a psychological assessment that has been
+    widely used in Canadian courtrooms
+  image: /images/media/2026-uoft-magazine-can-a-test-tell.jpg
+  tags: []
+
+- id: 2026-forensic-talks-psychopathy-unmasked
+  status: published
+  type: podcast
+  date: 2026-10-01
+  title: "Forensic Talks, episode 113: Psychopathy Unmasked"
+  outlet: "3D Forensics"
+  url: https://www.youtube.com/watch?v=-BVmgZZMFNw
+  image: /images/media/2026-forensic-talks-psychopathy-unmasked.jpg
+  publication: psychopathy-unmasked
+  tags: [psychopathy]
+
+- id: 2026-dna-of-things-pcl-r
+  status: published
+  type: podcast
+  date: 2026-09-27
+  title: "Dr. Rasmus Rosenberg Larsen on the PCL-R and the myth of the psychopath"
+  outlet: "The DNA of Things"
+  url: https://www.youtube.com/watch?v=RMNUokt-3P8
+  image: /images/media/2026-dna-of-things-pcl-r.jpg
+  tags: [psychopathy]
+
+- id: 2026-ejap-review-maung
+  status: published
+  type: review
+  date: 2026-09-09
+  title: "Review of Psychopathy Unmasked, by Hane Htut Maung"
+  outlet: "European Journal of Analytic Philosophy"
+  url: https://hrcak.srce.hr/en/clanak/506312
+  publication: psychopathy-unmasked
+  tags: [psychopathy]
+
+- id: 2026-varsity-psychopathy-complicated
+  status: published
+  type: interview
+  date: 2026-09-05
+  title: "Psychopathy is more complicated than we think"
+  outlet: "The Varsity"
+  url: https://thevarsity.ca/2026/09/05/psychopathy-is-more-complicated-than-we-thought/
+  tags: [psychopathy]
+
+- id: 2026-forensic-psychology-podcast
+  status: published
+  type: podcast
+  date: 2026-08-20
+  title: "Exploring the evidence for psychopathy"
+  outlet: "The Forensic Psychology Podcast (Prison Radio Association)"
+  url: https://open.spotify.com/episode/5zb25qtw1qstBKbzQVqiFT
+  image: /images/media/2026-forensic-psychology-podcast.jpg
+  tags: [psychopathy]
+
+- id: 2026-in-vivo-zombie-idea
+  status: published
+  type: podcast
+  date: 2026-08-18
+  title: "Psychopaths do not exist: The zombie idea explained"
+  outlet: "In Vivo with Tom Gabor"
+  url: https://www.youtube.com/watch?v=YgXvUkwWhhE
+  image: /images/media/2026-in-vivo-zombie-idea.jpg
+  tags: [psychopathy]
+
+- id: 2026-cbc-ideas-are-psychopaths-real
+  status: published
+  type: radio
+  date: 2026-08-03
+  title: "Are psychopaths real? A review of the science says, no"
+  outlet: "CBC Ideas with Nahlah Ayed"
+  url: https://www.cbc.ca/listen/live-radio/1-23-ideas/clip/16229326-are-psychopaths-real-a-review-science-says
+  image: /images/media/2026-cbc-ideas-are-psychopaths-real.jpg
+  tags: [psychopathy]
+  featured: true  # promoted in the rotating band on the home page
+
+- id: 2026-curiosity-desk
+  status: published
+  type: podcast
+  date: 2026-07-29
+  title: "Research on psychopathy"
+  outlet: "The Curiosity Desk"
+  url: https://www.youtube.com/live/-pwTYJJcJVo?t=9798
+  image: /images/media/2026-curiosity-desk.jpg
+  tags: [psychopathy]
+
+- id: 2026-inc-psychopaths-wrong
+  status: published
+  type: press
+  date: 2026-06-09
+  title: "Everything you think you know about psychopaths might be wrong"
+  outlet: "Inc."
+  url: https://www.inc.com/jessica-stillman/everything-you-think-you-know-about-psychopaths-might-be-wrong/91352314
+  tags: [psychopathy]
+
+- id: 2026-daily-mail-psychopaths
+  status: published
+  type: press
+  date: 2026-05-29
+  title: "Psychopaths don’t exist, scientist claims"
+  outlet: "Daily Mail"
+  url: https://www.dailymail.com/sciencetech/article-15858643/Psychopaths-dont-EXIST-Ted-Bundy.html
+  summary: >-
+    Murderous psychopaths might make great movie villains, but research now suggests that
+    these emotionless killers simply don
+  tags: [psychopathy]
+
+- id: 2026-times-of-india-chigurh-lecter
+  status: published
+  type: press
+  date: 2026-04-18
+  title: "No country for Chigurh, Lecter"
+  outlet: "The Times of India"
+  url: https://timesofindia.indiatimes.com/blogs/toi-edit-page/no-country-for-chigurh-lecter/
+  summary: >-
+    Norman Bates in Psycho, Hannibal Lecter in The Silence of the Lambs, Anton Chigurh in No
+    Country for Old Men. We owe our understanding and dread of ‘psychopaths’ to these bad
+    men. But Rasmus Rosenberg Larsen,...
+  image: /images/media/2026-times-of-india-chigurh-lecter.jpg
+  tags: []
+
+- id: 2026-think-psychopaths-not-real
+  status: published
+  type: radio
+  date: 2026-03-27
+  title: "What if psychopaths aren’t real?"
+  outlet: "Think (KERA)"
+  url: https://think.kera.org/2026/03/27/what-if-psychopaths-arent-real/
+  tags: [psychopathy]
+
+- id: 2026-cog-illusions-zombie-idea
+  status: published
+  type: podcast
+  date: 2026-03-18
+  title: "Psychopathy, a zombie idea?"
+  outlet: "Cog Illusions"
+  url: https://youtu.be/kazy7Z4l9tg
+  image: /images/media/2026-cog-illusions-zombie-idea.jpg
+  tags: [psychopathy]
+
+- id: 2026-lance-independent-zombie-idea
+  status: published
+  type: podcast
+  date: 2026-03-12
+  title: "Is psychopathy a zombie idea?"
+  outlet: "Lance Independent"
+  url: https://youtu.be/o3hWjM34pxE
+  image: /images/media/2026-lance-independent-zombie-idea.jpg
+  tags: [psychopathy]
+
+- id: 2026-in-good-health-dangerous
+  status: published
+  type: podcast
+  date: 2026-02-15
+  title: "Are psychopaths as dangerous as the legal system believes?"
+  outlet: "In Good Health"
+  url: https://www.youtube.com/watch?v=HjOpU1mhNYc
+  image: /images/media/2026-in-good-health-dangerous.jpg
+  tags: [psychopathy]
+
+- id: 2026-toronto-star-psychopath-test
+  status: published
+  type: press
+  date: 2026-02-14
+  title: "This made-in-Canada ‘psychopath test’ doesn’t work and has no place in courts, major study finds"
+  outlet: "Toronto Star"
+  url: https://www.thestar.com/news/gta/this-made-in-canada-psychopath-test-doesn-t-work-and-has-no-place-in-courts/article_99c16e8d-c892-4d72-bc3b-273f142519be.html
+  summary: >-
+    “We should probably consider a complete moratorium on these types of assessments,” says
+    U of T researcher Rasmus Rosenberg Larsen.
+  image: /images/media/2026-toronto-star-psychopath-test.jpg
+  tags: [psychopathy]
+
+- id: 2026-psychology-today-pcl-court
+  status: published
+  type: press
+  date: 2026-02-12
+  title: "Is the Psychopathy Checklist unsuitable for court?"
+  outlet: "Psychology Today"
+  url: https://www.psychologytoday.com/ca/blog/shadow-boxing/202602/is-the-psychopathy-checklist-unsuitable-for-court
+  summary: >-
+    A study finds flaws in the use of scores from psychopathy tests in court, but fails to
+    address the influence on juries of cultural portrayals of psychopathy.
+  image: /images/media/2026-psychology-today-pcl-court.jpg
+  tags: [psychopathy]
+
+- id: 2026-jfpp-review-tully
+  status: published
+  type: review
+  date: 2026-02-10
+  title: "Scepticism without synthesis: A review of Psychopathy Unmasked, by John Tully"
+  outlet: "The Journal of Forensic Psychiatry & Psychology"
+  url: https://www.tandfonline.com/doi/full/10.1080/14789949.2026.2629579
+  publication: psychopathy-unmasked
+  tags: [psychopathy]
+
+- id: 2026-uoft-news-psychopathy-test-unreliable
+  status: published
+  type: interview
+  date: 2026-02-06
+  title: "Psychopathy test used in Canadian courts unreliable, prone to bias: Study"
+  outlet: "U of T News"
+  url: https://www.utm.utoronto.ca/main-news/industrial-scale-misapplication-utm-research-questions-use-psych-assessments-courts
+  summary: >-
+    A test often used to evaluate psychopathy in Canadian criminal cases is out of date and
+    unreliable, research from the University of Toronto Mississauga suggests, raising
+    questions about the validity of the tool.The study led by Rasmus…
+  image: /images/media/2026-uoft-news-psychopathy-test-unreliable.jpg
+  tags: [psychopathy]
+
+- id: 2026-utm-news-industrial-scale
+  status: published
+  type: interview
+  date: 2026-01-19
+  title: "‘An industrial scale of misapplication’: UTM research questions use of psych assessments in courts"
+  outlet: "UTM News"
+  url: https://www.utm.utoronto.ca/main-news/industrial-scale-misapplication-utm-research-questions-use-psych-assessments-courts
+  summary: >-
+    A test often used to evaluate psychopathy in Canadian criminal cases is out of date and
+    unreliable, research from the University of Toronto Mississauga suggests, raising
+    questions about the validity of the tool.The study led by Rasmus…
+  image: /images/media/2026-utm-news-industrial-scale.jpg
+  tags: []
+
+- id: 2025-last-show-zombie-ideas
+  status: published
+  type: radio
+  date: 2025-10-22
+  title: "The myth of the psychopath"
+  outlet: "The Last Show with David Cooper (CBC)"
+  url: https://podcasts.apple.com/ca/podcast/rasmus-rosenberg-larsen-the-myth-of-the/id1168275879?i=1000733031272
+  image: /images/media/2025-last-show-zombie-ideas.jpg
+  tags: [psychopathy]
+
+- id: 2025-big-brains-psychopath
+  status: published
+  type: podcast
+  date: 2025-10-16
+  title: "Is there such a thing as a psychopath?"
+  outlet: "Big Brains (University of Chicago)"
+  url: https://news.uchicago.edu/big-brains-podcast-there-such-thing-psychopath
+  summary: >-
+    Scholar examines the science and myths around psychopathy tests—and their impact on the
+    criminal justice system
+  image: /images/media/2025-big-brains-psychopath.jpg
+  tags: [psychopathy]
+
+- id: 2025-marshall-project-book
+  status: published
+  type: interview
+  date: 2025-06-16
+  title: "Book challenges the psychopathy diagnosis in violent crime cases"
+  outlet: "The Marshall Project"
+  url: https://www.themarshallproject.org/2025/06/16/book-challenges-psychopathy-diagnosis-violent-crime
+  publication: psychopathy-unmasked
+  tags: [psychopathy]
+
+- id: 2022-news-talk-winnipeg
+  status: published
+  type: radio
+  date: 2022-12-08
+  title: "Interview on a serial killer case in Winnipeg"
+  outlet: "News Talk"
+  tags: []
+
+- id: 2021-utm-experiential-learning
+  status: published
+  type: video
+  date: 2021-06-20
+  title: "Gaining experience remotely: Collaborative research"
+  outlet: "UTM Experiential Learning Unit"
+  url: https://www.youtube.com/watch?v=ciIayJgvT9o
+  image: /images/media/2021-utm-experiential-learning.jpg
+  tags: []
+
+- id: 2021-ideas-in-practice-panel
+  status: published
+  type: video
+  date: 2021-03-05
+  title: "The phenomenal and the physical (panel)"
+  outlet: "Ideas in Practice"
+  url: https://www.youtube.com/watch?v=q5O2v44PqvY
+  image: /images/media/2021-ideas-in-practice-panel.jpg
+  tags: []
+
+- id: 2021-all-you-humans-art
+  status: published
+  type: podcast
+  date: 2021-02-21
+  title: "Prologue: The artist"
+  outlet: "All You Humans"
+  url: https://open.spotify.com/episode/4u66RudEiHdi5gqbJe3Hpq
+  image: /images/media/2021-all-you-humans-art.jpg
+  tags: []
+
+- id: 2021-ivnvi-forensic-psychology
+  status: published
+  type: podcast
+  date: 2021-02-20
+  title: "Humans of Forensics: Interview with Dr. Rasmus Larsen"
+  outlet: "IVNVI Society"
+  url: https://youtu.be/yTNTVWkBGZ0
+  image: /images/media/2021-ivnvi-forensic-psychology.jpg
+  tags: []
+
+- id: 2021-uoft-student-societies-podcast
+  status: published
+  type: podcast
+  date: 2021-02-20
+  title: "Forensic psychology"
+  outlet: "PAUSE, The Social and Criminology Society and UTM Psych Talks"
+  tags: []
+
+- id: 2021-uottawa-forensic-society
+  status: published
+  type: interview
+  date: 2021-01-03
+  title: "Forensic epistemology"
+  outlet: "University of Ottawa Forensic Society (Instagram)"
+  tags: []
+
+- id: 2020-tedx-psychopaths
+  status: published
+  type: video
+  date: 2020-11-03
+  title: "Are psychopaths dangerous social predators? A closer look at the evidence"
+  outlet: "TEDxUofT"
+  url: https://www.youtube.com/watch?v=iOcKfHI0QaU
+  image: /images/media/2020-tedx-psychopaths.jpg
+  tags: [psychopathy]
+
+- id: 2020-daily-nous-philosophical-psychology
+  status: published
+  type: press
+  date: 2020-06-24
+  title: "Controversy at Philosophical Psychology leads to editor’s resignation"
+  outlet: "Daily Nous"
+  url: https://dailynous.com/2020/06/24/controversy-philosophical-psychology-leads-editors-resignation/
+  summary: >-
+    In December 2019, the journal Philosophical Psychology published an article calling for
+    scholars to take more seriously genetics-based approaches to research on race and
+    intelligence. Yesterday, an editor [&hellip;]
+  tags: []
+
+- id: 2019-big-think-treatment
+  status: published
+  type: press
+  date: 2019-12-16
+  title: "Psychopath treatment research review"
+  outlet: "Big Think"
+  url: https://bigthink.com/surprising-science/psychopath-treatment
+  tags: [psychopathy]
+
+- id: 2019-uoft-news-outdated-understanding
+  status: published
+  type: interview
+  date: 2019-11-28
+  title: "Outdated understanding of psychopathy impairs treatment, contributes to stigma: U of T researcher"
+  outlet: "U of T News"
+  url: https://www.utoronto.ca/news/outdated-understanding-psychopathy-impairs-treatment-contributes-stigma-u-t-researcher
+  summary: >-
+    Psychopathy is one of the most widely recognized psychiatric diagnoses in popular
+    culture, but a University of Toronto researcher says it’s time to reconsider what we
+    think we know about the condition. “A lot of what people understand…
+  image: /images/media/2019-uoft-news-outdated-understanding.jpg
+  tags: [psychopathy]
+
+- id: 2019-utm-news-psychopath-test
+  status: published
+  type: interview
+  date: 2019-11-06
+  title: "Revisiting ‘The Psychopath Test’: New research gives diagnosis a failing grade"
+  outlet: "UTM News"
+  url: https://www.utm.utoronto.ca/main-news/revisiting-psychopath-test-new-research-gives-diagnosis-failing-grade
+  summary: >-
+    Charismatic, callous, criminal—the very mention of the word “psychopath” calls to mind
+    fictional and real-life monsters like Hannibal Lecter, Charles Manson or a predatory
+    executive in a pinstriped suit. Psychopathy is one of the most…
+  image: /images/media/2019-utm-news-psychopath-test.jpg
+  tags: [psychopathy]
+
+- id: 2019-medium-con-artists
+  status: published
+  type: interview
+  date: 2019-10-19
+  title: "Con artists and biases"
+  outlet: "The Medium"
+  tags: []
+
+- id: 2019-etobicoke-guardian-fraud
+  status: published
+  type: interview
+  date: 2019-09-27
+  title: "Buyer beware: How to protect yourself from fraud"
+  outlet: "The Etobicoke Guardian"
+  url: https://www.toronto.com/news-story/9599422-buyer-beware-how-to-protect-yourself-from-fraud/
+  summary: >-
+    Incidents of fraud in Canada are up nearly 20 per cent from 2017. While there is no one
+    profile for scammers, experts say people can protect themselves by doing
+  image: /images/media/2019-etobicoke-guardian-fraud.jpg
+  tags: []
+
+- id: 2018-buffalo-alumni-conversation
+  status: published
+  type: interview
+  date: "2018-10"
+  title: "Alumni conversation"
+  outlet: "University at Buffalo, Department of Philosophy newsletter"
+  tags: []
+
+- id: 2015-universitetsavisen-ode
+  status: published
+  type: other
+  date: 2015-08-19
+  title: "An ode to the inquisitive student (in Danish)"
+  outlet: "Universitetsavisen"
+  url: http://www.universitetsavisen.dk/debat/en-ode-til-den-sporgelystne-studine
+  tags: []
+
+- id: 2014-radio-247-democracy
+  status: published
+  type: radio
+  date: 2014-07-21
+  title: "Re-thinking democracy (in Danish)"
+  outlet: "Radio 24/7 Copenhagen"
+  tags: []
+
+- id: 2014-radio-247-privacy
+  status: published
+  type: radio
+  date: 2014-04-06
+  title: "Privacy (in Danish)"
+  outlet: "Radio 24/7 Copenhagen"
+  tags: []
+
+- id: 2013-radio-247-snowden
+  status: published
+  type: radio
+  date: 2013-06-15
+  title: "Edward Snowden, the NSA and surveillance (in Danish)"
+  outlet: "Radio 24/7 Copenhagen"
+  tags: []

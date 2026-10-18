@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A · Folio — Rasmus Rosenberg Larsen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Direction A: Folio. Paper, black ink, a didone for everything you read, a typewriter face for the apparatus. */
+:root {
+  --paper: #efeee9;
+  --ink: #000;
+  --ink-soft: #3a3936;
+  --muted: #6d6b66;
+  --rule: #cdcbc4;
+  --grain: .075;
+  --photo-filter: grayscale(1) contrast(1.05);
+  --serif: "Bodoni Moda", Didot, "Bodoni 72", serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --measure: 34rem;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #171715; --ink: #f0eee8; --ink-soft: #cfccc4; --muted: #9a978f; --rule: #3a3935; --grain: .05;
+    --photo-filter: grayscale(1) brightness(.92);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #171715; --ink: #f0eee8; --ink-soft: #cfccc4; --muted: #9a978f; --rule: #3a3935; --grain: .05;
+  --photo-filter: grayscale(1) brightness(.92);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-optical-sizing: auto;
+  font-size: 1.25rem;
+  line-height: 1.55;
+}
+/* paper grain */
+body::before {
+  content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: var(--grain);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+body > * { position: relative; z-index: 1; }
+
+a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: .2em; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+
+.mono { font-family: var(--mono); font-size: .8125rem; line-height: 1.5; letter-spacing: .01em; }
+.muted { color: var(--muted); }
+
+/* header */
+.top {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap;
+  padding: 1.5rem clamp(1rem, 4vw, 2.5rem);
+}
+.top nav { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+.top a { text-decoration: none; }
+.top a:hover { text-decoration: underline; }
+.theme { font: inherit; background: none; border: 0; color: inherit; cursor: pointer; padding: 0; }
+.theme:hover { text-decoration: underline; }
+
+/* hero: the field, not the person */
+.hero {
+  min-height: 78vh; display: grid; place-content: center; text-align: center;
+  padding: 4rem clamp(1rem, 4vw, 2.5rem) 5rem;
+}
+.hero h1 {
+  margin: 0 auto; max-width: 15ch;
+  font-weight: 400; font-size: clamp(2.75rem, 8.2vw, 7.25rem); line-height: .98; letter-spacing: -.015em;
+}
+.hero h1 span { display: inline-block; }
+.hero p { margin: 2.5rem auto 0; max-width: 31rem; color: var(--ink-soft); }
+.hero .mono { margin-top: 1.25rem; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero h1 span { opacity: .12; animation: ink 1.4s cubic-bezier(.2,.6,.2,1) forwards; }
+  .hero h1 span:nth-child(2) { animation-delay: .18s; }
+  .hero h1 span:nth-child(3) { animation-delay: .36s; }
+  .hero h1 span:nth-child(4) { animation-delay: .54s; }
+  .hero h1 span:nth-child(5) { animation-delay: .72s; }
+  .hero h1 span:nth-child(6) { animation-delay: .9s; }
+  @keyframes ink { to { opacity: 1; } }
+}
+
+/* sections */
+section { padding: 5.5rem clamp(1rem, 4vw, 2.5rem); border-top: 1px solid var(--rule); }
+section > h2 {
+  margin: 0 auto 3rem; text-align: center;
+  font-weight: 400; font-style: italic; font-size: clamp(2rem, 4vw, 2.75rem); line-height: 1.1;
+}
+.prose { max-width: var(--measure); margin: 0 auto; }
+.prose p { margin: 0 0 1em; }
+
+/* book */
+.book { display: grid; grid-template-columns: minmax(0, 15rem) minmax(0, var(--measure)); gap: clamp(2rem, 5vw, 4.5rem); justify-content: center; align-items: start; }
+.book img { width: 100%; height: auto; display: block; box-shadow: 0 1px 0 var(--rule); }
+.book h3 { margin: 0; font-weight: 500; font-size: 2rem; line-height: 1.1; }
+.book h3 + p { margin: .35rem 0 1.5rem; font-style: italic; font-size: 1.375rem; }
+.book .links { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; margin-top: 1.5rem; }
+
+/* publications */
+.pubs { list-style: none; margin: 0 auto; padding: 0; max-width: 46rem; }
+.pubs li { display: grid; grid-template-columns: 4.5rem 1fr; gap: 1.25rem; padding: 1.25rem 0; border-bottom: 1px solid var(--rule); }
+.pubs li:first-child { border-top: 1px solid var(--rule); }
+.pubs .yr { padding-top: .3rem; }
+.pubs a.t { display: block; text-decoration: none; font-size: 1.3125rem; line-height: 1.3; }
+.pubs a.t:hover { text-decoration: underline; }
+.pubs .m { margin-top: .35rem; }
+.more { text-align: center; margin-top: 2.5rem; }
+
+/* expertise */
+.areas { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2.5rem clamp(1.5rem, 4vw, 3.5rem); max-width: 68rem; margin: 0 auto; }
+.areas h3 { margin: 0 0 .75rem; font-weight: 500; font-size: 1.5rem; line-height: 1.2; }
+.areas p { margin: 0; font-size: 1.0625rem; color: var(--ink-soft); }
+.lede { max-width: var(--measure); margin: -1.5rem auto 3.5rem; text-align: center; color: var(--ink-soft); }
+
+/* about */
+.about { display: grid; grid-template-columns: minmax(0, 17rem) minmax(0, var(--measure)); gap: clamp(2rem, 5vw, 4.5rem); justify-content: center; align-items: start; }
+.about figure { margin: 0; }
+.about img { width: 100%; height: auto; display: block; filter: var(--photo-filter); aspect-ratio: 4 / 5; object-fit: cover; }
+.about figcaption { margin-top: .6rem; }
+
+/* contact */
+.contact { text-align: center; }
+.contact .email { display: inline-block; font-size: clamp(1.75rem, 4.5vw, 3rem); line-height: 1.15; text-decoration: none; margin: .5rem 0 2rem; overflow-wrap: anywhere; }
+.contact .email:hover { text-decoration: underline; }
+.contact address { font-style: normal; }
+footer { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; padding: 1.5rem clamp(1rem, 4vw, 2.5rem) 2rem; border-top: 1px solid var(--rule); }
+footer nav { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+
+@media (max-width: 760px) {
+  body { font-size: 1.125rem; }
+  .book, .about { grid-template-columns: 1fr; }
+  .book img { max-width: 12rem; }
+  .about img { max-width: 16rem; }
+  .areas { grid-template-columns: 1fr; }
+  .pubs li { grid-template-columns: 1fr; gap: .25rem; }
+  .hero { min-height: 70vh; }
+}
+</style>
+</head>
+<body>
+
+<header class="top mono">
+  <a href="#top">Rasmus Rosenberg Larsen</a>
+  <nav aria-label="Main">
+    <a href="#research">Research</a>
+    <a href="#book">Book</a>
+    <a href="#expertise">Expertise</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+    <button class="theme" type="button">Dark</button>
+  </nav>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <h1><span>Forensic</span> <span>epistemology</span> <span>and</span> <span>the</span> <span>philosophy</span> <span>of science</span></h1>
+    <p>Research at the intersection of psychology, epistemology and law: how scientific knowledge is used in society, and how it can improve decisions in the legal system.</p>
+    <p class="mono muted">Associate Professor, University of Toronto Mississauga<br>Affiliated Scientist, National Center for Ontological Research</p>
+  </div>
+
+  <section id="book" aria-labelledby="book-h">
+    <h2 id="book-h">The book</h2>
+    <div class="book">
+      <img src="assets/book-cover-flat.jpg" width="900" height="1350" alt="Cover of Psychopathy Unmasked: The Rise and Fall of a Dangerous Diagnosis">
+      <div>
+        <h3>Psychopathy Unmasked</h3>
+        <p>The Rise and Fall of a Dangerous Diagnosis</p>
+        <p>Psychopathy assessments are used across the legal system to inform sentencing, parole and transfer decisions. This book surveys the research and finds that people labelled psychopaths are not meaningfully more dangerous than, or psychologically different from, other offenders. It argues that the legal use of psychopathy assessments should end.</p>
+        <p class="mono muted">The MIT Press, 2025. 328 pp. ISBN 978-0-262-55220-2</p>
+        <div class="links mono">
+          <a href="https://mitpress.mit.edu/9780262552202/psychopathy-unmasked/">Order from MIT Press</a>
+          <a href="#">Reviews and interviews</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="research" aria-labelledby="research-h">
+    <h2 id="research-h">Selected publications</h2>
+    <ol class="pubs" reversed>
+      <li><span class="yr mono muted">2023</span><div><a class="t" href="https://doi.org/10.1037/law0000383">How to keep unreproducible neuroimaging evidence out of court: A case study in fMRI and psychopathy</a><div class="m mono muted">Jalava, Griffiths &amp; Larsen. Psychology, Public Policy, and Law 29(1)</div></div></li>
+      <li><span class="yr mono muted">2022</span><div><a class="t" href="https://doi.org/10.1037/tam0000184">Are psychopathy assessments ethical? A view from forensic mental health</a><div class="m mono muted">Larsen, Koch, Jalava &amp; Griffiths. Journal of Threat Assessment and Management</div></div></li>
+      <li><span class="yr mono muted">2022</span><div><a class="t" href="https://doi.org/10.1016/S2215-0366(22)00156-0">More phenomenology in psychiatry? Applied ontology as a method towards integration</a><div class="m mono muted">Larsen, Maschião, Piedade, Messas &amp; Hastings. The Lancet Psychiatry</div></div></li>
+      <li><span class="yr mono muted">2021</span><div><a class="t" href="https://doi.org/10.3389/fpsyg.2021.654336">Is the psychopathic brain an artefact of coding bias? A systematic review</a><div class="m mono muted">Jalava, Griffiths, Larsen &amp; Alcott. Frontiers in Psychology</div></div></li>
+      <li><span class="yr mono muted">2020</span><div><a class="t" href="https://doi.org/10.1037/law0000239">Are Psychopathy Checklist (PCL) psychopaths dangerous, untreatable, and without conscience? A systematic review of the empirical evidence</a><div class="m mono muted">Larsen, Jalava &amp; Griffiths. Psychology, Public Policy, and Law 26(3)</div></div></li>
+      <li><span class="yr mono muted">2020</span><div><a class="t" href="https://doi.org/10.1111/mila.12317">Are psychopaths moral-psychologically impaired? Reassessing emotion-theoretical explanations</a><div class="m mono muted">Larsen. Mind &amp; Language</div></div></li>
+    </ol>
+    <p class="more mono"><a href="#">All publications (30)</a> &nbsp; <a href="#">CV (PDF)</a></p>
+  </section>
+
+  <section id="expertise" aria-labelledby="exp-h">
+    <h2 id="exp-h">Expertise</h2>
+    <p class="lede">Available for legal consultation, public talks and ontology work. Fees depend on the scope of the job; pro bono for organisations that advance public understanding of science.</p>
+    <div class="areas">
+      <div>
+        <h3>Law and personality disorders</h3>
+        <p>Evidence-based guidance for legal teams on psychopathy and antisocial personality disorder, including how to respond to expert evidence that presents these labels as diagnoses with fixed prognoses.</p>
+      </div>
+      <div>
+        <h3>Talks and lectures</h3>
+        <p>Talks on science and society, forensic psychology and epistemology, tailored to the audience, from courts and bar associations to universities and the public.</p>
+      </div>
+      <div>
+        <h3>Ontology and taxonomy</h3>
+        <p>Ontology development for structuring data in the health and cognitive sciences, with training in Basic Formal Ontology and work on OBO Foundry projects.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" aria-labelledby="about-h">
+    <h2 id="about-h">About</h2>
+    <div class="about">
+      <figure>
+        <img src="assets/headshot-portrait.jpg" width="1119" height="1400" alt="Rasmus Rosenberg Larsen">
+      </figure>
+      <div class="prose">
+        <p>Rasmus Rosenberg Larsen is Associate Professor of Forensic Epistemology and Philosophy of Science at the University of Toronto Mississauga, and an Affiliated Scientist at the National Center for Ontological Research.</p>
+        <p>His research has appeared in The Lancet Psychiatry; Psychology, Public Policy, and Law; and Philosophical Psychology. He holds a PhD in philosophy of science from the University at Buffalo.</p>
+        <p class="mono"><a href="#">Full biography</a> &nbsp; <a href="#">CV (PDF)</a> &nbsp; <a href="#">Press kit</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact" aria-labelledby="contact-h">
+    <h2 id="contact-h">Contact</h2>
+    <p class="prose">For legal consultation, speaking invitations and other enquiries.</p>
+    <a class="email" href="mailto:rosenberg.larsen@utoronto.ca">rosenberg.larsen@utoronto.ca</a>
+    <address class="mono muted">Department of Forensic Science, NSB 2010<br>University of Toronto Mississauga<br>3359 Mississauga Road, Mississauga, ON L5L 1C6, Canada</address>
+  </section>
+</main>
+
+<footer class="mono muted">
+  <nav aria-label="Profiles">
+    <a href="https://scholar.google.com/citations?user=YX6hlhsAAAAJ">Google Scholar</a>
+    <a href="https://www.researchgate.net/profile/Rasmus-Larsen">ResearchGate</a>
+    <a href="https://www.linkedin.com/in/rosenberglarsen/">LinkedIn</a>
+    <a href="https://www.youtube.com/@Rosenberglarsen">YouTube</a>
+  </nav>
+  <a href="index.html">All mockups</a>
+</footer>
+
+<script>
+const root = document.documentElement, btn = document.querySelector('.theme');
+const current = () => root.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+const label = () => { const d = current() === 'dark'; btn.textContent = d ? 'Light' : 'Dark'; btn.setAttribute('aria-label', d ? 'Switch to light mode' : 'Switch to dark mode'); };
+btn.addEventListener('click', () => { root.dataset.theme = current() === 'dark' ? 'light' : 'dark'; label(); });
+label();
+</script>
+</body>
+</html>

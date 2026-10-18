@@ -1,0 +1,103 @@
+# Who Rasmus is. Used on every page, in metadata, the press kit and the CV.
+name: Rasmus Rosenberg Larsen
+given_name: Rasmus
+family_name: Rosenberg Larsen
+honorific_suffix: Ph.D.
+
+titles:
+  - role: Associate Professor of Forensic Epistemology and Philosophy of Science
+    unit: Institute of Forensic Sciences
+    organization: University of Toronto Mississauga
+    url: https://www.utm.utoronto.ca/
+  - role: Affiliated Scientist
+    organization: National Center for Ontological Research
+    url: https://ncor.buffalo.edu/
+
+fields:
+  - Forensic epistemology
+  - Philosophy of science
+  - Ontology
+
+email: rosenberg.larsen@utoronto.ca
+address:
+  - Institute of Forensic Sciences, SB 2010
+  - University of Toronto Mississauga
+  - 3359 Mississauga Road
+  - Mississauga, ON L5L 1C6, Canada
+
+# All known profiles. Only those listed under show_links appear on the site.
+links:
+  google_scholar: https://scholar.google.com/citations?user=YX6hlhsAAAAJ
+  researchgate: https://www.researchgate.net/profile/Rasmus-Larsen
+  linkedin: https://www.linkedin.com/in/rosenberglarsen/
+  youtube: https://www.youtube.com/@Rosenberglarsen
+  github: https://github.com/rrlarsen
+  orcid: https://orcid.org/0000-0002-9294-8645
+show_links: [linkedin, google_scholar, researchgate, youtube]
+
+# The PDF CV. Until the generated CV exists, drop a PDF at public/ with this name.
+cv_pdf: /rasmus-rosenberg-larsen-cv.pdf
+
+photo:
+  portrait: /images/headshot-portrait.jpg
+  wide: /images/headshot-wide.jpg
+  alt: Rasmus Rosenberg Larsen on the University of Toronto Mississauga campus
+
+# Credits and terms printed in the press kit README.
+press_kit:
+  photo_credit: Rasmus Rosenberg Larsen
+  cover_credit: Courtesy of The MIT Press
+  usage: >-
+    The photographs may be used free of charge for press coverage, event programmes,
+    posters and speaker introductions relating to Rasmus Rosenberg Larsen and his work,
+    with the photo credit given above. Please do not alter the photographs beyond
+    cropping and resizing.
+
+education:
+  - degree: Ph.D.
+    field: Philosophy
+    institution: University at Buffalo (SUNY)
+    date: 2017-06
+    supervisor: Barry Smith
+  - degree: M.A.
+    field: Philosophy
+    institution: University at Buffalo (SUNY)
+    date: 2013-05
+    supervisor: Kah Kyung Cho
+  - degree: B.Sc.
+    field: Philosophy & Business Administration
+    institution: Copenhagen Business School
+    date: 2011-07
+    supervisor: Tommy Moseby-Jensen
+
+# Research interests (CV section C.1)
+research_interests:
+  specialization:
+    - Philosophy of Science (i.e., psychology and mental health research)
+    - Forensic Science (i.e., forensic epistemology and forensic psychology)
+    - Formal and Applied Ontology (i.e., semantic enrichment of mental health data)
+    - Value Theory (i.e., moral psychology, aesthetics, and applied ethics/bioethics)
+  competence:
+    - Analytic Metaphysics
+    - History of Philosophy
+
+bio:
+  short: >-
+    Rasmus Rosenberg Larsen is Associate Professor of Forensic Epistemology and
+    Philosophy of Science at the Institute of Forensic Sciences, University of Toronto
+    Mississauga, and author of
+    Psychopathy Unmasked (MIT Press, 2025).
+  medium: >-
+    Rasmus Rosenberg Larsen (PhD) is an Associate Professor of Forensic Epistemology
+    and Philosophy of Science at the Institute of Forensic Sciences, University of
+    Toronto Mississauga, and an
+    Affiliated Scientist at the National Center for Ontological Research. His work
+    lies at the intersection of psychology, epistemology, and law, with research
+    published in journals such as The Lancet Psychiatry; Psychology, Public Policy,
+    and Law; and Philosophical Psychology.
+  long: |-
+    Rasmus Rosenberg Larsen (PhD) is an Associate Professor of Forensic Epistemology and Philosophy of Science at the Institute of Forensic Sciences, University of Toronto Mississauga, and an Affiliated Scientist at the National Center for Ontological Research. His work lies at the intersection of psychology, epistemology, and law, with research published in journals such as The Lancet Psychiatry; Psychology, Public Policy, and Law; and Philosophical Psychology.
+
+    Rasmus is the author of Psychopathy Unmasked: The Rise and Fall of a Dangerous Diagnosis (MIT Press), which offers a critical review of contemporary research and the judicial use of the controversial diagnosis commonly known as psychopathic personality disorder, or "psychopathy".
+
+    Rasmus earned his PhD in Philosophy of Science from the University at Buffalo, New York. His academic and professional work reflects a commitment to improving how scientific knowledge is used in society, particularly how science can improve decision-making throughout the legal system.

@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C · Apparatus — Rasmus Rosenberg Larsen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..700;1,400..700&family=Alegreya+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Direction C: Apparatus. The page reads like a well-made scholarly text: a single column of argument,
+   with the evidence in the margin. Claims carry note numbers; the notes are the publications. */
+:root {
+  --paper: #f6f5f1;
+  --ink: #1b1b1a;
+  --ink-soft: #444340;
+  --note: #5f5e59;
+  --rule: #d8d6cf;
+  --mark: #e4e1d6;
+  --serif: "Alegreya", Georgia, serif;
+  --sc: "Alegreya SC", "Alegreya", Georgia, serif;
+  --main: 36rem;
+  --margin: 15rem;
+  --gap: 3rem;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --paper: #1a1a18; --ink: #e9e7e1; --ink-soft: #c9c6be; --note: #a29f97; --rule: #383733; --mark: #34332e; color-scheme: dark; }
+}
+:root[data-theme="dark"] { --paper: #1a1a18; --ink: #e9e7e1; --ink-soft: #c9c6be; --note: #a29f97; --rule: #383733; --mark: #34332e; color-scheme: dark; }
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background-color: var(--paper); color: var(--ink); font-family: var(--serif); font-size: 1.25rem; line-height: 1.6; font-variant-numeric: oldstyle-nums proportional-nums; }
+a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: .18em; text-decoration-color: var(--note); }
+a:hover { text-decoration-color: currentColor; }
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+.sc { font-family: var(--sc); letter-spacing: .03em; }
+
+.page { max-width: calc(var(--main) + var(--margin) + var(--gap)); margin: 0 auto; padding: 0 1rem; }
+
+/* header */
+.top { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: .5rem 1.5rem; padding: 2rem 0 0; }
+.top .name { font-size: 1.25rem; text-decoration: none; }
+.top nav { display: flex; gap: 1.25rem; flex-wrap: wrap; font-size: 1.0625rem; }
+.top nav a { text-decoration: none; }
+.top nav a:hover { text-decoration: underline; }
+.theme { font: inherit; background: none; border: 0; color: inherit; padding: 0; cursor: pointer; }
+.theme:hover { text-decoration: underline; }
+
+/* the text-with-margin structure */
+.row { display: grid; grid-template-columns: minmax(0, var(--main)) var(--margin); gap: var(--gap); align-items: start; }
+.margin { font-size: .9375rem; line-height: 1.45; color: var(--note); }
+.margin p, .margin .n { margin: 0 0 1.1rem; }
+.n { display: block; padding: .15rem .4rem; margin-left: -.4rem; border-radius: 2px; transition: background-color .2s; }
+.n.on { background: var(--mark); color: var(--ink); }
+.n b { font-weight: 500; color: var(--ink); }
+sup.ref { font-size: .62em; line-height: 0; margin-left: .05em; }
+sup.ref a { text-decoration: none; padding: 0 .1em; border-radius: 2px; }
+sup.ref a:hover, sup.ref a:focus-visible, sup.ref a.on { background: var(--mark); }
+
+/* opening */
+.opening { padding: clamp(4rem, 14vh, 8rem) 0 4rem; }
+.opening p.lead { margin: 0; font-size: clamp(1.5rem, 2.9vw, 2.0625rem); line-height: 1.38; letter-spacing: -.005em; }
+.opening .byline { margin: 2rem 0 0; color: var(--note); font-size: 1.0625rem; }
+.margin img.cover { width: 6.5rem; height: auto; display: block; margin: .5rem 0 .4rem; }
+
+/* sections */
+section { padding: 3.5rem 0; border-top: 1px solid var(--rule); }
+h2 { margin: 0 0 1.5rem; font-family: var(--sc); font-weight: 400; font-size: 1.375rem; letter-spacing: .04em; }
+.prose p { margin: 0 0 1em; }
+.prose h3 { margin: 0; font-size: 1.75rem; font-weight: 500; line-height: 1.2; }
+.prose h3 + .sub { margin: .2rem 0 1.25rem; font-style: italic; font-size: 1.375rem; color: var(--ink-soft); }
+
+/* bibliography */
+.bib { list-style: none; margin: 0; padding: 0; }
+.bib li { padding-left: 1.75rem; text-indent: -1.75rem; margin-bottom: 1rem; font-size: 1.125rem; line-height: 1.5; }
+.bib i { color: var(--ink); }
+
+/* expertise run-in heads */
+.runin p { margin: 0 0 1.25rem; }
+.runin .sc { font-size: 1.0625em; }
+
+.margin img.portrait { width: 100%; max-width: 12rem; height: auto; display: block; aspect-ratio: 4 / 5; object-fit: cover; margin-bottom: .5rem; }
+
+.email { font-size: clamp(1.375rem, 3vw, 1.875rem); overflow-wrap: anywhere; }
+address { font-style: normal; color: var(--note); margin-top: 1.25rem; font-size: 1.0625rem; }
+footer { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; padding: 2rem 0 2.5rem; border-top: 1px solid var(--rule); color: var(--note); font-size: 1.0625rem; }
+footer nav { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+
+@media (max-width: 860px) {
+  body { font-size: 1.125rem; }
+  .row { grid-template-columns: 1fr; gap: 1.5rem; }
+  .margin { border-left: 2px solid var(--rule); padding-left: 1rem; }
+  .opening { padding-top: 3.5rem; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header class="top">
+  <a class="name sc" href="#top">Rasmus Rosenberg Larsen</a>
+  <nav aria-label="Main" class="sc">
+    <a href="#research">Research</a>
+    <a href="#book">Book</a>
+    <a href="#expertise">Expertise</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+    <button class="theme" type="button">Dark</button>
+  </nav>
+</header>
+
+<main id="top">
+  <div class="row opening">
+    <div>
+      <p class="lead">I work on how scientific knowledge is produced, contested and put to use: in psychiatry, in the courtroom, and in the ontologies that structure scientific data.<sup class="ref"><a href="#n1" data-n="1" aria-label="Note 1">1</a></sup> Much of my research examines psychopathy, a diagnosis widely used in the legal system whose scientific basis does not hold up to scrutiny.<sup class="ref"><a href="#n2" data-n="2" aria-label="Note 2">2</a></sup> My book argues that psychopathy assessments should no longer be used in court.<sup class="ref"><a href="#n3" data-n="3" aria-label="Note 3">3</a></sup></p>
+      <p class="byline">Associate Professor of Forensic Epistemology and Philosophy of Science, University of Toronto Mississauga. Affiliated Scientist, National Center for Ontological Research.</p>
+    </div>
+    <aside class="margin" aria-label="Notes">
+      <span class="n" id="n1" data-n="1">1. Jalava, Griffiths &amp; Larsen, <a href="https://doi.org/10.1037/law0000383">How to keep unreproducible neuroimaging evidence out of court</a>, <i>Psychology, Public Policy, and Law</i>, 2023. Larsen &amp; Hastings, <a href="https://doi.org/10.3389/fpsyt.2018.00487">From affective science to psychiatric disorder</a>, <i>Frontiers in Psychiatry</i>, 2018.</span>
+      <span class="n" id="n2" data-n="2">2. Larsen, Jalava &amp; Griffiths, <a href="https://doi.org/10.1037/law0000239">Are PCL psychopaths dangerous, untreatable, and without conscience?</a> <i>Psychology, Public Policy, and Law</i>, 2020.</span>
+      <span class="n" id="n3" data-n="3">3. <a href="#book"><img class="cover" src="assets/book-cover-flat.jpg" width="900" height="1350" alt=""><b>Psychopathy Unmasked</b></a>, The MIT Press, 2025.</span>
+    </aside>
+  </div>
+
+  <section id="book" aria-labelledby="book-h">
+    <div class="row">
+      <div class="prose">
+        <h2 id="book-h">The book</h2>
+        <h3>Psychopathy Unmasked</h3>
+        <p class="sub">The Rise and Fall of a Dangerous Diagnosis</p>
+        <p>Psychopathy assessments inform sentencing, parole and transfer decisions for an estimated hundreds of thousands of offenders in North America each year. The book surveys the research and finds that people labelled psychopaths are not meaningfully more dangerous than, or psychologically different from, other offenders. On that evidence, it argues that the legal use of psychopathy assessments should end.</p>
+        <p><a href="https://mitpress.mit.edu/9780262552202/psychopathy-unmasked/">Order from The MIT Press</a></p>
+      </div>
+      <aside class="margin">
+        <p>The MIT Press, June 2025<br>Paperback, 328 pages<br>ISBN 978-0-262-55220-2</p>
+        <p><a href="#">Reviews, interviews and events</a></p>
+      </aside>
+    </div>
+  </section>
+
+  <section id="research" aria-labelledby="research-h">
+    <div class="row">
+      <div>
+        <h2 id="research-h">Selected publications</h2>
+        <ul class="bib">
+          <li>Jalava, J., Griffiths, S., &amp; Larsen, R. R. (2023). <a href="https://doi.org/10.1037/law0000383">How to keep unreproducible neuroimaging evidence out of court: A case study in fMRI and psychopathy</a>. <i>Psychology, Public Policy, and Law</i>, 29(1), 1–18.</li>
+          <li>Larsen, R. R., Koch, P., Jalava, J., &amp; Griffiths, S. (2022). <a href="https://doi.org/10.1037/tam0000184">Are psychopathy assessments ethical? A view from forensic mental health</a>. <i>Journal of Threat Assessment and Management</i>.</li>
+          <li>Larsen, R. R., Maschião, L., Piedade, V., Messas, G., &amp; Hastings, J. (2022). <a href="https://doi.org/10.1016/S2215-0366(22)00156-0">More phenomenology in psychiatry? Applied ontology as a method towards integration</a>. <i>The Lancet Psychiatry</i>.</li>
+          <li>Jalava, J., Griffiths, S., Larsen, R. R., &amp; Alcott, E. B. (2021). <a href="https://doi.org/10.3389/fpsyg.2021.654336">Is the psychopathic brain an artefact of coding bias? A systematic review</a>. <i>Frontiers in Psychology</i>.</li>
+          <li>Larsen, R. R., Jalava, J., &amp; Griffiths, S. (2020). <a href="https://doi.org/10.1037/law0000239">Are Psychopathy Checklist (PCL) psychopaths dangerous, untreatable, and without conscience? A systematic review of the empirical evidence</a>. <i>Psychology, Public Policy, and Law</i>, 26(3), 297–311.</li>
+          <li>Larsen, R. R. (2020). <a href="https://doi.org/10.1111/mila.12317">Are psychopaths moral-psychologically impaired? Reassessing emotion-theoretical explanations</a>. <i>Mind &amp; Language</i>.</li>
+        </ul>
+      </div>
+      <aside class="margin">
+        <p><a href="#">All publications</a>, by year or by topic, with citations and BibTeX.</p>
+        <p><a href="#">Curriculum vitae</a> (PDF)</p>
+        <p><a href="https://scholar.google.com/citations?user=YX6hlhsAAAAJ">Google Scholar</a></p>
+      </aside>
+    </div>
+  </section>
+
+  <section id="expertise" aria-labelledby="exp-h">
+    <div class="row">
+      <div class="runin">
+        <h2 id="exp-h">Expertise</h2>
+        <p><span class="sc">Law and personality disorders.</span> Guidance for legal teams on psychopathy and antisocial personality disorder, including how to respond to expert evidence that presents these labels as diagnoses with fixed prognoses, such as high risk or untreatability.</p>
+        <p><span class="sc">Talks and lectures.</span> Talks on science and society, forensic psychology and epistemology, prepared for the audience at hand: courts and bar associations, universities, or the public.</p>
+        <p><span class="sc">Ontology and taxonomy.</span> Ontology development for structuring data in the health and cognitive sciences, grounded in Basic Formal Ontology and work on OBO Foundry projects.</p>
+      </div>
+      <aside class="margin">
+        <p>Fees are set by the scope of the work. Pro bono for institutions and non-profits that advance public understanding of science.</p>
+        <p><a href="#contact">Enquire about availability</a></p>
+      </aside>
+    </div>
+  </section>
+
+  <section id="about" aria-labelledby="about-h">
+    <div class="row">
+      <div class="prose">
+        <h2 id="about-h">About</h2>
+        <p>Rasmus Rosenberg Larsen is Associate Professor of Forensic Epistemology and Philosophy of Science at the University of Toronto Mississauga, and an Affiliated Scientist at the National Center for Ontological Research. His research appears in <i>The Lancet Psychiatry</i>, <i>Psychology, Public Policy, and Law</i>, and <i>Philosophical Psychology</i>.</p>
+        <p>He holds a PhD in philosophy of science from the University at Buffalo. His work is driven by a commitment to improving how scientific knowledge is used in society, particularly in the legal system.</p>
+      </div>
+      <aside class="margin">
+        <img class="portrait" src="assets/headshot-portrait.jpg" width="1119" height="1400" alt="Rasmus Rosenberg Larsen">
+        <p><a href="#">Press kit</a>: bios, photographs, book cover.</p>
+      </aside>
+    </div>
+  </section>
+
+  <section id="contact" aria-labelledby="contact-h">
+    <div class="row">
+      <div>
+        <h2 id="contact-h">Contact</h2>
+        <p style="margin:0 0 .5rem">For legal consultation, speaking invitations and other enquiries:</p>
+        <a class="email" href="mailto:rosenberg.larsen@utoronto.ca">rosenberg.larsen@utoronto.ca</a>
+        <address>Department of Forensic Science, NSB 2010<br>University of Toronto Mississauga<br>3359 Mississauga Road, Mississauga, ON L5L 1C6, Canada</address>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <nav aria-label="Profiles" class="sc">
+    <a href="https://scholar.google.com/citations?user=YX6hlhsAAAAJ">Google Scholar</a>
+    <a href="https://www.researchgate.net/profile/Rasmus-Larsen">ResearchGate</a>
+    <a href="https://www.linkedin.com/in/rosenberglarsen/">LinkedIn</a>
+    <a href="https://www.youtube.com/@Rosenberglarsen">YouTube</a>
+  </nav>
+  <a href="index.html">All mockups</a>
+</footer>
+
+</div>
+<script>
+const root = document.documentElement, btn = document.querySelector('.theme');
+const current = () => root.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+const label = () => { const d = current() === 'dark'; btn.textContent = d ? 'Light' : 'Dark'; btn.setAttribute('aria-label', d ? 'Switch to light mode' : 'Switch to dark mode'); };
+btn.addEventListener('click', () => { root.dataset.theme = current() === 'dark' ? 'light' : 'dark'; label(); });
+label();
+
+/* pointing at a note number lights up its note in the margin */
+document.querySelectorAll('sup.ref a').forEach(a => {
+  const note = document.getElementById('n' + a.dataset.n);
+  const on = v => { note.classList.toggle('on', v); a.classList.toggle('on', v); };
+  ['mouseenter', 'focus'].forEach(e => a.addEventListener(e, () => on(true)));
+  ['mouseleave', 'blur'].forEach(e => a.addEventListener(e, () => on(false)));
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CV builder</title>
+  <link rel="stylesheet" href="/app.css" />
+</head>
+<body>
+  <header class="bar">
+    <strong class="brand">CV builder</strong>
+    <span class="status" id="status" role="status" aria-live="polite"></span>
+    <div class="bar-actions">
+      <button type="button" id="checkpoint" class="ghost" title="Save a checkpoint of data/ that you can return to">Checkpoint</button>
+      <a class="ghost" href="http://localhost:4321/about/" target="_blank" rel="noopener">Open website</a>
+    </div>
+  </header>
+
+  <div class="layout">
+    <nav class="sections" id="sections" aria-label="CV sections"></nav>
+
+    <section class="entries" aria-label="Entries">
+      <div class="entries-head">
+        <h1 id="section-title">Choose a section</h1>
+        <p id="section-note" class="note"></p>
+        <div class="entries-tools" id="entries-tools" hidden>
+          <input type="search" id="search" placeholder="Search this section" aria-label="Search this section" />
+          <button type="button" id="add" class="primary">Add new entry</button>
+        </div>
+      </div>
+      <ul class="entry-list" id="entry-list"></ul>
+    </section>
+
+    <section class="detail" aria-label="Editor and preview">
+      <div class="tabs" role="tablist">
+        <button type="button" role="tab" id="tab-edit" aria-selected="true">Edit</button>
+        <button type="button" role="tab" id="tab-pdf" aria-selected="false">PDF preview</button>
+        <label class="pdf-version" id="pdf-version" hidden>
+          <select id="pdf-which" aria-label="Which PDF">
+            <option value="public">Public version (no student names)</option>
+            <option value="private">Private version (with student names)</option>
+          </select>
+        </label>
+      </div>
+      <div class="panel" id="panel-edit">
+        <p class="empty" id="edit-empty">Choose an entry, or add a new one.</p>
+        <form id="form" hidden novalidate></form>
+      </div>
+      <div class="panel" id="panel-pdf" hidden>
+        <iframe id="pdf" title="PDF preview of the CV"></iframe>
+      </div>
+    </section>
+  </div>
+
+  <script src="/app.js" type="module"></script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+---
+/* Publications as APA references. Under each: Abstract (opens in place), PDF when there
+   is one, and Cite, which downloads a citation file (RIS) for reference managers. */
+import type { Publication } from '../lib/data';
+import { apa } from '../lib/cite';
+
+interface Props { items: Publication[] }
+const { items } = Astro.props;
+---
+<ol class="pubs">
+  {items.map((p) => {
+    // a book's description serves as its abstract
+    const abstract = p.data.abstract ?? (p.data.type === 'book' ? p.data.description : undefined);
+    const absId = `abstract-${p.id}`;
+    return (
+      <li>
+        <p class="ref" set:html={apa(p)} />
+        <div class="acts sans">
+          {abstract && (
+            <button type="button" class="abs-toggle" aria-expanded="false" aria-controls={absId}>Abstract</button>
+          )}
+          {p.data.pdf && <a href={p.data.pdf}>PDF</a>}
+          {!p.data.stage && (
+            <a class="cite" href={`/research/ris/${p.id}.ris`} download title="Download citation (RIS) for Zotero, EndNote or Mendeley">
+              <span class="mark" aria-hidden="true">“</span>Cite
+            </a>
+          )}
+        </div>
+        {abstract && <p class="abstract" id={absId} hidden>{abstract}</p>}
+      </li>
+    );
+  })}
+</ol>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('.abs-toggle').forEach((btn) => {
+    const panel = document.getElementById(btn.getAttribute('aria-controls')!);
+    btn.addEventListener('click', () => {
+      const open = btn.getAttribute('aria-expanded') !== 'true';
+      btn.setAttribute('aria-expanded', String(open));
+      if (panel) panel.hidden = !open;
+    });
+  });
+</script>
+
+<style>
+  .pubs { list-style: none; margin: 0; padding: 0; }
+  li { padding: 1rem 0; border-top: 1px solid var(--rule); }
+  li:last-child { border-bottom: 1px solid var(--rule); }
+  .ref { margin: 0; padding-left: 1.5rem; text-indent: -1.5rem; line-height: 1.5; }
+  .ref :global(a) { overflow-wrap: anywhere; }
+  .acts { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.35rem 1.4rem; margin-top: 0.5rem; padding-left: 1.5rem; font-size: 0.875rem; }
+  .acts a, .abs-toggle { color: var(--link); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
+  .abs-toggle { font: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+  .abs-toggle::after { content: "+"; display: inline-block; margin-left: 0.3em; text-decoration: none; }
+  .abs-toggle[aria-expanded="true"]::after { content: "−"; }
+  /* the large opening quotation mark, as on journal sites */
+  .cite { display: inline-flex; align-items: baseline; text-decoration: none !important; }
+  .cite .mark { font-family: var(--serif); font-size: 2.4em; font-weight: 600; line-height: 0; margin-right: 0.08em; position: relative; top: 0.42em; }
+  .cite:hover { text-decoration: underline !important; }
+  .abstract { margin: 0.6rem 0 0.25rem 1.5rem; max-width: var(--measure); font-size: 1.0625rem; line-height: 1.55; color: var(--ink-soft); }
+</style>

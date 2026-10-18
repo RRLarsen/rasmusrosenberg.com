@@ -1,0 +1,34 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHeading from '../components/PageHeading.astro';
+import Section from '../components/Section.astro';
+import PublicationList from '../components/PublicationList.astro';
+import ScholarStats from '../components/ScholarStats.astro';
+import { getPublications, getSite, onWebsite } from '../lib/data';
+import { publication } from '../lib/jsonld';
+
+const site = await getSite();
+const pubs = (await getPublications()).filter(onWebsite);
+// Book reviews, op-eds and other non-peer-reviewed writing are left out here; op-eds
+// appear under Blog & Media, and everything is in the CV on the About page.
+const books = pubs.filter((p) => p.data.type === 'book');
+const peerReviewed = pubs.filter((p) => ['article', 'chapter', 'commentary'].includes(p.data.type));
+---
+<Base title="Research" description={site.pages.research} jsonLd={[...books, ...peerReviewed].filter((p) => !p.data.stage).map((p) => publication(p, site.url))}>
+  <Fragment slot="band">
+    <PageHeading title="Research" intro={site.pages.research} />
+    <div class="wrap stats-wrap"><ScholarStats /></div>
+  </Fragment>
+
+  <Section title={books.length === 1 ? 'Book' : 'Books'}>
+    <PublicationList items={books} />
+  </Section>
+
+  <Section title="Peer-reviewed articles and chapters" note="Most recent first">
+    {peerReviewed.length === 0 ? <p class="empty">No publications listed yet.</p> : <PublicationList items={peerReviewed} />}
+  </Section>
+</Base>
+
+<style>
+  .stats-wrap { margin-top: -0.75rem; padding-bottom: clamp(1.75rem, 4vh, 2.5rem); }
+</style>

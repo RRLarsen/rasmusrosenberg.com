@@ -1,0 +1,40 @@
+---
+/* The name as a wordmark: capitals with small capitals, letter-spaced, with two hairline
+   rules underneath that leave a gap in the middle. Built from text, so it stays sharp,
+   follows the colour theme, and reads as the plain name to screen readers. */
+interface Props { name: string; href?: string }
+const { name, href = '/' } = Astro.props;
+const words = name.split(' ');
+---
+<a class="wordmark" href={href} aria-label={name}>
+  <span class="letters" aria-hidden="true">
+    {words.map((w, i) => (
+      <>
+        <span class="cap">{w[0]}</span><span class="sc">{w.slice(1)}</span>{i < words.length - 1 && ' '}
+      </>
+    ))}
+  </span>
+</a>
+
+<style>
+  .wordmark {
+    display: inline-block; position: relative; padding-bottom: 0.55rem;
+    font-family: var(--serif); font-size: 1.3rem; line-height: 1; text-decoration: none; white-space: nowrap;
+    text-transform: uppercase; letter-spacing: 0.11em; font-variation-settings: "opsz" 24;
+  }
+  /* small capitals: smaller capitals, drawn slightly heavier so their strokes match */
+  .sc { font-size: 0.74em; font-weight: 480; letter-spacing: 0.14em; }
+  .cap { font-weight: 400; }
+  /* the two rules, leaving the middle open */
+  .wordmark::before, .wordmark::after {
+    content: ""; position: absolute; bottom: 0; width: 38%; height: 1px;
+    background: currentColor; opacity: 0.45;
+  }
+  .wordmark::before { left: 0; }
+  .wordmark::after { right: 0.11em; }
+  .wordmark:hover::before, .wordmark:hover::after { opacity: 0.8; }
+  @media (max-width: 420px) {
+    .wordmark { font-size: 1.1rem; letter-spacing: 0.08em; }
+    .sc { letter-spacing: 0.1em; }
+  }
+</style>

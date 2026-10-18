@@ -1,0 +1,51 @@
+# Site copy that is not about a specific record: page headlines and short introductions.
+title: Rasmus Rosenberg Larsen
+description: >-
+  Rasmus Rosenberg Larsen is Associate Professor of Forensic Epistemology and
+  Philosophy of Science at the Institute of Forensic Sciences, University of Toronto
+  Mississauga, and author of
+  Psychopathy Unmasked (MIT Press, 2025).
+url: https://rasmusrosenberg.com
+
+# Quotes for the turquoise band on the home page. They rotate, and visitors can pick one with the dots below.
+quotes:
+  - >-
+    The responsible use of science in law begins with understanding the strengths and
+    limitations of scientific evidence, while recognizing the consequences of getting
+    it wrong.
+  - >-
+    If four decades of research on psychopathy have taught us anything, it is that
+    virtually all our most deeply held assumptions about the disorder have been called
+    into question by empirical evidence.
+  - >-
+    The primary task of a forensic epistemologist is to critically examine how scientific
+    knowledge is produced, with the aim of assessing its utility and limitations in legal
+    decision-making.
+# The line under the quote.
+intro: >-
+  Rasmus Rosenberg Larsen, Ph.D., Associate Professor of Forensic Epistemology at
+  the Institute of Forensic Sciences at the University of Toronto Mississauga.
+
+pages:
+  # draft description of research interests, for Rasmus to revise
+  research: >-
+    My research examines how scientific evidence is produced, evaluated and used,
+    especially in psychiatry and the law. Much of it concerns psychopathy: what the
+    research actually shows, and whether psychopathy assessments belong in the legal
+    system. I also work on applied ontology for psychiatry and the health sciences,
+    and on the nature of moral and aesthetic judgment.
+  book: A critical review of psychopathy research and its use in the legal system.
+  media: Writing, talks, interviews and media appearances.
+  teaching: University courses, continuing education and educational resources.
+  expertise: >-
+    Available for legal consultation, public talks and ontology work. Fees depend on
+    the scope of the job, with pro bono work for organisations that advance public
+    understanding of science.
+  expertise_contact: >-
+    Write with a short description of the case or event, the timeline and the
+    audience. I welcome enquiries about availability and fees.
+  about: Biography and curriculum vitae.
+  contact: >-
+    For legal consultation, speaking invitations and other enquiries, email is the
+    best way to reach me.
+  tools: Small tools for teaching, free to use.

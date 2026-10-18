@@ -1,0 +1,18 @@
+# Citation figures shown on the Research page. Google Scholar has no API, so these are
+# copied by hand from the public profile. Update them now and then, and change as_of.
+profile_url: https://scholar.google.com/citations?user=YX6hlhsAAAAJ
+as_of: 2026-10-16
+publications: 42
+citations: 392
+h_index: 10
+i10_index: 10
+citations_per_year:
+  2018: 1
+  2019: 6
+  2020: 14
+  2021: 33
+  2022: 45
+  2023: 71
+  2024: 51
+  2025: 81
+  2026: 77

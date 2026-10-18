@@ -1,0 +1,54 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import PageHeading from '../components/PageHeading.astro';
+import Section from '../components/Section.astro';
+import MediaList, { type MediaItem } from '../components/MediaList.astro';
+import { getPublications, getSite, isPublished, onWebsite, byDateDesc } from '../lib/data';
+import { buildPressKit, pressKitPath, sizeLabel } from '../lib/press-kit';
+
+const site = await getSite();
+const pressKitSize = sizeLabel((await buildPressKit()).length);
+
+const media: MediaItem[] = (await getCollection('media', onWebsite)).sort(byDateDesc).map((m) => ({
+  title: m.data.title, outlet: m.data.outlet, date: m.data.date, summary: m.data.summary, image: m.data.image, url: m.data.url,
+}));
+const writing: MediaItem[] = (await getPublications())
+  .filter((p) => onWebsite(p) && ['op-ed', 'other'].includes(p.data.type))
+  .map((p) => ({
+    title: p.data.note ? `${p.data.title} (${p.data.note.toLowerCase()})` : p.data.title,
+    outlet: p.data.venue ?? '', date: p.data.date, summary: p.data.abstract, image: p.data.image, url: p.data.publisher_url,
+  }));
+const posts: MediaItem[] = (await getCollection('posts', isPublished)).sort(byDateDesc).map((p) => ({
+  title: p.data.title, outlet: 'Blog', date: p.data.date, summary: p.data.summary,
+}));
+---
+<Base title="Blog & Media" description={site.pages.media}>
+  <Fragment slot="band">
+    <PageHeading title="Blog & Media" intro={site.pages.media} />
+    <div class="wrap kit">
+      <a class="kit-link sans" href={pressKitPath} download>Download press kit <span>(ZIP, {pressKitSize})</span></a>
+      <p class="sans">Biographies, high-resolution photographs and the book cover, for journalists and event organisers.</p>
+    </div>
+  </Fragment>
+
+  <Section title="Media" note="Interviews, podcasts, coverage and reviews">
+    <MediaList items={media} empty="No interviews or press listed yet." />
+  </Section>
+
+  <Section title="Op-eds and commentary">
+    <MediaList items={writing} empty="No op-eds listed yet." />
+  </Section>
+
+  <Section title="Blog">
+    <MediaList items={posts} empty="No posts yet." />
+  </Section>
+</Base>
+
+<style>
+  .kit { margin-top: -1rem; padding-bottom: clamp(1.75rem, 4vh, 2.5rem); }
+  .kit-link { display: inline-block; padding: 0.6rem 1.1rem; border: 1px solid var(--on-deep-line); border-radius: 2px; text-decoration: none; }
+  .kit-link:hover { border-color: var(--on-deep); }
+  .kit-link span { color: var(--on-deep-soft); }
+  .kit p { margin: 0.75rem 0 0; color: var(--on-deep-soft); max-width: 36rem; }
+</style>

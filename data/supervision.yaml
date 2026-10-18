@@ -1,0 +1,185 @@
+# Student supervision (CV section D.2). Shown in the CV only.
+# Student names are NOT stored here (this file is public): they live in private/supervision-names.yaml,
+# which is never uploaded, and appear only in the private PDF CV.
+
+- id: sup-current-01
+  status: "published"
+  level: "graduate"
+  role: "Member of PhD Committee"
+  project: "the concept of normality and abnormality in mental health diagnostics"
+  unit: "Department of Philosophy"
+
+- id: sup-current-02
+  status: "published"
+  level: "graduate"
+  role: "Member of PhD Committee"
+  project: "insanity and criminal responsibility"
+  unit: "Department of Philosophy"
+
+- id: sup-2025-01
+  status: "published"
+  level: "undergraduate"
+  role: "Research internship"
+  course: "Research Internship in Forensic Science (FSC481)"
+  unit: "University of Toronto Mississauga, Institute of Forensic Sciences"
+  date: "2025"
+
+- id: sup-2024-01
+  status: "published"
+  level: "undergraduate"
+  role: "Research internship"
+  course: "Supervised Study (PSYD90)"
+  unit: "University of Toronto Scarborough, Department of Psychology"
+  date: "2024"
+
+- id: sup-2024-02
+  status: "published"
+  level: "undergraduate"
+  role: "Research internship"
+  course: "Professional Opportunity in Forensic Science (FSC485)"
+  unit: "University of Toronto Mississauga, Forensic Science Program"
+  date: "2024"
+
+- id: sup-2024-03
+  status: "published"
+  level: "undergraduate"
+  role: "Research internship"
+  course: "Advanced Independent Project (FSC489)"
+  unit: "University of Toronto Mississauga, Forensic Science Program"
+  date: "2024"
+
+- id: sup-2024-04
+  status: "published"
+  level: "undergraduate"
+  role: "Research internship"
+  course: "Advanced Independent Project (FSC489)"
+  unit: "University of Toronto Mississauga, Forensic Science Program"
+  date: "2024"
+
+- id: sup-2023-01
+  status: "published"
+  level: "undergraduate"
+  role: "Research internship"
+  course: "Internship in Forensic Science (FSC481)"
+  unit: "University of Toronto Mississauga, Forensic Science Program"
+  date: "2023"
+
+- id: sup-2023-02
+  status: "published"
+  level: "undergraduate"
+  role: "Research internship"
+  course: "Internship in Forensic Science (FSC481)"
+  unit: "University of Toronto Mississauga, Forensic Science Program"
+  date: "2023"
+
+- id: sup-2023-03
+  status: "published"
+  level: "undergraduate"
+  role: "Research internship"
+  course: "Internship in Forensic Science (FSC481)"
+  unit: "University of Toronto Mississauga, Forensic Science Program"
+  date: "2023"
+
+- id: sup-2023-04
+  status: "published"
+  level: "undergraduate"
+  role: "Research internship"
+  course: "Internship in Forensic Science (FSC481)"
+  unit: "University of Toronto Mississauga, Forensic Science Program"
+  date: "2023"
+
+- id: sup-2023-05
+  status: "published"
+  level: "undergraduate"
+  role: "Research internship"
+  course: "Internship in Forensic Science (FSC481)"
+  unit: "University of Toronto Mississauga, Forensic Science Program"
+  date: "2023"
+
+- id: sup-2022-01
+  status: "published"
+  level: "undergraduate"
+  role: "Research internship"
+  course: "Advanced Independent Project (FSC489)"
+  unit: "University of Toronto Mississauga, Forensic Science Program"
+  date: "2022"
+
+- id: sup-2022-02
+  status: "published"
+  level: "undergraduate"
+  role: "Research internship"
+  course: "Thesis in Psychology (PSY98)"
+  unit: "University of Toronto Scarborough, Department of Psychology"
+  date: "2022"
+
+- id: sup-2022-03
+  status: "published"
+  level: "undergraduate"
+  role: "Research internship"
+  course: "Socrates Project Seminar (PHL489)"
+  unit: "University of Toronto Mississauga, Department of Philosophy"
+  date: "2022"
+
+- id: sup-2021-01
+  status: "published"
+  level: "undergraduate"
+  role: "Research internship"
+  course: "Advanced Independent Project (FSC489)"
+  unit: "University of Toronto Mississauga, Forensic Science Program"
+  date: "2021"
+
+- id: sup-2020-01
+  status: "published"
+  level: "undergraduate"
+  role: "Research internship"
+  course: "Internship in Forensic Science (FSC483)"
+  unit: "University of Toronto Mississauga, Forensic Science Program"
+  date: "2020"
+
+- id: sup-2020-02
+  status: "published"
+  level: "undergraduate"
+  role: "Research internship"
+  course: "Internship in Forensic Science (FSC483)"
+  unit: "University of Toronto Mississauga, Forensic Science Program"
+  date: "2020"
+
+- id: sup-2020-03
+  status: "published"
+  level: "undergraduate"
+  role: "Research internship"
+  course: "Internship in Forensic Science (FSC483)"
+  unit: "University of Toronto Mississauga, Forensic Science Program"
+  date: "2020"
+
+- id: sup-2020-04
+  status: "published"
+  level: "undergraduate"
+  role: "Research internship"
+  course: "Internship in Forensic Science (FSC483)"
+  unit: "University of Toronto Mississauga, Forensic Science Program"
+  date: "2020"
+
+- id: sup-2019-01
+  status: "published"
+  level: "undergraduate"
+  role: "Research internship"
+  course: "Socrates Project Seminar (PHL489)"
+  unit: "University of Toronto Mississauga, Department of Philosophy"
+  date: "2019"
+
+- id: sup-2018-01
+  status: "published"
+  level: "undergraduate"
+  role: "Research internship"
+  course: "Internship in Forensic Science (FSC481)"
+  unit: "University of Toronto Mississauga, Forensic Science Program"
+  date: "2018"
+
+- id: sup-2018-02
+  status: "published"
+  level: "undergraduate"
+  role: "Research internship"
+  course: "Internship in Forensic Science (FSC481)"
+  unit: "University of Toronto Mississauga, Forensic Science Program"
+  date: "2018"

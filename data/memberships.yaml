@@ -1,0 +1,12 @@
+# Professional association memberships (CV section B.6). Shown in the CV only.
+
+- id: "iafmha"
+  status: "published"
+  organization: "International Association of Forensic Mental Health Assessment"
+  start: "2026"
+
+- id: "apa"
+  status: "published"
+  organization: "American Psychological Association"
+  start: "2019"
+  end: "2025"

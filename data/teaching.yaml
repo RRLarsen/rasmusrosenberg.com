@@ -1,0 +1,222 @@
+# University courses taught as instructor, from the CV (section D.1).
+# One entry per course; terms list every offering, most recent first.
+# The Teaching page shows title (code) with the description in an opener; terms are used in the CV.
+# Courses with the same content under different titles are merged into one entry.
+# Continuing-education courses and seminars use level: continuing-education and a date.
+
+- id: fsc335-forensic-epistemology-scientific-knowled
+  status: published
+  level: undergraduate
+  code: FSC335
+  title: "Forensic Epistemology: Scientific Knowledge and the Legal System"
+  institution: University of Toronto Mississauga
+  terms: [Spring 2026, Spring 2025, Fall 2022, Spring 2021]
+  description: ""
+
+- id: fsc481-research-internship-in-forensic-science
+  status: published
+  on_website: false
+  level: undergraduate
+  code: FSC481
+  title: "Research Internship in Forensic Science"
+  institution: University of Toronto Mississauga
+  terms: [Spring 2026, Fall 2025]
+  description: ""
+
+- id: fsc239-introduction-to-forensic-science
+  status: published
+  level: undergraduate
+  code: FSC239
+  title: "Introduction to Forensic Science"
+  institution: University of Toronto
+  terms: [Spring 2026, Fall 2025, Spring 2025, Fall 2024]
+  description: ""
+
+- id: fsc350-psychopathy-and-crime-the-science-ethics
+  status: published
+  level: undergraduate
+  code: FSC350
+  title: "Psychopathy and Crime: The Science, Ethics, and Legal Influence of a Controversial Diagnosis"
+  institution: University of Toronto Mississauga
+  terms: [Fall 2025]
+  description: ""
+
+- id: fsc220-introduction-to-forensic-psychology
+  status: published
+  level: undergraduate
+  code: FSC220
+  title: "Introduction to Forensic Psychology"
+  institution: University of Toronto Mississauga
+  terms: [Fall 2024, Fall 2022, Fall 2021, Summer 2021, Fall 2020, Fall 2019]
+  description: ""
+
+- id: fsc483-collaborative-research-internship
+  status: published
+  on_website: false
+  level: undergraduate
+  code: FSC483
+  title: "Collaborative Research Internship"
+  institution: University of Toronto Mississauga
+  terms: [Spring 2022, Spring 2021]
+  description: ""
+
+- id: fsc320-forensic-psychopathology
+  status: published
+  level: undergraduate
+  code: FSC320
+  title: "Forensic Psychopathology"
+  institution: University of Toronto Mississauga
+  terms: [Spring 2021, Spring 2019, Summer 2018]
+  description: ""
+
+- id: phl324-the-continental-tradition
+  status: published
+  level: undergraduate
+  code: PHL324
+  title: "The Continental Tradition"
+  institution: University of Toronto Mississauga
+  terms: [Spring 2020, Fall 2018]
+  description: ""
+
+- id: fsc430-seminar-in-forensic-science
+  status: published
+  level: undergraduate
+  code: FSC430
+  title: "Seminar in Forensic Science"
+  institution: University of Toronto Mississauga
+  terms: [Fall 2019]
+  description: ""
+
+- id: phl220-existentialism
+  status: published
+  level: undergraduate
+  code: PHL220
+  title: "Existentialism"
+  institution: University of Toronto Mississauga
+  terms: [Spring 2019]
+  description: ""
+
+- id: fsc350-the-psychology-of-evil
+  status: published
+  level: undergraduate
+  code: FSC350
+  title: "The Psychology of Evil"
+  institution: University of Toronto Mississauga
+  terms: [Fall 2018, Fall 2017]
+  description: ""
+
+- id: phl221-philosophy-at-the-movies
+  status: published
+  level: undergraduate
+  code: PHL221
+  title: "Philosophy at the Movies"
+  institution: University of Toronto Mississauga
+  terms: [Summer 2018]
+  description: ""
+
+- id: phl285-philosophy-of-art
+  status: published
+  level: undergraduate
+  code: PHL285
+  title: "Philosophy of Art"
+  institution: University of Toronto Mississauga
+  terms: [Fall 2017]
+  description: ""
+
+- id: phl2198-advanced-introduction-to-philosophy-of-s
+  status: published
+  level: graduate
+  code: PHL2198
+  title: "Advanced Introduction to Philosophy of Science"
+  institution: University of Toronto
+  terms: [Fall 2024]
+  description: ""
+
+- id: phl2196-philosophy-and-scientific-progress-the-r
+  status: published
+  level: graduate
+  code: PHL2196
+  title: "Philosophy and Scientific Progress: The Role of Formal and Applied Ontology"
+  institution: University of Toronto
+  terms: [Spring 2023]
+  description: ""
+
+- id: phl2196-philosophy-in-science-current-trends-in
+  status: published
+  level: graduate
+  code: PHL2196
+  title: "Philosophy in Science: Current Trends in Formal and Applied Ontology"
+  institution: University of Toronto
+  terms: [Fall 2021]
+  description: ""
+
+# Teaching assistant work at the University at Buffalo (CV section D.1). CV only.
+- id: ta-2016-fall-law-authority-and-morality
+  status: published
+  on_website: false
+  level: teaching-assistant
+  title: "Law, Authority, and Morality"
+  institution: University at Buffalo (SUNY)
+  role: Teaching Assistant
+  instructor: Dr. Ryan Muldoon
+  terms: [Fall 2016]
+
+- id: ta-2016-spring-introduction-to-philosophy
+  status: published
+  on_website: false
+  level: teaching-assistant
+  title: "Introduction to Philosophy"
+  institution: University at Buffalo (SUNY)
+  role: Teaching Assistant
+  instructor: Dr. Lewis Powell
+  terms: [Spring 2016]
+
+- id: ta-2015-fall-introduction-to-philosophy
+  status: published
+  on_website: false
+  level: teaching-assistant
+  title: "Introduction to Philosophy"
+  institution: University at Buffalo (SUNY)
+  role: Teaching Assistant
+  instructor: Dr. Kah-Kyung Cho
+  terms: [Fall 2015]
+
+- id: ta-2015-spring-introduction-to-ethics
+  status: published
+  on_website: false
+  level: teaching-assistant
+  title: "Introduction to Ethics"
+  institution: University at Buffalo (SUNY)
+  role: Teaching Assistant
+  instructor: Dr. Alex King
+  terms: [Spring 2015]
+
+- id: ta-2014-fall-introduction-to-ethics
+  status: published
+  on_website: false
+  level: teaching-assistant
+  title: "Introduction to Ethics"
+  institution: University at Buffalo (SUNY)
+  role: Co-Instructor
+  instructor: Dr. Randall Dipert
+  terms: [Fall 2014]
+
+- id: ta-2014-spring-world-civilization-module-ii
+  status: published
+  on_website: false
+  level: teaching-assistant
+  title: "World Civilization, Module II"
+  institution: University at Buffalo (SUNY)
+  role: Recitation Instructor
+  instructor: Dr. William Baumer
+  terms: [Spring 2014]
+
+- id: ta-2014-x-world-civilization-module-i
+  status: published
+  on_website: false
+  level: teaching-assistant
+  title: "World Civilization, Module I"
+  institution: University at Buffalo (SUNY)
+  role: Recitation Instructor
+  instructor: Dr. William Baumer
+  terms: ["2014"]

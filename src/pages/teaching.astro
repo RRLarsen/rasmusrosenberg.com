@@ -1,0 +1,110 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import PageHeading from '../components/PageHeading.astro';
+import Section from '../components/Section.astro';
+import { getSite, isPublished, onWebsite, byDateDesc, formatDate } from '../lib/data';
+
+const site = await getSite();
+const all = await getCollection('teaching', onWebsite);
+const tools = await getCollection('tools', isPublished);
+
+// most recently taught first: "Fall 2025" sorts after "Spring 2025"
+const termKey = (t: string) => {
+  const [season, year] = t.split(' ');
+  return Number(year) * 10 + ({ Spring: 1, Summer: 2, Fall: 3 }[season] ?? 0);
+};
+const latest = (c: CollectionEntry<'teaching'>) => Math.max(0, ...c.data.terms.map(termKey));
+const byRecent = (a: CollectionEntry<'teaching'>, b: CollectionEntry<'teaching'>) => latest(b) - latest(a);
+
+// The course code says the subject: FSC = science, PHL = philosophy. Within a group, courses
+// run in order of course code (graduate courses first); the same code is ordered by recency.
+const university = all.filter((c) => c.data.level === 'undergraduate' || c.data.level === 'graduate');
+const byCode = (a: CollectionEntry<'teaching'>, b: CollectionEntry<'teaching'>) =>
+  (a.data.code ?? '').localeCompare(b.data.code ?? '', 'en', { numeric: true }) || byRecent(a, b);
+const graduateFirst = (a: CollectionEntry<'teaching'>, b: CollectionEntry<'teaching'>) =>
+  Number(b.data.level === 'graduate') - Number(a.data.level === 'graduate') || byCode(a, b);
+const groups = [
+  { title: 'Science courses', items: university.filter((c) => c.data.code?.startsWith('FSC')).sort(graduateFirst) },
+  { title: 'Philosophy courses', items: university.filter((c) => c.data.code?.startsWith('PHL')).sort(graduateFirst) },
+].filter((g) => g.items.length > 0);
+const continuing = all.filter((c) => c.data.level === 'continuing-education').sort(byDateDesc);
+---
+<Base title="Teaching" description={site.pages.teaching}>
+  <PageHeading slot="band" title="Teaching" intro={site.pages.teaching} />
+
+  <Section title="University courses" id="courses">
+    {groups.map((g) => (
+      <>
+        <h3 class="group">{g.title}</h3>
+        <ul class="courses">
+          {g.items.map((c) => (
+            <li>
+              <details>
+                <summary>
+                  <span>{c.data.title} ({c.data.code}){c.data.level === 'graduate' && <span class="tag sans">Graduate</span>}</span>
+                </summary>
+                <p class="desc">{c.data.description || 'Course description coming soon.'}</p>
+              </details>
+            </li>
+          ))}
+        </ul>
+      </>
+    ))}
+  </Section>
+
+  <Section title="Continuing education" id="continuing-education">
+    {continuing.length === 0 ? (
+      <p class="empty">Forthcoming continuing education (CE credit) courses and seminars will be listed here.</p>
+    ) : (
+      <ul class="plain sans">
+        {continuing.map((c) => (
+          <li>
+            <span class="when">{c.data.date && formatDate(c.data.date)}</span>
+            <span>
+              <span class="title">{c.data.url ? <a href={c.data.url}>{c.data.title}</a> : c.data.title}</span>
+              {c.data.description && <span class="sub">{c.data.description}</span>}
+            </span>
+          </li>
+        ))}
+      </ul>
+    )}
+  </Section>
+
+  <Section title="Educational resources" id="resources">
+    <ul class="plain sans">
+      {tools.map((t) => (
+        <li class="tool"><span><a class="title" href={t.data.url}>{t.data.title}</a><span class="sub">{t.data.description}</span></span></li>
+      ))}
+    </ul>
+  </Section>
+</Base>
+
+<style>
+  .group { margin: 0 0 0.5rem; font-size: 1.25rem; font-weight: 500; }
+  .group:not(:first-child) { margin-top: 2.25rem; }
+
+  .courses { list-style: none; margin: 0; padding: 0; }
+  .courses li { border-top: 1px solid var(--rule); }
+  .courses li:last-child { border-bottom: 1px solid var(--rule); }
+  summary {
+    display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
+    padding: 0.75rem 0; cursor: pointer; list-style: none; font-size: 1.125rem; line-height: 1.35;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; flex: none; font-family: var(--sans); color: var(--link); font-size: 1.125rem; }
+  details[open] summary::after { content: "−"; }
+  summary:hover { color: var(--link); }
+  .tag { margin-left: 0.6rem; padding: 0.05rem 0.5rem; border: 1px solid var(--rule); border-radius: 2rem; font-size: 0.75rem; color: var(--muted); vertical-align: 0.15em; white-space: nowrap; }
+  .desc { margin: 0 0 1rem; max-width: var(--measure); color: var(--ink-soft); font-size: 1.0625rem; }
+
+  .plain { list-style: none; margin: 0; padding: 0; }
+  .plain li { display: grid; grid-template-columns: 8rem minmax(0, 1fr); gap: 1rem; padding: 0.75rem 0; border-top: 1px solid var(--rule); }
+  .plain li:last-child { border-bottom: 1px solid var(--rule); }
+  .plain li.tool { grid-template-columns: 1fr; }
+  .when { color: var(--muted); font-size: 0.875rem; padding-top: 0.15rem; }
+  .title { display: block; color: var(--ink); font-size: 1.0625rem; }
+  a.title { color: var(--link); }
+  .sub { display: block; margin-top: 0.15rem; color: var(--muted); font-size: 0.875rem; }
+  @media (max-width: 620px) { .plain li { grid-template-columns: 1fr; gap: 0.1rem; } }
+</style>

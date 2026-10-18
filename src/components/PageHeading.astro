@@ -1,0 +1,15 @@
+---
+/* The heading inside the turquoise band on every page except the home page. */
+interface Props { title: string; intro?: string }
+const { title, intro } = Astro.props;
+---
+<div class="wrap heading">
+  <h1>{title}</h1>
+  {intro && <p class="sans">{intro}</p>}
+</div>
+
+<style>
+  .heading { padding-top: clamp(0.75rem, 2.5vh, 1.5rem); padding-bottom: clamp(1.75rem, 4vh, 2.5rem); }
+  h1 { margin: 0; font-weight: 300; font-size: var(--step-3); letter-spacing: -0.02em; max-width: 22ch; }
+  p { margin: 0.9rem 0 0; max-width: 40rem; color: var(--on-deep-soft); }
+</style>

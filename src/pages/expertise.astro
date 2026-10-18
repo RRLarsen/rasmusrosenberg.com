@@ -1,0 +1,32 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import PageHeading from '../components/PageHeading.astro';
+import Section from '../components/Section.astro';
+import { getProfile, getSite, isPublished } from '../lib/data';
+
+const site = await getSite();
+const profile = await getProfile();
+const areas = (await getCollection('expertise', isPublished)).sort((a, b) => a.data.order - b.data.order);
+---
+<Base title="Expertise" description={site.pages.expertise}>
+  <PageHeading slot="band" title="Expertise" intro={site.pages.expertise} />
+
+  {areas.map((a) => (
+    <Section title={a.data.title} id={a.id}>
+      <div class="prose">
+        <p class="lead">{a.data.summary}</p>
+        {a.data.details && <p>{a.data.details}</p>}
+      </div>
+    </Section>
+  ))}
+
+  <Section title="Get in touch">
+    <p class="prose">{site.pages.expertise_contact}</p>
+    <a class="button" href={`mailto:${profile.email}`}>Email {profile.given_name}</a>
+  </Section>
+</Base>
+
+<style>
+  .lead { font-size: var(--step-1); line-height: 1.45; }
+</style>

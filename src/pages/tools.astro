@@ -1,0 +1,19 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import PageHeading from '../components/PageHeading.astro';
+import Section from '../components/Section.astro';
+import { getSite, isPublished } from '../lib/data';
+
+const site = await getSite();
+const tools = await getCollection('tools', isPublished);
+---
+<Base title="Tools" description={site.pages.tools}>
+  <PageHeading slot="band" title="Tools" intro={site.pages.tools} />
+  {tools.map((t) => (
+    <Section title={t.data.title} note={t.data.updated && `Updated ${t.data.updated}`}>
+      <p class="prose">{t.data.description}</p>
+      <a class="button" href={t.data.url}>Open {t.data.title}</a>
+    </Section>
+  ))}
+</Base>

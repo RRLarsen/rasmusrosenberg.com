@@ -1,0 +1,43 @@
+# Academic employment and research appointments (CV section B.2). No end date means current.
+- id: utm-associate-professor
+  status: published
+  kind: academic
+  title: Associate Professor of Forensic Epistemology and Philosophy of Science
+  department: Institute of Forensic Sciences and Department of Philosophy
+  organization: University of Toronto Mississauga
+  start: 2026-07
+
+- id: ncor-affiliated-scientist
+  status: published
+  kind: affiliation
+  title: Affiliated Scientist
+  description: Applied Ontology in Health Science
+  organization: National Center for Ontological Research
+  start: 2019-12
+
+- id: utm-assistant-professor
+  status: published
+  kind: academic
+  title: Assistant Professor (Tenure-Track)
+  department: Institute of Forensic Sciences and Department of Philosophy
+  organization: University of Toronto Mississauga
+  start: 2020-07
+  end: 2026-06
+
+- id: utm-visiting-assistant-professor-research
+  status: published
+  kind: visiting
+  title: Visiting Assistant Professor (CLTA Research stream)
+  department: Department of Philosophy and Forensic Science Program
+  organization: University of Toronto Mississauga
+  start: 2019-07
+  end: 2020-07
+
+- id: utm-visiting-assistant-professor-teaching
+  status: published
+  kind: visiting
+  title: Visiting Assistant Professor (CLTA Teaching stream)
+  department: Department of Philosophy and Forensic Science Program
+  organization: University of Toronto Mississauga
+  start: 2017-07
+  end: 2019-07

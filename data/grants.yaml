@@ -1,0 +1,99 @@
+# Research grants (B.4) and other grants and scholarships (B.5). Shown in the CV only. Amounts in dollars, as in the CV.
+
+- id: "grant-2026-07-research-contingency-fund-awar"
+  status: "published"
+  kind: "research"
+  date: "2026-07"
+  title: "Research Contingency Fund Award, University of Toronto Mississauga, for the future pursuit of a SSHRC Insight Grant"
+  amount: 5250
+
+- id: "grant-2025-08-institute-of-forensic-sciences"
+  status: "published"
+  kind: "research"
+  date: "2025-08"
+  title: "Institute of Forensic Sciences Faculty Research Award 2025, University of Toronto Mississauga"
+  amount: 2815
+
+- id: "grant-2024-03-utm-forensic-science-program-s"
+  status: "published"
+  kind: "research"
+  date: "2024-03"
+  title: "UTM Forensic Science Program’s Faculty Research Award 2023, University of Toronto Mississauga"
+  amount: 1667
+
+- id: "grant-2023-06-bridging-funds-university-of-t"
+  status: "published"
+  kind: "research"
+  date: "2023-06"
+  title: "Bridging Funds, University of Toronto Mississauga, for the future pursuit of a Canadian Institutes of Health Research Project Grant"
+  amount: 15000
+
+- id: "grant-2022-07-connaught-new-researcher-award"
+  status: "published"
+  kind: "research"
+  date: "2022-07"
+  title: "Connaught New Researcher Award, University of Toronto Mississauga and The Connaught Fund"
+  amount: 12500
+
+- id: "grant-2022-06-utm-forensic-science-program-s"
+  status: "published"
+  kind: "research"
+  date: "2022-06"
+  title: "UTM Forensic Science Program’s Faculty Research Award 2022–23, University of Toronto Mississauga"
+  amount: 2050
+
+- id: "grant-2015-11-student-travel-scholarship-for"
+  status: "published"
+  kind: "scholarship"
+  date: "2015-11"
+  title: "Student Travel Scholarship for Young Scientists, Christian og Ottilia Brorsons Rejselegat"
+  amount: 1500
+  url: "http://www.brorsons-rejselegat.dk"
+
+- id: "grant-2015-10-dissertation-writing-fellowshi"
+  status: "published"
+  kind: "scholarship"
+  date: "2015-10"
+  title: "Dissertation Writing Fellowship, Knud Højgaards Fond"
+  amount: 4000
+  url: "http://www.khf.dk/"
+
+- id: "grant-2015-08-dissertation-writing-fellowshi"
+  status: "published"
+  kind: "scholarship"
+  date: "2015-08"
+  title: "Dissertation Writing Fellowship, The Oticon Foundation"
+  amount: 4000
+  url: "http://www.oticonfonden.dk"
+
+- id: "grant-2013-08-student-travel-scholarship-the"
+  status: "published"
+  kind: "scholarship"
+  date: "2013-08"
+  title: "Student Travel Scholarship, The Oticon Foundation"
+  amount: 3800
+  url: "http://www.oticonfonden.dk"
+
+- id: "grant-2013-01-education-exchange-scholarship"
+  status: "published"
+  kind: "scholarship"
+  date: "2013-01"
+  title: "Education Exchange Scholarship, Hedorfs Fond"
+  amount: 2700
+  url: "http://www.hedorf.dk/"
+
+- id: "grant-2011-10-exchange-research-stipend-knud"
+  status: "published"
+  kind: "scholarship"
+  date: "2011-10"
+  title: "Exchange Research Stipend, Knud Højgaards Fond"
+  amount: 5000
+  url: "http://www.khf.dk/"
+
+- id: "grant-2011-08-education-exchange-scholarship"
+  status: "published"
+  kind: "scholarship"
+  date: "2011-08"
+  title: "Education Exchange Scholarship, Hedorfs Fond"
+  amount: 2700
+  url: "http://www.hedorf.dk/"

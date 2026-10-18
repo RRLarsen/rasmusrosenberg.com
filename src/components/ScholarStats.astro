@@ -1,0 +1,33 @@
+---
+/* Publications, citations and h-index from Google Scholar, in the turquoise band on the
+   Research page. Figures come from data/scholar.yaml, which is updated by hand. */
+import { getEntry } from 'astro:content';
+import { formatDate } from '../lib/data';
+
+const scholar = (await getEntry('scholar', 'main'))!.data;
+const fmt = (n: number) => n.toLocaleString('en-GB');
+---
+<div class="stats sans">
+  <dl class="figures">
+    <div><dt>Publications</dt><dd>{fmt(scholar.publications)}</dd></div>
+    <div><dt>Citations</dt><dd>{fmt(scholar.citations)}</dd></div>
+    <div><dt>h-index</dt><dd>{scholar.h_index}</dd></div>
+  </dl>
+  <p class="source">
+    Data from <a href={scholar.profile_url}>Google Scholar</a>, as of {formatDate(scholar.as_of)}.
+  </p>
+</div>
+
+<style>
+  .stats { display: grid; gap: 1rem; margin-top: 1.25rem; }
+  .figures { display: flex; gap: clamp(1.5rem, 4vw, 3rem); margin: 0; }
+  .figures div { border-top: 1px solid var(--on-deep-line); padding-top: 0.75rem; min-width: 6.5rem; }
+  dt { color: var(--on-deep-soft); font-size: 0.875rem; }
+  dd { margin: 0.15rem 0 0; font-family: var(--serif); font-weight: 300; font-size: 2.5rem; line-height: 1; color: var(--on-deep); }
+  .source { margin: 0; font-size: 0.8125rem; color: var(--on-deep-soft); }
+  .source a { color: var(--on-deep); }
+  @media (max-width: 620px) {
+    .figures div { min-width: 0; flex: 1; }
+    dd { font-size: 2rem; }
+  }
+</style>

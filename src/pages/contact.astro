@@ -1,0 +1,41 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHeading from '../components/PageHeading.astro';
+import Section from '../components/Section.astro';
+import { getProfile, getSite, linkNames } from '../lib/data';
+
+const site = await getSite();
+const profile = await getProfile();
+---
+<Base title="Contact" description={site.pages.contact}>
+  <PageHeading slot="band" title="Contact" intro={site.pages.contact} />
+  <div class="compact">
+
+  <Section title="Email">
+    <a class="email" href={`mailto:${profile.email}`}>{profile.email}</a>
+    <p class="note">{site.pages.expertise_contact}</p>
+  </Section>
+
+  <Section title="Office">
+    <address class="sans">
+      {profile.address.map((line, i) => <>{line}{i < profile.address.length - 1 && <br />}</>)}
+    </address>
+  </Section>
+
+  <Section title="Online">
+    <ul class="links sans">
+      {profile.show_links.map((key) => profile.links[key] && <li><a href={profile.links[key]}>{linkNames[key]}</a></li>)}
+    </ul>
+  </Section>
+  </div>
+</Base>
+
+<style>
+  /* a compact page: less space between sections, smaller headings and text */
+  .compact :global(.sec) { padding: 1.5rem 0; }
+  .compact :global(.sec-grid > h2) { font-size: 1.375rem; }
+  .email { font-size: clamp(1.25rem, 2.2vw, 1.5rem); overflow-wrap: anywhere; }
+  .note { margin: 0.6rem 0 0; max-width: var(--measure); color: var(--ink-soft); font-size: 1rem; line-height: 1.5; }
+  address { font-style: normal; line-height: 1.6; }
+  .links { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; }
+</style>

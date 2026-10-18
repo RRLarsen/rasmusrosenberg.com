@@ -1,0 +1,55 @@
+# Manuscripts under review and in preparation (CV section C.4). Shown in the CV only.
+
+- id: "ms-forensic-epistemology-book"
+  status: "published"
+  kind: "book"
+  stage: "in preparation"
+  title: "Forensic Epistemology: Scientific Knowledge and the Legal System"
+
+- id: "ms-investigative-reasoning-book"
+  status: "published"
+  kind: "book"
+  stage: "in preparation"
+  title: "Investigative Reasoning: Inferential and Explanatory Knowledge in Forensics"
+
+- id: "ms-scientific-transparency"
+  status: "published"
+  kind: "article"
+  stage: "in review"
+  title: "Scientific Transparency as a Touchstone for Improving Expert Evidence Law"
+  coauthors: ["Jason Chin", "Tess Neal", "Edith Beerdsen", "Kristy Marire", "Nicholas Scurich"]
+
+- id: "ms-rice-treatment-study"
+  status: "published"
+  kind: "article"
+  stage: "in review"
+  title: "The Lifespan and Influence of Unreliable Research: A Case Study of Rice et al.’s 1992 Treatment Study on Psychopathy"
+  coauthors: ["Stephanie Griffiths", "Jarkko Jalava", "Sonya McLaren", "Emilie Ades", "Yashika Shroff"]
+
+- id: "ms-informed-consent-forensic-therapy"
+  status: "published"
+  kind: "article"
+  stage: "in preparation"
+  title: "Informed Consent in Forensic Psychiatric Therapy: Ethical Dilemmas and Unresolved Issues"
+  coauthors: ["Peter Koch"]
+
+- id: "ms-degrees-of-moral-valuing"
+  status: "published"
+  kind: "article"
+  stage: "in preparation"
+  title: "What Explains the Degrees of Moral Valuing? A Sentimentalist Response Exploring the Role of Emotional Valence and Intensity"
+  coauthors: ["David Sackris"]
+
+- id: "ms-pcl-predictive-validity"
+  status: "published"
+  kind: "article"
+  stage: "in preparation"
+  title: "The Predictive Validity of the PCL Scales: A PRISMA Review and Study Quality Assessment"
+  coauthors: ["Stephanie Griffiths", "Jarkko Jalava", "Maja Turkalj", "Julian Tang", "Sonya McLaren"]
+
+- id: "ms-clinical-ethics-ontology"
+  status: "published"
+  kind: "article"
+  stage: "in preparation"
+  title: "Ontology of Clinical Ethics Consultations: A Consensus Based Taxonomy for Data Capturing"
+  coauthors: ["Peter Koch", "Abraham Brummett"]

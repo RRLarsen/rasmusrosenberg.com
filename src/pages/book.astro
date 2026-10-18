@@ -1,0 +1,62 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import PageHeading from '../components/PageHeading.astro';
+import Section from '../components/Section.astro';
+import BuyLinks from '../components/BuyLinks.astro';
+import { getPublications, getSite, isPublished, byDateDesc, formatDate } from '../lib/data';
+import { publication } from '../lib/jsonld';
+
+const site = await getSite();
+const book = (await getPublications()).find((p) => p.data.type === 'book' && p.data.featured);
+if (!book) throw new Error('No featured book in data/publications.yaml');
+const coverage = (await getCollection('media', isPublished))
+  .filter((m) => m.data.publication === book.id)
+  .sort(byDateDesc);
+const isbn = book.data.isbn?.replace(/^(\d{3})(\d)(\d{3})(\d{5})(\d)$/, '$1-$2-$3-$4-$5');
+---
+<Base title={book.data.title} description={site.pages.book} jsonLd={publication(book, site.url)} image={book.data.cover} imageAlt={`Cover of ${book.data.title}`}>
+  <PageHeading slot="band" title={book.data.title} intro={book.data.subtitle} />
+
+  <Section title="About the book">
+    <div class="book">
+      {book.data.cover && <img src={book.data.cover} width="600" height="900" alt={`Cover of ${book.data.title}`} />}
+      <div>
+        {book.data.description && <p class="desc">{book.data.description}</p>}
+        <dl class="facts sans">
+          {book.data.publisher && <><dt>Publisher</dt><dd>{book.data.publisher}</dd></>}
+          {book.data.date && <><dt>Published</dt><dd>{formatDate(book.data.date)}</dd></>}
+          {book.data.pages && <><dt>Pages</dt><dd>{book.data.pages}</dd></>}
+          {isbn && <><dt>ISBN</dt><dd>{isbn}</dd></>}
+        </dl>
+        <BuyLinks book={book} />
+      </div>
+    </div>
+  </Section>
+
+  <Section title="Reviews and interviews">
+    {coverage.length === 0 ? (
+      <p class="empty">Reviews, interviews and events will be listed here.</p>
+    ) : (
+      <ul class="coverage sans">
+        {coverage.map((m) => (
+          <li><span class="muted">{m.data.date.slice(0, 4)}</span> {m.data.url ? <a href={m.data.url}>{m.data.title}</a> : m.data.title}, {m.data.outlet}</li>
+        ))}
+      </ul>
+    )}
+  </Section>
+</Base>
+
+<style>
+  .book { display: grid; grid-template-columns: minmax(0, 15rem) minmax(0, 1fr); gap: clamp(1.5rem, 4vw, 3.5rem); align-items: start; }
+  .desc { max-width: var(--measure); font-size: var(--step-1); line-height: 1.5; }
+  .facts { display: grid; grid-template-columns: max-content 1fr; gap: 0.4rem 1.5rem; margin: 1.5rem 0 2rem; }
+  .facts dt { color: var(--muted); }
+  .facts dd { margin: 0; }
+  .coverage { list-style: none; margin: 0; padding: 0; }
+  .coverage li { padding: 0.8rem 0; border-top: 1px solid var(--rule); }
+  @media (max-width: 820px) {
+    .book { grid-template-columns: 1fr; }
+    .book img { max-width: 12rem; }
+  }
+</style>

@@ -1,0 +1,932 @@
+# Publications, from the CV (sections C.2 and C.3).
+# Abstracts, open-access PDF links and OpenAlex ids were added by matching DOIs in OpenAlex.
+# Types: book, article, chapter, review, commentary, op-ed, other.
+# The Research page lists everything except op-eds and "other"; those appear under Blog & Media.
+
+- id: psychopathy-unmasked
+  status: published
+  type: book
+  title: Psychopathy Unmasked
+  subtitle: The Rise and Fall of a Dangerous Diagnosis
+  authors:
+    - { family: Larsen, given: Rasmus Rosenberg, me: true }
+  date: 2025-06-17
+  pages: "328"
+  publisher: The MIT Press
+  place: Cambridge, MA
+  isbn: "9780262552202"
+  publisher_url: https://mitpress.mit.edu/9780262552202/psychopathy-unmasked/
+  cover: "/images/psychopathy-unmasked-cover.jpg"
+  links:
+    - { label: The MIT Press, url: "https://mitpress.mit.edu/9780262552202/psychopathy-unmasked/" }
+    - { label: Amazon.com, url: "https://www.amazon.com/dp/0262552205/" }
+    - { label: Amazon.ca, url: "https://www.amazon.ca/dp/0262552205/" }
+    - { label: Amazon.co.uk, url: "https://www.amazon.co.uk/dp/0262552205/" }
+    - { label: Indigo, url: "https://www.chapters.indigo.ca/books/search?keywords=9780262552202" }
+    - { label: Bookshop.org, url: "https://bookshop.org/a/2238/9780262552202" }
+    - { label: Barnes & Noble, url: "https://www.barnesandnoble.com/s/9780262552202/" }
+    - { label: MIT Press Bookstore, url: "https://mitpressbookstore.mit.edu/book/9780262552202" }
+  description: >-
+    Psychopathy assessments inform sentencing, parole and transfer decisions for an
+    estimated hundreds of thousands of offenders in North America each year. This book
+    surveys the research and finds that people labelled psychopaths are not meaningfully
+    more dangerous than, or psychologically different from, other offenders. It argues that
+    the legal use of psychopathy assessments should end.
+  tags: [psychopathy, law-and-evidence]
+  featured: true
+
+- id: larsen-zombie-science
+  status: published
+  type: book
+  title: Zombie Science
+  subtitle: When Discredited Ideas Refuse to Die
+  authors:
+    - { family: Larsen, given: Rasmus Rosenberg, me: true }
+  stage: under contract
+  publisher: Reaktion Books
+  tags: []
+
+- id: larsen-2025-canadian-case-law
+  status: published
+  type: article
+  title: "The use of psychopathy assessments in Canadian case law: A quantitative and qualitative survey of court records from 1980–2023"
+  authors:
+    - { family: Larsen, given: Rasmus Rosenberg, me: true }
+    - { family: McLaren, given: Sonya }
+    - { family: Jalava, given: Jarkko }
+    - { family: Griffiths, given: Stephanie }
+    - { family: DeMatteo, given: David }
+  date: "2025"
+  venue: Psychology, Public Policy, and Law
+  volume: "32"
+  issue: "2"
+  pages: "73\u201394"
+  doi: 10.1037/law0000472
+  openalex_id: W4414608922
+  tags: [psychopathy, law-and-evidence]
+
+- id: larsen-2025-empathy
+  status: published
+  type: article
+  title: Do psychopathic persons lack empathy? An exploratory systematic review of empathy assessment and emotion recognition studies in Psychopathy Checklist samples
+  authors:
+    - { family: Larsen, given: Rasmus Rosenberg, me: true }
+    - { family: McLaren, given: Sonya }
+    - { family: Jalava, given: Jarkko }
+    - { family: Griffiths, given: Stephanie }
+  date: "2025"
+  venue: Psychology, Public Policy, and Law
+  volume: "31"
+  issue: "2"
+  pages: "115\u2013133"
+  doi: 10.1037/law0000435
+  openalex_id: W4403507994
+  tags: [psychopathy]
+
+- id: deming-2024-medial-frontal-cortex
+  status: published
+  type: article
+  title: "Psychopathy and medial frontal cortex: A systematic review reveals predominantly null relationships"
+  authors:
+    - { family: Deming, given: P. }
+    - { family: Griffiths, given: S. }
+    - { family: Jalava, given: J. }
+    - { family: Koenigs, given: M. }
+    - { family: Larsen, given: Rasmus Rosenberg, me: true }
+  date: "2024"
+  venue: Neuroscience & Biobehavioral Reviews
+  volume: "167"
+  pages: "105904"
+  doi: 10.1016/j.neubiorev.2024.105904
+  openalex_id: W4402943393
+  abstract: >-
+    Theories have posited that psychopathy is caused by dysfunction in the medial frontal
+    cortex, including ventromedial prefrontal cortex (vmPFC), anterior cingulate cortex
+    (ACC), and dorsomedial prefrontal cortex (dmPFC). Recent reviews have questioned the
+    reproducibility of neuroimaging findings within this field. We conducted a systematic
+    review to describe the consistency of magnetic resonance imaging (MRI) findings
+    according to anatomical subregion (vmPFC, ACC, dmPFC), experimental task, psychopathy
+    assessment, study power, and peak coordinates of significant effects. Searches of
+    PsycInfo and MEDLINE databases produced 77 functional and 24 structural MRI studies that
+    analyzed the medial frontal cortex in relation to psychopathy in adult samples. Findings
+    were predominantly null (85.4 % of 1573 tests across the three medial frontal regions).
+    Studies with higher power observed null effects at marginally lower rates. Finally, peak
+    coordinates of significant effects were widely dispersed. The evidence failed to support
+    theories positing the medial frontal cortex as a consistent neural correlate of
+    psychopathy. Theory and methods in the field should be revised to account for
+    predominantly null neuroimaging findings.
+  tags: [psychopathy]
+
+- id: sackris-2024-disunity-moral-judgment
+  status: published
+  type: article
+  title: "The disunity of moral judgment: Evidence and implications"
+  authors:
+    - { family: Sackris, given: D. }
+    - { family: Larsen, given: Rasmus Rosenberg, me: true }
+  date: "2024"
+  venue: Philosophical Psychology
+  volume: "37"
+  issue: "2"
+  pages: "351\u2013370"
+  doi: 10.1080/09515089.2022.2056437
+  openalex_id: W4220860588
+  pdf: https://philpapers.org/archive/SACTDO-4.pdf
+  abstract: >-
+    We argue that there is significant evidence for reconsidering the possibility that moral
+    judgment constitutes a distinctive category of judgment. We begin by reviewing evidence
+    and arguments from neuroscience and philosophy that seem to indicate that a diversity of
+    brain processes result in verdicts that we ordinarily consider “moral judgments”. We
+    argue that if these findings are correct, this is plausible reason for doubting that all
+    moral judgments necessarily share common features: if diverse brain processes give rise
+    to what we refer to as “moral judgments”, then we have reason to suspect that these
+    judgments may have different features. After advancing this argument, we show that
+    giving up the unity of moral judgment seems to effectively dissolve the
+    internalism/externalism debate concerning motivation within the field of metaethics.
+  tags: [moral-and-aesthetic-judgment]
+
+- id: makowski-2023-clinical-neuropsychology
+  status: published
+  type: chapter
+  title: Clinical neuropsychology in the era of neuroimaging
+  authors:
+    - { family: Makowski, given: D. }
+    - { family: Chen, given: A. }
+    - { family: Larsen, given: Rasmus Rosenberg, me: true }
+    - { family: Boyle, given: G. }
+    - { family: Lilienfeld, given: S. O. }
+  editors: [G. J. Boyle, Y. Stern, D. J. Stein, B. J. Sahakian, C. J. Golden, T. M.-C. Lee, S.-H. A. Chen]
+  date: "2023"
+  venue: The SAGE handbook of clinical neuropsychology
+  publisher: SAGE Publishing
+  place: London
+  note: Chapter 4
+  tags: [psychiatry-and-ontology]
+
+- id: sackris-2023-higher-order-evidence
+  status: published
+  type: article
+  title: The perniciousness of higher-order evidence on aesthetic appreciation
+  authors:
+    - { family: Sackris, given: D. }
+    - { family: Larsen, given: Rasmus Rosenberg, me: true }
+  date: "2023"
+  venue: "Dialogue: Canadian Philosophical Review"
+  pages: "1\u201320"
+  doi: 10.1017/S0012217323000070
+  openalex_id: W4378800411
+  pdf: https://www.cambridge.org/core/services/aop-cambridge-core/content/view/3C7CCEBFEDBCEBA76656E75A1F52093F/S0012217323000070a.pdf/div-class-title-the-perniciousness-of-higher-order-evidence-on-aesthetic-appreciation-div.pdf
+  abstract: >-
+    We demonstrate that many philosophers accept the following claim: When an aesthetic
+    object is apprehended correctly, taking pleasure in said object is a reliable sign that
+    the object is aesthetically successful. We undermine this position by showing that what
+    grounds our pleasurable experience is opaque: In many cases, the experienced pleasure is
+    attributable to factors that have little to do with the aesthetic object. The evidence
+    appealed to is a form of Higher-Order Evidence (HOE) and we consider attempts to
+    overcome said evidence. We argue they are unsuccessful. We conclude by considering what
+    this means for our practice of making aesthetic judgements.
+  tags: [moral-and-aesthetic-judgment]
+
+- id: jalava-2023-neuroimaging-evidence
+  status: published
+  type: article
+  title: "How to keep unreproducible neuroimaging evidence out of court: A case study in fMRI and psychopathy"
+  authors:
+    - { family: Jalava, given: J. }
+    - { family: Griffiths, given: S. }
+    - { family: Larsen, given: Rasmus Rosenberg, me: true }
+  date: "2023"
+  venue: Psychology, Public Policy, and Law
+  volume: "29"
+  issue: "1"
+  pages: "1\u201318"
+  doi: 10.1037/law0000383
+  openalex_id: W4327627519
+  tags: [psychopathy, law-and-evidence]
+  featured: true
+
+- id: sackris-2023-moral-judgments
+  status: published
+  type: article
+  title: Are there “moral” judgments?
+  authors:
+    - { family: Sackris, given: D. }
+    - { family: Larsen, given: Rasmus Rosenberg, me: true }
+  date: "2023"
+  venue: European Journal of Analytic Philosophy
+  volume: "19"
+  issue: "2"
+  pages: "1\u201323"
+  doi: 10.31820/ejap.19.2.1
+  openalex_id: W4382618844
+  pdf: https://hrcak.srce.hr/file/434498
+  abstract: >-
+    Recent contributions in moral philosophy have raised questions concerning the prevalent
+    assumption that moral judgments are typologically discrete, and thereby distinct from
+    ordinary and/or other types of judgments. This paper adds to this discourse, surveying
+    how attempts at defining what makes moral judgments distinct have serious shortcomings,
+    and it is argued that any typological definition is likely to fail due to certain
+    questionable assumptions about the nature of judgment itself. The paper concludes by
+    raising questions for future investigations into the nature of moral judgment.
+  tags: [moral-and-aesthetic-judgment]
+
+- id: sackris-2023-aesthetic-judgments
+  status: published
+  type: article
+  title: Are there “aesthetic” judgments?
+  authors:
+    - { family: Sackris, given: D. }
+    - { family: Larsen, given: Rasmus Rosenberg, me: true }
+  date: "2023"
+  venue: Erkenntnis
+  doi: 10.1007/s10670-023-00663-w
+  openalex_id: W4321231549
+  tags: [moral-and-aesthetic-judgment]
+
+- id: larsen-2022-psychopathy-assessments-ethical
+  status: published
+  type: article
+  title: Are psychopathy assessments ethical? A view from forensic mental health
+  authors:
+    - { family: Larsen, given: Rasmus Rosenberg, me: true }
+    - { family: Koch, given: P. }
+    - { family: Jalava, given: J. }
+    - { family: Griffiths, given: S. }
+  date: "2022"
+  venue: Journal of Threat Assessment and Management
+  volume: "9"
+  issue: "4"
+  pages: "260\u2013286"
+  doi: 10.1037/tam0000184
+  openalex_id: W4285802777
+  tags: [psychopathy, law-and-evidence]
+  featured: true
+
+- id: larsen-2022-authors-reply
+  status: published
+  type: commentary
+  title: Applied ontology for phenomenological psychopathology? A cautionary tale – Authors’ reply
+  authors:
+    - { family: Larsen, given: Rasmus Rosenberg, me: true }
+    - { family: Maschião, given: L. }
+    - { family: Piedade, given: V. }
+    - { family: Messas, given: G. }
+    - { family: Hastings, given: J. }
+  date: "2022"
+  venue: The Lancet Psychiatry
+  volume: "9"
+  issue: "10"
+  pages: "766"
+  doi: 10.1016/S2215-0366(22)00309-1
+  openalex_id: W4295894894
+  tags: [psychiatry-and-ontology]
+
+- id: larsen-2022-phenomenology-psychiatry
+  status: published
+  type: article
+  title: More phenomenology in psychiatry? Applied ontology as a method towards integration
+  authors:
+    - { family: Larsen, given: Rasmus Rosenberg, me: true }
+    - { family: Maschião, given: L. }
+    - { family: Piedade, given: V. }
+    - { family: Messas, given: G. }
+    - { family: Hastings, given: J. }
+  date: "2022"
+  venue: The Lancet Psychiatry
+  volume: "9"
+  issue: "9"
+  pages: "751\u2013758"
+  doi: 10.1016/S2215-0366(22)00156-0
+  openalex_id: W4284975158
+  pdf: http://www.thelancet.com/article/S2215036622001560/pdf
+  tags: [psychiatry-and-ontology]
+  featured: true
+
+- id: jalava-2022-genetic-correlates
+  status: published
+  type: article
+  title: "Genetic correlates of PCL-R psychopathy: A systematic review"
+  authors:
+    - { family: Jalava, given: J. }
+    - { family: Griffiths, given: S. }
+    - { family: Larsen, given: Rasmus Rosenberg, me: true }
+    - { family: Alcott, given: E. }
+  date: "2022"
+  venue: Aggression and Violent Behavior
+  volume: "66"
+  pages: "101765"
+  doi: 10.1016/j.avb.2022.101765
+  openalex_id: W4284991588
+  tags: [psychopathy]
+
+- id: larsen-2022-canadian-practitioners
+  status: published
+  type: article
+  title: "Psychopathy assessments in forensic psychiatry: A pilot study of Canadian practitioners’ use and perceptions"
+  authors:
+    - { family: Larsen, given: Rasmus Rosenberg, me: true }
+    - { family: Griffiths, given: S. }
+    - { family: Jalava, given: J. }
+    - { family: Burns, given: J. }
+    - { family: Khoshabe, given: R. }
+    - { family: Raposo, given: N. }
+    - { family: Sng, given: D. }
+  date: "2022"
+  venue: Journal of Criminological Research, Policy and Practice
+  volume: "9"
+  issue: "1"
+  pages: "1\u201313"
+  doi: 10.1108/JCRPP-02-2022-0007
+  openalex_id: W4283391551
+  abstract: >-
+    Purpose The purpose of this study was to survey practitioners’ use and perceptions of
+    psychopathy assessments in Canadian forensic psychiatric settings. Psychopathy
+    assessments are widely used in forensic settings to inform decisions about sentencing,
+    placement, rehabilitation and parole. Recent empirical evidence suggests that the
+    utility of psychopathy assessments might be overestimated, leading to a debate about
+    their legal and ethical justification. However, one shortcoming of these discussions is
+    that they rely heavily on anecdotal evidence about how exactly psychopathy assessments
+    influence forensic decisions, due to a general lack of survey data on field uses. Some
+    data are available in European and American contexts, but little is known about Canadian
+    clinical practice. Design/methodology/approach To address this shortcoming in the
+    literature, the authors conducted a pilot study of practitioners in forensic psychiatric
+    units in Ontario (N = 18), evaluating their use of psychopathy assessments, reporting
+    habits and their perceptions of psychopathic offenders. Findings Practitioners reported
+    that they primarily used the Hare Psychopathy Checklist-Revised (PCL-R) as a risk
+    assessment tool, often in combination with other tools. Most clinicians reported using
+    psychopathy assessments infrequently, that there was a low base rate of psychopathic
+    offenders and their attitudes and beliefs about psychopathy were generally consistent
+    with the empirical literature. Originality/value This pilot study provides novel
+    insights into the use of psychopathy assessments in Canadian forensic psychiatry with
+    the potential to inform current debates.
+  tags: [psychopathy, law-and-evidence]
+
+- id: hastings-2021-integrative-paradigms
+  status: published
+  type: chapter
+  title: "Integrative paradigms for knowledge discovery in mental health: Overcoming the fragmentation of knowledge inherent in disparate theoretical paradigms"
+  authors:
+    - { family: Hastings, given: J. }
+    - { family: Larsen, given: Rasmus Rosenberg, me: true }
+  editors: [J. Tenenbaum, P. Ranallo]
+  date: "2021"
+  venue: "Mental health informatics: Enabling a learning mental healthcare system"
+  pages: "295\u2013316"
+  publisher: Springer International Publishing
+  place: Cham
+  tags: [psychiatry-and-ontology]
+
+- id: larsen-2021-amused-by-the-outrageous
+  status: published
+  type: chapter
+  title: "Amused by the outrageous: The morally tempering effect of news satire"
+  authors:
+    - { family: Larsen, given: Rasmus Rosenberg, me: true }
+    - { family: Sackris, given: D. }
+  editors: [B. Robinson]
+  date: "2021"
+  venue: The moral psychology of amusement
+  pages: "131\u2013150"
+  publisher: Rowman & Littlefield
+  place: New York
+  tags: [moral-and-aesthetic-judgment]
+
+- id: jalava-2021-coding-bias
+  status: published
+  type: article
+  title: Is the psychopathic brain an artefact of coding bias? A systematic review
+  authors:
+    - { family: Jalava, given: J. }
+    - { family: Griffiths, given: S. }
+    - { family: Larsen, given: Rasmus Rosenberg, me: true }
+    - { family: Alcott, given: E. B. }
+  date: "2021"
+  venue: Frontiers in Psychology
+  volume: "12"
+  pages: "654336"
+  doi: 10.3389/fpsyg.2021.654336
+  openalex_id: W3155932227
+  pdf: https://www.frontiersin.org/articles/10.3389/fpsyg.2021.654336/pdf
+  abstract: >-
+    Questionable research practices are a well-recognized problem in psychology. Coding
+    bias, or the tendency of review studies to disproportionately cite positive findings
+    from original research, has received comparatively little attention. Coding bias is more
+    likely to occur when original research, such as neuroimaging, includes large numbers of
+    effects, and is most concerning in applied contexts. We evaluated coding bias in reviews
+    of structural magnetic resonance imaging (sMRI) studies of PCL-R psychopathy. We used
+    PRISMA guidelines to locate all relevant original sMRI studies and reviews. The
+    proportion of null-findings cited in reviews was significantly lower than those reported
+    in original research, indicating coding bias. Coding bias was not affected by
+    publication date or review design. Reviews recommending forensic applications-such as
+    treatment amenability or reduced criminal responsibility-were no more accurate than
+    purely theoretical reviews. Coding bias may have contributed to a perception that
+    structural brain abnormalities in psychopaths are more consistent than they actually
+    are, and by extension that sMRI findings are suitable for forensic application. We
+    discuss possible sources for the pervasive coding bias we observed, and we provide
+    recommendations to counteract this bias in review studies. Until coding bias is
+    addressed, we argue that this literature should not inform conclusions about
+    psychopaths' neurobiology, especially in forensic contexts.
+  tags: [psychopathy, law-and-evidence]
+
+- id: larsen-2020-moral-psychological-impairment
+  status: published
+  type: article
+  title: Are psychopaths moral-psychologically impaired? Reassessing emotion-theoretical explanations
+  authors:
+    - { family: Larsen, given: Rasmus Rosenberg, me: true }
+  date: "2020"
+  venue: Mind & Language
+  volume: "37"
+  issue: "2"
+  pages: "177\u2013193"
+  doi: 10.1111/mila.12317
+  openalex_id: W3089335790
+  pdf: https://philpapers.org/archive/LARAPM.pdf
+  abstract: >-
+    Psychopathy has been theorized as a disorder of emotion, which impairs moral judgments.
+    However, these theories are increasingly being abandoned as empirical studies show that
+    psychopaths seem to make proper moral judgments. In this contribution, these findings
+    are reassessed, and it is argued that prevalent emotion‐theories of psychopathy appear
+    to operate with the unjustified assumption that psychopaths have no emotions, which
+    leads to the hypothesis that psychopaths are completely unable to make moral judgments.
+    An alternative and novel explanation is proposed, theorizing psychopathy as a
+    degree‐specific emotional deficiency, which causes degree‐specific differences in moral
+    judgments.
+  tags: [psychopathy, moral-and-aesthetic-judgment]
+  featured: true
+
+- id: larsen-2020-provocative-commentary
+  status: published
+  type: commentary
+  title: "More than provocative, less than scientific: A commentary on the editorial decision to publish Cofnas (2020)"
+  authors:
+    - { family: Larsen, given: Rasmus Rosenberg, me: true }
+    - { family: De Cruz, given: H. }
+    - { family: Kaplan, given: J. }
+    - { family: Fuentes, given: A. }
+    - { family: Marks, given: J. }
+    - { family: Pigliucci, given: M. }
+    - { family: Alfano, given: M. }
+    - { family: Livingstone Smith, given: D. }
+    - { family: Schroeder, given: L. }
+  date: "2020"
+  venue: Philosophical Psychology
+  volume: "33"
+  issue: "7"
+  pages: "893\u2013898"
+  doi: 10.1080/09515089.2020.1805199
+  openalex_id: W3049450946
+  pdf: https://www.tandfonline.com/doi/pdf/10.1080/09515089.2020.1805199?needAccess=true&role=button
+  tags: []
+
+- id: larsen-2020-pcl-systematic-review
+  status: published
+  type: article
+  title: Are Psychopathy Checklist (PCL) psychopaths dangerous, untreatable, and without conscience? A systematic review of the empirical evidence
+  authors:
+    - { family: Larsen, given: Rasmus Rosenberg, me: true }
+    - { family: Jalava, given: J. }
+    - { family: Griffiths, given: S. }
+  date: "2020"
+  venue: Psychology, Public Policy, and Law
+  volume: "26"
+  issue: "3"
+  pages: "297\u2013311"
+  doi: 10.1037/law0000239
+  openalex_id: W3027084836
+  tags: [psychopathy, law-and-evidence]
+  featured: true
+
+- id: larsen-2020-mapping-patient-experience
+  status: published
+  type: article
+  title: "Mapping the patient’s experience: An applied ontological framework for phenomenological psychopathology"
+  authors:
+    - { family: Larsen, given: Rasmus Rosenberg, me: true }
+    - { family: Hastings, given: J. }
+  date: "2020"
+  venue: Phenomenology and Mind
+  volume: "18"
+  pages: "200\u2013219"
+  doi: 10.17454/pam-1815
+  openalex_id: W3081569918
+  pdf: http://journals.openedition.org/phenomenology/pdf/1573
+  abstract: >-
+    Mental health research faces a suite of unresolved challenges that have contributed to a
+    stagnation of research efforts and treatment innovation.One such challenge is how to
+    reliably and validly account for the subjective side of patient symptomatology, that is,
+    the patient's inner experiences or patient phenomenology.Providing a structured,
+    standardised semantics for patient phenomenology would enable future research in novel
+    directions.In this contribution, we aim at initiating a standardized approach to patient
+    phenomenology by sketching a tentative formalisation within the framework of an applied
+    ontology, in the broader context of existing open-source Open Biomedical Ontologies
+    resources such as the Mental Functioning Ontology.We further discuss a number of
+    prevailing challenges and observations bearing on this task.
+  tags: [psychiatry-and-ontology]
+
+- id: larsen-2020-moral-blindness
+  status: published
+  type: article
+  title: "Psychopathy as moral blindness: A qualifying exploration of the blindness-analogy in psychopathy theory and research"
+  authors:
+    - { family: Larsen, given: Rasmus Rosenberg, me: true }
+  date: "2020"
+  venue: Philosophical Explorations
+  volume: "23"
+  issue: "3"
+  pages: "214\u2013233"
+  doi: 10.1080/13869795.2020.1799662
+  openalex_id: W3046455652
+  pdf: https://philpapers.org/archive/LARPAM-2.pdf
+  abstract: >-
+    The term psychopathy refers to a personality disorder associated with callous
+    personality traits and antisocial behaviors. Throughout its research history,
+    psychopathy has frequently been described as a peculiar form of moral blindness,
+    engendering a narrative about a patient stereotype incapable of taking a genuine moral
+    perspective, similar to a blind person who is deprived of proper visual perceptions.
+    However, recent empirical research has shown that clinically diagnosed psychopaths are
+    morally more fit than initially thought, and the blindness-analogy now comes across as
+    largely misleading. In this contribution, the moral-blindness analogy is explored in an
+    attempt to qualify anew its relevance in psychopathy theory and research. It is
+    demonstrated that there are indeed theoretically relevant parallels to be drawn between
+    blindness and psychopathy, parallels that are especially illuminating when accounting
+    for the potential symptomatology, dimensionality, and etiological nature of the
+    disorder.
+  tags: [psychopathy, moral-and-aesthetic-judgment]
+
+- id: larsen-2020-feeling-the-aesthetic
+  status: published
+  type: article
+  title: "Feeling the aesthetic: A pluralist sentimentalist theory of aesthetic experience"
+  authors:
+    - { family: Larsen, given: Rasmus Rosenberg, me: true }
+    - { family: Sackris, given: D. }
+  date: "2020"
+  venue: Estetika
+  volume: "57"
+  issue: "2"
+  pages: "116\u2013134"
+  doi: 10.33134/eeja.212
+  openalex_id: W3086910899
+  abstract: >-
+    Sentimentalist aesthetic theories, broadly construed, posit that emotions play a
+    fundamental role in aesthetic experiences. Jesse Prinz has recently proposed a
+    reductionistic version of sentimentalist aesthetics, suggesting that it is the discrete
+    feeling of wonder that makes an experience aesthetic. In this contribution, we draw on
+    Prinz’s proposal in order to outline a novel version of a sentimentalist theory.
+    Contrasting Prinz’s focus on a single emotion, we argue that an aesthetic experience is
+    rudimentarily composed of a plurality of emotions. We acknowledge and discuss
+    significant problems that follow from such a theory, arguing that a pluralist version of
+    sentimentalism is nonetheless the soundest position within sentimentalist aesthetics.
+  tags: [moral-and-aesthetic-judgment]
+
+- id: larsen-2020-affective-science-reprint
+  status: published
+  type: chapter
+  title: "From affective science to psychiatric disorder: Ontology as semantic bridge"
+  authors:
+    - { family: Larsen, given: Rasmus Rosenberg, me: true }
+    - { family: Hastings, given: J. }
+  editors: [D. Telles-Correia, E. Cheniaux]
+  date: "2020"
+  venue: New perspectives in psychopathology
+  pages: "108\u2013120"
+  publisher: Frontiers Media SA
+  place: Lausanne
+  note: Reprint of the 2018 article in Frontiers in Psychiatry
+  doi: 10.3389/978-2-88963-551-1
+  openalex_id: W3216948898
+  tags: [psychiatry-and-ontology]
+
+- id: larsen-2019-stigma
+  status: published
+  type: article
+  title: Psychopathy treatment and the stigma of yesterday’s research
+  authors:
+    - { family: Larsen, given: Rasmus Rosenberg, me: true }
+  date: "2019"
+  venue: Kennedy Institute of Ethics Journal
+  volume: "29"
+  issue: "3"
+  pages: "243\u2013272"
+  doi: 10.1353/ken.2019.0024
+  openalex_id: W2981879119
+  pdf: https://philpapers.org/archive/LARPTA.pdf
+  abstract: >-
+    The psychiatric diagnosis of psychopathic personality-or psychopathy-signifies a patient
+    stereotype with a callous lack of empathy and strong antisocial tendencies. Throughout
+    the research record and psychiatric practices, diagnosed psychopaths have been
+    predominantly seen as immune to psychiatric intervention and treatment, making the
+    diagnosis a potentially strong discriminator for treatment amenability. In this
+    contribution, the evidence in support of this proposition is critically analyzed. It is
+    demonstrated that the untreatability perspective rests largely on erroneous,
+    unscientific conclusions. Instead, recent research suggests that practitioners should be
+    more optimistic about the possibility of treating and rehabilitating diagnosed
+    psychopaths. In light of this finding, concrete ethical challenges in the forensic
+    practice surrounding the psychopathy diagnosis are discussed, adding to a growing body
+    of research that expresses skepticism about the forensic utility of the diagnosis.
+  tags: [psychopathy]
+
+- id: larsen-2019-stigma-reprint
+  status: published
+  type: chapter
+  title: Psychopathy treatment and the stigma of yesterday’s research
+  authors:
+    - { family: Larsen, given: Rasmus Rosenberg, me: true }
+  editors: [F. Allhoff, S. Borden]
+  date: "2019"
+  venue: Ethics and error in medicine
+  pages: "262\u2013287"
+  publisher: Routledge
+  place: New York
+  note: Reprint of the 2019 article in the Kennedy Institute of Ethics Journal
+  tags: [psychopathy]
+
+- id: sackris-2019-carroll
+  status: published
+  type: article
+  title: A consideration of Carroll’s content theory
+  authors:
+    - { family: Sackris, given: D. }
+    - { family: Larsen, given: Rasmus Rosenberg, me: true }
+  date: "2019"
+  venue: The Journal of Value Inquiry
+  volume: "54"
+  pages: "245\u2013255"
+  doi: 10.1007/s10790-019-09693-6
+  openalex_id: W2948121884
+  tags: [moral-and-aesthetic-judgment]
+
+- id: larsen-2018-false-positives
+  status: published
+  type: article
+  title: "False-positives in psychopathy assessment: Proposing theory-driven exclusion criteria in research sampling"
+  authors:
+    - { family: Larsen, given: Rasmus Rosenberg, me: true }
+  date: "2018"
+  venue: European Journal of Analytic Philosophy
+  volume: "14"
+  issue: "1"
+  pages: "33\u201352"
+  doi: 10.31820/ejap.14.1.2
+  openalex_id: W2904053442
+  abstract: >-
+    Recent debates in psychopathy studies have articulated concerns about false-positives in
+    assessment and research sampling. These are pressing concerns for research progress,
+    since scientific quality depends on sample quality, that is, if we wish to study
+    psychopathy we must be certain that the individuals we study are, in fact, psychopaths.
+    Thus, if conventional assessment tools yield substantial false-positives, this would
+    explain why central research is laden with discrepancies and nonreplicable findings.
+    This paper draws on moral psychology in order to develop tentative theory-driven
+    exclusion criteria applicable in research sampling. Implementing standardized procedures
+    to discriminate between research participants has the potential to yield more homogenous
+    and discrete samples, a vital prerequisite for research progress in etiology,
+    epidemiology, and treatment strategies.
+  tags: [psychopathy]
+
+- id: larsen-2018-affective-science
+  status: published
+  type: article
+  title: "From affective science to psychiatric disorder: Ontology as semantic bridge"
+  authors:
+    - { family: Larsen, given: Rasmus Rosenberg, me: true }
+    - { family: Hastings, given: J. }
+  date: "2018"
+  venue: Frontiers in Psychiatry
+  volume: "9"
+  pages: "487"
+  doi: 10.3389/fpsyt.2018.00487
+  openalex_id: W2897242206
+  pdf: https://www.frontiersin.org/articles/10.3389/fpsyt.2018.00487/pdf
+  abstract: >-
+    Advances in emotion and affective science have yet to translate routinely into
+    psychiatric research and practice. This is unfortunate since emotion and affect are
+    fundamental components of many psychiatric conditions. Rectifying this lack of
+    interdisciplinary integration could thus be a potential avenue for improving psychiatric
+    diagnosis and treatment. In this contribution, we propose and discuss an ontological
+    framework for explicitly capturing the complex interrelations between affective entities
+    and psychiatric disorders, in order to facilitate mapping and integration between
+    affective science and psychiatric diagnostics. We build on and enhance the
+    categorisation of emotion, affect and mood within the previously developed Emotion
+    Ontology, and that of psychiatric disorders in the Mental Disease Ontology. This effort
+    further draws on developments in formal ontology regarding the distinction between
+    normal and abnormal in order to formalize the interconnections. This operational
+    semantic framework is relevant for applications including clarifying psychiatric
+    diagnostic categories, clinical information systems, and the integration and translation
+    of research results across disciplines.
+  tags: [psychiatry-and-ontology]
+
+- id: larsen-2015-posited-self
+  status: published
+  type: article
+  title: "The posited self: The non-theistic foundation in Kierkegaard’s writings"
+  authors:
+    - { family: Larsen, given: Rasmus Rosenberg, me: true }
+  date: "2015"
+  venue: Kierkegaard Studies Yearbook
+  volume: "20"
+  issue: "1"
+  pages: "31\u201354"
+  doi: 10.1515/kierke-2015-0104
+  openalex_id: W2562831728
+  abstract: >-
+    We may correctly say that Søren Kierkegaard is one of the most influential
+    Christian-religious thinkers of the modern era, but are we equally justified in
+    categorizing his writings as foundationally religious? This paper challenges a
+    prevailing exclusive-theological interpretation that contends that Kierkegaard
+    principally writes from a Christian dogmatic viewpoint. I argue that Kierkegaard’s
+    religion is better understood as an outcome of his philosophical analysis of human
+    nature. Conclusively, we should appreciate Kierkegaard first as a philosopher, whose aim
+    is the explication of human subjectivity, and not primarily as an orator of Christian
+    orthodoxy
+  tags: [history-of-philosophy]
+
+- id: larsen-2013-schelling-kierkegaard
+  status: published
+  type: article
+  title: "Schelling and Kierkegaard in perspective: Integrating existence into idealism"
+  authors:
+    - { family: Larsen, given: Rasmus Rosenberg, me: true }
+  date: "2013"
+  venue: Res Philosophica
+  volume: "90"
+  issue: "4"
+  pages: "481\u2013501"
+  doi: 10.11612/resphil.2013.90.4.3
+  openalex_id: W889432237
+  pdf: https://philpapers.org/archive/LARSAK.pdf
+  abstract: >-
+    Søren Kierkegaard is often considered to be one of the most vocal critics of German
+    idealism.The present paper analyzes the philosophical similarity between Friedrich
+    Schelling's early idealistic work and Kierkegaard's existential writings, endeavoring to
+    display Schelling's epic 1809 publication Philosophical Investigations into the Essence
+    of Human Freedom as a possible forerunner to Kierkegaard.This juxtaposition reveals
+    concrete similarity that supports the thesis that Schelling's work could have been of
+    great inspirational value for Kierkegaard, especially Kierkegaard's core concepts such
+    as freedom, morality and God.However, Schelling's early work is primarily appreciated as
+    a philosophy of nature (metaphysics), and therefore fundamentally different from
+    Kierkegaard's theistic-psychological writings.The present paper tentatively opposes this
+    distinction, concluding that if Schelling really is a forerunner to Kierkegaard, then we
+    ought to appreciate Kierkegaard's writings as conveying more than a theological
+    message.The conclusion suggests that Kierkegaard's writings should be interpreted in a
+    broader philosophical context, closer to the metaphysical idealism he is often assumed
+    to resist.Only one who has tasted freedom can feel the longing to make everything
+    analogous to it, to spread it throughout the whole universe.
+  tags: [history-of-philosophy]
+
+- id: larsen-2026-aeon-no-psychopaths
+  status: published
+  type: op-ed
+  title: There are no psychopaths
+  authors:
+    - { family: Larsen, given: Rasmus Rosenberg, me: true }
+  date: 2026-02-27
+  venue: Aeon
+  publisher_url: https://aeon.co/essays/psychopathy-is-a-zombie-idea-why-does-it-cling-on
+  image: /images/media/larsen-2026-aeon-no-psychopaths.jpg
+  abstract: >-
+    Virtually everything you think you know about psychopathy has been thoroughly debunked.
+    Why does this zombie idea live on?
+  tags: [psychopathy]
+
+- id: larsen-2025-mit-press-reader-spin
+  status: published
+  type: op-ed
+  title: The neuroscience of psychopathy has a spin problem
+  authors:
+    - { family: Larsen, given: Rasmus Rosenberg, me: true }
+  date: 2025-07-22
+  venue: The MIT Press Reader
+  publisher_url: https://thereader.mitpress.mit.edu/the-neuroscience-of-psychopathy-has-a-spin-problem/
+  image: /images/media/larsen-2025-mit-press-reader-spin.jpg
+  abstract: >-
+    If there is no clear evidence of brain abnormalities in psychopathic persons, why do so
+    many scientists keep portraying psychopathy as a neurodevelopmental disorder?
+  tags: [psychopathy]
+
+- id: larsen-2025-nautilus-psychopaths
+  status: published
+  type: op-ed
+  title: What we still get wrong about psychopaths
+  authors:
+    - { family: Larsen, given: Rasmus Rosenberg, me: true }
+  date: 2025-07-25
+  venue: Nautilus
+  publisher_url: https://nautil.us/what-we-still-get-wrong-about-psychopaths-1226700/
+  image: /images/media/larsen-2025-nautilus-psychopaths.jpg
+  abstract: >-
+    Many scientists portray psychopathy as a brain disorder, despite a lack of evidence
+  tags: [psychopathy]
+
+- id: larsen-2020-medium-philosophical-psychology
+  status: published
+  type: op-ed
+  title: The editors of Philosophical Psychology stalled and rejected our commentary to an unscientific and racist publication
+  authors:
+    - { family: Larsen, given: Rasmus Rosenberg, me: true }
+  date: 2020-06-15
+  venue: Science and Philosophy (Medium)
+  publisher_url: https://medium.com/science-and-philosophy/the-editors-of-philosophical-psychology-stalled-and-rejected-our-commentary-to-an-unscientific-and-2f7393df48af
+  tags: []
+
+- id: larsen-2018-brains-blog-nothingburger
+  status: published
+  type: other
+  title: So, is psychopathy simply a big juicy nothingburger? Commentary on Heidi Maibom’s “What can philosophers learn from psychopathy?”
+  authors:
+    - { family: Larsen, given: Rasmus Rosenberg, me: true }
+  date: 2018-12-04
+  venue: The Brains Blog
+  tags: [psychopathy]
+
+- id: larsen-2016-turbulens-refugee-aid
+  status: published
+  type: op-ed
+  title: Lack of refugee aid discloses a chronic moral-political crisis
+  authors:
+    - { family: Larsen, given: Rasmus Rosenberg, me: true }
+  date: 2016-04-22
+  venue: Turbulens
+  note: In Danish
+  publisher_url: http://www.turbulens.net/temaer/moralogetik/?article=423
+  tags: []
+
+- id: larsen-2016-review-nordentoft
+  status: published
+  type: review
+  title: Review of Kresten Nordentoft, “What does the fire chief say?” Kierkegaard’s confrontation with his times
+  authors:
+    - { family: Larsen, given: Rasmus Rosenberg, me: true }
+  date: "2016"
+  venue: "Kierkegaard Research: Sources, Reception, and Resources"
+  volume: "18"
+  issue: "1"
+  pages: "143\u2013148"
+  publisher: Routledge
+  tags: [history-of-philosophy]
+
+- id: larsen-2016-review-malantschuk
+  status: published
+  type: review
+  title: "Review of Gregor Malantschuk, Freedom and existence: Studies in Søren Kierkegaard’s thinking"
+  authors:
+    - { family: Larsen, given: Rasmus Rosenberg, me: true }
+  date: "2016"
+  venue: "Kierkegaard Research: Sources, Reception, and Resources"
+  volume: "18"
+  issue: "1"
+  pages: "125\u2013130"
+  publisher: Routledge
+  tags: [history-of-philosophy]
+
+- id: larsen-2016-review-slok
+  status: published
+  type: review
+  title: "Review of Johannes Sløk, Kierkegaard’s universe: A new guide to the genius"
+  authors:
+    - { family: Larsen, given: Rasmus Rosenberg, me: true }
+  date: "2016"
+  venue: "Kierkegaard Research: Sources, Reception, and Resources"
+  volume: "18"
+  issue: "1"
+  pages: "173\u2013178"
+  publisher: Routledge
+  tags: [history-of-philosophy]
+
+- id: larsen-2015-review-assiter
+  status: published
+  type: review
+  title: Review of Alison Assiter, Kierkegaard, Eve and metaphors of birth
+  authors:
+    - { family: Larsen, given: Rasmus Rosenberg, me: true }
+  date: "2015"
+  venue: Journal of the British Society for Phenomenology
+  volume: "46"
+  issue: "5"
+  pages: "1\u20133"
+  publisher: Taylor and Francis
+  tags: [history-of-philosophy]
+
+- id: larsen-2015-weekendavisen-dogmatism
+  status: published
+  type: op-ed
+  title: The lazy format of dogmatism
+  authors:
+    - { family: Larsen, given: Rasmus Rosenberg, me: true }
+  date: 2015-04-10
+  venue: Weekendavisen
+  note: In Danish
+  tags: []
+
+- id: larsen-2014-information-beauty
+  status: published
+  type: op-ed
+  title: Perhaps one day the beauty will vanish
+  authors:
+    - { family: Larsen, given: Rasmus Rosenberg, me: true }
+  date: 2014-09-17
+  venue: Dagbladet Information
+  note: In Danish
+  publisher_url: http://www.information.dk/509844
+  image: /images/media/larsen-2014-information-beauty.jpg
+  tags: []

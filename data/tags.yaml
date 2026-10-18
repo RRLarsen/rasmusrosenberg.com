@@ -1,0 +1,11 @@
+# Controlled list of topics. Publications, talks and media may only use these ids.
+- id: psychopathy
+  label: Psychopathy
+- id: law-and-evidence
+  label: Law and evidence
+- id: psychiatry-and-ontology
+  label: Psychiatry and ontology
+- id: moral-and-aesthetic-judgment
+  label: Moral and aesthetic judgment
+- id: history-of-philosophy
+  label: History of philosophy

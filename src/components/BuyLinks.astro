@@ -1,0 +1,61 @@
+---
+/* Where to buy a book: the first link as a button, the rest in a "More retailers" menu.
+   Links come from the book's `links` in data/publications.yaml. */
+import type { Publication } from '../lib/data';
+
+interface Props { book: Publication; more?: { href: string; label: string } }
+const { book, more } = Astro.props;
+const links = book.data.links?.length ? book.data.links : book.data.publisher_url ? [{ label: book.data.publisher ?? 'Publisher', url: book.data.publisher_url }] : [];
+const [first, ...rest] = links;
+---
+{first && (
+  <div class="buy sans">
+    <a class="button" href={first.url}>Order from {first.label.replace(/^The /, '')}</a>
+    {rest.length > 0 && (
+      <details class="retailers">
+        <summary>More retailers</summary>
+        <ul>
+          {rest.map((l) => <li><a href={l.url}>{l.label}</a></li>)}
+        </ul>
+      </details>
+    )}
+    {more && <a class="more-link" href={more.href}>{more.label}</a>}
+  </div>
+)}
+
+<style>
+  .buy { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 0.75rem 1.25rem; margin-top: 1.25rem; }
+  .retailers { position: relative; }
+  summary {
+    list-style: none; cursor: pointer; padding: 0.7rem 1.1rem; border: 1px solid var(--rule); border-radius: 2px;
+    color: var(--ink); font-size: var(--step--1); line-height: 1.5;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: ""; display: inline-block; width: 0.45em; height: 0.45em; margin-left: 0.6em; border-right: 1.5px solid; border-bottom: 1.5px solid; transform: translateY(-0.2em) rotate(45deg); }
+  details[open] summary::after { transform: translateY(0.05em) rotate(-135deg); }
+  summary:hover { border-color: var(--ink-soft); }
+  ul {
+    position: absolute; z-index: 5; top: calc(100% + 0.35rem); left: 0; min-width: 100%; width: max-content;
+    margin: 0; padding: 0.35rem 0; list-style: none; background: var(--paper); border: 1px solid var(--rule);
+    box-shadow: 0 12px 24px -12px rgb(0 0 0 / 0.25);
+  }
+  li a { display: block; padding: 0.45rem 1.1rem; color: var(--ink); text-decoration: none; }
+  li a:hover, li a:focus-visible { background: color-mix(in srgb, var(--rule) 45%, transparent); text-decoration: underline; }
+  .more-link { align-self: center; }
+</style>
+
+<script>
+  // close the menu when clicking elsewhere or pressing Escape
+  document.addEventListener('click', (e) => {
+    document.querySelectorAll<HTMLDetailsElement>('details.retailers[open]').forEach((d) => {
+      if (!d.contains(e.target as Node)) d.open = false;
+    });
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    document.querySelectorAll<HTMLDetailsElement>('details.retailers[open]').forEach((d) => {
+      d.open = false;
+      d.querySelector('summary')?.focus();
+    });
+  });
+</script>

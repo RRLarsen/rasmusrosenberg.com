@@ -1,0 +1,24 @@
+---
+/* One line: email on the left, profiles and copyright on the right. Full contact details
+   are on the Contact page. */
+import { getProfile, linkNames } from '../lib/data';
+
+const profile = await getProfile();
+---
+<footer class="field">
+  <div class="wrap foot sans">
+    <a class="email" href={`mailto:${profile.email}`}>{profile.email}</a>
+    <nav aria-label="Profiles">
+      {profile.show_links.map((key) => profile.links[key] && <a href={profile.links[key]}>{linkNames[key]}</a>)}
+      <span>© {new Date().getFullYear()} {profile.name}</span>
+    </nav>
+  </div>
+</footer>
+
+<style>
+  .foot { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.75rem 2rem; padding-top: 1.5rem; padding-bottom: 1.5rem; color: var(--on-deep-soft); }
+  .email { overflow-wrap: anywhere; }
+  nav { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; }
+  nav a { color: var(--on-deep-soft); }
+  nav a:hover { color: var(--on-deep); }
+</style>

@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>D · Literary — Rasmus Rosenberg Larsen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..600;1,300..600&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* Direction D: Literary. Modelled on leoniekebaerwaldt.com: a delicate high-contrast serif for the name and
+   headings, a light monospace for everything else, generous white space, centred composition on grained paper. */
+:root {
+  --paper: #f2f2ef;
+  --ink: #0d0d0d;
+  --ink-soft: #3b3b39;
+  --muted: #7a7974;
+  --faint: #d9d8d3;
+  --plinth: #e6e5e0;
+  --rule: #c9c8c2;
+  --grain: .08;
+  --photo-filter: saturate(.55) contrast(1.02);
+  --serif: "Cormorant", "Cormorant Garamond", Didot, serif;
+  --mono: "DM Mono", ui-monospace, Menlo, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #151514; --ink: #efede8; --ink-soft: #cfccc5; --muted: #8f8c85; --faint: #34332f; --plinth: #222220; --rule: #3a3935; --grain: .05;
+    --photo-filter: saturate(.45) brightness(.9);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #151514; --ink: #efede8; --ink-soft: #cfccc5; --muted: #8f8c85; --faint: #34332f; --plinth: #222220; --rule: #3a3935; --grain: .05;
+  --photo-filter: saturate(.45) brightness(.9);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background-color: var(--paper); color: var(--ink);
+  font-family: var(--mono); font-weight: 300; font-size: .9375rem; line-height: 1.75;
+}
+body::before {
+  content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 100; opacity: var(--grain); mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+:root[data-theme="dark"] body::before { mix-blend-mode: screen; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) body::before { mix-blend-mode: screen; } }
+
+a { color: inherit; text-underline-offset: .25em; text-decoration-thickness: 1px; }
+:focus-visible { outline: 1px solid var(--ink); outline-offset: 4px; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+.arrow { display: inline-block; width: .9em; height: .9em; vertical-align: -.1em; margin-left: .5em; transition: transform .25s; }
+a:hover .arrow { transform: translateX(3px); }
+.go { font-weight: 500; text-decoration: underline; }
+
+/* header */
+.top {
+  position: fixed; inset: 0 0 auto 0; z-index: 50;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.1rem clamp(1rem, 3vw, 2rem);
+}
+.top a { text-decoration: none; font-weight: 400; }
+.top .right { display: flex; gap: 1.5rem; }
+
+/* full-screen menu */
+.menu {
+  position: fixed; inset: 0; z-index: 60; background: var(--paper);
+  display: grid; grid-template-rows: auto 1fr auto; padding: 1.1rem clamp(1rem, 3vw, 2rem) 2rem;
+  visibility: hidden; opacity: 0; transition: opacity .35s, visibility 0s .35s;
+}
+.menu.open { visibility: visible; opacity: 1; transition: opacity .35s; }
+.menu .bar { display: flex; justify-content: space-between; }
+.menu nav { align-self: center; display: flex; flex-direction: column; align-items: center; gap: .1rem; }
+.menu nav a { font-family: var(--serif); font-weight: 300; font-size: clamp(2.5rem, 7vw, 5rem); line-height: 1.12; text-decoration: none; }
+.menu nav a:hover { font-style: italic; }
+.menu .foot { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; color: var(--muted); }
+.menu .foot a { text-decoration: none; }
+
+/* hero: the name inks in as you scroll */
+.hero { height: 230vh; position: relative; }
+.hero .stick { position: sticky; top: 0; height: 100vh; height: 100svh; display: grid; place-items: center; text-align: center; padding: 0 1rem; }
+.hero h1 {
+  margin: 0; font-family: var(--serif); font-weight: 300; text-transform: uppercase;
+  font-size: clamp(2rem, 9vw, 10.5rem); line-height: .92; letter-spacing: .005em;
+}
+.hero h1 .line { display: block; white-space: nowrap; }
+.hero h1 .ch { opacity: var(--o, 1); }
+.hero .field { position: absolute; left: 0; right: 0; bottom: 18%; opacity: var(--f, 1); color: var(--ink-soft); }
+.hero .cue { position: absolute; left: 0; right: 0; bottom: 2rem; opacity: var(--c, 1); }
+
+/* sections */
+section { padding: clamp(5rem, 14vh, 9rem) clamp(1rem, 4vw, 2.5rem); }
+h2 { margin: 0 0 3.5rem; text-align: center; font-family: var(--serif); font-weight: 300; font-size: clamp(2.5rem, 5vw, 3.75rem); line-height: 1.05; }
+
+/* about: one sentence per line, staggered */
+.stagger { max-width: 60rem; margin: 0 auto; }
+.stagger p { margin: 0 0 .9rem; }
+.stagger p:nth-child(1) { padding-left: 4%; }
+.stagger p:nth-child(2) { padding-left: 22%; }
+.stagger p:nth-child(3) { padding-left: 0; }
+.stagger p:nth-child(4) { padding-left: 30%; }
+.stagger p:nth-child(5) { padding-left: 12%; }
+.stagger p:nth-child(6) { padding-left: 2%; }
+.stagger .go { display: inline-block; margin-top: 1.5rem; padding-left: 4%; }
+.portrait { display: block; width: min(22rem, 70%); margin: 5rem auto 0; }
+.portrait img { width: 100%; height: auto; display: block; aspect-ratio: 4 / 5; object-fit: cover; filter: var(--photo-filter); }
+.portrait figcaption { margin-top: .6rem; text-align: center; color: var(--muted); font-size: .8125rem; }
+
+/* book on a plinth */
+.works { display: flex; justify-content: center; gap: clamp(2rem, 6vw, 6rem); flex-wrap: wrap; }
+.work { width: min(30rem, 100%); text-align: center; }
+.plinth { background: var(--plinth); aspect-ratio: 5 / 6; display: grid; place-items: center; padding: 12%; }
+.plinth img { width: 62%; height: auto; display: block; box-shadow: 0 18px 30px -18px rgba(0,0,0,.45); }
+.work h3 { margin: 1.75rem 0 .25rem; font-family: var(--serif); font-weight: 400; font-size: 2rem; line-height: 1.1; }
+.work .meta { color: var(--muted); margin: 0 0 1rem; }
+
+/* press */
+.press { max-width: 46rem; margin: 0 auto; display: grid; grid-template-columns: 2.5rem 1fr 2.5rem; align-items: center; gap: 1rem; }
+.press blockquote { margin: 0; min-height: 9rem; }
+.press blockquote p { margin: 0 0 1rem; font-weight: 400; }
+.press cite { font-style: normal; color: var(--muted); }
+.press button { font-family: var(--serif); font-size: 3rem; line-height: 1; font-weight: 300; padding: .25rem; }
+.press .count { grid-column: 2; color: var(--muted); font-size: .8125rem; }
+.center { text-align: center; margin-top: 2.5rem; }
+
+/* publications table */
+.table { max-width: 64rem; margin: 0 auto; border-top: 1px solid var(--rule); }
+.row { display: grid; grid-template-columns: 1.7fr 1.2fr 4rem 7rem; gap: 1.5rem; padding: 1rem .25rem; border-bottom: 1px solid var(--rule); align-items: baseline; }
+.row .v, .row .y { color: var(--muted); }
+.row a { text-align: right; }
+
+/* expertise */
+.areas { max-width: 64rem; margin: 0 auto; border-top: 1px solid var(--rule); }
+.area { display: grid; grid-template-columns: 1fr 2fr; gap: 2rem; padding: 2rem .25rem; border-bottom: 1px solid var(--rule); }
+.area h3 { margin: 0; font-family: var(--serif); font-weight: 400; font-size: 1.75rem; line-height: 1.15; }
+.area p { margin: 0; color: var(--ink-soft); }
+.lede { max-width: 40rem; margin: -1.5rem auto 3rem; text-align: center; color: var(--ink-soft); }
+
+/* footer */
+footer { padding: 6rem clamp(1rem, 4vw, 2.5rem) 2rem; }
+.fgrid { display: grid; grid-template-columns: 1.6fr repeat(4, minmax(0, 1fr)); gap: 2rem; align-items: start; max-width: 80rem; margin: 0 auto; }
+.fgrid .big { font-family: var(--serif); font-weight: 300; font-size: clamp(2.25rem, 4.2vw, 3.75rem); line-height: 1; }
+.fgrid h4 { margin: 0 0 .5rem; font-weight: 400; color: var(--muted); font-size: .8125rem; }
+.fgrid ul { list-style: none; margin: 0; padding: 0; }
+.fgrid li a { text-decoration: none; }
+.fgrid li a:hover { text-decoration: underline; }
+.legal { text-align: center; color: var(--muted); font-size: .8125rem; margin-top: 5rem; }
+
+@media (max-width: 760px) {
+  body { font-size: .875rem; }
+  .stagger p { padding-left: 0 !important; }
+  .stagger .go { padding-left: 0; }
+  .row { grid-template-columns: 1fr auto; gap: .25rem 1rem; }
+  .row .v { grid-column: 1; grid-row: 2; }
+  .row .y { grid-column: 2; grid-row: 1; text-align: right; }
+  .row a { grid-column: 2; grid-row: 2; }
+  .area { grid-template-columns: 1fr; gap: .75rem; }
+  .fgrid { grid-template-columns: 1fr 1fr; }
+  .fgrid .big { grid-column: 1 / -1; }
+  .press { grid-template-columns: 2rem 1fr 2rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero { height: auto; }
+  .hero .stick { position: relative; }
+  .menu { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <a href="#top">Rasmus Rosenberg Larsen</a>
+  <div class="right">
+    <button class="theme" type="button">Dark</button>
+    <button class="menu-open" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+  </div>
+</header>
+
+<div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="bar"><span>Rasmus Rosenberg Larsen</span><button class="menu-close" type="button">Close</button></div>
+  <nav aria-label="Main">
+    <a href="#about">About</a>
+    <a href="#book">Book</a>
+    <a href="#publications">Publications</a>
+    <a href="#expertise">Expertise</a>
+    <a href="#">CV</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <div class="foot">
+    <a href="https://scholar.google.com/citations?user=YX6hlhsAAAAJ">Google Scholar</a>
+    <a href="https://www.researchgate.net/profile/Rasmus-Larsen">ResearchGate</a>
+    <a href="https://www.linkedin.com/in/rosenberglarsen/">LinkedIn</a>
+    <a href="https://www.youtube.com/@Rosenberglarsen">YouTube</a>
+  </div>
+</div>
+
+<main id="top">
+  <div class="hero">
+    <div class="stick">
+      <h1 aria-label="Rasmus Rosenberg Larsen"><span class="line" aria-hidden="true">Rasmus Rosenberg</span><span class="line" aria-hidden="true">Larsen</span></h1>
+      <p class="field">Forensic epistemology and philosophy of science</p>
+      <p class="cue" aria-hidden="true">Scroll</p>
+    </div>
+  </div>
+
+  <section id="about" aria-labelledby="about-h">
+    <h2 id="about-h">About Rasmus Rosenberg Larsen</h2>
+    <div class="stagger">
+      <p>Rasmus Rosenberg Larsen is Associate Professor of Forensic Epistemology and Philosophy of Science at the University of Toronto Mississauga.</p>
+      <p>He is an Affiliated Scientist at the National Center for Ontological Research.</p>
+      <p>His work lies at the intersection of psychology, epistemology and law, and asks how science can improve decisions in the legal system.</p>
+      <p>His research appears in The Lancet Psychiatry; Psychology, Public Policy, and Law; and Philosophical Psychology.</p>
+      <p>His book Psychopathy Unmasked (2025) is published by the MIT Press.</p>
+      <p>He holds a PhD in philosophy of science from the University at Buffalo.</p>
+      <a class="go" href="#">Full biography<svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+    <figure class="portrait">
+      <img src="assets/headshot-portrait.jpg" width="1119" height="1400" alt="Rasmus Rosenberg Larsen" loading="lazy">
+    </figure>
+  </section>
+
+  <section id="book" aria-labelledby="book-h">
+    <h2 id="book-h">The book</h2>
+    <div class="works">
+      <article class="work">
+        <div class="plinth"><img src="assets/book-cover-flat.jpg" width="900" height="1350" alt="Cover of Psychopathy Unmasked" loading="lazy"></div>
+        <h3>Psychopathy Unmasked</h3>
+        <p class="meta">The Rise and Fall of a Dangerous Diagnosis<br>Monograph (2025) | The MIT Press</p>
+        <a class="go" href="https://mitpress.mit.edu/9780262552202/psychopathy-unmasked/">More information<svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      </article>
+    </div>
+  </section>
+
+  <section id="press" aria-labelledby="press-h">
+    <h2 id="press-h">Praise and press</h2>
+    <div class="press" aria-roledescription="carousel">
+      <button class="prev" type="button" aria-label="Previous quote">‹</button>
+      <blockquote aria-live="polite">
+        <p class="q">“Placeholder: a sentence from an endorsement or review of Psychopathy Unmasked goes here.”</p>
+        <cite class="c">Reviewer name, Publication</cite>
+      </blockquote>
+      <button class="next" type="button" aria-label="Next quote">›</button>
+      <span class="count">1 of 3</span>
+    </div>
+    <p class="center"><a class="go" href="#">All reviews and interviews<svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></a></p>
+  </section>
+
+  <section id="publications" aria-labelledby="pubs-h">
+    <h2 id="pubs-h">Publications</h2>
+    <div class="table" role="list">
+      <div class="row" role="listitem"><span>How to keep unreproducible neuroimaging evidence out of court</span><span class="v">Psychology, Public Policy, and Law</span><span class="y">2023</span><a class="go" href="https://doi.org/10.1037/law0000383">Read<svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></a></div>
+      <div class="row" role="listitem"><span>Are psychopathy assessments ethical?</span><span class="v">Journal of Threat Assessment and Management</span><span class="y">2022</span><a class="go" href="https://doi.org/10.1037/tam0000184">Read<svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></a></div>
+      <div class="row" role="listitem"><span>More phenomenology in psychiatry?</span><span class="v">The Lancet Psychiatry</span><span class="y">2022</span><a class="go" href="https://doi.org/10.1016/S2215-0366(22)00156-0">Read<svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></a></div>
+      <div class="row" role="listitem"><span>Genetic correlates of PCL-R psychopathy</span><span class="v">Aggression and Violent Behavior</span><span class="y">2022</span><a class="go" href="https://doi.org/10.1016/j.avb.2022.101765">Read<svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></a></div>
+      <div class="row" role="listitem"><span>Is the psychopathic brain an artefact of coding bias?</span><span class="v">Frontiers in Psychology</span><span class="y">2021</span><a class="go" href="https://doi.org/10.3389/fpsyg.2021.654336">Read<svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></a></div>
+      <div class="row" role="listitem"><span>Are PCL psychopaths dangerous, untreatable, and without conscience?</span><span class="v">Psychology, Public Policy, and Law</span><span class="y">2020</span><a class="go" href="https://doi.org/10.1037/law0000239">Read<svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></a></div>
+      <div class="row" role="listitem"><span>Are psychopaths moral-psychologically impaired?</span><span class="v">Mind &amp; Language</span><span class="y">2020</span><a class="go" href="https://doi.org/10.1111/mila.12317">Read<svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></a></div>
+    </div>
+    <p class="center"><a class="go" href="#">All publications<svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></a></p>
+  </section>
+
+  <section id="expertise" aria-labelledby="exp-h">
+    <h2 id="exp-h">Expertise</h2>
+    <p class="lede">Available for legal consultation, public talks and ontology work. Fees depend on the scope of the job; pro bono for organisations that advance public understanding of science.</p>
+    <div class="areas">
+      <div class="area"><h3>Law and personality disorders</h3><p>Guidance for legal teams on psychopathy and antisocial personality disorder, including how to respond to expert evidence that presents these labels as diagnoses with fixed prognoses.</p></div>
+      <div class="area"><h3>Talks and lectures</h3><p>Talks on science and society, forensic psychology and epistemology, tailored to courts, bar associations, universities and public audiences.</p></div>
+      <div class="area"><h3>Ontology and taxonomy</h3><p>Ontology development for structuring data in the health and cognitive sciences, grounded in Basic Formal Ontology and work on OBO Foundry projects.</p></div>
+    </div>
+    <p class="center"><a class="go" href="mailto:rosenberg.larsen@utoronto.ca">Enquire by email<svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></a></p>
+  </section>
+</main>
+
+<footer id="contact">
+  <div class="fgrid">
+    <div class="big">Rasmus<br>Rosenberg Larsen</div>
+    <div><h4>Explore</h4><ul><li><a href="#about">About</a></li><li><a href="#publications">Publications</a></li><li><a href="#expertise">Expertise</a></li><li><a href="#">CV</a></li></ul></div>
+    <div><h4>Book</h4><ul><li><a href="#book">Psychopathy Unmasked</a></li><li><a href="#press">Reviews</a></li></ul></div>
+    <div><h4>Profiles</h4><ul><li><a href="https://scholar.google.com/citations?user=YX6hlhsAAAAJ">Google Scholar</a></li><li><a href="https://www.researchgate.net/profile/Rasmus-Larsen">ResearchGate</a></li><li><a href="https://www.linkedin.com/in/rosenberglarsen/">LinkedIn</a></li><li><a href="https://www.youtube.com/@Rosenberglarsen">YouTube</a></li></ul></div>
+    <div><h4>Contact</h4><ul><li><a href="mailto:rosenberg.larsen@utoronto.ca">rosenberg.larsen<wbr>@utoronto.ca</a></li><li style="color:var(--muted)">University of Toronto Mississauga</li></ul></div>
+  </div>
+  <p class="legal">© 2026 Rasmus Rosenberg Larsen &nbsp; <a href="index.html">All mockups</a></p>
+</footer>
+
+<script>
+const root = document.documentElement, themeBtn = document.querySelector('.theme');
+const current = () => root.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+const label = () => { const d = current() === 'dark'; themeBtn.textContent = d ? 'Light' : 'Dark'; themeBtn.setAttribute('aria-label', d ? 'Switch to light mode' : 'Switch to dark mode'); };
+themeBtn.addEventListener('click', () => { root.dataset.theme = current() === 'dark' ? 'light' : 'dark'; label(); });
+label();
+
+/* menu */
+const menu = document.getElementById('menu'), openBtn = document.querySelector('.menu-open'), closeBtn = document.querySelector('.menu-close');
+const setMenu = open => { menu.classList.toggle('open', open); openBtn.setAttribute('aria-expanded', open); (open ? closeBtn : openBtn).focus(); };
+openBtn.addEventListener('click', () => setMenu(true));
+closeBtn.addEventListener('click', () => setMenu(false));
+menu.querySelectorAll('nav a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+addEventListener('keydown', e => { if (e.key === 'Escape' && menu.classList.contains('open')) setMenu(false); });
+
+/* hero: letters ink in, left to right, as the page scrolls */
+const hero = document.querySelector('.hero'), stick = hero.querySelector('.stick');
+const chars = [];
+hero.querySelectorAll('.line').forEach(line => {
+  line.innerHTML = [...line.textContent].map(c => c === ' ' ? ' ' : `<span class="ch">${c}</span>`).join('');
+  chars.push(...line.querySelectorAll('.ch'));
+});
+const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+function ink() {
+  const span = hero.offsetHeight - innerHeight;
+  const p = still ? 1 : Math.min(1, Math.max(0, -hero.getBoundingClientRect().top / (span * .8)));
+  const n = chars.length, soft = 5;
+  chars.forEach((c, i) => {
+    const t = Math.min(1, Math.max(0, (p * (n + soft) - i) / soft));
+    c.style.setProperty('--o', (0.1 + 0.9 * t).toFixed(3));
+  });
+  stick.style.setProperty('--f', Math.min(1, Math.max(0, (p - .75) / .25)).toFixed(3));
+  stick.style.setProperty('--c', (1 - Math.min(1, p * 4)).toFixed(3));
+}
+ink();
+addEventListener('scroll', ink, { passive: true });
+addEventListener('resize', ink);
+
+/* press carousel (placeholder quotes) */
+const quotes = [
+  ['“Placeholder: a sentence from an endorsement or review of Psychopathy Unmasked goes here.”', 'Reviewer name, Publication'],
+  ['“Placeholder: a second endorsement, ideally from a legal scholar or practitioner.”', 'Name, Affiliation'],
+  ['“Placeholder: a line from a media interview or podcast.”', 'Programme or outlet'],
+];
+let qi = 0;
+const q = document.querySelector('.press .q'), c = document.querySelector('.press .c'), count = document.querySelector('.press .count');
+const show = i => { qi = (i + quotes.length) % quotes.length; q.textContent = quotes[qi][0]; c.textContent = quotes[qi][1]; count.textContent = `${qi + 1} of ${quotes.length}`; };
+document.querySelector('.press .prev').addEventListener('click', () => show(qi - 1));
+document.querySelector('.press .next').addEventListener('click', () => show(qi + 1));
+</script>
+</body>
+</html>

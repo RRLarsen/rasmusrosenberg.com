@@ -1,0 +1,580 @@
+# Conference presentations (C.5) and invited lectures and workshops (C.6). Shown in the CV only.
+
+- id: "conference-2026-06-11-psychopathy-and-clinical-stigma-char"
+  status: "published"
+  category: "conference"
+  format: "presentation"
+  title: "Psychopathy and Clinical Stigma: Characterological Judgment, Lived Experience, and Epistemic Injustice"
+  event: "3rd PhenoLab Summer School, Spoleto, Italy"
+  date: 2026-06-11
+
+- id: "conference-2026-05-07-psychopathic-personality-disorder-pa"
+  status: "published"
+  category: "conference"
+  format: "keynote"
+  title: "Psychopathic Personality Disorder: Past Promised, Current Problems, and Future Challenges"
+  event: "TIPPS Workshop: The Psychopathy Construct: Current Challenges and Future Prospects, University of Rijeka"
+  date: 2026-05-07
+
+- id: "conference-2025-08-08-psychopathy-a-clinical-construct-who"
+  status: "published"
+  category: "conference"
+  format: "poster"
+  title: "Psychopathy: A Clinical Construct Whose Time Has Passed?"
+  event: "The American Psychological Association Convention 2025 in Denver (Division 41: American Psychology-Law Society)"
+  date: 2025-08-08
+
+- id: "conference-2025-06-02-basic-formal-ontology-bfo"
+  status: "published"
+  category: "conference"
+  format: "keynote"
+  title: "Basic Formal Ontology (BFO) as a Sustainable Method for Building Databases: Promises and Challenges for Application in the Humanities"
+  event: "Sustainable Databases in the Humanities 2025, University of Toronto (online)"
+  date: 2025-06-02
+
+- id: "conference-2025-04-28-the-ophep-initiative-an-open-source"
+  status: "published"
+  category: "conference"
+  format: "presentation"
+  title: "The OPheP Initiative: An Open-Source Taxonomy for Capturing ‘First- Person’ Mental Health Data"
+  event: "Nordic Society for Phenomenology 2025 Annual Meeting"
+  date: 2025-04-28
+
+- id: "conference-2025-03-13-the-use-of-psychopathy-assessments-i"
+  status: "published"
+  category: "conference"
+  format: "presentation"
+  title: "The Use of Psychopathy Assessments in Canadian Case Law: A Quantitative and Qualitative Survey of Court Records from 1980 - 2023"
+  event: "Annual Conference of the American Psychology-Law Society"
+  date: 2025-03-13
+  note: "Co-presented with Sonya McLaren"
+
+- id: "conference-2022-10-14-ontology-of-phenomenological-psychop"
+  status: "published"
+  category: "conference"
+  format: "presentation"
+  title: "Ontology of Phenomenological Psychopathology (OPheP): A Collaborative, Decentralised, and Open-Science Initiative for the 21st Century"
+  event: "Renewing Phenomenological Psychopathology Launch Event, University of Birmingham"
+  date: 2022-10-14
+
+- id: "conference-2022-09-22-consent-and-coercion-in-forensic-psy"
+  status: "published"
+  category: "conference"
+  format: "presentation"
+  title: "Consent and Coercion in Forensic Psychiatry"
+  event: "The 12th Annual Western Michigan University Medical Humanities Conference in Kalamazoo"
+  date: 2022-09-22
+
+- id: "conference-2022-08-05-are-psychopathy-assessments-ethical"
+  status: "published"
+  category: "conference"
+  format: "poster"
+  title: "Are Psychopathy Assessments Ethical? A View from Forensic Psychology Ethics"
+  event: "The American Psychological Association Convention 2022 in Minneapolis (Division 41: American Psychology-Law Society)"
+  date: 2022-08-05
+
+- id: "conference-2022-07-05-is-a-psychopathy-assessment-violatin"
+  status: "published"
+  category: "conference"
+  format: "presentation"
+  title: "Is a Psychopathy Assessment Violating Basic Psychiatric Ethics? On the Ethical Perils of Assessing Psychopathic Offenders"
+  event: "International Academy of Law and Mental Health (IALMH) XXXVIIth Congress in Lyon"
+  date: 2022-07-05
+  note: "Symposium"
+
+- id: "conference-2022-05-20-applied-ontology-a-new-tool-for-inte"
+  status: "published"
+  category: "conference"
+  format: "presentation"
+  title: "Applied Ontology: A New Tool for Integrating Research in Phenomenological Psychopathology"
+  event: "What’s New? The Future of Phenomenological Psychopathology at St. Catherine’s College, Oxford University"
+  date: 2022-05-20
+
+- id: "conference-2022-01-13-psychopathy-a-clinical-construct-who"
+  status: "published"
+  category: "conference"
+  format: "keynote"
+  title: "Psychopathy: A Clinical Construct Whose Time Has Passed?"
+  event: "Workshop: Responding to Antisocial Personalities in a Democratic Society: Contributions to the Ethical Debates. University of Rijeka, Croatia"
+  date: 2022-01-13
+
+- id: "conference-2022-01-12-are-psychopathy-assessments-ethical"
+  status: "published"
+  category: "conference"
+  format: "keynote"
+  title: "Are Psychopathy Assessments Ethical? A View from Forensic Mental Health"
+  event: "Workshop: Responding to Antisocial Personalities in a Democratic Society: Contributions to the Ethical Debates. University of Rijeka, Croatia"
+  date: 2022-01-12
+
+- id: "conference-2022-01-05-are-there-moral-judgments"
+  status: "published"
+  category: "conference"
+  format: "presentation"
+  title: "Are There ‘Moral’ Judgments?"
+  event: "American Philosophical Association Eastern Division Meeting 2022"
+  date: 2022-01-05
+  note: "Symposium"
+
+- id: "conference-2021-11-09-the-hare-psychopathy-checklist-a-cli"
+  status: "published"
+  category: "conference"
+  format: "presentation"
+  title: "The Hare Psychopathy Checklist: A Clinical Construct Whose Time Has Passed?"
+  event: "The British Society of Psychology, Division of Forensic Psychology Annual Conference 2021"
+  date: 2021-11-09
+
+- id: "conference-2021-06-28-are-there-moral-judgments"
+  status: "published"
+  category: "conference"
+  format: "presentation"
+  title: "Are There ‘Moral’ Judgments?"
+  event: "The Society for Philosophy and Psychology 47th Annual Meeting"
+  date: 2021-06-28
+  note: "Poster presentation"
+
+- id: "conference-2020-06-16-the-hare-psychopathy-checklist-a-cli"
+  status: "published"
+  category: "conference"
+  format: "presentation"
+  title: "The Hare Psychopathy Checklist: A Clinical Construct Whose Time Has Passed?"
+  event: "The British Society of Psychology, Division of Forensic Psychology Annual Conference 2020, The voco St Johns, Solihull, UK"
+  date: 2020-06-16
+  note: "Postponed"
+
+- id: "conference-2020-06-10-abandoning-the-concepts-of-aesthetic"
+  status: "published"
+  category: "conference"
+  format: "presentation"
+  title: "Abandoning the Concepts of Aesthetic Properties and Aesthetic Experience"
+  event: "The European Society for Aesthetics 2020, Tallinn, Estonia"
+  date: 2020-06-10
+  note: "Cancelled"
+
+- id: "conference-2019-06-14-mapping-the-patient-s-experience-an"
+  status: "published"
+  category: "conference"
+  format: "presentation"
+  title: "Mapping the Patient’s Experience: An Applied Ontological Framework for Patient Phenomenology in Mental Health Research and Practice"
+  event: "2019 Swedish Congress of Philosophy (Filosofidagarna), University of Umeå"
+  date: 2019-06-14
+
+- id: "conference-2019-06-04-mapping-the-patient-s-experience-an"
+  status: "published"
+  category: "conference"
+  format: "presentation"
+  title: "Mapping the Patient’s Experience: An Applied Ontological Framework for Patient Phenomenology in Mental Health Research and Practice"
+  event: "San Raffaele Spring School of Philosophy 2019 (SRSSP 2019), San Raffaele University"
+  date: 2019-06-04
+
+- id: "conference-2019-04-25-mapping-the-patient-s-experience-an"
+  status: "published"
+  category: "conference"
+  format: "presentation"
+  title: "Mapping the Patient’s Experience: An Applied Ontological Framework for Patient Phenomenology in Mental Health Research and Practice"
+  event: "Nordic Society for Phenomenology (NoSP) 2019 annual meeting, University of Copenhagen"
+  date: 2019-04-25
+
+- id: "conference-2019-04-05-psychopathy-a-clinical-construct-who"
+  status: "published"
+  category: "conference"
+  format: "presentation"
+  title: "Psychopathy: A Clinical Construct Whose Time Has Passed?"
+  event: "Canadian Universities for Forensic Science (C.U.F.F.S.) annual meeting, University of Toronto"
+  date: 2019-04-05
+
+- id: "conference-2019-02-20-on-the-content-of-aesthetic-experien"
+  status: "published"
+  category: "conference"
+  format: "presentation"
+  title: "On the Content of Aesthetic Experience"
+  event: "American Philosophical Association (APA), Central Meeting in Denver, Colorado"
+  date: 2019-02-20
+
+- id: "conference-2018-10-26-the-aesthetic-convention-aesthetic-e"
+  status: "published"
+  category: "conference"
+  format: "presentation"
+  title: "The Aesthetic Convention: Aesthetic Experience as a Fiat Type of Perception"
+  event: "Central States Philosophical Association, 2018 meeting, Buffalo, New York"
+  date: 2018-10-26
+
+- id: "conference-2018-10-12-the-aesthetic-convention-aesthetic-e"
+  status: "published"
+  category: "conference"
+  format: "presentation"
+  title: "The Aesthetic Convention: Aesthetic Experience as a Fiat Type of Perception"
+  event: "The 72nd Annual Mountain-Plains Philosophy Conference, University of Colorado, Denver"
+  date: 2018-10-12
+
+- id: "conference-2018-05-05-from-affective-science-to-psychiatri"
+  status: "published"
+  category: "conference"
+  format: "presentation"
+  title: "From Affective Science to Psychiatric Diagnostics: Ontology as Semantic Bridging"
+  event: "Association for the Advancement of Philosophy and Psychiatry (AAPP), annual meeting, New York City"
+  date: 2018-05-05
+
+- id: "conference-2016-04-s-ren-kierkegaard-and-the-unbearable"
+  status: "published"
+  category: "conference"
+  format: "presentation"
+  title: "Søren Kierkegaard and The Unbearable Task of Becoming Oneself"
+  event: "Framing the Self(ie): Heterogeneity of identities in (non)spaces, Department of Romance Languages and Literatures, University at Buffalo"
+  date: "2016-04"
+
+- id: "conference-2013-11-kierkegaard-at-200-panel"
+  status: "published"
+  category: "conference"
+  format: "panel"
+  title: "Kierkegaard at 200: Thinking Backward and Living Forward"
+  event: "Kierkegaard, Religion, and Culture Group, annual meeting of the American Academy of Religion (AAR)"
+  date: "2013-11"
+  note: "Session theme: “Schelling, Kierkegaard, and Tillich”. Co-panelists: Adam Pryor, Vanessa Rumble, Christian Danz and Daniel Whistler"
+
+- id: "conference-2013-10-schelling-and-kierkegaard-in-perspec"
+  status: "published"
+  category: "conference"
+  format: "presentation"
+  title: "Schelling and Kierkegaard in Perspective: Integrating Existence into Idealism"
+  event: "The 2013 Baylor Symposium on Faith and Culture, “Kierkegaard: A Christian Thinker for Our Time?”, at Baylor University"
+  date: "2013-10"
+
+- id: "conference-2013-10-schelling-and-kierkegaard-in-perspec-2"
+  status: "published"
+  category: "conference"
+  format: "presentation"
+  title: "Schelling and Kierkegaard in Perspective: Integrating Existence into Idealism"
+  event: "Kierkegaard and Present-Age, at Brigham Young University"
+  date: "2013-10"
+
+- id: "invited-2026-03-25-psychopathy-in-forensic-practice-pas"
+  status: "published"
+  category: "invited"
+  format: "lecture"
+  title: "Psychopathy in Forensic Practice: Past Promises, Present Problems, and Future Challenges"
+  event: "Swinburne University, Centre for Forensic Behavioural Science"
+  date: 2026-03-25
+  host: "Dr. Ben Spivak"
+  audience: "Open seminar"
+
+- id: "invited-2026-02-25-psychopathy-and-the-pcl-r-in-forensi"
+  status: "published"
+  category: "invited"
+  format: "lecture"
+  title: "Psychopathy and the PCL-R in Forensic Clinical Practices"
+  event: "University of Toronto"
+  date: 2026-02-25
+  host: "Dr. Julie Goldenson"
+  audience: "Graduate student seminar"
+
+- id: "invited-2026-02-05-the-pcl-r-in-forensic-practices"
+  status: "published"
+  category: "invited"
+  format: "lecture"
+  title: "The PCL-R in Forensic Practices"
+  event: "Correctional Services of Canada, Prairies Region (SK; AB; BC)"
+  date: 2026-02-05
+  host: "Dr. Karen Todd"
+  audience: "Webinar to employees in the mental health services"
+
+- id: "invited-2026-01-22-psychopathy-unmasked-the-rise-and-fa"
+  status: "published"
+  category: "invited"
+  format: "lecture"
+  title: "Psychopathy Unmasked: The Rise and Fall of a Dangerous Diagnosis"
+  event: "UTM Alumni Relations, University of Toronto"
+  date: 2026-01-22
+  host: "Ben Jones"
+  audience: "Public lecture to university alumnus"
+
+- id: "invited-2025-10-28-the-use-of-the-pcl-r-in-canadian-cor"
+  status: "published"
+  category: "invited"
+  format: "lecture"
+  title: "The Use of the PCL-R in Canadian Correction and Case Law"
+  event: "Correctional Services of Canada, Regional Psychiatric Centre, Saskatchewan"
+  date: 2025-10-28
+  host: "Dr. Katy Sothmann"
+  audience: "Lecture to employees in correctional psychology"
+
+- id: "invited-2025-02-11-psychopathic-personality-disorder-a"
+  status: "published"
+  category: "invited"
+  format: "lecture"
+  title: "Psychopathic Personality Disorder: A Dangerous Diagnosis…?"
+  event: "Forensic Science Program, University of Toronto Mississauga"
+  date: 2025-02-11
+  host: "Ashley Moo-Choy"
+  audience: "Undergraduate Lecture"
+
+- id: "invited-2023-10-24-how-to-make-a-criminal-case-studies"
+  status: "published"
+  category: "invited"
+  format: "lecture"
+  title: "How to Make a Criminal? Case Studies in Public Perception"
+  event: "Forensic Science Program, University of Toronto Mississauga"
+  date: 2023-10-24
+  host: "Shelby Scott"
+  audience: "Undergraduate Lecture"
+
+- id: "invited-2023-03-14-introducing-forensic-psychopathology"
+  status: "published"
+  category: "invited"
+  format: "lecture"
+  title: "Introducing Forensic Psychopathology"
+  event: "Forensic Science Program, University of Toronto Mississauga"
+  date: 2023-03-14
+  host: "Dr. Vivienne Luk & Dr. Frank Wendt"
+  audience: "Undergraduate Lecture"
+
+- id: "invited-2023-03-07-how-to-make-a-criminal-case-studies"
+  status: "published"
+  category: "invited"
+  format: "lecture"
+  title: "How to Make a Criminal? Case Studies in Public Perception"
+  event: "Forensic Science Program, University of Toronto Mississauga"
+  date: 2023-03-07
+  host: "Shelby Scott"
+  audience: "Undergraduate Lecture"
+
+- id: "invited-2022-11-17-psychopaths-they-re-social-predators"
+  status: "published"
+  category: "invited"
+  format: "talk"
+  title: "‘Psychopaths, They’re Social Predators!’ The Forensic Scientific and Ethical Challenges in Predicting Violence"
+  event: "U of T Talk series, University of Toronto"
+  date: 2022-11-17
+  url: "https://www.youtube.com/watch?v=lWxVKFyIm98"
+
+- id: "invited-2022-11-07-biases-and-constructs-of-criminality"
+  status: "published"
+  category: "invited"
+  format: "lecture"
+  title: "Biases and Constructs of Criminality – How to ‘Make’ a Criminal: Case Studies in Public Perception"
+  event: "Forensic Science Program, University of Toronto Mississauga"
+  date: 2022-11-07
+  host: "Dr. Shelby Scott"
+  audience: "Undergraduate Lecture"
+
+- id: "invited-2022-10-31-the-psychopaths-among-us-and-the-sur"
+  status: "published"
+  category: "invited"
+  format: "talk"
+  title: "The Psychopaths Among Us, and The Surprising Science of Evil"
+  event: "The Yearly Halloween Talk in the Department of Philosophy, University of Toronto Mississauga"
+  date: 2022-10-31
+
+- id: "invited-2022-03-23-psychopathy-a-clinical-construct-who"
+  status: "published"
+  category: "invited"
+  format: "talk"
+  title: "Psychopathy: A Clinical Construct Whose Time Has Passed?"
+  event: "Panel on Psychopathy at International Congress of Forensic Psychology. Universidade Estadual do Piauí, Brazil"
+  date: 2022-03-23
+
+- id: "invited-2022-03-17-introducing-forensic-psychopathology"
+  status: "published"
+  category: "invited"
+  format: "lecture"
+  title: "Introducing Forensic Psychopathology"
+  event: "Forensic Science Program, University of Toronto Mississauga"
+  date: 2022-03-17
+  host: "Dr. Vivienne Luk"
+  audience: "Undergraduate Lecture"
+
+- id: "invited-2022-03-01-psychopathy-dangerous-social-predato"
+  status: "published"
+  category: "invited"
+  format: "talk"
+  title: "Psychopathy: Dangerous Social Predators or Stigmatizing Clinical Lore?"
+  event: "Lecture Me! Series, UTM Office of the Dean, Experiential Education Unit and Mississauga Library"
+  date: 2022-03-01
+  url: "https://www.youtube.com/watch?v=AO6WnNwgbv0&t=1851s"
+
+- id: "invited-2022-01-07-how-to-make-a-criminal-case-studies"
+  status: "published"
+  category: "invited"
+  format: "lecture"
+  title: "How to Make a Criminal? Case Studies in Public Perception"
+  event: "Forensic Science Program, University of Toronto Mississauga"
+  date: 2022-01-07
+  host: "Shelby Scott"
+  audience: "Undergraduate Lecture"
+
+- id: "invited-2021-03-18-introduction-to-forensic-psychopatho"
+  status: "published"
+  category: "invited"
+  format: "lecture"
+  title: "Introduction to Forensic Psychopathology?"
+  event: "Forensic Science Program, University of Toronto Mississauga"
+  date: 2021-03-18
+  host: "Dr. Vivienne Luk"
+  audience: "Undergraduate Lecture"
+
+- id: "invited-2021-01-28-the-forensic-science-of-the-future"
+  status: "published"
+  category: "invited"
+  format: "lecture"
+  title: "The Forensic Science of the Future"
+  event: "Forensic Science Program, University of Toronto Mississauga"
+  date: 2021-01-28
+  host: "Murray Clayton"
+  audience: "Undergraduate Lecture"
+
+- id: "invited-2020-10-03-the-psychopathy-checklist-making-soc"
+  status: "published"
+  category: "invited"
+  format: "talk"
+  title: "The Psychopathy Checklist: Making Society Safer, or a Stigmatizing Label?"
+  event: "TEDxUofT – Changing Realities, University of Toronto"
+  date: 2020-10-03
+  url: "https://youtu.be/iOcKfHI0QaU"
+
+- id: "invited-2019-04-05-kierkegaard-and-schelling-in-perspec"
+  status: "published"
+  category: "invited"
+  format: "talk"
+  title: "Kierkegaard and Schelling in Perspective"
+  event: "The Kierkegaard Circle, University of Toronto, Trinity College"
+  date: 2019-04-05
+  host: "Dr. Abrahim H. Khan"
+  audience: "Colloquium"
+
+- id: "invited-2019-04-04-kierkegaard-and-schelling-in-perspec"
+  status: "published"
+  category: "invited"
+  format: "lecture"
+  title: "Kierkegaard and Schelling in Perspective"
+  event: "Philosophy Department, University of Toronto St. George"
+  date: 2019-04-04
+  host: "Dr. Owen Ware"
+  audience: "Graduate Seminar"
+
+- id: "invited-2019-03-21-introduction-to-forensic-psychopatho"
+  status: "published"
+  category: "invited"
+  format: "lecture"
+  title: "Introduction to Forensic Psychopathology"
+  event: "Forensic Science Program, University of Toronto Mississauga"
+  date: 2019-03-21
+  host: "Dr. Vivienne Luk"
+  audience: "Undergraduate Lecture"
+
+- id: "invited-2019-03-13-psychopathy-as-moral-blindness-a-qua"
+  status: "published"
+  category: "invited"
+  format: "talk"
+  title: "Psychopathy as Moral Blindness: A Qualifying Exploration of the Blindness-Analogy in Psychopathy Theory and Research"
+  event: "Psychology &-Seminar, University of Toronto Psychology Students Association, University of Toronto"
+  date: 2019-03-13
+
+- id: "invited-2019-01-12-psychopathy-a-clinical-construct-who"
+  status: "published"
+  category: "invited"
+  format: "talk"
+  title: "Psychopathy: A Clinical Construct Whose Time Has Passed?"
+  event: "Making The Dead Talk, Laboratory Medicine & Pathobiology Student Union Conference on Forensic Science at the University of Toronto"
+  date: 2019-01-12
+
+- id: "invited-2018-10-31-the-good-the-bad-and-the-halloween-s"
+  status: "published"
+  category: "invited"
+  format: "talk"
+  title: "The Good, The Bad, and The Halloween Slasher"
+  event: "The Yearly Halloween Talk in the Department of Philosophy, University of Toronto Mississauga"
+  date: 2018-10-31
+
+- id: "invited-2018-02-10-psychopathy-and-forensic-psychopatho"
+  status: "published"
+  category: "invited"
+  format: "lecture"
+  title: "Psychopathy and Forensic Psychopathology"
+  event: "Forensic Science Program, University of Toronto Mississauga"
+  date: 2018-02-10
+  host: "Dr. Vivienne Luk"
+  audience: "Undergraduate Lecture"
+
+- id: "invited-2015-11-psychopathic-behavior-in-critical-pe"
+  status: "published"
+  category: "invited"
+  format: "talk"
+  title: "Psychopathic Behavior in Critical Perspective"
+  event: "The School of Social Work, University at Buffalo"
+  date: "2015-11"
+  host: "Dr. Annahita Ball"
+  audience: "Undergraduate Lecture"
+
+- id: "invited-2015-11-psychopathic-behavior-in-critical-pe-2"
+  status: "published"
+  category: "invited"
+  format: "talk"
+  title: "Psychopathic Behavior in Critical Perspective"
+  event: "The School of Social Work, University at Buffalo"
+  date: "2015-11"
+  host: "Dr. Annahita Ball"
+  audience: "Graduate Lecture"
+
+- id: "invited-2015-07-the-posited-self-kierkegaard-s-impac"
+  status: "published"
+  category: "invited"
+  format: "talk"
+  title: "The Posited Self: Kierkegaard’s Impact on Moral Philosophy"
+  event: "Kierkegaard Summer Course, University of Copenhagen"
+  date: "2015-07"
+  host: "Dr. K. Brian Söderquist"
+
+- id: "invited-2015-02-do-cartoons-matter-on-the-terror-of"
+  status: "published"
+  category: "invited"
+  format: "talk"
+  title: "Do Cartoons Matter? On the ‘Terror’ of Free Speech"
+  event: "The Regent Talk, Department of Philosophy, University at Buffalo"
+  date: "2015-02"
+
+- id: "invited-2014-11-why-we-must-study-evil"
+  status: "published"
+  category: "invited"
+  format: "talk"
+  title: "Why We Must Study Evil"
+  event: "Dissertation Seminar: Fall 2014, Department of Philosophy, University at Buffalo"
+  date: "2014-11"
+
+- id: "invited-2014-10-kierkegaard-on-faith-as-an-existenti"
+  status: "published"
+  category: "invited"
+  format: "talk"
+  title: "Kierkegaard on Faith as an Existential Attitude"
+  event: "Colloquial Talk: Fall 2014, Department of Philosophy, University at Buffalo"
+  date: "2014-10"
+
+- id: "invited-2014-10-schelling-and-kierkegaard-in-perspec"
+  status: "published"
+  category: "invited"
+  format: "talk"
+  title: "Schelling and Kierkegaard in Perspective: Integrating Existence into Idealism"
+  event: "Colloquial Talk: Fall 2013, Department of Philosophy, University at Buffalo"
+  date: "2014-10"
+
+- id: "invited-2014-09-the-posited-self-kierkegaard-s-non-t"
+  status: "published"
+  category: "invited"
+  format: "talk"
+  title: "The Posited Self: Kierkegaard’s Non-Theistic Foundation"
+  event: "Dissertation Seminar: Fall 2014, Department of Philosophy, University at Buffalo"
+  date: "2014-09"
+
+- id: "invited-2012-10-s-ren-kierkegaard-on-self-hood"
+  status: "published"
+  category: "invited"
+  format: "talk"
+  title: "Søren Kierkegaard on Self-hood"
+  event: "Colloquial Talk: Fall 2012, Department of Philosophy, University at Buffalo"
+  date: "2012-10"
+
+- id: "invited-2012-03-the-system-theory-of-niklas-luhmann"
+  status: "published"
+  category: "invited"
+  format: "talk"
+  title: "The System Theory of Niklas Luhmann: Applied in Social Contexts"
+  event: "Colloquial Talk: Spring 2012, Department of Philosophy, University at Buffalo"
+  date: "2012-03"
