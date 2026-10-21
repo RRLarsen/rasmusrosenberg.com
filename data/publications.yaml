@@ -53,18 +53,21 @@
   title: "The use of psychopathy assessments in Canadian case law: A quantitative and qualitative survey of court records from 1980–2023"
   authors:
     - { family: Larsen, given: Rasmus Rosenberg, me: true }
-    - { family: McLaren, given: Sonya }
-    - { family: Jalava, given: Jarkko }
+    - { family: Ades, given: Emilie }
+    - { family: Shroff, given: Yashika }
+    - { family: McLaren, given: Sonya Anna }
     - { family: Griffiths, given: Stephanie }
+    - { family: Jalava, given: Jarkko }
     - { family: DeMatteo, given: David }
-  date: "2025"
+  date: "2026"
   venue: Psychology, Public Policy, and Law
   volume: "32"
-  issue: "2"
+  issue: "1"
   pages: "73\u201394"
   doi: 10.1037/law0000472
   openalex_id: W4414608922
   tags: [psychopathy, law-and-evidence]
+  abstract: "This study investigated the use of psychopathy assessments in Canadian courts between 1980 and 2023. We reviewed 3,315 court cases and found that psychopathy assessments were used in two distinct ways: either as a clinical measure of psychopathy or exclusively for risk assessment purposes. Psychopathy assessments are most commonly introduced in court by prosecutors, with the Hare Psychopathy Checklist—Revised (PCL-R) being the most frequently used tool. The use of psychopathy assessments increased by 858% from the year 2000 to its peak in 2013, followed by a 10-year gradual (63%) decline. There was evidence of adversarial allegiance where prosecution-retained experts gave defendants higher PCL-R scores (d = 1.08) compared to defense-retained experts. PCL-R assessments showed poor reliability when comparing paired scores between prosecution and defense experts, suggesting a high risk of Type 1 and Type 2 errors. Intraclass correlation coefficient between prosecution- and defense-retained experts was .079 (95% confidence interval [CI] [−0.12, 0.34]), where 40% of experts had a ≥ 5.9 points scoring difference. A qualitative analysis of 183 expert testimonies on the perceived forensic risk and treatment prospects associated with psychopathy showed significant variability in expert testimonies. Most experts linked psychopathy to a high risk of recidivism (72.36%) and described it as a categorically untreatable condition (50.63%), where many experts also stated that treatment makes psychopathic persons worse (15.82%). These findings suggest that some expert testimonies on psychopathy are not aligned with the empirical research. We discuss the potential implications for legal practitioners and comment on the future role of psychopathy assessments in Canadian courts."
 
 - id: larsen-2025-empathy
   status: published
@@ -72,9 +75,9 @@
   title: Do psychopathic persons lack empathy? An exploratory systematic review of empathy assessment and emotion recognition studies in Psychopathy Checklist samples
   authors:
     - { family: Larsen, given: Rasmus Rosenberg, me: true }
-    - { family: McLaren, given: Sonya }
-    - { family: Jalava, given: Jarkko }
+    - { family: McLaren, given: Sonya Anna }
     - { family: Griffiths, given: Stephanie }
+    - { family: Jalava, given: Jarkko }
   date: "2025"
   venue: Psychology, Public Policy, and Law
   volume: "31"
@@ -83,6 +86,7 @@
   doi: 10.1037/law0000435
   openalex_id: W4403507994
   tags: [psychopathy]
+  abstract: Psychopathy assessments are widely used in the legal system to inform decisions about sentencing, rehabilitation, etc. Recently, these assessments have become controversial as long-held beliefs about psychopathy are contested. One common claim that has yet to be scrutinized is the assumption that psychopathic persons lack empathy. This hypothesis has been studied extensively in forensic samples, but there are few relevant systematic reviews to inform forensic practices. We conducted a systematic review of empirical studies testing empathy in persons assessed with the Hare Psychopathy Checklist (PCL) scales. Included studies (n = 66) measured general, cognitive, and affective empathy across two different paradigms using (a) empathy assessment tools and (b) emotion recognition tests. These studies had great heterogeneity in their reporting of effects, precluding a meaningful meta-analysis. A structured overview of results showed a total of 1,672 effects were reported across 66 included studies (N = 5,711) of which 182 effects (10.89%) were statistically significant and 1,490 effects (89.11%) were nulls. Exploratory analyses revealed that high-powered studies had a significantly larger proportion of nulls (89.29%) compared to low-powered studies (81.45%), suggesting a potential problem with false-positive discoveries in the research literature. In conclusion, we found little evidence to suggest that PCL psychopathic persons have different empathic capacities, thus challenging the common assumption that psychopathy is associated with a lack of empathy. We discuss the implication of these results for the current and future use of PCL assessment in forensic settings.
 
 - id: deming-2024-medial-frontal-cortex
   status: published
@@ -164,6 +168,7 @@
   note: Chapter 4
   tags: [psychiatry-and-ontology]
   doi: 10.4135/9781529789522.n4
+  abstract: This chapter provides a critique of current neuroimaging methods used in neuropsychological research and clinical practice, limitations and challenges of integrating neuroimaging findings within clinical neuropsychological practice, as well as potential future directions.
 
 - id: sackris-2023-higher-order-evidence
   status: published
@@ -206,6 +211,7 @@
   openalex_id: W4327627519
   tags: [psychopathy, law-and-evidence]
   featured: true
+  abstract: "The amount of neuroimaging evidence introduced in courts continues to increase. Meanwhile, neuroimaging research is in the midst of a reproducibility crisis, as many published findings appear to be false positives. The problem is mostly due to small sample sizes, lack of direct replications, and questionable research practices. There are concerns that a significant proportion of neuroimaging evidence introduced in court may therefore be unreliable. Guidelines governing the admissibility of scientific evidence—Frye and Daubert—are not designed to weed out such data. We propose supplementing Frye and Daubert with minimal reproducibility criteria that allow judges to make informed admissibility decisions about neuroimaging research. To demonstrate how this could work, we subjected functional magnetic resonance imaging (fMRI) findings on psychopathy—evidence that has been admitted in court—to a minimal reproducibility test. A systematic PRISMA search found 64 relevant studies but no sufficiently powered, directly replicated evidence of a psychopathy-related neurobiological profile. This illustrates two things: (a) the probability of false positives in this data set is likely to be unacceptably high and (b) the reproducibility of similar neuroimaging evidence can be evaluated in a straightforward way. Our findings suggest an urgent need to modify admissibility guidelines to exclude low-quality neuroimaging data."
 
 - id: sackris-2023-moral-judgments
   status: published
@@ -244,6 +250,7 @@
   doi: 10.1007/s10670-023-00663-w
   openalex_id: W4321231549
   tags: [moral-and-aesthetic-judgment]
+  abstract: In philosophy of aesthetics, scholars commonly express a commitment to the premise that there is a distinctive type of judgment that can be meaningfully labeled “aesthetic”, and that these judgments are distinctively different from other types of judgments. We argue that, within an Aristotelian framework, there is no clear avenue for meaningfully differentiating “aesthetic” judgment from other types of judgment, and, as such, we aim to question the assumption that aesthetic judgment does in fact constitute a distinctive kind of judgment that is in need of, or can be subject to, distinctive theorizing. We advance our argument primarily through demonstrating that leading contemporary accounts of aesthetic judgment do not successfully distinguish a type of judgment in that they do not tell us how making an aesthetic judgment differs substantially from judging that 2 + 3 = 5, that football is entertaining, or that today is Tuesday.
 
 - id: larsen-2022-psychopathy-assessments-ethical
   status: published
@@ -263,6 +270,7 @@
   openalex_id: W4285802777
   tags: [psychopathy, law-and-evidence]
   featured: true
+  abstract: We survey the forensic use of psychopathy assessments and analyze whether they comply with ethical standards in forensic mental health. We conclude that there are pressing ethical problems with these assessment tools as they are associated with nonbeneficial and harmful consequences and minimal social benefits, thus calling for an immediate and universal cessation of psychopathy assessments in forensic settings.
 
 - id: larsen-2022-authors-reply
   status: published
@@ -303,6 +311,7 @@
   pdf: http://www.thelancet.com/article/S2215036622001560/pdf
   tags: [psychiatry-and-ontology]
   featured: true
+  abstract: There have been renewed calls to use phenomenology in psychiatry to improve knowledge about causation, diagnostics, and treatment of mental health conditions. A phenomenological approach aims to elucidate the subjective experiences of mental health, which its advocates claim have been largely neglected by current diagnostic frameworks in psychiatry (eg, DSM-5). The consequence of neglecting rich phenomenological information is a comparatively more constrained approach to theory development, empirical research, and care programmes. Although calls for more phenomenology in psychiatry have been met with enthusiasm, there is still relatively little information on how to practically facilitate this integration. In this Personal View, we argue that phenomenological approaches need a shared semantic framework to drive their innovative potential, thus enabling consistent data capture, exchange, and interoperability with current mental health data and informatics approaches (eg, the Research Domain Criteria project). We show how an applied ontology of phenomenological psychopathology offers a suitable method to address these challenges.
 
 - id: jalava-2022-genetic-correlates
   status: published
@@ -320,6 +329,7 @@
   doi: 10.1016/j.avb.2022.101765
   openalex_id: W4284991588
   tags: [psychopathy]
+  abstract: "Background & objectives: Though it has been argued that courts should admit biogenetic evidence on psychopathy, no research to date has evaluated whether individuals with clinical psychopathy have consistent genetic correlates. The current study: 1) systematically reviewed all quantitative and molecular genetic studies of PCL-R psychopathy, and 2) assessed the quality and reproducibility of findings. Review methods: Using PRISMA guidelines, we reviewed 1 heritability and 15 molecular genetic studies of PCL-R psychopathy. Sample characteristics, research design, and the main findings of each study were qualitatively synthesized according to candidate neurotransmitter systems. We also assessed broad metrics of study quality such as sample generalizability, accounting for environmental or clinical variability in analyses, and replication of effects. Results: Heritability estimates for the facets of clinical psychopathy were low. Molecular genetic findings were inconsistent and mostly unreplicated. Further, replicated findings were contradictory; elevated dopamine metabolite levels observed in independent samples was qualified by a lack of association between a candidate dopamine polymorphism and PCL-R scores. Inconsistent findings may be related to issues with study quality. Though most studies had clear hypotheses and generalizable samples, few accounted for clinical complexity of those samples, environmental factors, or gene-environment interplay. Implications: The current review suggests that the genetic bases of PCL-R psychopathy are not robust enough for forensic application. Genetic findings in people with antisocial characteristics (violence, addiction, CU traits) may not generalize to those with PCL-R psychopathy."
 
 - id: larsen-2022-canadian-practitioners
   status: published
@@ -378,6 +388,7 @@
   place: Cham
   tags: [psychiatry-and-ontology]
   doi: 10.1007/978-3-030-70558-9_12
+  abstract: "The domain of mental health is inherently complex, spanning across multiple disciplines, data types, descriptive levels, and approaches. This complexity has brought considerable challenges in terms of how to facilitate efficient knowledge discovery and integration across disciplines in the domain. The vocabulary and semantic frameworks in use across these different descriptive levels are fragmented and contested, and it is difficult to gain an overview of what is known across all the relevant bodies of knowledge and practice. In this chapter, we review progress that has recently been made towards integrative semantic and computational frameworks for structuring and advancing mental health research. This includes the paradigm shift incubated in the NIMH’s RDoC effort, which offers a roadmap for studying the nature of the complex interactions within and between human systems: biological (body, brain), mental (mind), behavioral, social, and environmental. We also review computational approaches to infer and model relationships between entities that explicitly cross levels of explanation and disciplinary boundaries. We describe the quantitative methods that are used to integrate and analyze across heterogeneous datasets, and the epistemological challenges that face the field when attempting to determine mechanistic explanations that move the global understanding of mental health forward."
 
 - id: larsen-2021-amused-by-the-outrageous
   status: published
@@ -394,6 +405,7 @@
   place: New York
   tags: [moral-and-aesthetic-judgment]
   doi: 10.5040/9798881816322.ch-8
+  abstract: "In this contribution, we suggest a different approach to measuring and assessing the impact of news satire on the political process. Instead of asking the broad question of “What effect does news satire have on participatory democracy?,” we shall form a (testable) theory that seeks to qualify and guide an initial answer to the question: “What effect should we expect news satire to have on participatory democracy?” Perhaps by first developing a theory that lends itself to prediction, can we then develop better test/research paradigms. At the very least, perhaps such a theory can serve to explain why research into this area has yielded such mixed results."
 
 - id: jalava-2021-coding-bias
   status: published
@@ -500,6 +512,7 @@
   openalex_id: W3027084836
   tags: [psychopathy, law-and-evidence]
   featured: true
+  abstract: The Hare Psychopathy Checklist (PCL; Hare, Neumann, & Mokros 2018) scales are among the most widely used forensic assessment tools. Their perceived utility rests partly on their ability to assess stable personality traits indicative of a lack of conscience, which then facilitates behavioral predictions useful in forensic decisions. In this systematic review, we evaluate the empirical evidence behind 3 fundamental justifications for using the PCL scales in forensics, namely, that they are empirically predictive of (1) criminal behavior, (2) treatment outcomes, and (3) a lack of conscience. We found the PCL scales can predict criminal behavior to a statistically significant degree, though with important limitations. We found no evidence of PCL psychopathy being predictive of treatment and rehabilitation outcomes. We found no evidence of PCL psychopathy being predictive of a lack of conscience. These findings disprove widespread beliefs about PCL psychopathy among forensic practitioners and questions the current and future role of the PCL scales in forensic settings.
 
 - id: larsen-2020-mapping-patient-experience
   status: published
@@ -601,6 +614,7 @@
   doi: 10.3389/978-2-88963-551-1
   openalex_id: W3216948898
   tags: [psychiatry-and-ontology]
+  abstract: Advances in emotion and affective science have yet to translate routinely into psychiatric research and practice. This is unfortunate since emotion and affect are fundamental components of many psychiatric conditions. Rectifying this lack of interdisciplinary integration could thus be a potential avenue for improving psychiatric diagnosis and treatment. In this contribution, we propose and discuss an ontological framework for explicitly capturing the complex interrelations between affective entities and psychiatric disorders, in order to facilitate mapping and integration between affective science and psychiatric diagnostics. We build on and enhance the categorisation of emotion, affect and mood within the previously developed Emotion Ontology, and that of psychiatric disorders in the Mental Disease Ontology. This effort further draws on developments in formal ontology regarding the distinction between normal and abnormal in order to formalize the interconnections. This operational semantic framework is relevant for applications including clarifying psychiatric diagnostic categories, clinical information systems, and the integration and translation of research results across disciplines.
 
 - id: larsen-2019-stigma
   status: published
@@ -646,6 +660,7 @@
   note: Reprint of the 2019 article in the Kennedy Institute of Ethics Journal
   tags: [psychopathy]
   doi: 10.4324/9780429266119-14
+  abstract: The psychiatric diagnosis of psychopathic personality-or psychopathy-signifies a patient stereotype with a callous lack of empathy and strong antisocial tendencies. Throughout the research record and psychiatric practices, diagnosed psychopaths have been predominantly seen as immune to psychiatric intervention and treatment, making the diagnosis a potentially strong discriminator for treatment amenability. In this contribution, the evidence in support of this proposition is critically analyzed. It is demonstrated that the untreatability perspective rests largely on erroneous, unscientific conclusions. Instead, recent research suggests that practitioners should be more optimistic about the possibility of treating and rehabilitating diagnosed psychopaths. In light of this finding, concrete ethical challenges in the forensic practice surrounding the psychopathy diagnosis are discussed, adding to a growing body of research that expresses skepticism about the forensic utility of the diagnosis.
 
 - id: sackris-2019-carroll
   status: published
@@ -661,6 +676,7 @@
   doi: 10.1007/s10790-019-09693-6
   openalex_id: W2948121884
   tags: [moral-and-aesthetic-judgment]
+  abstract: "In this paper, we consider Noël Carroll’s Content Theory (CT) (2015) and argue that a key problem with CT is that it can be interpreted in two distinct ways: as a descriptive theory of aesthetic experience and as a normative prescriptive theory. Although CT is presented as a descriptive theory of experience, much of what Carroll says implies that CT can also be understood as a theory about how one ought to look at artworks. We argue that when understood as a descriptive theory, CT fails to qualify as a meaningful theory of aesthetic experience. We then interpret the theory prescriptively. Ultimately, this second interpretation is also found lacking: if the aim of the theory is to instruct one on how to view art, it is no longer an attempt to characterize the experience of art. We conclude by arguing that the main flaw in CT is its approach: we cannot meaningfully characterize an experience by enumerating the objects that supposedly cause said experience, and any theory that takes such an approach is likely to be unsuccessful."
 
 - id: larsen-2018-false-positives
   status: published
