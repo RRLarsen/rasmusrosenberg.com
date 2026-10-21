@@ -47,23 +47,24 @@ src/                  # Astro site
 
 ## Features, built in phases
 
-1. **Foundation:** migrate current content from the Wix site (Home, About, Author, CV, Tools, Contact), define schemas, build the pages: Home, About, Publications (filterable, cite/BibTeX button), Talks, Media, Teaching, Book, Contact. Add schema.org JSON-LD (Person, ScholarlyArticle, Book). Use correct metadata: he is an **Associate** Professor (the old Wix meta description wrongly says Assistant).
-2. **PDF CV:** a Typst CV built from `data/` on every build and linked from the CV page.
-3. **Press kit page:** 50, 150 and 300-word bios, headshots, book cover, comment topics, contact. All generated from the data.
-4. **External data (scheduled GitHub Action, weekly):**
-   - OpenAlex: citation counts per work, total citations, h-index, written to `generated/metrics.json` with a "last updated" date. Link out to the Google Scholar profile. (Superseded 2026-10-21: OpenAlex counts are too low to show; see the Research page decision for how Scholar figures are refreshed.)
-   - YouTube channel RSS feed → media/videos.
-   - Newsletter RSS (Buttondown or Substack) → posts listing.
-5. **Writing/newsletter:** publish on the site (or a newsletter platform with RSS), syndicate links to Bluesky and LinkedIn.
-6. **Suggestion inbox:** fetchers propose `suggested` records (new DOIs via ORCID/OpenAlex/Crossref, Google Alerts RSS for media mentions), and he approves or rejects them.
-7. **CV app:** a local or hosted editor UI over `data/` (start with Sveltia/Decap CMS, custom app later if needed).
-8. **Book site:** psychopathyunmasked.com as a second output from the same repo and data (book reviews, media, events). Design for this from the start: keep shared data and components separate from site-specific pages.
+Status as of 2026-10-21. Details of each are in the decisions below.
+
+1. **Foundation: done.** Content migrated from the Wix site; schemas; pages: Home, Research (publications with abstract, PDF and cite), Book, Blog & Media, Expertise, About (with the full CV), Teaching, Tools, Contact, 404, redirects from old Wix addresses. Schema.org JSON-LD (Person, ScholarlyArticle, Book). Correct metadata: he is an **Associate** Professor.
+2. **PDF CV: done.** Typst, built from `data/` on every build; public and private versions; linked from the About page.
+3. **Press kit: done.** A ZIP built from the data (three bios, photographs, book cover and 3D image), linked from Blog & Media. The original plan said 50-, 150- and 300-word bios; the current ones are about 30, 65 and 145 words.
+4. **External data: done differently.** Instead of a scheduled GitHub Action writing metrics, the local dashboard checks online sources every Friday: Google Scholar figures (citations, h-index; OpenAlex counts were too low to show) and the suggestions inbox (OpenAlex, Crossref, ORCID, YouTube, Google Alerts, Google News, Apple Podcasts). Newsletter RSS is not built.
+5. **Writing/newsletter: not started.** The Blog section on Blog & Media is ready for posts (Markdown in `posts/`); syndication to Bluesky and LinkedIn is not built.
+6. **Suggestion inbox: done** (in the dashboard; suggestions are cached in `generated/inbox.json`, not written to `data/` as `suggested` records).
+7. **CV app: done as a custom app**, not Sveltia/Decap: the dashboard with the CV Builder and Website Editor (`npm run dashboard`).
+8. **Book site: later.** psychopathyunmasked.com as a second output from the same repo and data (book reviews, media, events). Keep shared data and components separate from site-specific pages so it stays possible.
 
 ## Hosting and domains
 
-- Public GitHub repo, deployed to GitHub Pages through Actions, with custom domains rasmusrosenberg.com and psychopathyunmasked.com.
-- The domains are registered with Wix and the subscriptions run for about another year. At launch, point DNS at GitHub Pages; transfer to a cheaper registrar at renewal.
-- Everything in the repo is public, so never commit drafts not meant for the public, credentials or private notes. API keys go in GitHub Actions secrets.
+- Public GitHub repo (`rrlarsen/rasmusrosenberg.com`), deployed to GitHub Pages through Actions. The main address is **https://www.rasmusrosenberg.com** (`data/site.yaml: url`, `astro.config.mjs: site`); rasmusrosenberg.com without www redirects to it.
+- psychopathyunmasked.com stays on Wix until the book site is built.
+- The domains are registered with Wix and the subscriptions run for about another year. At launch, point the rasmusrosenberg.com DNS at GitHub Pages; transfer to a cheaper registrar at renewal.
+- Everything in the repo is public, so never commit drafts not meant for the public, credentials or private notes. API keys go in GitHub Actions secrets. `private/` (student names, the private PDF, the original CV document) is git-ignored and must be backed up separately.
+- Licence: code under MIT; content (texts, data, photographs, images) all rights reserved (`LICENSE`).
 
 ## Working conventions
 

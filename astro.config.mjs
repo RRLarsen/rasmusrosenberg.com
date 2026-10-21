@@ -3,7 +3,7 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://rasmusrosenberg.com',
+  site: 'https://www.rasmusrosenberg.com',
   trailingSlash: 'always',
   devToolbar: { enabled: false },
   // sitemap-index.xml for search engines; the 404 page is left out

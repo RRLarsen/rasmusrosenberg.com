@@ -21,3 +21,7 @@ npm run dashboard  # open the dashboard at http://localhost:4400: CV builder, we
 - `design/`: design mockups from the planning stage, kept for reference.
 
 See `CLAUDE.md` for the full project brief and decisions.
+
+## Licence
+
+The code is under the MIT License; the content (texts, CV data, photographs, images) is not, and all rights are reserved. See `LICENSE`.

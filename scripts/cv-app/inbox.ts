@@ -14,7 +14,7 @@ const INBOX_FILE = join(ROOT, 'generated', 'inbox.json');
 const SETTINGS_FILE = join(ROOT, 'data', 'inbox.yaml');
 // Google Alerts feed addresses belong to your Google account, so they stay out of the public repo
 const ALERTS_FILE = join(ROOT, 'private', 'alerts.yaml');
-const UA = 'rasmusrosenberg.com CV builder (https://rasmusrosenberg.com)';
+const UA = 'rasmusrosenberg.com CV builder (https://www.rasmusrosenberg.com)';
 
 export interface Suggestion {
   key: string; // "doi:…" or "url:…"
