@@ -22,10 +22,11 @@ const about = (book.data.long_description ?? book.data.description ?? '').split(
   <PageHeading slot="band" title={book.data.title} intro={book.data.subtitle} />
 
   <Section title="About the book">
+    <!-- the cover beside the key information and where to buy; a rule level with the cover's
+         bottom edge; then the description across the full width, under the cover -->
     <div class="book">
       {book.data.cover && <img src={book.data.cover} width="600" height="900" alt={`Cover of ${book.data.title}`} />}
       <div>
-        <!-- key information and where to buy first, then the description -->
         <dl class="facts sans">
           {book.data.publisher && <><dt>Publisher</dt><dd>{book.data.publisher}</dd></>}
           {book.data.date && <><dt>Published</dt><dd>{formatDate(book.data.date)}</dd></>}
@@ -34,14 +35,17 @@ const about = (book.data.long_description ?? book.data.description ?? '').split(
           {book.data.website && <><dt>Website</dt><dd><a href={book.data.website}>{bareHost(book.data.website)}</a></dd></>}
         </dl>
         <BuyLinks book={book} />
-        {about.length > 0 && <hr class="divider" />}
+      </div>
+    </div>
+    {about.length > 0 && (
+      <div class="about">
         {about.map((para, i) => (
           <p class={i === 0 && about.length > 1 ? 'desc lead' : 'desc'}>
             <Emph text={para} />
           </p>
         ))}
       </div>
-    </div>
+    )}
   </Section>
 
   {book.data.praise?.length && (
@@ -71,8 +75,10 @@ const about = (book.data.long_description ?? book.data.description ?? '').split(
 </Base>
 
 <style>
-  .book { display: grid; grid-template-columns: minmax(0, 15rem) minmax(0, 1fr); gap: clamp(1.5rem, 4vw, 3.5rem); align-items: start; }
-  .desc { max-width: var(--measure); font-size: var(--step-1); line-height: 1.5; margin: 0 0 1rem; }
+  .book { display: grid; grid-template-columns: minmax(0, 15rem) minmax(0, 1fr); gap: clamp(1.5rem, 4vw, 3.5rem); align-items: start; border-bottom: 1px solid var(--ink-soft); padding-bottom: 1.5rem; }
+  .book img { display: block; }
+  .about { margin-top: 2rem; }
+  .desc { font-size: var(--step-1); line-height: 1.5; margin: 0 0 1rem; }
   .desc.lead { font-weight: 600; }
   .praise { display: grid; gap: 2.25rem; max-width: var(--measure); }
   .praise figure { margin: 0; padding-left: 1.25rem; border-left: 2px solid var(--link); }
@@ -83,13 +89,12 @@ const about = (book.data.long_description ?? book.data.description ?? '').split(
   .praise figcaption { margin-top: 0.6rem; font-size: var(--step--1); color: var(--muted); line-height: 1.45; }
   .praise .name { color: var(--ink); font-weight: 600; }
   .facts { display: grid; grid-template-columns: max-content 1fr; gap: 0.4rem 1.5rem; margin: 0; }
-  .divider { border: 0; border-top: 1px solid var(--ink-soft); margin: 2rem 0; max-width: var(--measure); }
   .facts dt { color: var(--muted); }
   .facts dd { margin: 0; }
   .coverage { list-style: none; margin: 0; padding: 0; }
   .coverage li { padding: 0.8rem 0; border-top: 1px solid var(--rule); }
   @media (max-width: 820px) {
-    .book { grid-template-columns: 1fr; }
+    .book { grid-template-columns: 1fr; padding-bottom: 1.75rem; }
     .book img { max-width: 12rem; }
   }
 </style>

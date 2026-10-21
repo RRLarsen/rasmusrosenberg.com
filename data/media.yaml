@@ -24,7 +24,7 @@
     A U of T study questions the reliability of a psychological assessment that has been
     widely used in Canadian courtrooms
   image: /images/media/2026-uoft-magazine-can-a-test-tell.jpg
-  tags: []
+  publication: psychopathy-unmasked
 
 - id: 2026-forensic-talks-psychopathy-unmasked
   status: published
@@ -66,6 +66,7 @@
   outlet: "The Varsity"
   url: https://thevarsity.ca/2026/09/05/psychopathy-is-more-complicated-than-we-thought/
   tags: [psychopathy]
+  publication: psychopathy-unmasked
 
 - id: 2026-forensic-psychology-podcast
   status: published
@@ -76,6 +77,7 @@
   url: https://open.spotify.com/episode/5zb25qtw1qstBKbzQVqiFT
   image: /images/media/2026-forensic-psychology-podcast.jpg
   tags: [psychopathy]
+  publication: psychopathy-unmasked
 
 - id: 2026-in-vivo-zombie-idea
   status: published
@@ -98,6 +100,7 @@
   image: /images/media/2026-cbc-ideas-are-psychopaths-real.jpg
   tags: [psychopathy]
   featured: true  # promoted in the rotating band on the home page
+  publication: psychopathy-unmasked
 
 - id: 2026-curiosity-desk
   status: published
@@ -108,6 +111,7 @@
   url: https://www.youtube.com/live/-pwTYJJcJVo?t=9798
   image: /images/media/2026-curiosity-desk.jpg
   tags: [psychopathy]
+  publication: psychopathy-unmasked
 
 - id: 2026-inc-psychopaths-wrong
   status: published
@@ -117,6 +121,7 @@
   outlet: "Inc."
   url: https://www.inc.com/jessica-stillman/everything-you-think-you-know-about-psychopaths-might-be-wrong/91352314
   tags: [psychopathy]
+  publication: psychopathy-unmasked
 
 - id: 2026-daily-mail-psychopaths
   status: published
@@ -129,6 +134,7 @@
     Murderous psychopaths might make great movie villains, but research now suggests that
     these emotionless killers simply don
   tags: [psychopathy]
+  publication: psychopathy-unmasked
 
 - id: 2026-times-of-india-chigurh-lecter
   status: published
@@ -152,6 +158,7 @@
   outlet: "Think (KERA)"
   url: https://think.kera.org/2026/03/27/what-if-psychopaths-arent-real/
   tags: [psychopathy]
+  publication: psychopathy-unmasked
 
 - id: 2026-cog-illusions-zombie-idea
   status: published
@@ -173,6 +180,7 @@
   url: https://youtu.be/o3hWjM34pxE
   image: /images/media/2026-lance-independent-zombie-idea.jpg
   tags: [psychopathy]
+  publication: psychopathy-unmasked
 
 - id: 2026-in-good-health-dangerous
   status: published
@@ -236,6 +244,7 @@
     questions about the validity of the tool.The study led by Rasmus…
   image: /images/media/2026-uoft-news-psychopathy-test-unreliable.jpg
   tags: [psychopathy]
+  publication: psychopathy-unmasked
 
 - id: 2026-utm-news-industrial-scale
   status: published
@@ -249,7 +258,7 @@
     unreliable, research from the University of Toronto Mississauga suggests, raising
     questions about the validity of the tool.The study led by Rasmus…
   image: /images/media/2026-utm-news-industrial-scale.jpg
-  tags: []
+  publication: psychopathy-unmasked
 
 - id: 2025-last-show-zombie-ideas
   status: published
