@@ -13,6 +13,7 @@ import { makeSchemas } from '../../src/schemas.ts';
 import { sections, type Section, type Field } from './sections.ts';
 import { lookup, knownIndex, keysOf, LookupError } from './lookup.ts';
 import * as inbox from './inbox.ts';
+import * as scholar from './scholar.ts';
 
 const ROOT = process.cwd();
 const DATA = join(ROOT, 'data');
@@ -165,7 +166,9 @@ const itemText = (data: unknown, indent: number) => indentText(stringify([data],
 
 /** One field as YAML: long text wrapped in a block (>- or, with line breaks, |-), like the hand-written files. */
 function fieldYaml(k: string, v: unknown) {
-  const d = new Document({ [k]: v });
+  // numbers by year ({ "2025": 81 }) are written with plain year keys (2025: 81)
+  const yearMap = v && typeof v === 'object' && !Array.isArray(v) && Object.keys(v).every((y) => /^\d{4}$/.test(y));
+  const d = new Document({ [k]: yearMap ? new Map(Object.entries(v as object).map(([y, n]) => [Number(y), n])) : v });
   if (typeof v === 'string' && (v.includes('\n') || v.length > 80)) (d.get(k, true) as any).type = v.includes('\n') ? 'BLOCK_LITERAL' : 'BLOCK_FOLDED';
   return d.toString({ lineWidth: typeof v === 'string' && v.includes('\n') ? 0 : 88 });
 }
@@ -458,12 +461,18 @@ createServer(async (req, res) => {
       const upstream = remote ? await git(['rev-parse', '--abbrev-ref', '@{u}']).then((x) => x.trim()).catch(() => '') : '';
       const ahead = upstream ? Number((await git(['rev-list', '--count', '@{u}..HEAD'])).trim()) : 0;
       // the notifications feed: anything that needs attention, newest concerns first
-      type Note = { level: 'info' | 'action' | 'error'; title: string; detail?: string; href?: string; action?: 'checkpoint' | 'publish' | 'check' };
+      type Note = { level: 'info' | 'action' | 'error'; title: string; detail?: string; href?: string; action?: 'checkpoint' | 'publish' | 'check' | 'scholar' };
       const notes: Note[] = [];
       if (!lastBuild.ok) notes.push({ level: 'error', title: 'The last update of the PDF and website failed', detail: lastBuild.log || 'See the dashboard’s terminal for details.' });
       if (changed) notes.push({ level: 'action', title: `${changed} changed file${changed > 1 ? 's' : ''} not yet saved in a checkpoint`, detail: 'A checkpoint keeps a copy you can return to.', action: 'checkpoint' });
       if (ahead) notes.push({ level: 'action', title: `${ahead} checkpoint${ahead > 1 ? 's' : ''} not yet published`, detail: 'Publish to update the live website.', action: 'publish' });
       for (const [src, msg] of Object.entries(box.problems ?? {})) notes.push({ level: 'error', title: `Could not reach ${src}`, detail: msg, action: 'check' });
+      const sch = scholar.lastAttempt();
+      if (sch && Date.now() - Date.parse(sch.at) < 14 * 24 * 3600 * 1000 && (!sch.ok || sch.changes?.length)) {
+        notes.push(sch.ok
+          ? { level: 'info', title: sch.message, detail: `Checked ${new Date(sch.at).toLocaleDateString('en-CA')}.`, href: '/website#W.4' }
+          : { level: 'error', title: 'Google Scholar figures could not be updated', detail: sch.message, action: 'scholar' });
+      }
       for (const x of box.items) notes.push({ level: 'info', title: x.title, detail: `New ${x.kind === 'publication' ? 'publication' : 'media mention'} · ${x.sources.join(', ')}${x.date ? ` · ${x.date}` : ''}`, href: `/cv#inbox:${encodeURIComponent(x.key)}` });
       return json(res, 200, {
         name: parse(readFileSync(fileOf('profile'), 'utf8')).name,
@@ -479,6 +488,13 @@ createServer(async (req, res) => {
     if (what === 'preview' && id === 'start' && req.method === 'POST') {
       startPreview();
       return json(res, 200, { ok: true });
+    }
+
+    // Google Scholar figures: one fetch of the public profile page (see scholar.ts for the limits)
+    if (what === 'scholar' && id === 'update' && req.method === 'POST') {
+      const r = await scholar.update();
+      if (r.ok) rebuild();
+      return json(res, 200, r);
     }
 
     // quick add: DOI, ISBN or web address → a filled-in form (not saved)
@@ -581,5 +597,7 @@ createServer(async (req, res) => {
 }).listen(PORT, '127.0.0.1', () => {
   const url = `http://localhost:${PORT}`;
   console.log(`Dashboard running at ${url} (this computer only). Press Ctrl+C to stop.`);
+  // about once a month, refresh the Google Scholar figures (one request, from this computer)
+  if (scholar.isDue()) scholar.update().then((r) => { console.log(r.message); if (r.ok) rebuild(); });
   if (!process.env.CV_APP_NO_OPEN) spawn('open', [url], { stdio: 'ignore', detached: true }).unref();
 });

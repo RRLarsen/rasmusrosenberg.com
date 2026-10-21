@@ -83,7 +83,6 @@ export function makeSchemas(dataDir = join(process.cwd(), 'data')) {
     scholar: z.object({
       profile_url: z.url(),
       as_of: isoDate,
-      publications: z.number().int(),
       citations: z.number().int(),
       h_index: z.number().int(),
       i10_index: z.number().int().optional(),

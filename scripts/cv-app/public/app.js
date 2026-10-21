@@ -148,6 +148,7 @@ const inputFor = (f, value) => {
       return el('select', { id, name: f.name }, opts.map((o) => el('option', { value: o, selected: (value ?? (f.required ? opts[0] : '')) === o }, o || '—')));
     }
     case 'lines': return el('textarea', { id, name: f.name, rows: Math.max(3, (value ?? []).length + 1) }, (value ?? []).join('\n'));
+    case 'yearmap': return el('textarea', { id, name: f.name }, Object.entries(value ?? {}).map(([y, n]) => `${y}: ${n}`).join('\n'));
     case 'tags': return el('div', { class: 'tagset', id }, state.config.tags.map((t) =>
       el('label', { class: 'check' }, el('input', { type: 'checkbox', name: f.name, value: t.id, checked: (value ?? []).includes(t.id) }), t.label)));
     case 'publication': return el('select', { id, name: f.name }, el('option', { value: '' }, '—'),
@@ -205,6 +206,7 @@ function renderForm(data, mode) {
   form.append(el('p', { class: 'form-error', id: 'form-error' }));
   form.append(el('div', { class: 'actions' },
     el('button', { type: 'submit', class: 'primary' }, mode === 'new' ? 'Add entry' : 'Save'),
+    s.action ? el('button', { type: 'button', title: s.action.help, onclick: () => runAction(s) }, s.action.label) : null,
     mode === 'edit' && s.mode === 'list' ? el('button', { type: 'button', class: 'danger', onclick: removeEntry }, 'Delete') : null,
     el('span', { class: 'spacer' }),
     mode !== 'object' ? el('button', { type: 'button', onclick: () => guard(() => { state.key = undefined; renderList(); showEmpty(); }) }, 'Close') : null));
@@ -215,6 +217,19 @@ function renderForm(data, mode) {
   form.oninput = (e) => { if (e.target.tagName === 'TEXTAREA') grow(e.target); changed(); };
   form.onchange = changed;
   form.onsubmit = (e) => { e.preventDefault(); saveEntry(); };
+}
+
+/** a section's extra server action (e.g. fetching the Google Scholar figures), then reload the form */
+async function runAction(s) {
+  if (state.dirty && !confirm('You have unsaved changes on this form. Continue and replace them?')) return;
+  setStatus(`${s.action.label}…`);
+  try {
+    const r = await api(s.action.endpoint, { method: 'POST' });
+    if (!r.ok) { setStatus(r.message, 'error'); return; }
+    const { data } = await api(`section/${s.id}`);
+    renderForm(data, 'object');
+    afterSave(r.message);
+  } catch (err) { setStatus(`${s.action.label} failed: ${err.message}`, 'error'); }
 }
 
 function renderYaml(text) {
@@ -250,6 +265,7 @@ function collect() {
       case 'checkbox': data[f.name] = box.checked; break;
       case 'number': data[f.name] = box.value === '' ? undefined : Number(box.value); break;
       case 'lines': data[f.name] = box.value.split('\n').map((x) => x.trim()).filter(Boolean); break;
+      case 'yearmap': data[f.name] = Object.fromEntries(box.value.split('\n').map((l) => l.match(/^\s*(\d{4})\s*:\s*(\d+)\s*$/)).filter(Boolean).map((m) => [m[1], Number(m[2])])); break;
       case 'tags': data[f.name] = [...box.querySelectorAll('input:checked')].map((i) => i.value); break;
       case 'authors':
       case 'links':
@@ -643,7 +659,10 @@ loadConfig().then(async () => {
     const key = decodeURIComponent(location.hash.slice('#inbox:'.length));
     if (key && state.inbox.items.some((x) => x.key === key)) openSuggestion(key);
   }
-  else await selectSection(MODE === 'website' ? 'W.1' : 'C.2');
+  else {
+    const want = decodeURIComponent(location.hash.slice(1));
+    await selectSection(state.config.sections.some((x) => x.id === want && inMode(x)) ? want : MODE === 'website' ? 'W.1' : 'C.2');
+  }
   refreshInboxCount();
 })
   .catch((err) => setStatus(`Could not load: ${err.message}`, 'error'));

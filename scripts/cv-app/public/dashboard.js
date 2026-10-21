@@ -40,7 +40,7 @@ async function refresh() {
   notes.replaceChildren();
   for (const n of st.notifications) {
     const body = [el('span', { class: 't', text: n.title }), n.detail ? el('span', { class: 'd', text: n.detail }) : null];
-    if (n.action) body.push(el('button', { type: 'button', class: 'act', onclick: () => actions[n.action]() }, { checkpoint: 'Checkpoint', publish: 'Publish', check: 'Check again' }[n.action]));
+    if (n.action) body.push(el('button', { type: 'button', class: 'act', onclick: () => actions[n.action]() }, { checkpoint: 'Checkpoint', publish: 'Publish', check: 'Check again', scholar: 'Try again' }[n.action]));
     notes.append(el('li', {}, n.href ? el('a', { class: `note ${n.level}`, href: n.href }, body) : el('div', { class: `note ${n.level}` }, body)));
   }
   if (!st.notifications.length) notes.append(el('li', { class: 'empty', text: 'Nothing needs your attention.' }));
@@ -83,6 +83,12 @@ const actions = {
     setStatus('Publishing…');
     try { const r = await api('publish', { method: 'POST', body: { message } }); setStatus(r.message, r.ok ? '' : 'error'); }
     catch (err) { setStatus(`Publishing failed: ${err.message}`, 'error'); }
+    refresh();
+  },
+  async scholar() {
+    setStatus('Reading your Google Scholar profile…');
+    try { const r = await api('scholar/update', { method: 'POST' }); setStatus(r.message, r.ok ? '' : 'error'); }
+    catch (err) { setStatus(`Update failed: ${err.message}`, 'error'); }
     refresh();
   },
   async check() {

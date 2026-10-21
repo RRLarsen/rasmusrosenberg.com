@@ -29,3 +29,4 @@ public/rasmus-rosenberg-larsen-cv.pdf
 
 # suggestions inbox cache (CV builder); rebuilt on every check
 generated/inbox.json
+generated/scholar.json

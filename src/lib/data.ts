@@ -15,6 +15,9 @@ export async function getSite() {
 }
 
 /** Only records with status: published ever reach a page. */
+/** what counts as a publication in the Research page's figure: published books, articles, chapters, and commentaries */
+export const countedTypes = ['book', 'article', 'chapter', 'commentary'];
+
 export const isPublished = ({ data }: { data: { status: string } }) => data.status === 'published';
 
 /** Published and meant for the website (on_website: false keeps an entry in the CV only). */

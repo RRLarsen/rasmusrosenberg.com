@@ -1,8 +1,8 @@
-# Citation figures shown on the Research page. Google Scholar has no API, so these are
-# copied by hand from the public profile. Update them now and then, and change as_of.
+# Citation figures shown on the Research page, from the public Google Scholar profile. The
+# dashboard refreshes them about once a month (scripts/cv-app/scholar.ts); they can also be
+# edited by hand in the Website Editor. The publication count is taken from data/, not Scholar.
 profile_url: https://scholar.google.com/citations?user=YX6hlhsAAAAJ
-as_of: 2026-10-16
-publications: 42
+as_of: 2026-10-21
 citations: 392
 h_index: 10
 i10_index: 10

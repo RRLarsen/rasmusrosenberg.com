@@ -1,20 +1,22 @@
 ---
-/* Publications, citations and h-index from Google Scholar, in the turquoise band on the
-   Research page. Figures come from data/scholar.yaml, which is updated by hand. */
+/* Figures in the turquoise band on the Research page. Publications are counted from data/
+   (published books, articles, chapters, and commentaries, as listed on the page); citations
+   and h-index come from Google Scholar (data/scholar.yaml, refreshed by the dashboard). */
 import { getEntry } from 'astro:content';
-import { formatDate } from '../lib/data';
+import { formatDate, getPublications, isPublished, countedTypes } from '../lib/data';
 
 const scholar = (await getEntry('scholar', 'main'))!.data;
+const publications = (await getPublications()).filter((p) => isPublished(p) && countedTypes.includes(p.data.type) && !p.data.stage).length;
 const fmt = (n: number) => n.toLocaleString('en-GB');
 ---
 <div class="stats sans">
   <dl class="figures">
-    <div><dt>Publications</dt><dd>{fmt(scholar.publications)}</dd></div>
+    <div><dt>Publications</dt><dd>{fmt(publications)}</dd></div>
     <div><dt>Citations</dt><dd>{fmt(scholar.citations)}</dd></div>
     <div><dt>h-index</dt><dd>{scholar.h_index}</dd></div>
   </dl>
   <p class="source">
-    Data from <a href={scholar.profile_url}>Google Scholar</a>, as of {formatDate(scholar.as_of)}.
+    Publications as listed below. Citations and h-index from <a href={scholar.profile_url}>Google Scholar</a>, as of {formatDate(scholar.as_of)}.
   </p>
 </div>
 
