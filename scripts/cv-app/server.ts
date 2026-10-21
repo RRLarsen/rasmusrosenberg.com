@@ -8,12 +8,16 @@ import { spawn, execFile } from 'node:child_process';
 import { parseDocument, parse, stringify, isSeq, isMap, type Document } from 'yaml';
 import { makeSchemas } from '../../src/schemas.ts';
 import { sections, type Section, type Field } from './sections.ts';
+import { lookup, knownIndex, keysOf, LookupError } from './lookup.ts';
+import * as inbox from './inbox.ts';
 
 const ROOT = process.cwd();
 const DATA = join(ROOT, 'data');
 const PUBLIC_DIR = join(ROOT, 'scripts', 'cv-app', 'public');
 const NAMES_FILE = join(ROOT, 'private', 'supervision-names.yaml');
 const PORT = Number(process.env.CV_APP_PORT ?? 4400);
+const git = (args: string[]) => new Promise<string>((resolve, reject) =>
+  execFile('git', args, { cwd: ROOT }, (err, out, errOut) => (err ? reject(new Error((errOut || out || err.message).trim())) : resolve(out))));
 
 // ---------- files
 
@@ -156,6 +160,41 @@ const indentText = (text: string, n: number) => text.split('\n').map((l) => (l ?
 /** one list item as YAML text, e.g. "- id: x\n  title: y\n" */
 const itemText = (data: unknown, indent: number) => indentText(stringify([data], { lineWidth: 88 }), indent);
 
+/**
+ * Change only the fields that differ: each changed field's lines are replaced, removed fields
+ * are cut and new fields are added at the end of the entry, so the rest of the entry keeps its
+ * exact text (style, quoting, comments). Returns null when the entry cannot be patched this way
+ * (e.g. it is written on one line as { … }); the caller then rewrites the whole entry.
+ */
+function patchItem(src: string, item: any, entry: Record<string, unknown>): string | null {
+  if (!isMap(item) || item.flow || !item.items.length) return null;
+  const pairs = item.items as any[];
+  if (pairs.some((p) => !p.key?.range || !(p.value?.range ?? p.key.range))) return null;
+  const col = indentOf(src, pairs[0].key.range[0]);
+  if (pairs.some((p) => indentOf(src, p.key.range[0]) !== col || lineStart(src, p.key.range[0]) !== p.key.range[0] - col)) return null;
+  const fieldText = (k: string, v: unknown) => indentText(stringify({ [k]: v }, { lineWidth: 0 }), col);
+  const pairEnd = (p: any) => lineEnd(src, Math.max(p.key.range[0], (p.value?.range ?? p.key.range)[1] - 1));
+  const edits: { from: number; to: number; text: string }[] = [];
+  const old = item.toJSON();
+  for (const p of pairs) {
+    const k = String(p.key.value);
+    const from = lineStart(src, p.key.range[0]);
+    if (!(k in entry)) edits.push({ from, to: pairEnd(p), text: '' });
+    else if (!sameEntry(old[k], entry[k])) edits.push({ from, to: pairEnd(p), text: fieldText(k, entry[k]) });
+  }
+  const added = Object.keys(entry).filter((k) => !(k in old));
+  if (added.length) {
+    const at = pairEnd(pairs[pairs.length - 1]);
+    edits.push({ from: at, to: at, text: added.map((k) => fieldText(k, entry[k])).join('') });
+  }
+  if (!edits.length) return src;
+  let out = src;
+  for (const e of edits.sort((a, b) => b.from - a.from)) out = out.slice(0, e.from) + e.text + out.slice(e.to);
+  // the patched entry must read back exactly as intended
+  const check = parseDocument(out);
+  return check.errors.length ? null : out;
+}
+
 function save(s: Section, body: { key?: string; data: Record<string, unknown> }) {
   const errors = check(s, body.data, body.key);
   if (Object.keys(errors).length) return { ok: false, errors };
@@ -217,8 +256,12 @@ function save(s: Section, body: { key?: string; data: Record<string, unknown> })
   }
 
   const unchanged = index >= 0 && sameEntry((list.items[index] as any).toJSON(), entry);
+  let patched: string | null = null;
   if (unchanged) {
     // nothing to write; only the private name may have changed
+  } else if (index >= 0 && (patched = patchItem(src, list.items[index], entry)) !== null
+    && sameEntry((listNode(parseDocument(patched), s).items[index] as any)?.toJSON(), entry)) {
+    src = patched;
   } else if (index >= 0) {
     const { start, end } = span(src, list.items[index]);
     src = src.slice(0, start) + itemText(entry, indentOf(src, start + (src.slice(start).search(/\S/)))) + src.slice(end);
@@ -275,6 +318,27 @@ function rebuild() {
     building = false;
     if (again) { again = false; rebuild(); }
   });
+}
+
+/** Add a DOI to a publication already in the CV, so OpenAlex and Crossref can match it from now on. */
+function addDoi(sectionId: string, id: string, doi: string) {
+  const s = sectionById(sectionId);
+  if (s.collection !== 'publications') throw new HttpError(400, 'Only publications have DOIs.');
+  const entry = entriesOf({ ...s, filter: undefined }).find((e) => e.key === id);
+  if (!entry) throw new HttpError(404, 'That entry is no longer in the CV.');
+  const r = save(s, { key: id, data: { ...entry.data, doi } });
+  if (r.ok) rebuild();
+  return r.ok ? { ok: true, section: sectionId, id } : { ok: false, error: Object.values(r.errors ?? {}).join(' ') };
+}
+
+// ---------- checkpoints (a git commit of data/)
+
+async function checkpoint(message: string) {
+  await git(['add', 'data']);
+  const staged = await git(['diff', '--cached', '--name-only', '--', 'data']);
+  if (!staged.trim()) return { ok: true, message: 'Nothing new to save in a checkpoint.' };
+  await git(['commit', '-m', message.slice(0, 200), '--', 'data']);
+  return { ok: true, message: `Checkpoint saved: ${staged.trim().split('\n').length} file(s).` };
 }
 
 // ---------- HTTP
@@ -348,14 +412,84 @@ createServer(async (req, res) => {
     }
     if (what === 'checkpoint' && req.method === 'POST') {
       const body = await readBody(req);
-      const message = String(body.message || 'Update CV data').slice(0, 200);
-      const run = (args: string[]) => new Promise<string>((resolve, reject) =>
-        execFile('git', args, { cwd: ROOT }, (err, out, errOut) => (err ? reject(new Error(errOut || out || err.message)) : resolve(out))));
-      await run(['add', 'data']);
-      const staged = await run(['diff', '--cached', '--name-only', '--', 'data']);
-      if (!staged.trim()) return json(res, 200, { ok: true, message: 'Nothing new to save in a checkpoint.' });
-      await run(['commit', '-m', message, '--', 'data']);
-      return json(res, 200, { ok: true, message: `Checkpoint saved: ${staged.trim().split('\n').length} file(s).` });
+      return json(res, 200, await checkpoint(String(body.message || 'Update CV data')));
+    }
+
+    // quick add: DOI, ISBN or web address → a filled-in form (not saved)
+    if (what === 'lookup' && req.method === 'POST') {
+      const body = await readBody(req);
+      try {
+        const found = await lookup(String(body.q ?? ''), body.as === 'op-ed' ? 'op-ed' : 'media');
+        const known = knownIndex();
+        const match = keysOf(found.data).map((k) => known.get(k)).find(Boolean);
+        const similar = match || !found.data.title ? undefined : inbox.similarEntry(String(found.data.title), found.section === 'C.8' ? 'media' : 'publication', known);
+        return json(res, 200, { ok: true, found, known: match, similar });
+      } catch (e: any) {
+        if (e instanceof LookupError) return json(res, 200, { ok: false, error: e.message });
+        throw e;
+      }
+    }
+
+    // add a DOI to an existing publication (from quick add)
+    if (what === 'add-doi' && req.method === 'POST') {
+      const body = await readBody(req);
+      return json(res, 200, addDoi(String(body.section), String(body.id), String(body.doi)));
+    }
+
+    // suggestions inbox
+    if (what === 'inbox') {
+      if (req.method === 'GET' && !id) {
+        const stale = inbox.isStale();
+        if (stale) inbox.check().catch(() => {}); // a weekly check, in the background
+        return json(res, 200, { ...inbox.list(), checking: stale });
+      }
+      if (req.method === 'POST' && id === 'check') { await inbox.check(); return json(res, 200, inbox.list()); }
+      if (id === 'feeds') {
+        if (req.method === 'GET') return json(res, 200, { feeds: inbox.alertFeeds() });
+        const body = await readBody(req);
+        try { inbox.setAlertFeeds((body.feeds ?? []).map((f: string) => f.trim()).filter(Boolean)); }
+        catch (e: any) { return json(res, 200, { ok: false, error: e.message }); }
+        return json(res, 200, { ok: true });
+      }
+      const body = await readBody(req);
+      const item = inbox.find(String(body.key ?? ''));
+      if (!item) throw new HttpError(404, 'That suggestion is no longer in the inbox.');
+      if (id === 'dismiss' && req.method === 'POST') { inbox.dismiss(item.key); return json(res, 200, { ok: true }); }
+      if (id === 'prepare' && req.method === 'POST') {
+        try {
+          const found = await lookup(item.doi ?? item.url ?? '', body.as === 'op-ed' ? 'op-ed' : 'media');
+          if (item.sources.includes('YouTube') && found.section === 'C.8') found.data.type = 'video';
+          if (!found.data.title) found.data.title = item.title;
+          if (!found.data.date && item.date) found.data.date = item.date;
+          return json(res, 200, { ok: true, found });
+        } catch (e: any) {
+          if (!(e instanceof LookupError)) throw e;
+          // the page could not be read: start from what the source gave us
+          if (item.kind === 'media') return json(res, 200, { ok: true, found: { section: 'C.8', source: item.sources.join(', '), data: { type: item.sources.includes('YouTube') ? 'video' : 'press', title: item.title, date: item.date, url: item.url, outlet: '' } } });
+          return json(res, 200, { ok: false, error: e.message });
+        }
+      }
+      if (id === 'link' && req.method === 'POST') {
+        const similar = inbox.list().items.find((x) => x.key === item.key)?.similar;
+        if (!similar || similar.collection !== 'publications' || !item.doi) throw new HttpError(400, 'No matching entry to add the DOI to.');
+        return json(res, 200, addDoi(similar.section, similar.id, item.doi));
+      }
+    }
+
+    // publish: save a checkpoint of data/ and upload to GitHub (which rebuilds the live site)
+    if (what === 'publish') {
+      const remote = await git(['remote', 'get-url', 'origin']).then((x) => x.trim()).catch(() => '');
+      const changed = (await git(['status', '--porcelain', '--', 'data'])).trim().split('\n').filter(Boolean).length;
+      const upstream = remote ? await git(['rev-parse', '--abbrev-ref', '@{u}']).then((x) => x.trim()).catch(() => '') : '';
+      const ahead = upstream ? Number((await git(['rev-list', '--count', '@{u}..HEAD'])).trim()) : remote ? Number((await git(['rev-list', '--count', 'HEAD'])).trim()) : 0;
+      if (req.method === 'GET') return json(res, 200, { remote, changed, ahead });
+      if (req.method === 'POST') {
+        if (!remote) return json(res, 200, { ok: false, message: 'Not connected to GitHub yet. Publishing starts working once the site has a GitHub repository.' });
+        const body = await readBody(req);
+        if (changed) await checkpoint(String(body.message || 'Update CV data'));
+        await git(upstream ? ['push'] : ['push', '-u', 'origin', 'HEAD']);
+        return json(res, 200, { ok: true, message: 'Published. GitHub is rebuilding the website; the changes are live in a few minutes.' });
+      }
     }
     throw new HttpError(404, 'Unknown request');
   } catch (e: any) {

@@ -101,6 +101,12 @@ export function makeSchemas(dataDir = join(process.cwd(), 'data')) {
 
     tags: z.object({ label: z.string(), description: z.string().optional() }),
 
+    // The CV builder's suggestions inbox (data/inbox.yaml); not a site collection.
+    inbox: z.object({
+      youtube_channel_id: z.string().regex(/^UC[\w-]{22}$/).optional(),
+      dismissed: z.array(z.string()).default([]),
+    }),
+
     publications: z
       .object({
         status,

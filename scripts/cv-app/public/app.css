@@ -95,3 +95,28 @@ form .key { color: var(--muted); font-size: 0.78rem; margin: 0 0 1rem; }
   .layout { grid-template-columns: 13.5rem 18rem 1fr; }
   .pdf-version select { max-width: 12rem; }
 }
+
+/* quick add dialog */
+dialog { border: 1px solid var(--rule); border-radius: 8px; padding: 1.25rem 1.5rem; width: min(34rem, 92vw); background: white; color: var(--ink); }
+dialog::backdrop { background: rgb(15 59 57 / 0.35); }
+dialog h2 { margin: 0 0 1rem; font-family: Georgia, serif; font-weight: 400; font-size: 1.3rem; }
+dialog input[type="text"] { width: 100%; padding: 0.5rem 0.6rem; border: 1px solid var(--rule); border-radius: 4px; }
+dialog .as { border: 0; padding: 0; margin: 1rem 0 0; display: grid; gap: 0.3rem; }
+dialog .as legend { font-size: 0.82rem; color: var(--muted); margin-bottom: 0.3rem; }
+dialog .check { display: flex; gap: 0.5rem; align-items: center; font-size: 0.9rem; }
+.quick-msg { min-height: 1.3em; font-size: 0.875rem; margin: 0.9rem 0 0; white-space: pre-wrap; }
+.quick-msg.error { color: var(--error); }
+dialog .actions { display: flex; gap: 0.5rem; margin-top: 1rem; }
+
+/* suggestions inbox */
+.sections .inbox-count { background: var(--deep); color: var(--on-deep); border-radius: 1rem; padding: 0 0.45rem; font-size: 0.75rem; }
+.sections button[aria-current="true"] .inbox-count { background: var(--on-deep); color: var(--deep); }
+.suggestion h2 { margin: 0 0 0.35rem; font-family: Georgia, serif; font-weight: 400; font-size: 1.3rem; line-height: 1.3; }
+.suggestion .meta { color: var(--muted); font-size: 0.85rem; margin: 0 0 1rem; }
+.suggestion .notice { background: var(--card); border: 1px solid var(--rule); border-left: 3px solid var(--deep); padding: 0.7rem 0.9rem; margin: 0 0 1rem; font-size: 0.9rem; max-width: 46rem; }
+.suggestion .notice p { margin: 0 0 0.5rem; }
+.suggestion .actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+.suggestion .problems { color: var(--error); font-size: 0.85rem; }
+.feeds textarea { width: 100%; min-height: 7rem; font: 13px/1.5 ui-monospace, Menlo, monospace; padding: 0.5rem; border: 1px solid var(--rule); border-radius: 4px; }
+.feeds ol { padding-left: 1.2rem; font-size: 0.9rem; max-width: 46rem; }
+.entries-tools[hidden] { display: none; }

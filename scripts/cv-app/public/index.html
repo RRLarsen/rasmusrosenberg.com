@@ -11,7 +11,9 @@
     <strong class="brand">CV builder</strong>
     <span class="status" id="status" role="status" aria-live="polite"></span>
     <div class="bar-actions">
+      <button type="button" id="quick" class="ghost" title="Add an entry from a DOI, ISBN or web address">Quick add</button>
       <button type="button" id="checkpoint" class="ghost" title="Save a checkpoint of data/ that you can return to">Checkpoint</button>
+      <button type="button" id="publish" class="ghost" title="Upload your checkpoints to the live website">Publish</button>
       <a class="ghost" href="http://localhost:4321/about/" target="_blank" rel="noopener">Open website</a>
     </div>
   </header>
@@ -26,6 +28,10 @@
         <div class="entries-tools" id="entries-tools" hidden>
           <input type="search" id="search" placeholder="Search this section" aria-label="Search this section" />
           <button type="button" id="add" class="primary">Add new entry</button>
+        </div>
+        <div class="entries-tools" id="inbox-tools" hidden>
+          <button type="button" id="inbox-check" class="primary">Check now</button>
+          <button type="button" id="inbox-sources">Google Alerts</button>
         </div>
       </div>
       <ul class="entry-list" id="entry-list"></ul>
@@ -51,6 +57,24 @@
       </div>
     </section>
   </div>
+
+  <dialog id="quick-dialog" aria-labelledby="quick-title">
+    <form method="dialog" id="quick-form">
+      <h2 id="quick-title">Quick add</h2>
+      <label class="lbl" for="quick-q">DOI, ISBN or web address</label>
+      <input type="text" id="quick-q" autocomplete="off" placeholder="e.g. 10.1037/law0000472, 978-0-262-55220-2 or https://…" />
+      <fieldset class="as">
+        <legend>A web page that is not a scholarly publication becomes</legend>
+        <label class="check"><input type="radio" name="as" value="media" checked /> Media (C.8)</label>
+        <label class="check"><input type="radio" name="as" value="op-ed" /> Op-ed or commentary by you (C.3)</label>
+      </fieldset>
+      <p class="quick-msg" id="quick-msg" role="status" aria-live="polite"></p>
+      <div class="actions">
+        <button type="submit" class="primary" id="quick-go" value="go">Look up</button>
+        <button type="button" id="quick-cancel">Cancel</button>
+      </div>
+    </form>
+  </dialog>
 
   <script src="/app.js" type="module"></script>
 </body>

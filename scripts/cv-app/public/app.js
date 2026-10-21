@@ -32,7 +32,11 @@ function setStatus(text, kind = '') {
 async function loadConfig() {
   state.config = await api('config');
   const nav = $('#sections');
-  nav.replaceChildren();
+  nav.replaceChildren(
+    el('h2', { text: 'Inbox' }),
+    el('button', { type: 'button', 'data-id': 'INBOX', onclick: () => guard(selectInbox) },
+      el('span', { text: 'Suggestions' }), el('span', { class: 'inbox-count', id: 'inbox-count', hidden: true })),
+  );
   let group = '';
   for (const s of state.config.sections) {
     if (s.group !== group) { group = s.group; nav.append(el('h2', { text: group })); }
@@ -50,6 +54,8 @@ async function selectSection(id) {
   $('#section-title').textContent = `${s.id.startsWith('W') ? '' : `${s.id} `}${s.title}`;
   $('#section-note').textContent = s.note ?? (s.mode === 'list' ? '' : 'One set of fields; edit and save.');
   $('#entries-tools').hidden = s.mode !== 'list';
+  $('#inbox-tools').hidden = true;
+  $('#edit-empty').textContent = 'Choose an entry, or add a new one.';
   $('#search').value = '';
   $('#entry-list').replaceChildren();
   showTab('edit');
@@ -113,6 +119,17 @@ function newEntry() {
   renderList();
   const defaults = { status: 'published', ...(state.section.defaults ?? {}) };
   renderForm(structuredClone(defaults), 'new');
+}
+
+/** Open a new, filled-in entry in a section (from quick add or the inbox); nothing is saved yet. */
+async function openPrefilled(sectionId, data, message) {
+  await selectSection(sectionId);
+  state.key = undefined;
+  renderList();
+  renderForm({ status: 'published', ...(state.section.defaults ?? {}), ...data }, 'new');
+  state.dirty = true;
+  setStatus(message);
+  liveCheck();
 }
 
 const inputFor = (f, value) => {
@@ -299,6 +316,7 @@ async function afterSave(message) {
     const c = b.querySelector('.count');
     if (c) c.textContent = cfg.counts[b.dataset.id];
   }
+  refreshInboxCount();
   setStatus(`${message} Updating the PDF and website…`);
   watchBuild();
 }
@@ -334,9 +352,233 @@ function guard(next) {
 }
 window.addEventListener('beforeunload', (e) => { if (state.dirty) { e.preventDefault(); e.returnValue = ''; } });
 
+// ---------- quick add
+
+const quick = $('#quick-dialog');
+function openQuick() {
+  $('#quick-q').value = '';
+  quickMsg('');
+  quick.showModal();
+  $('#quick-q').focus();
+}
+const quickMsg = (text, kind = '') => { const m = $('#quick-msg'); m.textContent = text; m.className = `quick-msg ${kind}`; };
+$('#quick-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const q = $('#quick-q').value.trim();
+  if (!q) return;
+  quickMsg('Looking it up…');
+  $('#quick-go').disabled = true;
+  try {
+    const r = await api('lookup', { method: 'POST', body: { q, as: new FormData($('#quick-form')).get('as') } });
+    if (!r.ok) { quickMsg(r.error, 'error'); return; }
+    if (r.known) {
+      quickMsg(`Already in your CV (${r.known.section}): “${r.known.title}”.`, 'error');
+      const open = el('button', { type: 'button', onclick: async () => { quick.close(); await selectSection(r.known.section); openEntry(r.known.id); } }, 'Open it');
+      $('#quick-msg').append(' ', open);
+      return;
+    }
+    const where = state.config.sections.find((x) => x.id === r.found.section);
+    const addNew = async () => {
+      quick.close();
+      await openPrefilled(r.found.section, r.found.data, `Filled in from ${r.found.source} as a new entry in ${where.id} ${where.title}. Check the fields, then press Add entry.`);
+    };
+    if (r.similar) {
+      // probably the same work, entered earlier without this identifier
+      quickMsg(`Found “${r.found.data.title}”. This may already be in your CV as “${r.similar.title}” (${r.similar.section}).\n`);
+      const m = $('#quick-msg');
+      if (r.found.data.doi && r.similar.collection === 'publications') {
+        m.append(el('button', { type: 'button', class: 'primary', onclick: async () => {
+          const x = await api('add-doi', { method: 'POST', body: { section: r.similar.section, id: r.similar.id, doi: r.found.data.doi } });
+          if (!x.ok) { quickMsg(`Not saved: ${x.error}`, 'error'); return; }
+          quick.close();
+          await selectSection(r.similar.section);
+          openEntry(r.similar.id);
+          afterSave(`DOI added to “${r.similar.title}”.`);
+        } }, 'Add the DOI to that entry'), ' ');
+      } else {
+        m.append(el('button', { type: 'button', onclick: async () => { quick.close(); await selectSection(r.similar.section); openEntry(r.similar.id); } }, 'Open that entry'), ' ');
+      }
+      m.append(el('button', { type: 'button', onclick: addNew }, 'Add as a new entry'));
+      return;
+    }
+    await addNew();
+  } catch (err) {
+    quickMsg(`Something went wrong: ${err.message}`, 'error');
+  } finally {
+    $('#quick-go').disabled = false;
+  }
+});
+$('#quick-cancel').addEventListener('click', () => quick.close());
+
+// ---------- suggestions inbox
+
+const kindLabel = { publication: 'Publication', media: 'Media' };
+
+async function refreshInboxCount() {
+  try {
+    const r = await api('inbox');
+    const c = $('#inbox-count');
+    c.textContent = r.items.length;
+    c.hidden = !r.items.length;
+    if (r.checking) setTimeout(refreshInboxCount, 15000); // a weekly check is running
+    return r;
+  } catch { return null; }
+}
+
+async function selectInbox(message) {
+  state.section = { id: 'INBOX', mode: 'inbox', fields: [] };
+  state.key = undefined; state.dirty = false;
+  for (const b of document.querySelectorAll('#sections button')) b.setAttribute('aria-current', String(b.dataset.id === 'INBOX'));
+  $('#section-title').textContent = 'Suggestions';
+  $('#entries-tools').hidden = true;
+  $('#inbox-tools').hidden = false;
+  showTab('edit');
+  showEmpty();
+  $('#edit-empty').textContent = 'Choose a suggestion to add it to the CV or dismiss it.';
+  const r = await refreshInboxCount();
+  state.inbox = r ?? { items: [] };
+  const when = r?.checked_at ? new Date(r.checked_at).toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' }) : 'never';
+  const problems = Object.entries(r?.problems ?? {}).map(([k, v]) => `${k}: ${v}`).join('; ');
+  $('#section-note').textContent = `New publications (OpenAlex, Crossref, ORCID), videos on your YouTube channel${r?.feeds ? ' and Google Alerts' : ''}. Nothing is added until you approve it. Last checked: ${when}.${r?.checking ? ' Checking now…' : ''}${problems ? ` Could not reach ${problems}.` : ''}`;
+  renderInbox();
+  if (message) setStatus(message);
+}
+
+function renderInbox() {
+  const list = $('#entry-list');
+  list.replaceChildren();
+  for (const x of state.inbox.items) {
+    list.append(el('li', {}, el('button', { type: 'button', 'aria-current': String(x.key === state.key), onclick: () => openSuggestion(x.key) },
+      el('span', { class: 't', text: x.title }),
+      el('span', { class: 'm' }, [kindLabel[x.kind], x.sources.join(', '), x.date].filter(Boolean).join(' · '),
+        x.similar ? el('span', { class: 'badge', text: 'may be in CV' }) : null))));
+  }
+  if (!list.children.length) list.append(el('li', { class: 'empty', style: 'padding:1rem', text: 'No new suggestions.' }));
+}
+
+function openSuggestion(key) {
+  const x = state.inbox.items.find((i) => i.key === key);
+  state.key = key;
+  renderInbox();
+  const form = $('#form');
+  form.replaceChildren();
+  form.dataset.mode = 'inbox';
+  form.onsubmit = (e) => e.preventDefault();
+  form.oninput = form.onchange = null;
+  $('#edit-empty').hidden = true;
+  form.hidden = false;
+  const link = x.doi ? `https://doi.org/${x.doi}` : x.url;
+  const box = el('div', { class: 'suggestion' },
+    el('h2', { text: x.title }),
+    el('p', { class: 'meta' }, [kindLabel[x.kind], x.date, x.detail].filter(Boolean).join(' · '), ' · Found by ', x.sources.join(', '),
+      link ? [' · ', el('a', { href: link, target: '_blank', rel: 'noopener' }, x.doi ? `DOI ${x.doi}` : 'Open the page')] : null));
+  if (x.similar) {
+    const notice = el('div', { class: 'notice' },
+      el('p', {}, 'This may already be in your CV as ', el('strong', { text: `“${x.similar.title}”` }), ` (${x.similar.section}).`));
+    if (x.doi && x.similar.collection === 'publications') {
+      notice.append(el('p', {}, 'If it is the same work, add the DOI to that entry. Then OpenAlex and Crossref can match it from now on.'),
+        el('button', { type: 'button', class: 'primary', onclick: () => linkSuggestion(x) }, 'Add the DOI to that entry'));
+    } else {
+      notice.append(el('button', { type: 'button', onclick: async () => { await selectSection(x.similar.section); openEntry(x.similar.id); } }, 'Open that entry'));
+    }
+    box.append(notice);
+  }
+  const actions = el('div', { class: 'actions' });
+  if (x.kind === 'publication') actions.append(el('button', { type: 'button', class: x.similar ? '' : 'primary', onclick: () => approve(x, 'media') }, 'Add to CV…'));
+  else actions.append(
+    el('button', { type: 'button', class: 'primary', onclick: () => approve(x, 'media') }, 'Add as media…'),
+    x.sources.includes('YouTube') ? null : el('button', { type: 'button', onclick: () => approve(x, 'op-ed') }, 'Add as op-ed by me…'));
+  actions.append(el('button', { type: 'button', class: 'danger', onclick: () => dismissSuggestion(x) }, 'Dismiss'));
+  box.append(actions, el('p', { class: 'help', text: 'Adding opens a filled-in form; nothing is saved until you press Add entry. Dismissed suggestions do not come back.' }));
+  form.append(box);
+}
+
+async function approve(x, as) {
+  setStatus('Fetching the details…');
+  const r = await api('inbox/prepare', { method: 'POST', body: { key: x.key, as } });
+  if (!r.ok) { setStatus(`Could not fetch the details: ${r.error}`, 'error'); return; }
+  const where = state.config.sections.find((s) => s.id === r.found.section);
+  await openPrefilled(r.found.section, r.found.data, `Filled in from ${r.found.source} as a new entry in ${where.id} ${where.title}. Check the fields, then press Add entry; it then leaves the inbox.`);
+}
+
+async function dismissSuggestion(x) {
+  await api('inbox/dismiss', { method: 'POST', body: { key: x.key } });
+  state.inbox.items = state.inbox.items.filter((i) => i.key !== x.key);
+  state.key = undefined;
+  renderInbox();
+  showEmpty();
+  refreshInboxCount();
+  setStatus('Dismissed. It will not be suggested again.');
+}
+
+async function linkSuggestion(x) {
+  const r = await api('inbox/link', { method: 'POST', body: { key: x.key } });
+  if (!r.ok) { setStatus(`Not saved: ${r.error}`, 'error'); return; }
+  state.inbox.items = state.inbox.items.filter((i) => i.key !== x.key);
+  state.key = undefined;
+  renderInbox();
+  showEmpty();
+  refreshInboxCount();
+  afterSave(`DOI added to “${x.similar.title}”.`);
+}
+
+$('#inbox-check').addEventListener('click', async () => {
+  $('#inbox-check').disabled = true;
+  setStatus('Checking OpenAlex, Crossref, ORCID, YouTube and your alerts…');
+  try { await api('inbox/check', { method: 'POST' }); await selectInbox('Inbox checked.'); }
+  catch (err) { setStatus(`Check failed: ${err.message}`, 'error'); }
+  finally { $('#inbox-check').disabled = false; }
+});
+
+$('#inbox-sources').addEventListener('click', async () => {
+  const { feeds } = await api('inbox/feeds');
+  state.key = undefined;
+  renderInbox();
+  const form = $('#form');
+  form.dataset.mode = 'inbox';
+  form.oninput = form.onchange = null;
+  $('#edit-empty').hidden = true;
+  form.hidden = false;
+  const ta = el('textarea', { id: 'feeds', spellcheck: 'false' }, feeds.join('\n'));
+  const msg = el('p', { class: 'form-error' });
+  form.replaceChildren(el('div', { class: 'feeds suggestion' },
+    el('h2', { text: 'Google Alerts' }),
+    el('p', { class: 'meta', text: 'Media mentions reach the inbox through Google Alerts. The feed addresses are kept in private/, never uploaded.' }),
+    el('ol', {},
+      el('li', {}, 'Go to ', el('a', { href: 'https://www.google.com/alerts', target: '_blank', rel: 'noopener' }, 'google.com/alerts'), ' and type a search, e.g. "Rasmus Rosenberg Larsen" or "Psychopathy Unmasked".'),
+      el('li', {}, 'Open "Show options" and set "Deliver to" to RSS feed. Then create the alert.'),
+      el('li', {}, 'Right-click the RSS icon next to the alert, copy the link, and paste it below (one per line).')),
+    el('label', { class: 'lbl', for: 'feeds' }, 'Feed addresses'), ta, msg,
+    el('div', { class: 'actions' }, el('button', { type: 'button', class: 'primary', onclick: async () => {
+      const r = await api('inbox/feeds', { method: 'PUT', body: { feeds: ta.value.split('\n') } });
+      if (!r.ok) { msg.textContent = r.error; return; }
+      msg.textContent = '';
+      setStatus('Alerts saved. Press Check now to fetch them.');
+    } }, 'Save'))));
+  form.onsubmit = (e) => e.preventDefault();
+});
+
+// ---------- publish
+
+$('#publish').addEventListener('click', async () => {
+  const st = await api('publish');
+  if (!st.remote) { setStatus('Not connected to GitHub yet. Publishing starts working once the site has a GitHub repository.', 'error'); return; }
+  if (!st.changed && !st.ahead) { setStatus('Nothing new to publish: the live website is up to date.'); return; }
+  let message = 'Update CV data';
+  if (st.changed) {
+    message = prompt(`Describe the changes for the checkpoint made before publishing (${st.changed} changed file(s) in data/):`, 'Update CV');
+    if (message === null) return;
+  }
+  if (!confirm('Publish to the live website? Your checkpoints are uploaded to GitHub, which rebuilds the site.')) return;
+  setStatus('Publishing…');
+  try { const r = await api('publish', { method: 'POST', body: { message } }); setStatus(r.message, r.ok ? '' : 'error'); }
+  catch (err) { setStatus(`Publishing failed: ${err.message}`, 'error'); }
+});
+
 // ---------- wiring
 
 $('#add').addEventListener('click', () => guard(newEntry));
+$('#quick').addEventListener('click', () => guard(openQuick));
 $('#search').addEventListener('input', renderList);
 $('#tab-edit').addEventListener('click', () => showTab('edit'));
 $('#tab-pdf').addEventListener('click', () => showTab('pdf'));
@@ -348,5 +590,5 @@ $('#checkpoint').addEventListener('click', async () => {
   catch (err) { setStatus(`Checkpoint failed: ${err.message}`, 'error'); }
 });
 
-loadConfig().then(() => { setStatus('Ready. Changes are saved straight into data/.'); selectSection('C.2'); })
+loadConfig().then(() => { setStatus('Ready. Changes are saved straight into data/.'); selectSection('C.2'); refreshInboxCount(); })
   .catch((err) => setStatus(`Could not load: ${err.message}`, 'error'));

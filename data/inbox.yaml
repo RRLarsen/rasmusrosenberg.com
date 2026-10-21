@@ -1,0 +1,9 @@
+# Suggestions inbox (CV builder): what the inbox needs to remember. Edited by the app.
+# youtube_channel_id: found from the YouTube link in profile.yaml on the first check.
+# dismissed: suggestions you chose not to add (DOIs and web addresses), so they do not come back.
+dismissed:
+  - doi:10.31219/osf.io/28b3q_v2
+  - doi:10.21428/cb6ab371.0ec07f88
+  - doi:10.17605/osf.io/3v4h7
+  - doi:10.31219/osf.io/28b3q_v1
+youtube_channel_id: UCSBw-Qvp2RagL9KOrdzkFPw
