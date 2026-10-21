@@ -2,6 +2,17 @@
 # summary and image (a thumbnail in public/images/media/) are shown on the Blog & Media page.
 # Thumbnails and most summaries come from each link's own preview data (its og:image and og:description).
 
+- id: 2021-the-hare-psychopathy-checklist-a-clinical-constr
+  status: published
+  type: video
+  title: "The Hare Psychopathy Checklist: A Clinical Construct Whose Time Has Passed?"
+  outlet: YouTube
+  date: 2021-11-09
+  url: https://www.youtube.com/watch?v=pDogs_Usmnw
+  summary: "BACKGROUND: The clinical construct of psychopathy refers to a personality
+    disorder characterized by various antisocial personality traits and behaviors. The
+    ..."
+
 - id: 2026-uoft-magazine-can-a-test-tell
   status: published
   type: press

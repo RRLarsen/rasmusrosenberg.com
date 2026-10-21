@@ -34,6 +34,7 @@
     the legal use of psychopathy assessments should end.
   tags: [psychopathy, law-and-evidence]
   featured: true
+  doi: 10.7551/mitpress/15188.001.0001
 
 - id: larsen-zombie-science
   status: published
@@ -162,6 +163,7 @@
   place: London
   note: Chapter 4
   tags: [psychiatry-and-ontology]
+  doi: 10.4135/9781529789522.n4
 
 - id: sackris-2023-higher-order-evidence
   status: published
@@ -375,6 +377,7 @@
   publisher: Springer International Publishing
   place: Cham
   tags: [psychiatry-and-ontology]
+  doi: 10.1007/978-3-030-70558-9_12
 
 - id: larsen-2021-amused-by-the-outrageous
   status: published
@@ -390,6 +393,7 @@
   publisher: Rowman & Littlefield
   place: New York
   tags: [moral-and-aesthetic-judgment]
+  doi: 10.5040/9798881816322.ch-8
 
 - id: jalava-2021-coding-bias
   status: published
@@ -641,6 +645,7 @@
   place: New York
   note: Reprint of the 2019 article in the Kennedy Institute of Ethics Journal
   tags: [psychopathy]
+  doi: 10.4324/9780429266119-14
 
 - id: sackris-2019-carroll
   status: published
