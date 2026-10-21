@@ -12,6 +12,7 @@
   summary: "BACKGROUND: The clinical construct of psychopathy refers to a personality
     disorder characterized by various antisocial personality traits and behaviors. The
     ..."
+  image: /images/media/2021-the-hare-psychopathy-checklist-a-clinical-constr.jpg
 
 - id: 2026-uoft-magazine-can-a-test-tell
   status: published
@@ -57,6 +58,7 @@
   url: https://hrcak.srce.hr/en/clanak/506312
   publication: psychopathy-unmasked
   tags: [psychopathy]
+  image: /images/media/2026-ejap-review-maung.jpg
 
 - id: 2026-varsity-psychopathy-complicated
   status: published
@@ -67,6 +69,7 @@
   url: https://thevarsity.ca/2026/09/05/psychopathy-is-more-complicated-than-we-thought/
   tags: [psychopathy]
   publication: psychopathy-unmasked
+  image: /images/media/2026-varsity-psychopathy-complicated.jpg
 
 - id: 2026-forensic-psychology-podcast
   status: published
@@ -122,6 +125,7 @@
   url: https://www.inc.com/jessica-stillman/everything-you-think-you-know-about-psychopaths-might-be-wrong/91352314
   tags: [psychopathy]
   publication: psychopathy-unmasked
+  image: /images/media/2026-inc-psychopaths-wrong.jpg
 
 - id: 2026-daily-mail-psychopaths
   status: published
@@ -135,6 +139,7 @@
     these emotionless killers simply don
   tags: [psychopathy]
   publication: psychopathy-unmasked
+  image: /images/media/2026-daily-mail-psychopaths.jpg
 
 - id: 2026-times-of-india-chigurh-lecter
   status: published
@@ -159,6 +164,7 @@
   url: https://think.kera.org/2026/03/27/what-if-psychopaths-arent-real/
   tags: [psychopathy]
   publication: psychopathy-unmasked
+  image: /images/media/2026-think-psychopaths-not-real.jpg
 
 - id: 2026-cog-illusions-zombie-idea
   status: published
@@ -230,6 +236,7 @@
   url: https://www.tandfonline.com/doi/full/10.1080/14789949.2026.2629579
   publication: psychopathy-unmasked
   tags: [psychopathy]
+  image: /images/media/2026-jfpp-review-tully.jpg
 
 - id: 2026-uoft-news-psychopathy-test-unreliable
   status: published
@@ -294,6 +301,7 @@
   url: https://www.themarshallproject.org/2025/06/16/book-challenges-psychopathy-diagnosis-violent-crime
   publication: psychopathy-unmasked
   tags: [psychopathy]
+  image: /images/media/2025-marshall-project-book.jpg
 
 - id: 2022-news-talk-winnipeg
   status: published
@@ -390,6 +398,7 @@
   outlet: "Big Think"
   url: https://bigthink.com/surprising-science/psychopath-treatment
   tags: [psychopathy]
+  image: /images/media/2019-big-think-treatment.jpg
 
 - id: 2019-uoft-news-outdated-understanding
   status: published
