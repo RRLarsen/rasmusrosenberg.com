@@ -39,10 +39,15 @@
     - { label: Amazon.com, url: "https://www.amazon.com/dp/0262552205/" }
     - { label: Amazon.ca, url: "https://www.amazon.ca/dp/0262552205/" }
     - { label: Amazon.co.uk, url: "https://www.amazon.co.uk/dp/0262552205/" }
-    - { label: Indigo, url: "https://www.chapters.indigo.ca/books/search?keywords=9780262552202" }
+    - { label: Indigo, url: "https://www.indigo.ca/en-ca/psychopathy-unmasked-the-rise-and-fall-of-a-dangerous-diagnosis/9780262552202.html" }
     - { label: Bookshop.org, url: "https://bookshop.org/a/2238/9780262552202" }
     - { label: Barnes & Noble, url: "https://www.barnesandnoble.com/s/9780262552202/" }
     - { label: MIT Press Bookstore, url: "https://mitpressbookstore.mit.edu/book/9780262552202" }
+    - { label: Apple Books, url: "https://books.apple.com/us/book/psychopathy-unmasked/id6695729032" }
+    - { label: Powell’s Books, url: "https://www.powells.com/book/psychopathy-unmasked-the-rise-and-fall-of-a-dangerous-diagnosis-9780262552202" }
+    - { label: Blackwell’s, url: "https://blackwells.co.uk/bookshop/product/Psychopathy-Unmasked-by-Rasmus-Rosenberg-Larsen/9780262552202" }
+    - { label: Booktopia, url: "https://www.booktopia.com.au/psychopathy-unmasked/book/9780262552202.html" }
+    - { label: Saxo, url: "https://www.saxo.com/dk/psychopathy-unmasked_bog_9780262552202" }
   description: Psychopathy assessments influence sentencing, parole, and other consequential decisions throughout the North American criminal justice system. Drawing on decades of empirical research, this book challenges the longstanding assumption that individuals labelled psychopaths are uniquely dangerous or possess distinctive psychological characteristics. It argues that these claims lack adequate scientific support and that psychopathy assessments should no longer be used to inform legal decision-making.
   tags: [psychopathy, law-and-evidence]
   featured: true

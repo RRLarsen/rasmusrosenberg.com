@@ -191,7 +191,7 @@ export const sections: Section[] = [
       { name: 'intro', label: 'Line under the quote', type: 'textarea' },
     ] },
   { id: 'W.2', group: 'Website', title: 'Expertise', collection: 'expertise', mode: 'list', summary: { title: 'title', meta: ['order'] },
-    fields: [{ name: 'title', label: 'Title', type: 'text', required: true }, { name: 'summary', label: 'Summary', type: 'textarea', required: true }, { name: 'details', label: 'Details', type: 'textarea' }, { name: 'order', label: 'Order', type: 'number', required: true }, status] },
+    fields: [{ name: 'title', label: 'Title', type: 'text', required: true }, { name: 'summary', label: 'Summary', type: 'textarea', required: true }, { name: 'details', label: 'Details', type: 'textarea', help: 'Shown on the Expertise page. *Asterisks* mark italics; [link text](address) makes a link, e.g. [*Psychopathy Unmasked*](/book/).' }, { name: 'order', label: 'Order', type: 'number', required: true }, status] },
   { id: 'W.3', group: 'Website', title: 'Educational resources', collection: 'tools', mode: 'list', summary: { title: 'title', meta: ['updated'] },
     fields: [{ name: 'title', label: 'Title', type: 'text', required: true }, { name: 'description', label: 'Description', type: 'textarea', required: true }, { name: 'url', label: 'Web address', type: 'text', required: true }, date('updated', 'Updated', false), status] },
   { id: 'W.4', group: 'Website', title: 'Google Scholar figures', collection: 'scholar', mode: 'object',

@@ -1,6 +1,13 @@
 ---
-/* Text with *asterisks* around the parts to set in italics, e.g. a book title in a description. */
+/* Text with light inline markup from data/: *asterisks* for italics (e.g. a book title) and
+   [link text](address) for links, e.g. "My book, [*Psychopathy Unmasked*](/book/), …". */
 interface Props { text: string }
-const parts = Astro.props.text.split(/\*([^*]+)\*/);
+const italics = (s: string) => s.split(/\*([^*]+)\*/).map((part, i) => ({ part, em: i % 2 === 1 }));
+// split into plain text and links: [text, label, href, text, label, href, …]
+const pieces = Astro.props.text.split(/\[([^\]]+)\]\(([^)\s]+)\)/);
 ---
-{parts.map((part, i) => (i % 2 ? <em>{part}</em> : part))}
+{pieces.map((piece, i) => {
+  if (i % 3 === 2) return null; // an href, used with its label
+  const runs = italics(piece).map(({ part, em }) => (em ? <em>{part}</em> : part));
+  return i % 3 === 1 ? <a href={pieces[i + 1]}>{runs}</a> : runs;
+})}
