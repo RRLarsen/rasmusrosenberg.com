@@ -4,7 +4,7 @@
 export type FieldType =
   | 'text' | 'textarea' | 'date' | 'number' | 'select' | 'checkbox'
   | 'lines' // a list of short texts, one per line
-  | 'authors' | 'links' | 'tags' | 'publication'
+  | 'authors' | 'links' | 'praise' | 'tags' | 'publication'
   | 'private-name'; // stored in private/, never in data/
 
 export interface Field {
@@ -61,6 +61,7 @@ const publicationFields = (type: string[]): Field[] => [
   { name: 'doi', label: 'DOI', type: 'text', help: 'e.g. 10.1037/law0000239 (without https://doi.org/)' },
   { name: 'isbn', label: 'ISBN', type: 'text' },
   { name: 'publisher_url', label: 'Web address', type: 'text' },
+  { name: 'praise', label: 'Praise (Book page)', type: 'praise', help: 'Books only: endorsements, shown under "Praise" on the Book page. *Asterisks* mark italics, e.g. the book title.' },
   { name: 'website', label: 'Book website', type: 'text', help: 'Books only: the book’s own site, linked on the home page and the Book page' },
   { name: 'pdf', label: 'PDF', type: 'text', help: 'A web address, or a file in public/ such as /papers/x.pdf' },
   { name: 'abstract', label: 'Abstract', type: 'textarea' },

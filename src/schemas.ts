@@ -140,6 +140,8 @@ export function makeSchemas(dataDir = join(process.cwd(), 'data')) {
         description: z.string().optional(),
         // a book's full description for the Book page: paragraphs separated by a blank line, the first shown in bold
         long_description: z.string().optional(),
+        // endorsements of a book, shown under "Praise" on the Book page
+        praise: z.array(z.object({ quote: z.string(), name: z.string(), affiliation: z.string().optional() })).optional(),
         cover: z.string().optional(),
         // thumbnail for op-eds and other writing on the Blog & Media page
         image: z.string().optional(),

@@ -1,0 +1,6 @@
+---
+/* Text with *asterisks* around the parts to set in italics, e.g. a book title in a description. */
+interface Props { text: string }
+const parts = Astro.props.text.split(/\*([^*]+)\*/);
+---
+{parts.map((part, i) => (i % 2 ? <em>{part}</em> : part))}

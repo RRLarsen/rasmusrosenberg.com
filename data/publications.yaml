@@ -17,6 +17,16 @@
   isbn: "9780262552202"
   publisher_url: https://mitpress.mit.edu/9780262552202/psychopathy-unmasked/
   website: https://www.psychopathyunmasked.com
+  praise:
+    - quote: "Larsen’s *Psychopathy Unmasked* challenges everything we thought we knew about the so-called psychopathic personality disorder. It has the potential to revolutionize forensic psychology research and practice like few other books before it."
+      name: Shadd Maruna
+      affiliation: "University of Liverpool; author of *Making Good: How Ex-Convicts Reform and Rebuild Their Lives*"
+    - quote: "There are countless books on psychopathy, but *Psychopathy Unmasked* is the first scholarly book to provide a critical analysis of psychopathy. Larsen skillfully challenges what we think we know about psychopathy by rebutting myths with sound scientific knowledge."
+      name: David DeMatteo
+      affiliation: Professor of Psychology and Professor of Law, Drexel University
+    - quote: "A tour-de-force accounting of the abuses of the prejudicial ‘psychopath’ diagnosis in court, this book additionally debunks several sacred cows in the research community—ultimately questioning whether psychopathy should be considered a legitimate scientific concept."
+      name: John F. Edens
+      affiliation: Professor of Psychological and Brain Sciences, Texas A&M University
   long_description: |-
     Why our fascination with psychopaths is scientifically wrongheaded, and how the criminal justice system has misused the controversial science of psychopathy.
 

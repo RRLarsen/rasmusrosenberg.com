@@ -81,6 +81,8 @@ form .check { display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem
 form .rows { display: grid; gap: 0.4rem; }
 form .row { display: grid; grid-template-columns: 1fr 1fr auto auto; gap: 0.4rem; align-items: center; }
 form .row.links { grid-template-columns: 1fr 2fr auto; }
+form .row.praise { grid-template-columns: 1fr 1fr auto; padding: 0.5rem; border: 1px solid var(--rule); border-radius: 4px; }
+form .row.praise textarea { grid-column: 1 / -1; min-height: 4.5rem; }
 form .row label { font-size: 0.8rem; display: flex; gap: 0.25rem; align-items: center; }
 form .tagset { display: flex; flex-wrap: wrap; gap: 0.4rem 1rem; }
 form .actions { display: flex; gap: 0.5rem; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--rule); max-width: 46rem; }

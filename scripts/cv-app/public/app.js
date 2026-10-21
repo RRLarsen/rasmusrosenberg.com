@@ -149,6 +149,7 @@ const inputFor = (f, value) => {
       state.config.publications.map((p) => el('option', { value: p.id, selected: value === p.id }, p.label)));
     case 'authors': return rowsEditor(f, value ?? [], 'authors');
     case 'links': return rowsEditor(f, value ?? [], 'links');
+    case 'praise': return rowsEditor(f, value ?? [], 'praise');
     default: return el('input', { id, name: f.name, type: 'text', value: value ?? '' });
   }
 };
@@ -162,13 +163,19 @@ function rowsEditor(f, rows, kind) {
           el('input', { type: 'text', placeholder: 'Given name or initials', 'data-k': 'given', value: r.given ?? '' }),
           el('label', {}, el('input', { type: 'checkbox', 'data-k': 'me', checked: !!r.me }), 'me'),
           el('button', { type: 'button', title: 'Remove', onclick: () => { row.remove(); changed(); } }, '×'))
+      : kind === 'praise'
+      ? el('div', { class: 'row praise' },
+          el('textarea', { placeholder: 'Quote', 'data-k': 'quote', rows: 3 }, r.quote ?? ''),
+          el('input', { type: 'text', placeholder: 'Name', 'data-k': 'name', value: r.name ?? '' }),
+          el('input', { type: 'text', placeholder: 'Title and affiliation', 'data-k': 'affiliation', value: r.affiliation ?? '' }),
+          el('button', { type: 'button', title: 'Remove', onclick: () => { row.remove(); changed(); } }, '×'))
       : el('div', { class: 'row links' },
           el('input', { type: 'text', placeholder: 'Label', 'data-k': 'label', value: r.label ?? '' }),
           el('input', { type: 'text', placeholder: 'Web address', 'data-k': 'url', value: r.url ?? '' }),
           el('button', { type: 'button', title: 'Remove', onclick: () => { row.remove(); changed(); } }, '×'));
     box.insertBefore(row, box.lastElementChild);
   };
-  box.append(el('button', { type: 'button', onclick: () => { addRow(); changed(); } }, kind === 'authors' ? 'Add author' : 'Add link'));
+  box.append(el('button', { type: 'button', onclick: () => { addRow(); changed(); } }, { authors: 'Add author', links: 'Add link', praise: 'Add a quote' }[kind]));
   for (const r of rows) addRow(r);
   return box;
 }
@@ -238,6 +245,7 @@ function collect() {
       case 'tags': data[f.name] = [...box.querySelectorAll('input:checked')].map((i) => i.value); break;
       case 'authors':
       case 'links':
+      case 'praise':
         data[f.name] = [...box.querySelectorAll('.row')].map((row) => {
           const o = {};
           for (const i of row.querySelectorAll('[data-k]')) {

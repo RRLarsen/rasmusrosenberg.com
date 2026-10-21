@@ -46,6 +46,7 @@
   url: https://www.youtube.com/watch?v=RMNUokt-3P8
   image: /images/media/2026-dna-of-things-pcl-r.jpg
   tags: [psychopathy]
+  publication: psychopathy-unmasked
 
 - id: 2026-ejap-review-maung
   status: published
@@ -85,6 +86,7 @@
   url: https://www.youtube.com/watch?v=YgXvUkwWhhE
   image: /images/media/2026-in-vivo-zombie-idea.jpg
   tags: [psychopathy]
+  publication: psychopathy-unmasked
 
 - id: 2026-cbc-ideas-are-psychopaths-real
   status: published
@@ -140,7 +142,7 @@
     Country for Old Men. We owe our understanding and dread of ‘psychopaths’ to these bad
     men. But Rasmus Rosenberg Larsen,...
   image: /images/media/2026-times-of-india-chigurh-lecter.jpg
-  tags: []
+  publication: psychopathy-unmasked
 
 - id: 2026-think-psychopaths-not-real
   status: published
@@ -160,6 +162,7 @@
   url: https://youtu.be/kazy7Z4l9tg
   image: /images/media/2026-cog-illusions-zombie-idea.jpg
   tags: [psychopathy]
+  publication: psychopathy-unmasked
 
 - id: 2026-lance-independent-zombie-idea
   status: published
@@ -180,6 +183,7 @@
   url: https://www.youtube.com/watch?v=HjOpU1mhNYc
   image: /images/media/2026-in-good-health-dangerous.jpg
   tags: [psychopathy]
+  publication: psychopathy-unmasked
 
 - id: 2026-toronto-star-psychopath-test
   status: published
@@ -193,6 +197,7 @@
     U of T researcher Rasmus Rosenberg Larsen.
   image: /images/media/2026-toronto-star-psychopath-test.jpg
   tags: [psychopathy]
+  publication: psychopathy-unmasked
 
 - id: 2026-psychology-today-pcl-court
   status: published
@@ -206,6 +211,7 @@
     address the influence on juries of cultural portrayals of psychopathy.
   image: /images/media/2026-psychology-today-pcl-court.jpg
   tags: [psychopathy]
+  publication: psychopathy-unmasked
 
 - id: 2026-jfpp-review-tully
   status: published
@@ -254,6 +260,7 @@
   url: https://podcasts.apple.com/ca/podcast/rasmus-rosenberg-larsen-the-myth-of-the/id1168275879?i=1000733031272
   image: /images/media/2025-last-show-zombie-ideas.jpg
   tags: [psychopathy]
+  publication: psychopathy-unmasked
 
 - id: 2025-big-brains-psychopath
   status: published
@@ -267,6 +274,7 @@
     criminal justice system
   image: /images/media/2025-big-brains-psychopath.jpg
   tags: [psychopathy]
+  publication: psychopathy-unmasked
 
 - id: 2025-marshall-project-book
   status: published
