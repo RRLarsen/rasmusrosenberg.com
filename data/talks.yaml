@@ -1,5 +1,17 @@
 # Conference presentations (C.5) and invited lectures and workshops (C.6). Shown in the CV only.
 
+- id: conference-2026-the-future-of-psychopathy-scientific-debate-clin
+  status: published
+  title: "The Future of Psychopathy: Scientific Debate, Clinical Utility, and Ethical
+    Concerns"
+  event: ATSA 2026 45th Annual Research and Treatment Conference
+  location: Detroit, Michigan
+  date: 2026-10-01
+  format: presentation
+  category: conference
+  tags:
+    - psychopathy
+
 - id: "conference-2026-06-11-psychopathy-and-clinical-stigma-char"
   status: "published"
   category: "conference"
