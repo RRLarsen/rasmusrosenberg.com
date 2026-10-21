@@ -31,7 +31,7 @@ export async function buildPressKit(): Promise<Uint8Array> {
     }, []);
   const describe = (f: string) => {
     const { width, height } = jpegSize(readFileSync(join(dir, f)));
-    const what = /cover/i.test(f) ? 'Book cover' : /portrait/i.test(f) ? 'Portrait photograph' : /landscape/i.test(f) ? 'Landscape photograph' : 'Image';
+    const what = /-3d\./i.test(f) ? 'Book, 3D image (for event pages, social media, and slides)' : /cover/i.test(f) ? 'Book cover' : /portrait/i.test(f) ? 'Portrait photograph' : /landscape/i.test(f) ? 'Landscape photograph' : 'Image';
     return `  images/${f}\n      ${what}, ${width} × ${height} px`;
   };
 
@@ -40,6 +40,7 @@ export async function buildPressKit(): Promise<Uint8Array> {
     '',
     ...t.map((x) => [x.role, x.unit, x.organization].filter(Boolean).join(', ')),
     book ? `Author of ${book.data.title}: ${book.data.subtitle} (${book.data.publisher}, ${book.data.date?.slice(0, 4)})` : '',
+    ...(book?.data.website ? [`Book website: ${book.data.website}`] : []),
     '',
     'CONTENTS',
     '',

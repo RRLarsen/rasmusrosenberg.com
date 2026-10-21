@@ -3,8 +3,8 @@
   title: Exam Timer
   description: >-
     A simple browser-based timer for exams and teaching. Set a duration, display a
-    large countdown with the date and start time, and control it with start, pause
-    and reset. Includes fullscreen mode, visual end warnings and a message field for
+    large countdown with the date and start time, and control it with start, pause,
+    and reset. Includes fullscreen mode, visual end warnings, and a message field for
     announcements.
   url: https://rrlarsen.github.io/Exam-Timer/
   updated: 2026-04

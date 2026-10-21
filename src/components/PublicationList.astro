@@ -21,7 +21,7 @@ const { items } = Astro.props;
           )}
           {p.data.pdf && <a href={p.data.pdf}>PDF</a>}
           {!p.data.stage && (
-            <a class="cite" href={`/research/ris/${p.id}.ris`} download title="Download citation (RIS) for Zotero, EndNote or Mendeley">
+            <a class="cite" href={`/research/ris/${p.id}.ris`} download title="Download citation (RIS) for Zotero, EndNote, or Mendeley">
               <span class="mark" aria-hidden="true">“</span>Cite
             </a>
           )}
