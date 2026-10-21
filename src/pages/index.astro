@@ -4,7 +4,7 @@ import Base from '../layouts/Base.astro';
 import Section from '../components/Section.astro';
 import BuyLinks from '../components/BuyLinks.astro';
 import Promo from '../components/Promo.astro';
-import { getProfile, getPublications, getSite, isPublished, bareHost } from '../lib/data';
+import { getProfile, getPublications, getSite, isPublished } from '../lib/data';
 import { getPromotions, type Promotion } from '../lib/promotions';
 import { person } from '../lib/jsonld';
 import Emph from '../components/Emph.astro';
@@ -56,12 +56,18 @@ const slides: Slide[] = [...quotes.slice(0, 1), ...promos, ...quotes.slice(1)];
   {book && (
     <section class="sec" aria-labelledby="book-h">
       <div class="wrap book">
-        {book.data.cover && <img src={book.data.cover} width="600" height="900" alt={`Cover of ${book.data.title}`} />}
+        {book.data.cover && (
+          <picture>
+            {/* on phones, a horizontal image of the book on turquoise; on wider screens, the cover */}
+            <source media="(max-width: 820px)" srcset="/images/psychopathy-unmasked-wide.jpg" width="1440" height="900" />
+            <img src={book.data.cover} width="600" height="900" alt={`Cover of ${book.data.title}`} />
+          </picture>
+        )}
         <div>
           <h2 id="book-h">{book.data.title}</h2>
           {book.data.subtitle && <p class="sub">{book.data.subtitle}</p>}
           {book.data.description && <p class="desc">{book.data.description}</p>}
-          <p class="facts sans">{book.data.publisher}, {book.data.date?.slice(0, 4)}. {book.data.pages} pages.{book.data.website && <> Book website: <a href={book.data.website}>{bareHost(book.data.website)}</a></>}</p>
+          <p class="facts sans">{book.data.publisher}, {book.data.date?.slice(0, 4)}. {book.data.pages} pages.</p>
           <BuyLinks book={book} more={{ href: '/book/', label: 'More about the book' }} />
         </div>
       </div>
@@ -157,10 +163,18 @@ const slides: Slide[] = [...quotes.slice(0, 1), ...promos, ...quotes.slice(1)];
   .areas h3 { margin: 0 0 0.5rem; font-weight: 500; font-size: var(--step-1); line-height: 1.2; }
   .areas p { margin: 0; color: var(--ink-soft); font-size: 1.0625rem; }
 
+  .book picture { display: block; }
+  .book img { display: block; width: 100%; height: auto; }
+
   @media (max-width: 820px) {
     .opening, .areas, .book { grid-template-columns: 1fr; }
-    .portrait { max-width: 15rem; }
-    .quote blockquote p { text-indent: 0; }
-    .book img { max-width: 11rem; }
+    .quote blockquote p { text-indent: 0; font-size: 2rem; line-height: 1.18; }
+    /* phones: quote or promotion, then the portrait (full width), then the credentials line */
+    .words { display: contents; }
+    .quotes { order: 1; }
+    .portrait { order: 2; width: 100%; max-width: none; }
+    .who { order: 3; margin-top: 0; }
+    /* every slide shares the height of the tallest (the promotion), so centre the quotes in it */
+    .quote { display: flex; flex-direction: column; justify-content: center; }
   }
 </style>
