@@ -1,5 +1,5 @@
 // The suggestions inbox: new publications (OpenAlex, Crossref and ORCID, by ORCID iD), new
-// videos on the YouTube channel, and Google Alerts. A check writes what it finds to
+// videos on the YouTube channel, Google Alerts, and searches of Google News and Apple Podcasts. A check writes what it finds to
 // generated/inbox.json; anything already in data/ (matched on DOI or web address) or
 // dismissed (data/inbox.yaml) is left out when the inbox is shown. Nothing enters the CV
 // until it is approved: approving opens a filled-in form to check and save.
@@ -24,23 +24,41 @@ export interface Suggestion {
   url?: string;
   doi?: string;
   sources: string[];
+  /** a ready-made entry, when the source already gives everything (podcast episodes) */
+  prefill?: { section: string; data: Record<string, unknown> };
 }
 
-interface Stored { checked_at?: string; problems?: Record<string, string>; items: Suggestion[] }
+interface Stored {
+  checked_at?: string;
+  problems?: Record<string, string>;
+  items: Suggestion[];
+  /** Google News article ids already decoded to the real address (decoding costs two requests) */
+  news_urls?: Record<string, string>;
+}
+
+/** used until searches are set in the app */
+export const DEFAULT_SEARCHES = ['"Rasmus Rosenberg Larsen"', '"Rasmus Larsen" psychopathy', '"Psychopathy Unmasked" Larsen'];
 
 // ---------- settings
 
 const profile = () => parse(readFileSync(join(ROOT, 'data', 'profile.yaml'), 'utf8'));
 const orcidId = () => String(profile().links?.orcid ?? '').match(/\d{4}-\d{4}-\d{4}-\d{3}[\dX]/)?.[0];
-const settings = (): { youtube_channel_id?: string; dismissed: string[] } => ({ dismissed: [], ...(existsSync(SETTINGS_FILE) ? parse(readFileSync(SETTINGS_FILE, 'utf8')) ?? {} : {}) });
+const settings = (): { youtube_channel_id?: string; searches?: string[]; dismissed: string[] } => ({ dismissed: [], ...(existsSync(SETTINGS_FILE) ? parse(readFileSync(SETTINGS_FILE, 'utf8')) ?? {} : {}) });
 
-function writeSetting(key: 'youtube_channel_id' | 'dismissed', value: unknown) {
+function writeSetting(key: 'youtube_channel_id' | 'searches' | 'dismissed', value: unknown) {
   const doc = parseDocument(existsSync(SETTINGS_FILE) ? readFileSync(SETTINGS_FILE, 'utf8') : '');
   if (key === 'dismissed') {
     const seq = doc.get('dismissed', true);
     if (isSeq(seq)) { seq.flow = false; seq.add(value); } else doc.set('dismissed', [value]);
   } else doc.set(key, value);
   writeFileSync(SETTINGS_FILE, doc.toString({ lineWidth: 0 }));
+}
+
+export const searches = (): string[] => settings().searches ?? DEFAULT_SEARCHES;
+export function setSearches(list: string[]) {
+  if (list.some((q) => q.length > 200)) throw new Error('A search is too long.');
+  if ((list.join(' ').match(/"/g) ?? []).length % 2) throw new Error('A quotation mark is not closed.');
+  writeSetting('searches', list);
 }
 
 export const alertFeeds = (): string[] => (existsSync(ALERTS_FILE) ? parse(readFileSync(ALERTS_FILE, 'utf8'))?.feeds ?? [] : []);
@@ -136,6 +154,70 @@ async function fromAlert(feed: string): Promise<Suggestion[]> {
   });
 }
 
+// Google News search (no account needed). Its links are Google redirects; each is decoded once
+// to the article's own address, so it can be matched against data/.
+const BROWSER_UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Safari/605.1.15';
+async function decodeNewsLink(id: string): Promise<string | undefined> {
+  try {
+    const page = await (await fetch(`https://news.google.com/rss/articles/${id}`, { headers: { 'User-Agent': BROWSER_UA }, signal: AbortSignal.timeout(15000) })).text();
+    const sig = page.match(/data-n-a-sg="([^"]+)"/)?.[1], ts = page.match(/data-n-a-ts="([^"]+)"/)?.[1];
+    if (!sig || !ts) return undefined;
+    const inner = JSON.stringify(['garturlreq', [['X', 'X', ['X', 'X'], null, null, 1, 1, 'US:en', null, 1, null, null, null, null, null, 0, 1], 'X', 'X', 1, [1, 1, 1], 1, 1, null, 0, 0, null, 0], id, Number(ts), sig]);
+    const r = await (await fetch('https://news.google.com/_/DotsSplashUi/data/batchexecute', {
+      method: 'POST', signal: AbortSignal.timeout(15000),
+      headers: { 'User-Agent': BROWSER_UA, 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+      body: `f.req=${encodeURIComponent(JSON.stringify([[['Fbv4je', inner, null, 'generic']]]))}`,
+    })).text();
+    const url = JSON.parse(JSON.parse(r.split('\n\n')[1])[0][2])[1];
+    return typeof url === 'string' && /^https?:\/\//.test(url) ? url : undefined;
+  } catch { return undefined; }
+}
+
+async function fromGoogleNews(q: string, cache: Record<string, string>): Promise<Suggestion[]> {
+  const r = await fetch(`https://news.google.com/rss/search?q=${encodeURIComponent(q)}&hl=en-CA&gl=CA&ceid=CA:en`, { headers: { 'User-Agent': BROWSER_UA }, signal: AbortSignal.timeout(20000) });
+  if (!r.ok) throw new Error(`news.google.com answered ${r.status}`);
+  const items = ((await r.text()).match(/<item>[\s\S]*?<\/item>/g) ?? []).map((e) => {
+    const id = e.match(/<guid[^>]*>([^<]+)<\/guid>/)?.[1] ?? '';
+    const outlet = xmlText(e.match(/<source[^>]*>([\s\S]*?)<\/source>/)?.[1]);
+    const title = xmlText(e.match(/<title>([\s\S]*?)<\/title>/)?.[1]).replace(new RegExp(`\\s+-\\s+${outlet.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`), '');
+    const pub = e.match(/<pubDate>([^<]+)/)?.[1];
+    return { id, outlet, title, date: pub ? new Date(pub).toISOString().slice(0, 10) : undefined, link: (e.match(/<link>([^<]+)/)?.[1] ?? '').replace(/&amp;/g, '&') };
+  });
+  // decode new links, a few at a time
+  const todo = items.filter((x) => x.id && !cache[x.id]);
+  for (let i = 0; i < todo.length; i += 4) {
+    await Promise.all(todo.slice(i, i + 4).map(async (x) => { const url = await decodeNewsLink(x.id); if (url) cache[x.id] = url; }));
+  }
+  return items.map((x) => {
+    const url = cache[x.id] ?? x.link;
+    return { key: `url:${normUrl(url)}`, kind: 'media' as const, title: x.title, url, date: x.date, detail: x.outlet, sources: ['Google News'] };
+  });
+}
+
+/** every quoted phrase and other word of the search appears in the text (Apple's search is loose) */
+function matches(q: string, text: string) {
+  const t = text.toLowerCase();
+  const phrases = [...q.matchAll(/"([^"]+)"/g)].map((m) => m[1]);
+  const words = q.replace(/"[^"]*"/g, ' ').split(/\s+/).filter(Boolean);
+  return [...phrases, ...words].every((w) => t.includes(w.toLowerCase()));
+}
+
+async function fromApplePodcasts(q: string): Promise<Suggestion[]> {
+  const term = q.replace(/"/g, '').trim();
+  const j = await getJson(`https://itunes.apple.com/search?term=${encodeURIComponent(term)}&media=podcast&entity=podcastEpisode&limit=100&country=CA`);
+  return (j.results ?? [])
+    .filter((r: any) => r.trackViewUrl && matches(q, `${r.trackName} ${r.collectionName} ${r.description ?? ''} ${r.shortDescription ?? ''}`))
+    .map((r: any) => {
+      const url = r.trackViewUrl.replace(/[?&]uo=\d+/, '');
+      const date = String(r.releaseDate ?? '').slice(0, 10) || undefined;
+      const summary = xmlText(r.shortDescription || r.description || '').slice(0, 400) || undefined;
+      return {
+        key: `url:${normUrl(url)}`, kind: 'media' as const, title: r.trackName, url, date, detail: `Podcast: ${r.collectionName}`, sources: ['Apple Podcasts'],
+        prefill: { section: 'C.8', data: Object.fromEntries(Object.entries({ type: 'podcast', title: r.trackName, outlet: r.collectionName, date, url, summary }).filter(([, v]) => v)) },
+      };
+    });
+}
+
 // ---------- checking and listing
 
 let checking: Promise<Stored> | null = null;
@@ -144,10 +226,13 @@ let checking: Promise<Stored> | null = null;
 export function check(): Promise<Stored> {
   checking ??= (async () => {
     const orcid = orcidId();
+    const newsUrls = { ...(stored().news_urls ?? {}) };
     const jobs: [string, Promise<Suggestion[]>][] = [
       ...(orcid ? [['OpenAlex', fromOpenAlex(orcid)], ['Crossref', fromCrossref(orcid)], ['ORCID', fromOrcid(orcid)]] as [string, Promise<Suggestion[]>][] : []),
       ['YouTube', fromYouTube()],
       ...alertFeeds().map((f, i) => [`Google Alerts${alertFeeds().length > 1 ? ` ${i + 1}` : ''}`, fromAlert(f)] as [string, Promise<Suggestion[]>]),
+      ...searches().map((q) => [`Google News (${q})`, fromGoogleNews(q, newsUrls)] as [string, Promise<Suggestion[]>]),
+      ...searches().map((q) => [`Apple Podcasts (${q})`, fromApplePodcasts(q)] as [string, Promise<Suggestion[]>]),
     ];
     const results = await Promise.allSettled(jobs.map(([, p]) => p));
     const problems: Record<string, string> = {};
@@ -157,14 +242,14 @@ export function check(): Promise<Stored> {
       for (const s of r.value) {
         if (!s.key || s.key === 'url:' || !s.title) continue;
         const had = byKey.get(s.key);
-        if (had) had.sources = [...new Set([...had.sources, ...s.sources])];
+        if (had) { had.sources = [...new Set([...had.sources, ...s.sources])]; had.prefill ??= s.prefill; }
         else byKey.set(s.key, s);
       }
     });
-    const stored: Stored = { checked_at: new Date().toISOString(), problems, items: [...byKey.values()] };
+    const result: Stored = { checked_at: new Date().toISOString(), problems, items: [...byKey.values()], news_urls: newsUrls };
     mkdirSync(dirname(INBOX_FILE), { recursive: true });
-    writeFileSync(INBOX_FILE, JSON.stringify(stored, null, 2));
-    return stored;
+    writeFileSync(INBOX_FILE, JSON.stringify(result, null, 2));
+    return result;
   })().finally(() => { checking = null; });
   return checking;
 }
@@ -205,7 +290,7 @@ export function list() {
     .filter((x) => !known.has(x.key) && !dismissed.has(x.key))
     .map((x) => ({ ...x, similar: similarEntry(x.title, x.kind, known) }))
     .sort((a, b) => (b.date ?? '').localeCompare(a.date ?? ''));
-  return { checked_at: s.checked_at, problems: s.problems ?? {}, items, feeds: alertFeeds().length };
+  return { checked_at: s.checked_at, problems: s.problems ?? {}, items, feeds: alertFeeds().length, searches: searches() };
 }
 
 export function find(key: string) {

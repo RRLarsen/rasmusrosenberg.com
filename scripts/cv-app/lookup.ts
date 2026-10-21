@@ -38,6 +38,8 @@ export function normUrl(raw: string): string {
   const params = new URLSearchParams();
   if (host === 'youtu.be') { params.set('v', path.slice(1)); host = 'youtube.com'; path = '/watch'; }
   else if (host === 'youtube.com' && path === '/watch') { if (u.searchParams.get('v')) params.set('v', u.searchParams.get('v')!); }
+  // Apple Podcasts: the same episode under any country store or title slug
+  else if (host === 'podcasts.apple.com' && /\/id\d+/.test(path)) { path = `/${path.match(/id\d+/)![0]}`; if (u.searchParams.get('i')) params.set('i', u.searchParams.get('i')!); }
   else for (const [k, v] of u.searchParams) if (!/^(utm_|fbclid|gclid|mc_|si$|feature$|ref$|share)/i.test(k)) params.set(k, v);
   const q = params.toString();
   return `${host}${path}${q ? `?${q}` : ''}`;

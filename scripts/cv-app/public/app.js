@@ -439,7 +439,7 @@ async function selectInbox(message) {
   state.inbox = r ?? { items: [] };
   const when = r?.checked_at ? new Date(r.checked_at).toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' }) : 'never';
   const problems = Object.entries(r?.problems ?? {}).map(([k, v]) => `${k}: ${v}`).join('; ');
-  $('#section-note').textContent = `New publications (OpenAlex, Crossref, ORCID), videos on your YouTube channel${r?.feeds ? ' and Google Alerts' : ''}. Nothing is added until you approve it. Last checked: ${when}.${r?.checking ? ' Checking now…' : ''}${problems ? ` Could not reach ${problems}.` : ''}`;
+  $('#section-note').textContent = `New publications (OpenAlex, Crossref, ORCID), videos on your YouTube channel, and media mentions (Google News, Apple Podcasts${r?.feeds ? ', Google Alerts' : ''}). Nothing is added until you approve it. Last checked: ${when}.${r?.checking ? ' Checking now…' : ''}${problems ? ` Could not reach ${problems}.` : ''}`;
   renderInbox();
   if (message) setStatus(message);
 }
@@ -487,7 +487,7 @@ function openSuggestion(key) {
   if (x.kind === 'publication') actions.append(el('button', { type: 'button', class: x.similar ? '' : 'primary', onclick: () => approve(x, 'media') }, 'Add to CV…'));
   else actions.append(
     el('button', { type: 'button', class: 'primary', onclick: () => approve(x, 'media') }, 'Add as media…'),
-    x.sources.includes('YouTube') ? null : el('button', { type: 'button', onclick: () => approve(x, 'op-ed') }, 'Add as op-ed by me…'));
+    x.sources.some((src) => src === 'YouTube' || src === 'Apple Podcasts') ? null : el('button', { type: 'button', onclick: () => approve(x, 'op-ed') }, 'Add as op-ed by me…'));
   actions.append(el('button', { type: 'button', class: 'danger', onclick: () => dismissSuggestion(x) }, 'Dismiss'));
   box.append(actions, el('p', { class: 'help', text: 'Adding opens a filled-in form; nothing is saved until you press Add entry. Dismissed suggestions do not come back.' }));
   form.append(box);
@@ -524,14 +524,14 @@ async function linkSuggestion(x) {
 
 $('#inbox-check').addEventListener('click', async () => {
   $('#inbox-check').disabled = true;
-  setStatus('Checking OpenAlex, Crossref, ORCID, YouTube and your alerts…');
+  setStatus('Checking OpenAlex, Crossref, ORCID, YouTube, Google News, Apple Podcasts and your alerts… (this can take a minute)');
   try { await api('inbox/check', { method: 'POST' }); await selectInbox('Inbox checked.'); }
   catch (err) { setStatus(`Check failed: ${err.message}`, 'error'); }
   finally { $('#inbox-check').disabled = false; }
 });
 
 $('#inbox-sources').addEventListener('click', async () => {
-  const { feeds } = await api('inbox/feeds');
+  const [{ feeds }, { searches }] = await Promise.all([api('inbox/feeds'), api('inbox/searches')]);
   state.key = undefined;
   renderInbox();
   const form = $('#form');
@@ -539,21 +539,29 @@ $('#inbox-sources').addEventListener('click', async () => {
   form.oninput = form.onchange = null;
   $('#edit-empty').hidden = true;
   form.hidden = false;
+  const qs = el('textarea', { id: 'searches', spellcheck: 'false' }, searches.join('\n'));
   const ta = el('textarea', { id: 'feeds', spellcheck: 'false' }, feeds.join('\n'));
   const msg = el('p', { class: 'form-error' });
   form.replaceChildren(el('div', { class: 'feeds suggestion' },
-    el('h2', { text: 'Google Alerts' }),
-    el('p', { class: 'meta', text: 'Media mentions reach the inbox through Google Alerts. The feed addresses are kept in private/, never uploaded.' }),
+    el('h2', { text: 'Sources for media mentions' }),
+    el('p', { class: 'meta', text: 'Publications come from OpenAlex, Crossref and ORCID, and videos from your YouTube channel, without any setup. Media mentions come from the searches and alerts below.' }),
+
+    el('label', { class: 'lbl', for: 'searches' }, 'Searches (Google News and Apple Podcasts)'), qs,
+    el('p', { class: 'help', text: 'One search per line. Put a name or title in quotation marks to search for the exact phrase, e.g. "Rasmus Rosenberg Larsen" or "Psychopathy Unmasked" Larsen. Podcast episodes are kept only if their title, show or description contains every phrase and word.' }),
+
+    el('label', { class: 'lbl', for: 'feeds', style: 'margin-top:1.25rem' }, 'Google Alerts feed addresses'), ta,
     el('ol', {},
-      el('li', {}, 'Go to ', el('a', { href: 'https://www.google.com/alerts', target: '_blank', rel: 'noopener' }, 'google.com/alerts'), ' and type a search, e.g. "Rasmus Rosenberg Larsen" or "Psychopathy Unmasked".'),
-      el('li', {}, 'Open "Show options" and set "Deliver to" to RSS feed. Then create the alert.'),
-      el('li', {}, 'Right-click the RSS icon next to the alert, copy the link, and paste it below (one per line).')),
-    el('label', { class: 'lbl', for: 'feeds' }, 'Feed addresses'), ta, msg,
+      el('li', {}, 'Go to ', el('a', { href: 'https://www.google.com/alerts', target: '_blank', rel: 'noopener' }, 'google.com/alerts'), ' and create an alert, e.g. "Rasmus Rosenberg Larsen".'),
+      el('li', {}, 'Under "Show options", set "Deliver to" to RSS feed.'),
+      el('li', {}, 'Right-click the RSS icon next to the alert, copy the link, and paste it above (one per line). These addresses stay in private/, never uploaded.')),
+    msg,
     el('div', { class: 'actions' }, el('button', { type: 'button', class: 'primary', onclick: async () => {
-      const r = await api('inbox/feeds', { method: 'PUT', body: { feeds: ta.value.split('\n') } });
-      if (!r.ok) { msg.textContent = r.error; return; }
+      const a = await api('inbox/searches', { method: 'PUT', body: { searches: qs.value.split('\n') } });
+      if (!a.ok) { msg.textContent = a.error; return; }
+      const b = await api('inbox/feeds', { method: 'PUT', body: { feeds: ta.value.split('\n') } });
+      if (!b.ok) { msg.textContent = b.error; return; }
       msg.textContent = '';
-      setStatus('Alerts saved. Press Check now to fetch them.');
+      setStatus('Sources saved. Press Check now to search them.');
     } }, 'Save'))));
   form.onsubmit = (e) => e.preventDefault();
 });

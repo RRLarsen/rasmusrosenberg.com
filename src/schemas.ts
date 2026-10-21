@@ -104,6 +104,7 @@ export function makeSchemas(dataDir = join(process.cwd(), 'data')) {
     // The CV builder's suggestions inbox (data/inbox.yaml); not a site collection.
     inbox: z.object({
       youtube_channel_id: z.string().regex(/^UC[\w-]{22}$/).optional(),
+      searches: z.array(z.string()).optional(), // Google News and Apple Podcasts searches
       dismissed: z.array(z.string()).default([]),
     }),
 

@@ -444,6 +444,13 @@ createServer(async (req, res) => {
         return json(res, 200, { ...inbox.list(), checking: stale });
       }
       if (req.method === 'POST' && id === 'check') { await inbox.check(); return json(res, 200, inbox.list()); }
+      if (id === 'searches') {
+        if (req.method === 'GET') return json(res, 200, { searches: inbox.searches() });
+        const body = await readBody(req);
+        try { inbox.setSearches((body.searches ?? []).map((q: string) => q.trim()).filter(Boolean)); }
+        catch (e: any) { return json(res, 200, { ok: false, error: e.message }); }
+        return json(res, 200, { ok: true });
+      }
       if (id === 'feeds') {
         if (req.method === 'GET') return json(res, 200, { feeds: inbox.alertFeeds() });
         const body = await readBody(req);
@@ -456,6 +463,7 @@ createServer(async (req, res) => {
       if (!item) throw new HttpError(404, 'That suggestion is no longer in the inbox.');
       if (id === 'dismiss' && req.method === 'POST') { inbox.dismiss(item.key); return json(res, 200, { ok: true }); }
       if (id === 'prepare' && req.method === 'POST') {
+        if (item.prefill && body.as !== 'op-ed') return json(res, 200, { ok: true, found: { ...item.prefill, source: item.sources.join(', ') } });
         try {
           const found = await lookup(item.doi ?? item.url ?? '', body.as === 'op-ed' ? 'op-ed' : 'media');
           if (item.sources.includes('YouTube') && found.section === 'C.8') found.data.type = 'video';
