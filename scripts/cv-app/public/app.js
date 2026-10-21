@@ -1,4 +1,5 @@
-// CV builder: the browser side. Talks to scripts/cv-app/server.ts.
+// CV Builder and Website Editor: the browser side. Talks to scripts/cv-app/server.ts.
+import { drawWordmark } from '/wordmark.js';
 const $ = (sel) => document.querySelector(sel);
 const el = (tag, attrs = {}, ...children) => {
   const n = document.createElement(tag);
@@ -614,13 +615,34 @@ $('#checkpoint').addEventListener('click', async () => {
   catch (err) { setStatus(`Checkpoint failed: ${err.message}`, 'error'); }
 });
 
-document.title = MODE === 'website' ? 'Website content' : 'CV builder';
+document.title = MODE === 'website' ? 'Website Editor' : 'CV Builder';
+drawWordmark();
+if (MODE === 'website') $('#open-site').href = 'http://localhost:4321/';
+// Open Website starts the local preview first if it is not running
+$('#open-site').addEventListener('click', async (e) => {
+  e.preventDefault();
+  const tab = window.open('about:blank', '_blank'); // opened now, so the browser does not block it
+  if ((await api('status')).preview.running) { if (tab) tab.location = $('#open-site').href; return; }
+  await api('preview/start', { method: 'POST' });
+  setStatus('Starting the local website…');
+  for (let i = 0; i < 30; i++) {
+    await new Promise((r) => setTimeout(r, 1000));
+    if ((await api('status')).preview.running) { setStatus('The local website is running.'); if (tab) tab.location = $('#open-site').href; return; }
+  }
+  tab?.close();
+  setStatus('The local website did not start. Try `npm run dev` in a terminal to see why.', 'error');
+});
 $('.brand').textContent = document.title;
 $('#quick').hidden = MODE !== 'cv';
 $('#tab-pdf').hidden = MODE !== 'cv'; // the website editor has "Open website" instead
 loadConfig().then(async () => {
-  setStatus('Ready. Changes are saved straight into data/.');
-  if (MODE === 'cv' && location.hash === '#inbox') await selectInbox();
+  setStatus('Ready.');
+  if (MODE === 'cv' && location.hash.startsWith('#inbox')) {
+    // #inbox opens the inbox; #inbox:<key> also opens that suggestion (from a dashboard notification)
+    await selectInbox();
+    const key = decodeURIComponent(location.hash.slice('#inbox:'.length));
+    if (key && state.inbox.items.some((x) => x.key === key)) openSuggestion(key);
+  }
   else await selectSection(MODE === 'website' ? 'W.1' : 'C.2');
   refreshInboxCount();
 })

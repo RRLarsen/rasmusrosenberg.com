@@ -5,17 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>CV builder</title>
   <link rel="stylesheet" href="/app.css" />
+  <link rel="stylesheet" href="/wordmark.css" />
 </head>
 <body>
   <header class="bar">
-    <a class="home" href="/" title="Back to the dashboard">← Dashboard</a>
-    <strong class="brand">CV builder</strong>
+    <a class="wordmark" href="/" title="Back to the dashboard"></a>
+    <span class="divider" aria-hidden="true"></span>
+    <strong class="brand">CV Builder</strong>
     <span class="status" id="status" role="status" aria-live="polite"></span>
     <div class="bar-actions">
       <button type="button" id="quick" class="ghost" title="Add an entry from a DOI, ISBN or web address">Quick add</button>
       <button type="button" id="checkpoint" class="ghost" title="Save a checkpoint of data/ that you can return to">Checkpoint</button>
       <button type="button" id="publish" class="ghost" title="Upload your checkpoints to the live website">Publish</button>
-      <a class="ghost" href="http://localhost:4321/about/" target="_blank" rel="noopener">Open website</a>
+      <a class="ghost" id="open-site" href="http://localhost:4321/about/" target="_blank" rel="noopener">Open Website</a>
+      <a class="ghost" href="/">Dashboard</a>
     </div>
   </header>
 

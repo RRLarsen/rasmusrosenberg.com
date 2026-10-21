@@ -360,7 +360,7 @@ async function startPreview() {
   previewProcess.on('exit', () => { previewProcess = null; });
 }
 // stop the preview with the dashboard
-for (const sig of ['SIGINT', 'SIGTERM'] as const) process.on(sig, () => { previewProcess?.kill(); process.exit(0); });
+for (const sig of ['SIGINT', 'SIGTERM', 'SIGHUP'] as const) process.on(sig, () => { previewProcess?.kill(); process.exit(0); });
 
 // ---------- checkpoints (a git commit of data/)
 
@@ -383,7 +383,7 @@ const json = (res: ServerResponse, status: number, body: unknown) => {
   res.writeHead(status, { 'Content-Type': 'application/json; charset=utf-8' });
   res.end(JSON.stringify(body));
 };
-const types: Record<string, string> = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.mjs': 'text/javascript; charset=utf-8', '.pdf': 'application/pdf', '.svg': 'image/svg+xml', '.png': 'image/png' };
+const types: Record<string, string> = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.mjs': 'text/javascript; charset=utf-8', '.pdf': 'application/pdf', '.svg': 'image/svg+xml', '.png': 'image/png', '.woff2': 'font/woff2' };
 const sendFile = (res: ServerResponse, path: string) => {
   if (!existsSync(path) || !statSync(path).isFile()) return json(res, 404, { error: 'Not found' });
   res.writeHead(200, { 'Content-Type': types[extname(path)] ?? 'application/octet-stream', 'Cache-Control': 'no-store' });
@@ -403,6 +403,8 @@ createServer(async (req, res) => {
       if (file.includes('..')) return json(res, 400, { error: 'Bad path' });
       // pdf.js, for the PDF preview (so links in the CV open in a new tab)
       if (file.startsWith('vendor/pdfjs/')) return sendFile(res, join(ROOT, 'node_modules', 'pdfjs-dist', file.slice('vendor/pdfjs/'.length)));
+      // the website's serif, for the name wordmark in the banner
+      if (file.startsWith('vendor/newsreader/')) return sendFile(res, join(ROOT, 'node_modules', '@fontsource-variable', 'newsreader', file.slice('vendor/newsreader/'.length)));
       return sendFile(res, join(PUBLIC_DIR, file));
     }
 
@@ -453,10 +455,22 @@ createServer(async (req, res) => {
       const changed = (await git(['status', '--porcelain', '--', 'data'])).trim().split('\n').filter(Boolean).length;
       const [when, message] = (await git(['log', '-1', '--format=%cI%x09%s', '--', 'data']).catch(() => '')).trim().split('\t');
       const box = inbox.list();
+      const upstream = remote ? await git(['rev-parse', '--abbrev-ref', '@{u}']).then((x) => x.trim()).catch(() => '') : '';
+      const ahead = upstream ? Number((await git(['rev-list', '--count', '@{u}..HEAD'])).trim()) : 0;
+      // the notifications feed: anything that needs attention, newest concerns first
+      type Note = { level: 'info' | 'action' | 'error'; title: string; detail?: string; href?: string; action?: 'checkpoint' | 'publish' | 'check' };
+      const notes: Note[] = [];
+      if (!lastBuild.ok) notes.push({ level: 'error', title: 'The last update of the PDF and website failed', detail: lastBuild.log || 'See the dashboard’s terminal for details.' });
+      if (changed) notes.push({ level: 'action', title: `${changed} changed file${changed > 1 ? 's' : ''} not yet saved in a checkpoint`, detail: 'A checkpoint keeps a copy you can return to.', action: 'checkpoint' });
+      if (ahead) notes.push({ level: 'action', title: `${ahead} checkpoint${ahead > 1 ? 's' : ''} not yet published`, detail: 'Publish to update the live website.', action: 'publish' });
+      for (const [src, msg] of Object.entries(box.problems ?? {})) notes.push({ level: 'error', title: `Could not reach ${src}`, detail: msg, action: 'check' });
+      for (const x of box.items) notes.push({ level: 'info', title: x.title, detail: `New ${x.kind === 'publication' ? 'publication' : 'media mention'} · ${x.sources.join(', ')}${x.date ? ` · ${x.date}` : ''}`, href: `/cv#inbox:${encodeURIComponent(x.key)}` });
       return json(res, 200, {
+        name: parse(readFileSync(fileOf('profile'), 'utf8')).name,
+        notifications: notes,
         // before the first rebuild in this session, report when the PDF file was last written
         build: { building, ...lastBuild, at: lastBuild.at || (existsSync(PUBLIC_PDF) ? statSync(PUBLIC_PDF).mtime.toISOString() : '') },
-        git: { remote, changed, last: when ? { when, message } : null },
+        git: { remote, changed, ahead, last: when ? { when, message } : null },
         inbox: { count: box.items.length, checked_at: box.checked_at },
         preview: { running: await previewRunning(), url: PREVIEW_URL, starting: !!previewProcess && !(await previewRunning()) },
         counts: Object.fromEntries(sections.filter((x) => x.mode === 'list').map((x) => [x.id, entriesOf(x).length])),

@@ -1,0 +1,15 @@
+/* The name wordmark from the website (src/components/Wordmark.astro): capitals with small
+   capitals, letter-spaced, two hairline rules underneath with a gap in the middle. */
+@import url('/vendor/newsreader/opsz.css');
+.wordmark {
+  display: inline-block; position: relative; padding-bottom: 0.45rem; color: inherit;
+  font-family: "Newsreader Variable", Georgia, serif; font-size: 1.05rem; line-height: 1; text-decoration: none; white-space: nowrap;
+  text-transform: uppercase; letter-spacing: 0.11em; font-variation-settings: "opsz" 24;
+}
+.wordmark .sc { font-size: 0.74em; font-weight: 480; letter-spacing: 0.14em; }
+.wordmark .cap { font-weight: 400; }
+.wordmark::before, .wordmark::after { content: ""; position: absolute; bottom: 0; width: 38%; height: 1px; background: currentColor; opacity: 0.45; }
+.wordmark::before { left: 0; }
+.wordmark::after { right: 0.11em; }
+.wordmark:hover::before, .wordmark:hover::after { opacity: 0.8; }
+.bar .divider { width: 1px; align-self: stretch; margin: 0.15rem 0.1rem; background: rgb(255 255 255 / 0.25); }

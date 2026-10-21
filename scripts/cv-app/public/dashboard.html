@@ -5,63 +5,55 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Dashboard</title>
   <link rel="stylesheet" href="/app.css" />
+  <link rel="stylesheet" href="/wordmark.css" />
   <link rel="stylesheet" href="/dashboard.css" />
 </head>
 <body class="dash">
   <header class="bar">
+    <div class="bar-left"><a class="wordmark" href="/"></a></div>
     <strong class="brand">Dashboard</strong>
     <span class="status" id="status" role="status" aria-live="polite"></span>
+    <div class="bar-actions">
+      <button type="button" class="ghost" id="checkpoint" title="Save a checkpoint of data/ that you can return to">Checkpoint</button>
+      <button type="button" class="ghost" id="publish" title="Upload your checkpoints to the live website">Publish</button>
+    </div>
   </header>
 
-  <main class="tiles" aria-label="Tools">
-    <a class="tile" href="/cv">
-      <h2>CV builder</h2>
-      <p>Publications, talks, teaching, service and the rest of your CV. Quick add by DOI, ISBN or web address.</p>
-      <p class="meta" id="cv-meta"></p>
-    </a>
-
-    <a class="tile" href="/website">
-      <h2>Website content</h2>
-      <p>Page introductions, home page quotes, biographies, expertise, educational resources and Scholar figures.</p>
-      <p class="meta">The book, publications and media are edited in the CV builder.</p>
-    </a>
-
-    <a class="tile" href="/cv#inbox">
-      <h2>Suggestions <span class="count" id="inbox-count" hidden></span></h2>
-      <p>New publications, videos and media mentions found online, waiting for your approval.</p>
-      <p class="meta" id="inbox-meta"></p>
-    </a>
-
-    <section class="tile">
-      <h2>Local website <span class="dot" id="preview-dot"></span></h2>
-      <p>Preview the site on this computer as you edit.</p>
-      <p class="meta" id="preview-meta"></p>
-      <div class="actions">
-        <button type="button" class="primary" id="preview-start">Start</button>
-        <a class="ghost" id="preview-open" href="http://localhost:4321/" target="_blank" rel="noopener">Open website</a>
+  <div class="dash-layout">
+    <aside class="feed" aria-labelledby="feed-h">
+      <div class="feed-head">
+        <h2 id="feed-h">Notifications <span class="count" id="feed-count" hidden></span></h2>
+        <button type="button" id="check-now" title="Look for new publications, videos and media mentions">Check now</button>
       </div>
-    </section>
+      <p class="feed-meta" id="feed-meta"></p>
+      <ul class="notes" id="notes"></ul>
+    </aside>
 
-    <section class="tile">
-      <h2>PDF CV</h2>
-      <p>Rebuilt automatically after every save.</p>
-      <p class="meta" id="build-meta"></p>
-      <div class="actions">
-        <a class="ghost" href="/pdf/public" target="_blank" rel="noopener">Public version</a>
-        <a class="ghost" href="/pdf/private" target="_blank" rel="noopener">Private version (with student names)</a>
-      </div>
-    </section>
+    <main class="tiles" aria-label="Tools">
+      <section class="tile">
+        <h2><a href="/cv">CV Builder</a></h2>
+        <p>Publications, talks, teaching, service, and the rest of your CV. Quick add by DOI, ISBN, or web address.</p>
+        <p class="meta" id="cv-meta"></p>
+        <div class="actions">
+          <a class="primary button" href="/cv">Open CV Builder</a>
+          <a class="ghost" href="/pdf/public" target="_blank" rel="noopener">Public version</a>
+          <a class="ghost" href="/pdf/private" target="_blank" rel="noopener">Private version</a>
+        </div>
+        <p class="meta" id="build-meta"></p>
+      </section>
 
-    <section class="tile">
-      <h2>Save and publish</h2>
-      <p id="git-meta"></p>
-      <p class="meta" id="publish-meta"></p>
-      <div class="actions">
-        <button type="button" id="checkpoint">Checkpoint</button>
-        <button type="button" class="primary" id="publish">Publish</button>
-      </div>
-    </section>
-  </main>
+      <section class="tile">
+        <h2><a href="/website">Website Editor</a></h2>
+        <p>Page introductions, home page quotes, biographies, expertise, educational resources, and Scholar figures.</p>
+        <p class="meta">The book, publications, and media are edited in the CV Builder.</p>
+        <div class="actions">
+          <a class="primary button" href="/website">Open Website Editor</a>
+          <button type="button" class="ghost" id="open-site">Open Website</button>
+        </div>
+        <p class="meta" id="preview-meta"></p>
+      </section>
+    </main>
+  </div>
 
   <script src="/dashboard.js" type="module"></script>
 </body>
