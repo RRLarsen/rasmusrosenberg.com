@@ -95,7 +95,7 @@ export const sections: Section[] = [
     ], defaults: { kind: 'academic' } },
   { id: 'B.3', group: 'B. Academic history', title: 'Awards and honours', collection: 'awards', mode: 'list',
     summary: { title: 'title', meta: ['date'] },
-    fields: [date(), { name: 'title', label: 'Award', type: 'textarea', required: true }, status] },
+    fields: [date(), { name: 'title', label: 'Award', type: 'textarea', required: true, help: 'Put *asterisks* around words to set them in italics, e.g. a journal title' }, status] },
   { id: 'B.4', group: 'B. Academic history', title: 'Research grants', collection: 'grants', mode: 'list',
     filter: { field: 'kind', values: ['research'] }, defaults: { kind: 'research' }, summary: { title: 'title', meta: ['date', 'amount'] },
     fields: [date(), { name: 'title', label: 'Grant', type: 'textarea', required: true }, { name: 'amount', label: 'Amount ($)', type: 'number' }, { name: 'url', label: 'Web address', type: 'text' }, { name: 'kind', label: 'Kind', type: 'select', options: ['research', 'scholarship'], required: true }, status] },
@@ -204,7 +204,8 @@ export const sections: Section[] = [
 function talkFields(): Field[] {
   return [
     { name: 'title', label: 'Title', type: 'text', required: true },
-    { name: 'event', label: 'Event and place', type: 'textarea', required: true },
+    { name: 'event', label: 'Event', type: 'textarea', required: true, help: 'The conference, workshop or series; set in italics in the CV' },
+    { name: 'location', label: 'Place', type: 'text', help: 'e.g. University of Copenhagen; Spoleto, Italy' },
     date(),
     { name: 'format', label: 'Format', type: 'select', options: ['presentation', 'keynote', 'poster', 'panel', 'lecture', 'talk'], required: true },
     { name: 'category', label: 'CV section', type: 'select', options: ['conference', 'invited'], required: true },

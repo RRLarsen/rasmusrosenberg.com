@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>CV preview</title>
+  <!-- The PDF preview, drawn with pdf.js so that links in the CV open in a new tab
+       (the browser's own PDF viewer opens them inside the preview frame). -->
+  <link rel="stylesheet" href="/vendor/pdfjs/web/pdf_viewer.css" />
+  <style>
+    html, body { margin: 0; height: 100%; background: #e6e6e1; }
+    #container { position: absolute; inset: 0; overflow: auto; }
+    .pdfViewer .page { margin: 12px auto; border: 0; box-shadow: 0 1px 4px rgb(0 0 0 / 0.18); }
+    #msg { font: 14px system-ui, sans-serif; color: #5c6c69; padding: 1rem; }
+  </style>
+</head>
+<body>
+  <div id="container"><div id="viewer" class="pdfViewer"></div><p id="msg">Loading…</p></div>
+  <script type="module">
+    import * as pdfjsLib from '/vendor/pdfjs/build/pdf.mjs';
+    globalThis.pdfjsLib = pdfjsLib;
+    pdfjsLib.GlobalWorkerOptions.workerSrc = '/vendor/pdfjs/build/pdf.worker.mjs';
+    const { EventBus, PDFLinkService, PDFViewer, LinkTarget } = await import('/vendor/pdfjs/web/pdf_viewer.mjs');
+
+    const container = document.getElementById('container');
+    const eventBus = new EventBus();
+    const linkService = new PDFLinkService({ eventBus, externalLinkTarget: LinkTarget.BLANK, externalLinkRel: 'noopener' });
+    const viewer = new PDFViewer({ container, eventBus, linkService });
+    linkService.setViewer(viewer);
+    eventBus.on('pagesinit', () => { viewer.currentScaleValue = 'page-width'; document.getElementById('msg').remove(); });
+    addEventListener('resize', () => { viewer.currentScaleValue = 'page-width'; });
+
+    try {
+      const doc = await pdfjsLib.getDocument(new URLSearchParams(location.search).get('file')).promise;
+      viewer.setDocument(doc);
+      linkService.setDocument(doc);
+    } catch {
+      document.getElementById('msg').textContent = 'The PDF could not be loaded. Try saving again to rebuild it.';
+    }
+  </script>
+</body>
+</html>

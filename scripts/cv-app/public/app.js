@@ -323,7 +323,7 @@ function showTab(which) {
   $('#pdf-version').hidden = which !== 'pdf';
   if (which === 'pdf') loadPdf();
 }
-const loadPdf = () => { $('#pdf').src = `/pdf/${state.pdf}?t=${Date.now()}#view=FitH`; };
+const loadPdf = () => { $('#pdf').src = `/preview.html?file=${encodeURIComponent(`/pdf/${state.pdf}?t=${Date.now()}`)}`; };
 
 // ---------- unsaved changes
 

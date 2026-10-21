@@ -288,7 +288,7 @@ const json = (res: ServerResponse, status: number, body: unknown) => {
   res.writeHead(status, { 'Content-Type': 'application/json; charset=utf-8' });
   res.end(JSON.stringify(body));
 };
-const types: Record<string, string> = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.pdf': 'application/pdf' };
+const types: Record<string, string> = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.mjs': 'text/javascript; charset=utf-8', '.pdf': 'application/pdf', '.svg': 'image/svg+xml', '.png': 'image/png' };
 const sendFile = (res: ServerResponse, path: string) => {
   if (!existsSync(path) || !statSync(path).isFile()) return json(res, 404, { error: 'Not found' });
   res.writeHead(200, { 'Content-Type': types[extname(path)] ?? 'application/octet-stream', 'Cache-Control': 'no-store' });
@@ -305,6 +305,8 @@ createServer(async (req, res) => {
       if (url.pathname === '/pdf/private') return sendFile(res, join(ROOT, 'private', 'rasmus-rosenberg-larsen-cv-private.pdf'));
       const file = url.pathname === '/' ? 'index.html' : url.pathname.slice(1);
       if (file.includes('..')) return json(res, 400, { error: 'Bad path' });
+      // pdf.js, for the PDF preview (so links in the CV open in a new tab)
+      if (file.startsWith('vendor/pdfjs/')) return sendFile(res, join(ROOT, 'node_modules', 'pdfjs-dist', file.slice('vendor/pdfjs/'.length)));
       return sendFile(res, join(PUBLIC_DIR, file));
     }
 

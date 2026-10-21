@@ -128,7 +128,7 @@
   status: "published"
   kind: "administrative"
   role: "Search Committee"
-  organization: "Forensic Science Program for the hiring of senior position in Forensic Psychology at the rank of Assistant Professor"
+  organization: "Institute of Forensic Sciences for the hiring of senior position in Forensic Psychology at the rank of Assistant Professor"
   start: "2024"
   end: "2024"
 
@@ -136,7 +136,7 @@
   status: "published"
   kind: "administrative"
   role: "Search Committee"
-  organization: "Forensic Science Program for the hiring of tenure-track, junior position in Forensic Psychology at the rank of Assistant Professor"
+  organization: "Institute of Forensic Sciences for the hiring of tenure-track, junior position in Forensic Psychology at the rank of Assistant Professor"
   start: "2024"
   end: "2024"
 
@@ -167,7 +167,7 @@
   status: "published"
   kind: "administrative"
   role: "Search Committee"
-  organization: "Forensic Science Program for the hiring of tenure-track positions Forensic Genomics at the rank of Assistant Professor"
+  organization: "Institute of Forensic Sciences for the hiring of tenure-track positions Forensic Genomics at the rank of Assistant Professor"
   start: "2021"
   end: "2021"
 
@@ -190,5 +190,5 @@
 - id: "administrative-2018-curriculum-committee-in-the-forensic-sci"
   status: "published"
   kind: "administrative"
-  role: "Curriculum committee in the Forensic Science Program. University of Toronto Mississauga"
+  role: "Curriculum committee in the Institute of Forensic Sciences. University of Toronto Mississauga"
   start: "2018"

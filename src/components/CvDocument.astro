@@ -25,7 +25,9 @@ const tag = { 1: 'h4', 2: 'h5', 3: 'h6' } as const;
           <dl class="facts">{b.entries!.map((e) => <><dt>{e.when}</dt><dd set:html={runsToHtml(e.runs)} /></>)}</dl>
         )}
         {(b.kind === 'refs' || b.kind === 'list') && (
-          <ol class="hang">{b.entries!.map((e) => <li set:html={runsToHtml(e.runs)} />)}</ol>
+          b.numbered
+            ? <ol class="numbered">{b.entries!.map((e) => <li><span class="num">{e.num}.</span><span set:html={runsToHtml(e.runs)} /></li>)}</ol>
+            : <ol class="hang">{b.entries!.map((e) => <li set:html={runsToHtml(e.runs)} />)}</ol>
         )}
         {b.kind === 'text' && b.entries!.map((e) => <p class="plain" set:html={runsToHtml(e.runs)} />)}
       </>
@@ -43,13 +45,15 @@ const tag = { 1: 'h4', 2: 'h5', 3: 'h6' } as const;
   header { border-bottom: 1px solid var(--rule); padding-bottom: 1.25rem; margin-bottom: 0.5rem; }
   .cv-name { margin: 0 0 0.4rem; font-size: 1.75rem; font-weight: 400; }
   header p { margin: 0; color: var(--ink-soft); }
-  .l1 { margin: 1.75rem 0 0.25rem; font-size: 1.25rem; font-weight: 500; }
-  .l2 { margin: 1.25rem 0 0.5rem; font-family: var(--sans); font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.03em; color: var(--muted); }
-  .l3 { margin: 0.9rem 0 0.4rem; font-size: 1rem; font-weight: 500; font-style: italic; }
+  .l1 { margin: 2.25rem 0 0.75rem; padding-bottom: 0.3rem; border-bottom: 2px solid currentColor; font-size: 1.4rem; font-weight: 600; }
+  .l2 { margin: 1.5rem 0 0.6rem; font-family: var(--sans); font-size: 1rem; font-weight: 600; }
+  .l3 { margin: 0.9rem 0 0.4rem; font-family: var(--sans); font-size: 0.9375rem; font-weight: 700; color: var(--link); }
   ul, ol { margin: 0; padding: 0; list-style: none; }
-  .dated li { display: grid; grid-template-columns: 8rem 1fr; gap: 1rem; padding: 0.2rem 0; }
+  .dated li { display: grid; grid-template-columns: 8rem 1fr; gap: 1rem; padding: 0.3rem 0; }
+  .numbered li { display: grid; grid-template-columns: 2rem 1fr; gap: 0.6rem; margin-bottom: 0.6rem; }
+  .num { text-align: right; color: var(--muted); }
   .when { font-family: var(--sans); font-size: 0.8125rem; color: var(--muted); padding-top: 0.15rem; }
-  .hang li { padding-left: 1.5rem; text-indent: -1.5rem; margin-bottom: 0.5rem; }
+  .hang li { padding-left: 1.5rem; text-indent: -1.5rem; margin-bottom: 0.6rem; }
   .cv :global(a) { overflow-wrap: anywhere; }
   .facts { display: grid; grid-template-columns: 8rem 1fr; gap: 0.2rem 1rem; margin: 0.5rem 0 0; }
   .facts dt { font-family: var(--sans); font-size: 0.8125rem; color: var(--muted); padding-top: 0.15rem; }
