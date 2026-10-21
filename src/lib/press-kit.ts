@@ -4,7 +4,7 @@
 import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { strToU8, zipSync, type Zippable } from 'fflate';
-import { getProfile, getPublications, getSite } from './data';
+import { getProfile, getPublications, getSite, plain } from './data';
 
 export const pressKitPath = '/rasmus-rosenberg-larsen-press-kit.zip';
 
@@ -45,11 +45,11 @@ export async function buildPressKit(): Promise<Uint8Array> {
     'CONTENTS',
     '',
     '  bio-short.txt',
-    `      Short biography, ${words(profile.bio.short)} words. For programmes and bylines.`,
+    `      Short biography, ${words(plain(profile.bio.short))} words. For programmes and bylines.`,
     '  bio-medium.txt',
-    `      Medium biography, ${words(profile.bio.medium)} words. For introductions and articles.`,
+    `      Medium biography, ${words(plain(profile.bio.medium))} words. For introductions and articles.`,
     '  bio-long.txt',
-    `      Long biography, ${words(profile.bio.long)} words. For profiles and event pages.`,
+    `      Long biography, ${words(plain(profile.bio.long))} words. For profiles and event pages.`,
     ...images.map(describe),
     '',
     'CREDITS',
@@ -71,9 +71,9 @@ export async function buildPressKit(): Promise<Uint8Array> {
 
   const files: Zippable = {
     'README.txt': strToU8(crlf(readme)),
-    'bio-short.txt': strToU8(crlf(profile.bio.short + '\n')),
-    'bio-medium.txt': strToU8(crlf(profile.bio.medium + '\n')),
-    'bio-long.txt': strToU8(crlf(profile.bio.long + '\n')),
+    'bio-short.txt': strToU8(crlf(plain(profile.bio.short) + '\n')),
+    'bio-medium.txt': strToU8(crlf(plain(profile.bio.medium) + '\n')),
+    'bio-long.txt': strToU8(crlf(plain(profile.bio.long) + '\n')),
   };
   // JPEGs are already compressed, so store them as they are.
   for (const f of images) files[`images/${f}`] = [readFileSync(join(dir, f)), { level: 0 }];

@@ -1,6 +1,8 @@
 ---
 /* The full academic CV on the About page. Content and order come from the shared CV model
-   (src/lib/cv.ts), which the PDF CV also uses. Student names never appear here. */
+   (src/lib/cv.ts), which the PDF CV also uses, and the look follows the PDF (cv/cv.typ): one
+   typeface, a centred title, ruled section headings, numbered publications. Student names
+   never appear here. */
 import { buildCv } from '../lib/cv';
 import { runsToHtml } from '../lib/cite';
 
@@ -9,8 +11,8 @@ const tag = { 1: 'h4', 2: 'h5', 3: 'h6' } as const;
 ---
 <article class="cv" tabindex="0" aria-label="Curriculum vitae">
   <header>
-    <h3 class="cv-name">{cv.name}</h3>
-    <p class="sans">{cv.headline.join('. ')}.<br /><Fragment set:html={runsToHtml(cv.contact)} /></p>
+    <p class="updated">Updated {cv.updated}</p>
+    <h3 class="cv-title">Curriculum Vitae: {cv.title_name}</h3>
   </header>
 
   {cv.blocks.map((b) => {
@@ -36,31 +38,36 @@ const tag = { 1: 'h4', 2: 'h5', 3: 'h6' } as const;
 </article>
 
 <style>
+  /* mirrors the PDF: Hanken Grotesk throughout, turquoise headings, clear space between entries */
   .cv {
     max-height: 80vh; overflow-y: auto; overscroll-behavior: contain;
     background: color-mix(in srgb, var(--paper) 60%, white); border: 1px solid var(--rule);
-    padding: clamp(1.5rem, 4vw, 3rem); font-size: 1rem; line-height: 1.5;
+    padding: clamp(1.5rem, 4vw, 3rem); font-family: var(--sans); font-size: 0.9375rem; line-height: 1.5;
+    --head: var(--link);
   }
   @media (prefers-color-scheme: dark) { .cv { background: color-mix(in srgb, var(--paper) 85%, white); } }
-  header { border-bottom: 1px solid var(--rule); padding-bottom: 1.25rem; margin-bottom: 0.5rem; }
-  .cv-name { margin: 0 0 0.4rem; font-size: 1.75rem; font-weight: 400; }
-  header p { margin: 0; color: var(--ink-soft); }
-  .l1 { margin: 2.25rem 0 0.75rem; padding-bottom: 0.3rem; border-bottom: 2px solid currentColor; font-size: 1.4rem; font-weight: 600; }
-  .l2 { margin: 1.5rem 0 0.6rem; font-family: var(--sans); font-size: 1rem; font-weight: 600; }
-  .l3 { margin: 0.9rem 0 0.4rem; font-family: var(--sans); font-size: 0.9375rem; font-weight: 700; color: var(--link); }
+  header { margin-bottom: 2rem; }
+  .updated { margin: 0 0 0.75rem; text-align: right; font-size: 0.75rem; color: var(--muted); }
+  .cv-title { margin: 0; text-align: center; font-family: var(--sans); font-size: clamp(1.35rem, 3vw, 1.75rem); font-weight: 600; line-height: 1.2; color: var(--head); }
+  .l1 { margin: 2.25rem 0 1rem; padding-bottom: 0.35rem; border-bottom: 2px solid var(--head); font-family: var(--sans); font-size: 1.3rem; font-weight: 600; color: var(--head); }
+  header + .l1 { margin-top: 0; }
+  .l2 { margin: 1.6rem 0 0.7rem; font-family: var(--sans); font-size: 1rem; font-weight: 600; color: var(--head); }
+  .l3 { margin: 1.1rem 0 0.55rem; font-family: var(--sans); font-size: 0.9375rem; font-weight: 700; color: var(--head); }
   ul, ol { margin: 0; padding: 0; list-style: none; }
-  .dated li { display: grid; grid-template-columns: 8rem 1fr; gap: 1rem; padding: 0.3rem 0; }
-  .numbered li { display: grid; grid-template-columns: 2rem 1fr; gap: 0.6rem; margin-bottom: 0.6rem; }
-  .num { text-align: right; color: var(--muted); }
-  .when { font-family: var(--sans); font-size: 0.8125rem; color: var(--muted); padding-top: 0.15rem; }
-  .hang li { padding-left: 1.5rem; text-indent: -1.5rem; margin-bottom: 0.6rem; }
+  .dated li { display: grid; grid-template-columns: 7.5rem 1fr; gap: 1rem; margin-bottom: 0.85rem; }
+  .when { font-size: 0.75rem; color: var(--muted); padding-top: 0.2rem; }
+  .numbered li { display: grid; grid-template-columns: 2rem 1fr; gap: 0.6rem; margin-bottom: 0.85rem; }
+  .num { text-align: right; color: var(--muted); font-size: 0.875rem; }
+  .hang li { padding-left: 1.5rem; text-indent: -1.5rem; margin-bottom: 0.85rem; }
   .cv :global(a) { overflow-wrap: anywhere; }
-  .facts { display: grid; grid-template-columns: 8rem 1fr; gap: 0.2rem 1rem; margin: 0.5rem 0 0; }
-  .facts dt { font-family: var(--sans); font-size: 0.8125rem; color: var(--muted); padding-top: 0.15rem; }
+  .cv :global(strong) { font-weight: 600; }
+  .facts { display: grid; grid-template-columns: 7.5rem 1fr; gap: 0.3rem 1rem; margin: 0; }
+  .facts dt { font-size: 0.75rem; color: var(--muted); padding-top: 0.2rem; }
   .facts dd { margin: 0; }
-  .plain { margin: 0 0 0.4rem; }
+  .plain { margin: 0 0 0.85rem; }
   @media (max-width: 820px) {
     .cv { max-height: none; overflow: visible; }
     .dated li, .facts { grid-template-columns: 1fr; gap: 0; }
+    .facts dd { margin-bottom: 0.4rem; }
   }
 </style>

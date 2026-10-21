@@ -3,8 +3,9 @@ import Base from '../layouts/Base.astro';
 import PageHeading from '../components/PageHeading.astro';
 import Section from '../components/Section.astro';
 import CvDocument from '../components/CvDocument.astro';
-import { getProfile, getSite } from '../lib/data';
+import { getProfile, getSite, plain } from '../lib/data';
 import { person } from '../lib/jsonld';
+import Emph from '../components/Emph.astro';
 
 const site = await getSite();
 const profile = await getProfile();
@@ -12,13 +13,13 @@ const profile = await getProfile();
 // The PDF is generated from the same data on every build (scripts/cv/build-pdf.mjs).
 const pdf = profile.cv_pdf;
 ---
-<Base title="About" description={profile.bio.short} jsonLd={person(profile, site.url)}>
+<Base title="About" description={plain(profile.bio.short)} jsonLd={person(profile, site.url)}>
   <PageHeading slot="band" title={`About ${profile.given_name}`} intro={site.pages.about} />
 
   <Section title="Biography">
     <div class="bio">
       <div class="prose">
-        {profile.bio.long.split(/\n\s*\n/).map((para) => <p>{para}</p>)}
+        {profile.bio.long.split(/\n\s*\n/).map((para) => <p><Emph text={para} /></p>)}
       </div>
       <img src={profile.photo.portrait} width="1119" height="1400" alt={profile.photo.alt} loading="lazy" />
     </div>

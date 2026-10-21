@@ -7,6 +7,7 @@ import Promo from '../components/Promo.astro';
 import { getProfile, getPublications, getSite, isPublished, bareHost } from '../lib/data';
 import { getPromotions, type Promotion } from '../lib/promotions';
 import { person } from '../lib/jsonld';
+import Emph from '../components/Emph.astro';
 
 const profile = await getProfile();
 const site = await getSite();
@@ -82,7 +83,7 @@ const slides: Slide[] = [...quotes.slice(0, 1), ...promos, ...quotes.slice(1)];
 
   <Section title="About" id="about">
     <div class="prose">
-      <p>{profile.bio.medium}</p>
+      <p><Emph text={profile.bio.medium} /></p>
       <p class="sans"><a href="/about/">Biography and CV</a></p>
     </div>
   </Section>

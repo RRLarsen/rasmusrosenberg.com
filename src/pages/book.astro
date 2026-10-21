@@ -67,7 +67,7 @@ const about = (book.data.long_description ?? book.data.description ?? '').split(
     ) : (
       <ul class="coverage sans">
         {coverage.map((m) => (
-          <li><span class="muted">{m.data.date.slice(0, 4)}</span> {m.data.url ? <a href={m.data.url}>{m.data.title}</a> : m.data.title}, {m.data.outlet}</li>
+          <li><span class="muted">{m.data.date.slice(0, 4)}</span> {m.data.url ? <a href={m.data.url}><Emph text={m.data.title} /></a> : <Emph text={m.data.title} />}, {m.data.outlet}</li>
         ))}
       </ul>
     )}

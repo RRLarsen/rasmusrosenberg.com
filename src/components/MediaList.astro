@@ -3,6 +3,7 @@
    few show; the rest open with "Show more". All items are in the page for search engines
    and for visitors without JavaScript. */
 import { formatDate } from '../lib/data';
+import Emph from './Emph.astro';
 
 export interface MediaItem {
   title: string;
@@ -25,7 +26,7 @@ const label = (n: number) => `Show more (${n})`;
             ? <img src={m.image} alt="" width="640" height="360" loading="lazy" />
             : <span class="tile" aria-hidden="true">{m.outlet}</span>}
           <div>
-            <h3>{m.url ? <a href={m.url}>{m.title}</a> : m.title}</h3>
+            <h3>{m.url ? <a href={m.url}><Emph text={m.title} /></a> : <Emph text={m.title} />}</h3>
             <p class="meta sans">{m.outlet}{m.date && `, ${formatDate(m.date)}`}</p>
             {m.summary && <p class="summary">{m.summary}</p>}
           </div>

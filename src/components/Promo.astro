@@ -3,6 +3,7 @@
    the same place: a 16:9 image frame (or a tile with the source's name), the title, a short
    standard description (who, where, when), and one action link. */
 import type { Promotion } from '../lib/promotions';
+import Emph from './Emph.astro';
 
 interface Props { promo: Promotion; active: boolean }
 const { promo, active } = Astro.props;
@@ -14,8 +15,8 @@ const { promo, active } = Astro.props;
       : <span class="tile" aria-hidden="true">{promo.source}</span>}
   </div>
   <div>
-    <p class="title">{promo.title}</p>
-    <p class="description sans">{promo.description}</p>
+    <p class="title"><Emph text={promo.title} /></p>
+    <p class="description sans"><Emph text={promo.description} /></p>
     {promo.url && <a class="action sans" href={promo.url} tabindex={active ? undefined : -1}>{promo.action}</a>}
   </div>
 </div>

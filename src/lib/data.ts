@@ -63,6 +63,9 @@ export function formatDate(iso: string) {
   return [d, month, y].filter(Boolean).join(' ');
 }
 
+/** Data text without its inline markup (*italics*, [links](…)), for plain-text uses: metadata, the press kit. */
+export const plain = (s: string) => s.replace(/\[([^\]]+)\]\([^)\s]+\)/g, '$1').replace(/\*([^*]+)\*/g, '$1');
+
 /** "https://www.psychopathyunmasked.com/" → "psychopathyunmasked.com", for link text */
 export const bareHost = (url: string) => url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
 

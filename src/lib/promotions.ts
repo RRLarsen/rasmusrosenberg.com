@@ -41,7 +41,7 @@ export async function getPromotions(): Promise<Promotion[]> {
     video: (s) => `${name} appeared on ${s}`,
     interview: (s) => `${name} was interviewed by ${s}`,
     press: (s) => `${name}’s research was featured in ${s}`,
-    review: (s, book) => (book ? `${book} was reviewed in ${s}` : `${name}’s work was reviewed in ${s}`),
+    review: (s, book) => (book ? `*${book}* was reviewed in ${s}` : `${name}’s work was reviewed in ${s}`),
     other: (s) => `${name} in ${s}`,
   };
 

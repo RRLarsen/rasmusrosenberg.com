@@ -47,6 +47,8 @@ const range = (start?: string, end?: string, single = false) => {
 };
 const money = (n?: number) => (n ? ` ($${n.toLocaleString('en-US')})` : '');
 /** “Title.” but “Title?”: no extra full stop after a question or exclamation mark */
+/** a title in quotation marks, as runs, keeping *italics* inside it (e.g. a book title) */
+const quotedRuns = (s: string): Run[] => [t('“'), ...emphRuns(s), t(`”${/[?!]\*?$/.test(s) ? '' : '.'}`)];
 const quoted = (s: string) => `“${s}”${/[?!]$/.test(s) ? '' : '.'}`;
 /** Text with *asterisks* around the parts to set in italics (used in award titles). */
 const emphRuns = (s: string): Run[] => s.split(/\*([^*]+)\*/).map((x, i) => t(x, i % 2 ? { i: true } : {})).filter((r) => r.t);
@@ -199,7 +201,7 @@ export async function buildCv(): Promise<Cv> {
   add({ level: 2, title: 'C.8 Media publicity and public relations', kind: 'dated', entries: media.map((m) => ({
     when: monthYear(m.data.date.slice(0, 7)),
     runs: [
-      t(`${mediaLabel[m.data.type]}:`, { b: true }), t(` ${quoted(m.data.title)} `), t(m.data.outlet, { i: true }), t('.'),
+      t(`${mediaLabel[m.data.type]}:`, { b: true }), t(' '), ...quotedRuns(m.data.title), t(' '), t(m.data.outlet, { i: true }), t('.'),
       ...(m.data.url ? [t(' '), t(m.data.url, { href: m.data.url })] : []),
     ],
   })) });

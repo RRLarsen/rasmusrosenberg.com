@@ -144,7 +144,7 @@ export const sections: Section[] = [
     summary: { title: 'title', meta: ['date', 'outlet'] },
     fields: [
       { name: 'type', label: 'Type', type: 'select', options: ['interview', 'podcast', 'radio', 'press', 'video', 'review', 'other'], required: true },
-      { name: 'title', label: 'Title', type: 'text', required: true },
+      { name: 'title', label: 'Title', type: 'text', required: true, help: 'Put *asterisks* around a book title to set it in italics.' },
       { name: 'outlet', label: 'Outlet or show', type: 'text', required: true },
       date(),
       { name: 'url', label: 'Web address', type: 'text' },
