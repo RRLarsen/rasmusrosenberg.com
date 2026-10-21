@@ -4,7 +4,7 @@ import Base from '../layouts/Base.astro';
 import PageHeading from '../components/PageHeading.astro';
 import Section from '../components/Section.astro';
 import BuyLinks from '../components/BuyLinks.astro';
-import { getPublications, getSite, isPublished, byDateDesc, formatDate } from '../lib/data';
+import { getPublications, getSite, isPublished, byDateDesc, formatDate, bareHost } from '../lib/data';
 import { publication } from '../lib/jsonld';
 
 const site = await getSite();
@@ -14,6 +14,8 @@ const coverage = (await getCollection('media', isPublished))
   .filter((m) => m.data.publication === book.id)
   .sort(byDateDesc);
 const isbn = book.data.isbn?.replace(/^(\d{3})(\d)(\d{3})(\d{5})(\d)$/, '$1-$2-$3-$4-$5');
+// the long description, paragraph by paragraph (the first in bold, *asterisks* for italics); else the short one
+const about = (book.data.long_description ?? book.data.description ?? '').split(/\n\s*\n/).map((x) => x.trim()).filter(Boolean);
 ---
 <Base title={book.data.title} description={site.pages.book} jsonLd={publication(book, site.url)} image={book.data.cover} imageAlt={`Cover of ${book.data.title}`}>
   <PageHeading slot="band" title={book.data.title} intro={book.data.subtitle} />
@@ -22,12 +24,17 @@ const isbn = book.data.isbn?.replace(/^(\d{3})(\d)(\d{3})(\d{5})(\d)$/, '$1-$2-$
     <div class="book">
       {book.data.cover && <img src={book.data.cover} width="600" height="900" alt={`Cover of ${book.data.title}`} />}
       <div>
-        {book.data.description && <p class="desc">{book.data.description}</p>}
+        {about.map((para, i) => (
+          <p class={i === 0 && about.length > 1 ? 'desc lead' : 'desc'}>
+            {para.split(/\*([^*]+)\*/).map((part, j) => (j % 2 ? <em>{part}</em> : part))}
+          </p>
+        ))}
         <dl class="facts sans">
           {book.data.publisher && <><dt>Publisher</dt><dd>{book.data.publisher}</dd></>}
           {book.data.date && <><dt>Published</dt><dd>{formatDate(book.data.date)}</dd></>}
           {book.data.pages && <><dt>Pages</dt><dd>{book.data.pages}</dd></>}
           {isbn && <><dt>ISBN</dt><dd>{isbn}</dd></>}
+          {book.data.website && <><dt>Website</dt><dd><a href={book.data.website}>{bareHost(book.data.website)}</a></dd></>}
         </dl>
         <BuyLinks book={book} />
       </div>
@@ -49,7 +56,8 @@ const isbn = book.data.isbn?.replace(/^(\d{3})(\d)(\d{3})(\d{5})(\d)$/, '$1-$2-$
 
 <style>
   .book { display: grid; grid-template-columns: minmax(0, 15rem) minmax(0, 1fr); gap: clamp(1.5rem, 4vw, 3.5rem); align-items: start; }
-  .desc { max-width: var(--measure); font-size: var(--step-1); line-height: 1.5; }
+  .desc { max-width: var(--measure); font-size: var(--step-1); line-height: 1.5; margin: 0 0 1rem; }
+  .desc.lead { font-weight: 600; }
   .facts { display: grid; grid-template-columns: max-content 1fr; gap: 0.4rem 1.5rem; margin: 1.5rem 0 2rem; }
   .facts dt { color: var(--muted); }
   .facts dd { margin: 0; }

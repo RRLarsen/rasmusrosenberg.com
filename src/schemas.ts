@@ -132,11 +132,14 @@ export function makeSchemas(dataDir = join(process.cwd(), 'data')) {
         openalex_id: z.string().optional(),
         philpapers_id: z.string().optional(),
         publisher_url: z.url().optional(),
+        website: z.url().optional(), // a book's own website, e.g. https://www.psychopathyunmasked.com
         oa_url: z.url().optional(),
         // a PDF of the work: a URL, or a path to a file in public/ (e.g. /papers/larsen-2020.pdf)
         pdf: z.string().optional(),
         abstract: z.string().optional(),
         description: z.string().optional(),
+        // a book's full description for the Book page: paragraphs separated by a blank line, the first shown in bold
+        long_description: z.string().optional(),
         cover: z.string().optional(),
         // thumbnail for op-eds and other writing on the Blog & Media page
         image: z.string().optional(),

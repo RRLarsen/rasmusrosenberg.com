@@ -16,6 +16,13 @@
   place: Cambridge, MA
   isbn: "9780262552202"
   publisher_url: https://mitpress.mit.edu/9780262552202/psychopathy-unmasked/
+  website: https://www.psychopathyunmasked.com
+  long_description: |-
+    Why our fascination with psychopaths is scientifically wrongheaded, and how the criminal justice system has misused the controversial science of psychopathy.
+
+    Psychopathy is a widely acknowledged personality disorder associated with callous unemotional traits and antisocial behaviors. Psychopathic persons are described as dangerous predators incapable of empathy and moral intuition, and while they are believed to make up only around 1 percent of the general population, forensic experts claim they are disproportionately responsible for the majority of violent crimes. Today, psychopathy assessments are being widely used in the legal system to inform a variety of judicial decisions. In *Psychopathy Unmasked*, Rasmus Rosenberg Larsen provides a critical rebuttal of psychopathy and its legal use, scrutinizing central claims about the diagnosis that have traditionally served to justify its role in the criminal justice system.
+
+    It is estimated that hundreds of thousands of offenders undergo a psychopathy assessment each year in North America. This book surveys and discusses contemporary developments in psychopathy research where studies have consistently shown that psychopathic persons, contrary to mainstream beliefs, are not meaningfully more dangerous than, or psychologically different from, ordinary non-psychopathic criminals. Based on these disqualifying findings, Larsen argues that we should end the use of psychopathy assessments in the legal system.
   cover: "/images/psychopathy-unmasked-cover.jpg"
   links:
     - { label: The MIT Press, url: "https://mitpress.mit.edu/9780262552202/psychopathy-unmasked/" }
@@ -26,12 +33,7 @@
     - { label: Bookshop.org, url: "https://bookshop.org/a/2238/9780262552202" }
     - { label: Barnes & Noble, url: "https://www.barnesandnoble.com/s/9780262552202/" }
     - { label: MIT Press Bookstore, url: "https://mitpressbookstore.mit.edu/book/9780262552202" }
-  description: >-
-    Psychopathy assessments inform sentencing, parole and transfer decisions for an
-    estimated hundreds of thousands of offenders in North America each year. This book
-    surveys the research and finds that people labelled psychopaths are not meaningfully
-    more dangerous than, or psychologically different from, other offenders. It argues that
-    the legal use of psychopathy assessments should end.
+  description: Psychopathy assessments influence sentencing, parole, and other consequential decisions throughout the North American criminal justice system. Drawing on decades of empirical research, this book challenges the longstanding assumption that individuals labelled psychopaths are uniquely dangerous or possess distinctive psychological characteristics. It argues that these claims lack adequate scientific support and that psychopathy assessments should no longer be used to inform legal decision-making.
   tags: [psychopathy, law-and-evidence]
   featured: true
   doi: 10.7551/mitpress/15188.001.0001

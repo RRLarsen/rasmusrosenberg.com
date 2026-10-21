@@ -63,6 +63,9 @@ export function formatDate(iso: string) {
   return [d, month, y].filter(Boolean).join(' ');
 }
 
+/** "https://www.psychopathyunmasked.com/" → "psychopathyunmasked.com", for link text */
+export const bareHost = (url: string) => url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
+
 export const fullTitle = (p: Publication) => (p.data.subtitle ? `${p.data.title}: ${p.data.subtitle}` : p.data.title);
 
 /** Profile links in display order, with readable names. */
