@@ -64,6 +64,7 @@ const publicationFields = (type: string[]): Field[] => [
   { name: 'praise', label: 'Praise (Book page)', type: 'praise', help: 'Books only: endorsements, shown under "Praise" on the Book page. *Asterisks* mark italics, e.g. the book title.' },
   { name: 'website', label: 'Book website', type: 'text', help: 'Books only: the book’s own site, linked on the home page and the Book page' },
   { name: 'pdf', label: 'PDF', type: 'text', help: 'A web address, or a file in public/ such as /papers/x.pdf' },
+  { name: 'researchgate', label: 'ResearchGate page', type: 'text', help: 'e.g. https://www.researchgate.net/publication/…  The PDF button links here when there is no direct PDF.' },
   { name: 'abstract', label: 'Abstract', type: 'textarea' },
   { name: 'description', label: 'Book description (short)', type: 'textarea', help: 'Books only: shown on the home page, and as the abstract on the Research page when there is no abstract.' },
   { name: 'long_description', label: 'Book description (long, Book page)', type: 'textarea', help: 'Books only: shown on the Book page. Separate paragraphs with a blank line; the first paragraph is shown in bold, and *asterisks* mark italics (e.g. the book title). Without it, the Book page uses the short description.' },

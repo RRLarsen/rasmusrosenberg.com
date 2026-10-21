@@ -19,7 +19,7 @@ const { items } = Astro.props;
           {abstract && (
             <button type="button" class="abs-toggle" aria-expanded="false" aria-controls={absId}>Abstract</button>
           )}
-          {p.data.pdf && <a href={p.data.pdf}>PDF</a>}
+          {p.data.pdf ? <a href={p.data.pdf}>PDF</a> : p.data.researchgate && <a href={p.data.researchgate} title="Full text on ResearchGate">PDF</a>}
           {!p.data.stage && (
             <a class="cite" href={`/research/ris/${p.id}.ris`} download title="Download citation (RIS) for Zotero, EndNote, or Mendeley">
               <span class="mark" aria-hidden="true">“</span>Cite

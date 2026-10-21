@@ -134,6 +134,8 @@ export function makeSchemas(dataDir = join(process.cwd(), 'data')) {
         publisher_url: z.url().optional(),
         website: z.url().optional(), // a book's own website, e.g. https://www.psychopathyunmasked.com
         oa_url: z.url().optional(),
+        // the work's ResearchGate page: the PDF button links here when there is no direct pdf
+        researchgate: z.url().optional(),
         // a PDF of the work: a URL, or a path to a file in public/ (e.g. /papers/larsen-2020.pdf)
         pdf: z.string().optional(),
         abstract: z.string().optional(),
