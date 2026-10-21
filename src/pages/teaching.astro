@@ -1,5 +1,6 @@
 ---
 import { getCollection, type CollectionEntry } from 'astro:content';
+import Emph from '../components/Emph.astro';
 import Base from '../layouts/Base.astro';
 import PageHeading from '../components/PageHeading.astro';
 import Section from '../components/Section.astro';
@@ -44,7 +45,7 @@ const continuing = all.filter((c) => c.data.level === 'continuing-education').so
                 <summary>
                   <span>{c.data.title} ({c.data.code}){c.data.level === 'graduate' && <span class="tag sans">Graduate</span>}</span>
                 </summary>
-                <p class="desc">{c.data.description || 'Course description coming soon.'}</p>
+                <p class="desc">{c.data.description ? <Emph text={c.data.description} /> : 'Course description coming soon.'}</p>
               </details>
             </li>
           ))}

@@ -161,7 +161,7 @@ export const sections: Section[] = [
       { name: 'level', label: 'Level', type: 'select', options: ['undergraduate', 'graduate', 'continuing-education', 'teaching-assistant', 'other'], required: true },
       { name: 'institution', label: 'Institution', type: 'text' },
       { name: 'terms', label: 'Terms taught', type: 'lines', help: 'One per line, e.g. Fall 2025' },
-      { name: 'description', label: 'Course description (Teaching page)', type: 'textarea' },
+      { name: 'description', label: 'Course description (Teaching page)', type: 'textarea', help: '*Asterisks* mark italics, e.g. a book title.' },
       date('date', 'Date (continuing education)', false),
       { name: 'url', label: 'Web address (continuing education)', type: 'text' },
       { name: 'role', label: 'Role (teaching assistant)', type: 'text' },
