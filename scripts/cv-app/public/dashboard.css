@@ -1,0 +1,15 @@
+/* The dashboard home: one tile per tool. A new tool is a new tile in dashboard.html. */
+body.dash { min-height: 100%; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr)); gap: 1rem; padding: 1.5rem; max-width: 72rem; width: 100%; margin: 0 auto; }
+.tile { display: flex; flex-direction: column; gap: 0.4rem; padding: 1.25rem 1.35rem; background: var(--card); border: 1px solid var(--rule); border-radius: 8px; color: var(--ink); text-decoration: none; }
+a.tile:hover { border-color: var(--deep); box-shadow: 0 6px 18px -12px rgb(15 59 57 / 0.5); }
+a.tile:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; }
+.tile h2 { margin: 0 0 0.2rem; font-family: Georgia, serif; font-weight: 400; font-size: 1.3rem; display: flex; align-items: center; gap: 0.5rem; }
+.tile p { margin: 0; font-size: 0.9rem; }
+.tile .meta { color: var(--muted); font-size: 0.82rem; }
+.tile .actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: auto; padding-top: 0.75rem; }
+.tile .ghost { text-decoration: none; color: var(--ink); }
+.count { background: var(--deep); color: var(--on-deep); border-radius: 1rem; padding: 0 0.5rem; font-family: system-ui, sans-serif; font-size: 0.8rem; }
+.dot { width: 0.6rem; height: 0.6rem; border-radius: 50%; background: var(--rule); display: inline-block; }
+.dot.on { background: var(--ok); }
+button[disabled] { opacity: 0.5; cursor: not-allowed; }

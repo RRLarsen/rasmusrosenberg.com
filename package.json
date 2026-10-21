@@ -9,6 +9,7 @@
     "preview": "astro preview",
     "check": "astro check",
     "cv:pdf": "astro build && node scripts/cv/build-pdf.mjs",
+    "dashboard": "node --disable-warning=ExperimentalWarning scripts/cv-app/server.ts",
     "cv": "node --disable-warning=ExperimentalWarning scripts/cv-app/server.ts"
   },
   "dependencies": {

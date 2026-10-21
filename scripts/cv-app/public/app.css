@@ -19,6 +19,8 @@ button, input, select, textarea { font: inherit; color: inherit; }
 :focus-visible { outline: 2px solid var(--link); outline-offset: 2px; }
 
 .bar { display: flex; align-items: center; gap: 1rem; padding: 0.6rem 1rem; background: var(--deep); color: var(--on-deep); }
+.home { color: var(--on-deep); opacity: 0.8; text-decoration: none; font-size: 0.875rem; white-space: nowrap; }
+.home:hover { opacity: 1; text-decoration: underline; }
 .brand { font-family: Georgia, serif; font-weight: 400; font-size: 1.15rem; letter-spacing: 0.01em; }
 .status { flex: 1; font-size: 0.875rem; opacity: 0.9; }
 .status.error { color: #ffc9bd; }

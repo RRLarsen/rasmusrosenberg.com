@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="/app.css" />
+  <link rel="stylesheet" href="/dashboard.css" />
+</head>
+<body class="dash">
+  <header class="bar">
+    <strong class="brand">Dashboard</strong>
+    <span class="status" id="status" role="status" aria-live="polite"></span>
+  </header>
+
+  <main class="tiles" aria-label="Tools">
+    <a class="tile" href="/cv">
+      <h2>CV builder</h2>
+      <p>Publications, talks, teaching, service and the rest of your CV. Quick add by DOI, ISBN or web address.</p>
+      <p class="meta" id="cv-meta"></p>
+    </a>
+
+    <a class="tile" href="/website">
+      <h2>Website content</h2>
+      <p>Page introductions, home page quotes, biographies, expertise, educational resources and Scholar figures.</p>
+      <p class="meta">The book, publications and media are edited in the CV builder.</p>
+    </a>
+
+    <a class="tile" href="/cv#inbox">
+      <h2>Suggestions <span class="count" id="inbox-count" hidden></span></h2>
+      <p>New publications, videos and media mentions found online, waiting for your approval.</p>
+      <p class="meta" id="inbox-meta"></p>
+    </a>
+
+    <section class="tile">
+      <h2>Local website <span class="dot" id="preview-dot"></span></h2>
+      <p>Preview the site on this computer as you edit.</p>
+      <p class="meta" id="preview-meta"></p>
+      <div class="actions">
+        <button type="button" class="primary" id="preview-start">Start</button>
+        <a class="ghost" id="preview-open" href="http://localhost:4321/" target="_blank" rel="noopener">Open website</a>
+      </div>
+    </section>
+
+    <section class="tile">
+      <h2>PDF CV</h2>
+      <p>Rebuilt automatically after every save.</p>
+      <p class="meta" id="build-meta"></p>
+      <div class="actions">
+        <a class="ghost" href="/pdf/public" target="_blank" rel="noopener">Public version</a>
+        <a class="ghost" href="/pdf/private" target="_blank" rel="noopener">Private version (with student names)</a>
+      </div>
+    </section>
+
+    <section class="tile">
+      <h2>Save and publish</h2>
+      <p id="git-meta"></p>
+      <p class="meta" id="publish-meta"></p>
+      <div class="actions">
+        <button type="button" id="checkpoint">Checkpoint</button>
+        <button type="button" class="primary" id="publish">Publish</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="/dashboard.js" type="module"></script>
+</body>
+</html>

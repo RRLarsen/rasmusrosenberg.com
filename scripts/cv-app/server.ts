@@ -1,11 +1,14 @@
-// The CV app: a small local server (http://localhost:4400, this computer only) that edits the
-// files in data/, checks every entry with the site's own rules (src/schemas.ts), keeps student
-// names in private/, and rebuilds the PDF CV after each save. Start it with `npm run cv`.
+// The dashboard: a small local server (http://localhost:4400, this computer only). Its home page
+// (/) links the tools; /cv is the CV builder and /website the website content editor (the same
+// app, showing different sections). It edits the files in data/, checks every entry with the
+// site's own rules (src/schemas.ts), keeps student names in private/, rebuilds the PDF CV and
+// site after each save, and can start the local website preview. Start it with
+// `npm run dashboard` (or `npm run cv`).
 import { createServer, type IncomingMessage, type ServerResponse } from 'node:http';
 import { readFileSync, writeFileSync, existsSync, statSync } from 'node:fs';
 import { join, extname } from 'node:path';
 import { spawn, execFile } from 'node:child_process';
-import { parseDocument, parse, stringify, isSeq, isMap, type Document } from 'yaml';
+import { parseDocument, parse, stringify, isSeq, isMap, Document } from 'yaml';
 import { makeSchemas } from '../../src/schemas.ts';
 import { sections, type Section, type Field } from './sections.ts';
 import { lookup, knownIndex, keysOf, LookupError } from './lookup.ts';
@@ -160,6 +163,13 @@ const indentText = (text: string, n: number) => text.split('\n').map((l) => (l ?
 /** one list item as YAML text, e.g. "- id: x\n  title: y\n" */
 const itemText = (data: unknown, indent: number) => indentText(stringify([data], { lineWidth: 88 }), indent);
 
+/** One field as YAML: long text wrapped in a block (>- or, with line breaks, |-), like the hand-written files. */
+function fieldYaml(k: string, v: unknown) {
+  const d = new Document({ [k]: v });
+  if (typeof v === 'string' && (v.includes('\n') || v.length > 80)) (d.get(k, true) as any).type = v.includes('\n') ? 'BLOCK_LITERAL' : 'BLOCK_FOLDED';
+  return d.toString({ lineWidth: typeof v === 'string' && v.includes('\n') ? 0 : 88 });
+}
+
 /**
  * Change only the fields that differ: each changed field's lines are replaced, removed fields
  * are cut and new fields are added at the end of the entry, so the rest of the entry keeps its
@@ -172,7 +182,7 @@ function patchItem(src: string, item: any, entry: Record<string, unknown>): stri
   if (pairs.some((p) => !p.key?.range || !(p.value?.range ?? p.key.range))) return null;
   const col = indentOf(src, pairs[0].key.range[0]);
   if (pairs.some((p) => indentOf(src, p.key.range[0]) !== col || lineStart(src, p.key.range[0]) !== p.key.range[0] - col)) return null;
-  const fieldText = (k: string, v: unknown) => indentText(stringify({ [k]: v }, { lineWidth: 0 }), col);
+  const fieldText = (k: string, v: unknown) => indentText(fieldYaml(k, v), col);
   const pairEnd = (p: any) => lineEnd(src, Math.max(p.key.range[0], (p.value?.range ?? p.key.range)[1] - 1));
   const edits: { from: number; to: number; text: string }[] = [];
   const old = item.toJSON();
@@ -208,6 +218,13 @@ function save(s: Section, body: { key?: string; data: Record<string, unknown> })
       // replace the whole map under the key (e.g. research_interests)
       const pair = (doc.contents as any).items.find((p: any) => p.key?.value === s.path![0]);
       if (pair && sameEntry(pair.value.toJSON(), cleaned)) return { ok: true, key: 'object' };
+      // change only the fields that differ, keeping comments and style (as for list entries)
+      const entry = ordered(cleaned, s.fields, pair && isMap(pair.value) ? Object.keys(pair.value.toJSON()) : []);
+      const patched = pair && isMap(pair.value) ? patchItem(src, pair.value, entry) : null;
+      if (patched !== null && sameEntry((parseDocument(patched).get(s.path[0]) as any)?.toJSON?.(), cleaned)) {
+        writeFileSync(file, patched);
+        return { ok: true, key: 'object' };
+      }
       const text = indentText(stringify(cleaned, { lineWidth: 88 }), 2);
       if (pair) {
         const from = lineEnd(src, pair.key.range[0]);
@@ -222,7 +239,7 @@ function save(s: Section, body: { key?: string; data: Record<string, unknown> })
         const d = parseDocument(src);
         const pair = (d.contents as any).items.find((p: any) => p.key?.value === f.name);
         if (sameEntry(pair?.value?.toJSON?.() ?? pair?.value, cleaned[f.name])) continue;
-        const text = cleaned[f.name] === undefined ? '' : stringify({ [f.name]: cleaned[f.name] }, { lineWidth: 88 });
+        const text = cleaned[f.name] === undefined ? '' : fieldYaml(f.name, cleaned[f.name]);
         if (pair) {
           const from = lineStart(src, pair.key.range[0]);
           const to = lineEnd(src, Math.max(pair.value.range[0], pair.value.range[1] - 1));
@@ -331,6 +348,20 @@ function addDoi(sectionId: string, id: string, doi: string) {
   return r.ok ? { ok: true, section: sectionId, id } : { ok: false, error: Object.values(r.errors ?? {}).join(' ') };
 }
 
+// ---------- the local website preview (astro dev), started from the dashboard
+
+const PREVIEW_URL = 'http://localhost:4321';
+const PUBLIC_PDF = join(ROOT, 'public', 'rasmus-rosenberg-larsen-cv.pdf');
+let previewProcess: ReturnType<typeof spawn> | null = null;
+const previewRunning = () => fetch(PREVIEW_URL, { signal: AbortSignal.timeout(800) }).then(() => true, () => false);
+async function startPreview() {
+  if (previewProcess || (await previewRunning())) return;
+  previewProcess = spawn('npm', ['run', 'dev', '--', '--port', '4321'], { cwd: ROOT, env: process.env, stdio: 'ignore' });
+  previewProcess.on('exit', () => { previewProcess = null; });
+}
+// stop the preview with the dashboard
+for (const sig of ['SIGINT', 'SIGTERM'] as const) process.on(sig, () => { previewProcess?.kill(); process.exit(0); });
+
 // ---------- checkpoints (a git commit of data/)
 
 async function checkpoint(message: string) {
@@ -367,7 +398,8 @@ createServer(async (req, res) => {
     if (parts[0] !== 'api') {
       if (url.pathname === '/pdf/public') return sendFile(res, join(ROOT, 'public', 'rasmus-rosenberg-larsen-cv.pdf'));
       if (url.pathname === '/pdf/private') return sendFile(res, join(ROOT, 'private', 'rasmus-rosenberg-larsen-cv-private.pdf'));
-      const file = url.pathname === '/' ? 'index.html' : url.pathname.slice(1);
+      const pages: Record<string, string> = { '/': 'dashboard.html', '/cv': 'index.html', '/cv/': 'index.html', '/website': 'index.html', '/website/': 'index.html' };
+      const file = pages[url.pathname] ?? url.pathname.slice(1);
       if (file.includes('..')) return json(res, 400, { error: 'Bad path' });
       // pdf.js, for the PDF preview (so links in the CV open in a new tab)
       if (file.startsWith('vendor/pdfjs/')) return sendFile(res, join(ROOT, 'node_modules', 'pdfjs-dist', file.slice('vendor/pdfjs/'.length)));
@@ -413,6 +445,26 @@ createServer(async (req, res) => {
     if (what === 'checkpoint' && req.method === 'POST') {
       const body = await readBody(req);
       return json(res, 200, await checkpoint(String(body.message || 'Update CV data')));
+    }
+
+    // the dashboard's overview: build, git, inbox and local website
+    if (what === 'status' && req.method === 'GET') {
+      const remote = await git(['remote', 'get-url', 'origin']).then((x) => x.trim()).catch(() => '');
+      const changed = (await git(['status', '--porcelain', '--', 'data'])).trim().split('\n').filter(Boolean).length;
+      const [when, message] = (await git(['log', '-1', '--format=%cI%x09%s', '--', 'data']).catch(() => '')).trim().split('\t');
+      const box = inbox.list();
+      return json(res, 200, {
+        // before the first rebuild in this session, report when the PDF file was last written
+        build: { building, ...lastBuild, at: lastBuild.at || (existsSync(PUBLIC_PDF) ? statSync(PUBLIC_PDF).mtime.toISOString() : '') },
+        git: { remote, changed, last: when ? { when, message } : null },
+        inbox: { count: box.items.length, checked_at: box.checked_at },
+        preview: { running: await previewRunning(), url: PREVIEW_URL, starting: !!previewProcess && !(await previewRunning()) },
+        counts: Object.fromEntries(sections.filter((x) => x.mode === 'list').map((x) => [x.id, entriesOf(x).length])),
+      });
+    }
+    if (what === 'preview' && id === 'start' && req.method === 'POST') {
+      startPreview();
+      return json(res, 200, { ok: true });
     }
 
     // quick add: DOI, ISBN or web address → a filled-in form (not saved)
@@ -503,8 +555,17 @@ createServer(async (req, res) => {
   } catch (e: any) {
     json(res, e.status ?? 500, { error: e.message ?? String(e) });
   }
+}).on('error', async (err: NodeJS.ErrnoException) => {
+  // already running (e.g. started earlier in another terminal): just open it
+  if (err.code !== 'EADDRINUSE') throw err;
+  const url = `http://localhost:${PORT}`;
+  const ours = await fetch(`${url}/api/status`, { signal: AbortSignal.timeout(1500) }).then((r) => r.ok, () => false);
+  if (!ours) { console.error(`Port ${PORT} is in use by another program. Close it, or start with CV_APP_PORT=4401 npm run dashboard.`); process.exit(1); }
+  console.log(`The dashboard is already running at ${url}. Opening it.`);
+  if (!process.env.CV_APP_NO_OPEN) spawn('open', [url], { stdio: 'ignore', detached: true }).unref();
+  process.exit(0);
 }).listen(PORT, '127.0.0.1', () => {
   const url = `http://localhost:${PORT}`;
-  console.log(`CV app running at ${url} (this computer only). Press Ctrl+C to stop.`);
+  console.log(`Dashboard running at ${url} (this computer only). Press Ctrl+C to stop.`);
   if (!process.env.CV_APP_NO_OPEN) spawn('open', [url], { stdio: 'ignore', detached: true }).unref();
 });

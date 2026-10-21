@@ -8,7 +8,8 @@ Personal academic website of Rasmus Rosenberg Larsen. Built with [Astro](https:/
 npm install      # once
 npm run dev      # preview at http://localhost:4321 (updates as you edit)
 npm run build    # build the site into dist/ and the PDF CVs (public/ and private/)
-npm run cv       # open the CV builder at http://localhost:4400 (edit data/ through forms)
+npm run dashboard  # open the dashboard at http://localhost:4400: CV builder, website content,
+                   # suggestions inbox, local website preview, checkpoint and publish
 ```
 
 ## Where things are

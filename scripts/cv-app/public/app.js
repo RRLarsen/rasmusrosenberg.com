@@ -19,6 +19,10 @@ const api = async (path, opts = {}) => {
   return j;
 };
 
+// /cv shows the CV sections (A–E) and the inbox; /website shows the website content sections
+const MODE = location.pathname.startsWith('/website') ? 'website' : 'cv';
+const inMode = (s) => (MODE === 'website') === (s.group === 'Website');
+
 const state = { config: null, section: null, entries: [], key: undefined, dirty: false, pdf: 'public' };
 
 function setStatus(text, kind = '') {
@@ -32,13 +36,13 @@ function setStatus(text, kind = '') {
 async function loadConfig() {
   state.config = await api('config');
   const nav = $('#sections');
-  nav.replaceChildren(
+  nav.replaceChildren(...(MODE === 'cv' ? [
     el('h2', { text: 'Inbox' }),
     el('button', { type: 'button', 'data-id': 'INBOX', onclick: () => guard(selectInbox) },
       el('span', { text: 'Suggestions' }), el('span', { class: 'inbox-count', id: 'inbox-count', hidden: true })),
-  );
+  ] : []));
   let group = '';
-  for (const s of state.config.sections) {
+  for (const s of state.config.sections.filter(inMode)) {
     if (s.group !== group) { group = s.group; nav.append(el('h2', { text: group })); }
     const count = state.config.counts[s.id];
     nav.append(el('button', { type: 'button', 'data-id': s.id, onclick: () => guard(() => selectSection(s.id)) },
@@ -204,7 +208,10 @@ function renderForm(data, mode) {
     el('span', { class: 'spacer' }),
     mode !== 'object' ? el('button', { type: 'button', onclick: () => guard(() => { state.key = undefined; renderList(); showEmpty(); }) }, 'Close') : null));
   state.dirty = false;
-  form.oninput = changed;
+  // text boxes grow to fit their text (up to a limit), so long texts are readable at a glance
+  const grow = (ta) => { ta.style.height = 'auto'; ta.style.height = `${Math.min(ta.scrollHeight + 2, window.innerHeight * 0.6)}px`; };
+  form.querySelectorAll('textarea:not(.yaml)').forEach(grow);
+  form.oninput = (e) => { if (e.target.tagName === 'TEXTAREA') grow(e.target); changed(); };
   form.onchange = changed;
   form.onsubmit = (e) => { e.preventDefault(); saveEntry(); };
 }
@@ -423,6 +430,7 @@ $('#quick-cancel').addEventListener('click', () => quick.close());
 const kindLabel = { publication: 'Publication', media: 'Media' };
 
 async function refreshInboxCount() {
+  if (MODE !== 'cv') return null;
   try {
     const r = await api('inbox');
     const c = $('#inbox-count');
@@ -606,5 +614,14 @@ $('#checkpoint').addEventListener('click', async () => {
   catch (err) { setStatus(`Checkpoint failed: ${err.message}`, 'error'); }
 });
 
-loadConfig().then(() => { setStatus('Ready. Changes are saved straight into data/.'); selectSection('C.2'); refreshInboxCount(); })
+document.title = MODE === 'website' ? 'Website content' : 'CV builder';
+$('.brand').textContent = document.title;
+$('#quick').hidden = MODE !== 'cv';
+$('#tab-pdf').hidden = MODE !== 'cv'; // the website editor has "Open website" instead
+loadConfig().then(async () => {
+  setStatus('Ready. Changes are saved straight into data/.');
+  if (MODE === 'cv' && location.hash === '#inbox') await selectInbox();
+  else await selectSection(MODE === 'website' ? 'W.1' : 'C.2');
+  refreshInboxCount();
+})
   .catch((err) => setStatus(`Could not load: ${err.message}`, 'error'));
