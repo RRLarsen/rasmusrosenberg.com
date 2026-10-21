@@ -63,6 +63,7 @@ const publicationFields = (type: string[]): Field[] => [
   { name: 'publisher_url', label: 'Web address', type: 'text' },
   { name: 'pdf', label: 'PDF', type: 'text', help: 'A web address, or a file in public/ such as /papers/x.pdf' },
   { name: 'abstract', label: 'Abstract', type: 'textarea' },
+  { name: 'description', label: 'Book description', type: 'textarea', help: 'Books only: shown on the Book page and the home page, and as the abstract on the Research page when there is no abstract.' },
   { name: 'note', label: 'Note', type: 'text', help: 'e.g. In Danish; Reprint of …' },
   { name: 'image', label: 'Thumbnail (op-eds)', type: 'text', help: 'A file in public/, e.g. /images/media/x.jpg' },
   tags, onWebsite, featured, status,
