@@ -12,4 +12,14 @@
 .wordmark::before { left: 0; }
 .wordmark::after { right: 0.11em; }
 .wordmark:hover::before, .wordmark:hover::after { opacity: 0.8; }
-.bar .divider { width: 1px; align-self: stretch; margin: 0.15rem 0.1rem; background: rgb(255 255 255 / 0.25); }
+
+/* The banner lines up with the page below: the logo cell is as wide as the left column
+   (--left), its rule continues that column's border, and the breadcrumb starts after it. */
+.bar { padding: 0 1rem 0 0; gap: 1rem; min-height: 3.2rem; }
+.bar-left { box-sizing: border-box; width: var(--left, 16rem); flex: none; align-self: stretch; display: flex; align-items: center; padding-left: 1rem; border-right: 1px solid rgb(255 255 255 / 0.25); }
+.crumbs { display: flex; align-items: baseline; gap: 0.5rem; margin-left: 0.5rem; white-space: nowrap; }
+.crumbs a { color: var(--on-deep); opacity: 0.75; text-decoration: none; font-family: Georgia, serif; font-size: 1.15rem; }
+.crumbs a:hover { opacity: 1; text-decoration: underline; }
+.crumbs .sep { opacity: 0.5; }
+/* on narrower windows the left column is too slim for the logo: let the cell take its own width */
+@media (max-width: 1150px) { .bar-left { width: var(--left-narrow, auto); padding-right: 1rem; } }

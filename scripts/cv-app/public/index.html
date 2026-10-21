@@ -9,16 +9,16 @@
 </head>
 <body>
   <header class="bar">
-    <a class="wordmark" href="/" title="Back to the dashboard"></a>
-    <span class="divider" aria-hidden="true"></span>
-    <strong class="brand">CV Builder</strong>
+    <div class="bar-left"><a class="wordmark" href="/" title="Back to the dashboard"></a></div>
+    <nav class="crumbs" aria-label="You are here">
+      <a href="/">Dashboard</a><span class="sep" aria-hidden="true">›</span><span class="brand" aria-current="page">CV Builder</span>
+    </nav>
     <span class="status" id="status" role="status" aria-live="polite"></span>
     <div class="bar-actions">
       <button type="button" id="quick" class="ghost" title="Add an entry from a DOI, ISBN or web address">Quick add</button>
       <button type="button" id="checkpoint" class="ghost" title="Save a checkpoint of data/ that you can return to">Checkpoint</button>
       <button type="button" id="publish" class="ghost" title="Upload your checkpoints to the live website">Publish</button>
       <a class="ghost" id="open-site" href="http://localhost:4321/about/" target="_blank" rel="noopener">Open Website</a>
-      <a class="ghost" href="/">Dashboard</a>
     </div>
   </header>
 
