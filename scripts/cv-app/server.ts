@@ -597,7 +597,13 @@ createServer(async (req, res) => {
 }).listen(PORT, '127.0.0.1', () => {
   const url = `http://localhost:${PORT}`;
   console.log(`Dashboard running at ${url} (this computer only). Press Ctrl+C to stop.`);
-  // about once a month, refresh the Google Scholar figures (one request, from this computer)
-  if (scholar.isDue()) scholar.update().then((r) => { console.log(r.message); if (r.ok) rebuild(); });
+  // the weekly online checks (Fridays): Google Scholar figures and the suggestions inbox. Run now
+  // if due, and look again every hour, so a dashboard left open still checks on Friday.
+  const weekly = () => {
+    if (scholar.isDue()) scholar.update().then((r) => { console.log(r.message); if (r.ok) rebuild(); });
+    if (inbox.isStale()) inbox.check().catch(() => {});
+  };
+  weekly();
+  setInterval(weekly, 3600 * 1000);
   if (!process.env.CV_APP_NO_OPEN) spawn('open', [url], { stdio: 'ignore', detached: true }).unref();
 });

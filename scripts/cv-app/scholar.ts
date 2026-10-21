@@ -1,18 +1,18 @@
 // Google Scholar figures: citations, h-index, i10-index, and citations per year, read from the
 // public profile page and written to data/scholar.yaml. Limits, by design:
 //   - only the profile page itself (robots.txt allows /citations?user=; no searches, no paging);
-//   - from this computer, through the dashboard (never from a server), about once a month
-//     when the dashboard opens, or when Rasmus presses "Update from Google Scholar";
+//   - from this computer, through the dashboard (never from a server), once a week (Fridays,
+//     see schedule.ts), or when Rasmus presses "Update from Google Scholar";
 //   - if Google answers with a robot check or a changed page, nothing is written.
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { parseDocument } from 'yaml';
+import { dueSince } from './schedule.ts';
 
 const ROOT = process.cwd();
 const FILE = join(ROOT, 'data', 'scholar.yaml');
 const LOG = join(ROOT, 'generated', 'scholar.json'); // the last attempt, for the dashboard's notifications
 const UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Safari/605.1.15';
-const MONTH = 30 * 24 * 3600 * 1000;
 
 export interface Figures { citations: number; h_index: number; i10_index: number; citations_per_year: Record<string, number> }
 export interface Attempt { at: string; ok: boolean; message: string; changes?: string[] }
@@ -78,10 +78,8 @@ export async function update(): Promise<Attempt> {
   return remember({ at: new Date().toISOString(), ok: true, message: changes.length ? `Google Scholar figures updated: ${changes.join(', ')}.` : 'Google Scholar figures checked: no change.', changes });
 }
 
-/** About a month since the figures were last checked (or the last failed attempt)? */
+/** Due this week? (checked on Fridays; a failed attempt also counts, so Google is asked at most once a week) */
 export function isDue() {
-  const asOf = Date.parse(String(current().get('as_of')));
   const last = lastAttempt();
-  const lastTry = last ? Date.parse(last.at) : 0;
-  return Date.now() - Math.max(asOf || 0, lastTry) > MONTH;
+  return dueSince(last ? Date.parse(last.at) : 0);
 }

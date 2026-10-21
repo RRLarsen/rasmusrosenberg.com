@@ -220,7 +220,7 @@ export const sections: Section[] = [
   { id: 'W.3', group: 'Website', title: 'Educational resources', collection: 'tools', mode: 'list', summary: { title: 'title', meta: ['updated'] },
     fields: [{ name: 'title', label: 'Title', type: 'text', required: true }, { name: 'description', label: 'Description', type: 'textarea', required: true }, { name: 'url', label: 'Web address', type: 'text', required: true }, date('updated', 'Updated', false), status] },
   { id: 'W.4', group: 'Website', title: 'Google Scholar figures', collection: 'scholar', mode: 'object',
-    note: 'Refreshed from your public Google Scholar profile about once a month when the dashboard opens. The publication count on the Research page comes from your publication list, not Scholar.',
+    note: 'Refreshed from your public Google Scholar profile every Friday (or the next time the dashboard runs). The publication count on the Research page comes from your publication list, not Scholar.',
     action: { label: 'Update from Google Scholar', endpoint: 'scholar/update', help: 'Reads your public profile page once and fills in the figures.' },
     fields: [
       { name: 'citations', label: 'Citations', type: 'number', required: true },

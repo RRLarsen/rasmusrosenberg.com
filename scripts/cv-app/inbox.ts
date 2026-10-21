@@ -7,6 +7,7 @@ import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { parse, parseDocument, isSeq } from 'yaml';
 import { knownIndex, normDoi, normUrl, type KnownEntry } from './lookup.ts';
+import { dueSince } from './schedule.ts';
 
 const ROOT = process.cwd();
 const INBOX_FILE = join(ROOT, 'generated', 'inbox.json');
@@ -302,7 +303,8 @@ export function dismiss(key: string) {
 }
 
 /** older than a week (or never checked)? */
+/** due this week? (checked on Fridays, see schedule.ts) */
 export const isStale = () => {
   const at = stored().checked_at;
-  return !at || Date.now() - Date.parse(at) > 7 * 24 * 3600 * 1000;
+  return dueSince(at ? Date.parse(at) : 0);
 };
