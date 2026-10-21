@@ -7,7 +7,7 @@
 import { createServer, type IncomingMessage, type ServerResponse } from 'node:http';
 import { readFileSync, writeFileSync, existsSync, statSync } from 'node:fs';
 import { join, extname } from 'node:path';
-import { spawn, execFile } from 'node:child_process';
+import { spawn, execFile, execFileSync } from 'node:child_process';
 import { parseDocument, parse, stringify, isSeq, isMap, Document } from 'yaml';
 import { makeSchemas } from '../../src/schemas.ts';
 import { sections, type Section, type Field } from './sections.ts';
@@ -365,6 +365,24 @@ async function startPreview() {
 // stop the preview with the dashboard
 for (const sig of ['SIGINT', 'SIGTERM', 'SIGHUP'] as const) process.on(sig, () => { previewProcess?.kill(); process.exit(0); });
 
+// ---------- opening the dashboard in a new browser window (not a tab)
+
+function defaultBrowser(): string {
+  try {
+    const out = execFileSync('defaults', ['read', 'com.apple.LaunchServices/com.apple.launchservices.secure', 'LSHandlers'], { encoding: 'utf8' });
+    return out.match(/LSHandlerRoleAll = "([^"]+)";\s*LSHandlerURLScheme = https;/)?.[1] ?? out.match(/LSHandlerURLScheme = https;\s*}?[^}]*?LSHandlerRoleAll = "([^"]+)"/)?.[1] ?? '';
+  } catch { return ''; }
+}
+function openWindow(url: string) {
+  const browser = defaultBrowser().toLowerCase();
+  const run = (cmd: string, args: string[]) => spawn(cmd, args, { stdio: 'ignore', detached: true }).unref();
+  if (browser.includes('chrome')) run('open', ['-na', 'Google Chrome', '--args', '--new-window', url]);
+  else if (browser.includes('safari')) run('osascript', ['-e', `tell application "Safari" to make new document with properties {URL:"${url}"}`, '-e', 'tell application "Safari" to activate']);
+  else if (browser.includes('firefox')) run('open', ['-na', 'Firefox', '--args', '--new-window', url]);
+  else if (browser.includes('edge')) run('open', ['-na', 'Microsoft Edge', '--args', '--new-window', url]);
+  else run('open', [url]);
+}
+
 // ---------- checkpoints (a git commit of data/)
 
 async function checkpoint(message: string) {
@@ -592,8 +610,8 @@ createServer(async (req, res) => {
   const ours = await fetch(`${url}/api/status`, { signal: AbortSignal.timeout(1500) }).then((r) => r.ok, () => false);
   if (!ours) { console.error(`Port ${PORT} is in use by another program. Close it, or start with CV_APP_PORT=4401 npm run dashboard.`); process.exit(1); }
   console.log(`The dashboard is already running at ${url}. Opening it.`);
-  if (!process.env.CV_APP_NO_OPEN) spawn('open', [url], { stdio: 'ignore', detached: true }).unref();
-  process.exit(0);
+  if (!process.env.CV_APP_NO_OPEN) openWindow(url);
+  setTimeout(() => process.exit(0), 500);
 }).listen(PORT, '127.0.0.1', () => {
   const url = `http://localhost:${PORT}`;
   console.log(`Dashboard running at ${url} (this computer only). Press Ctrl+C to stop.`);
@@ -605,5 +623,5 @@ createServer(async (req, res) => {
   };
   weekly();
   setInterval(weekly, 3600 * 1000);
-  if (!process.env.CV_APP_NO_OPEN) spawn('open', [url], { stdio: 'ignore', detached: true }).unref();
+  if (!process.env.CV_APP_NO_OPEN) openWindow(url);
 });
