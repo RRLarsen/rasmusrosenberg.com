@@ -16,11 +16,12 @@ band:
   - quote: The responsible use of science in law begins with understanding the strengths and
       limitations of scientific evidence, while recognizing the consequences of getting
       it wrong.
-  - publication: larsen-2025-canadian-case-law
   - media: 2026-cbc-ideas-are-psychopaths-real
+  - publication: larsen-2025-canadian-case-law
   - quote: If four decades of research on psychopathy have taught us anything, it is that
       virtually all our most deeply held assumptions about the disorder have been called
       into question by empirical evidence.
+    show: false
   - quote: The primary task of a forensic epistemologist is to critically examine how
       scientific knowledge is produced, with the aim of assessing its utility and
       limitations in legal decision-making.
