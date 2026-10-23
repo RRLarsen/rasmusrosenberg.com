@@ -124,3 +124,34 @@ dialog .actions { display: flex; gap: 0.5rem; margin-top: 1rem; }
 .feeds textarea { width: 100%; min-height: 7rem; font: 13px/1.5 ui-monospace, Menlo, monospace; padding: 0.5rem; border: 1px solid var(--rule); border-radius: 4px; }
 .feeds ol { padding-left: 1.2rem; font-size: 0.9rem; max-width: 46rem; }
 .entries-tools[hidden] { display: none; }
+
+/* thumbnail field and crop window */
+.thumb { display: grid; gap: 0.5rem; max-width: 30rem; }
+.thumb-frame { position: relative; aspect-ratio: 16 / 9; background: var(--deep); border-radius: 4px; overflow: hidden; }
+.thumb-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.thumb-empty { position: absolute; inset: 0; display: flex; align-items: flex-end; padding: 0.75rem; color: var(--on-deep); font-size: 0.85rem; }
+.thumb-actions { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.thumb-suggest { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
+.thumb-option { padding: 0; border: 2px solid transparent; border-radius: 4px; overflow: hidden; width: 8rem; aspect-ratio: 16 / 9; }
+.thumb-option:hover { border-color: var(--deep); }
+.thumb-option img { width: 100%; height: 100%; object-fit: cover; display: block; }
+#crop-dialog { width: min(52rem, 94vw); }
+#crop-canvas { width: 100%; aspect-ratio: 16 / 9; display: block; cursor: grab; border-radius: 4px; touch-action: none; }
+#crop-canvas:active { cursor: grabbing; }
+#crop-dialog .zoom { display: flex; align-items: center; gap: 0.6rem; margin-top: 0.75rem; font-size: 0.9rem; }
+#crop-dialog .zoom input { flex: 1; }
+
+/* home page slides */
+.band { display: grid; gap: 0.6rem; max-width: 46rem; }
+.slot { border: 1px solid var(--rule); border-radius: 6px; padding: 0.6rem 0.75rem; background: var(--card); }
+.slot-head { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; }
+.slot-head .spacer { flex: 1; }
+.slot-head button { padding: 0.15rem 0.5rem; }
+.slot-head select { padding: 0.25rem; border: 1px solid var(--rule); border-radius: 4px; background: white; }
+.slot-body textarea, .slot-body select { width: 100%; padding: 0.45rem 0.6rem; border: 1px solid var(--rule); border-radius: 4px; background: white; }
+.band > button { justify-self: start; }
+.slot-n { white-space: nowrap; }
+.thumb-empty[hidden], .thumb-frame img[hidden] { display: none; }
+.slot-toggle { display: flex; align-items: center; gap: 0.3rem; font-size: 0.85rem; white-space: nowrap; }
+.slot.off { opacity: 0.55; }
+.slot.off .slot-n::after { content: " (hidden)"; font-weight: 400; color: var(--muted); }

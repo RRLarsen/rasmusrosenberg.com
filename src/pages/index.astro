@@ -5,7 +5,7 @@ import Section from '../components/Section.astro';
 import BuyLinks from '../components/BuyLinks.astro';
 import Promo from '../components/Promo.astro';
 import { getProfile, getPublications, getSite, isPublished } from '../lib/data';
-import { getPromotions, type Promotion } from '../lib/promotions';
+import { getBand } from '../lib/promotions';
 import { person } from '../lib/jsonld';
 import Emph from '../components/Emph.astro';
 
@@ -15,19 +15,16 @@ const pubs = await getPublications();
 const book = pubs.find((p) => p.data.type === 'book' && p.data.featured);
 const expertise = (await getCollection('expertise', isPublished)).sort((a, b) => a.data.order - b.data.order);
 
-// The rotating band: quotes, with promotions (any record marked featured: true) slotted in
-// after the first quote. Promotions all use the Promo template.
-type Slide = { kind: 'quote'; text: string } | { kind: 'promo'; promo: Promotion };
-const quotes: Slide[] = site.quotes.map((text) => ({ kind: 'quote', text }));
-const promos: Slide[] = (await getPromotions()).map((promo) => ({ kind: 'promo', promo }));
-const slides: Slide[] = [...quotes.slice(0, 1), ...promos, ...quotes.slice(1)];
+// The rotating band: the quotes and promotions in data/site.yaml (band), in that order.
+// Promotions all use the Promo template.
+const slides = await getBand(site.band);
 ---
 <Base jsonLd={person(profile, site.url)}>
   <Fragment slot="band">
     <div class="wrap opening">
       <div class="words">
         <h1 class="visually-hidden">{profile.name}</h1>
-        <figure class="quotes" aria-roledescription="carousel" aria-label="Quotes and media">
+        <figure class="quotes" aria-roledescription="carousel" aria-label="Quotes and media" data-seconds={site.band_seconds}>
           <div class="stack">
             {slides.map((sl, i) => (
               <div class="quote" id={`slide-${i}`} data-active={i === 0 ? '' : undefined} aria-hidden={i === 0 ? undefined : 'true'}>
@@ -96,7 +93,7 @@ const slides: Slide[] = [...quotes.slice(0, 1), ...promos, ...quotes.slice(1)];
 </Base>
 
 <script>
-  // Rotating quotes: a new one every few seconds, or pick one with the dots.
+  // Rotating quotes: a new one every few seconds (site.yaml: band_seconds), or pick one with the dots.
   // Picking a quote stops the rotation; hovering pauses it; reduced motion turns it off.
   const box = document.querySelector<HTMLElement>('.quotes');
   const quotes = box ? [...box.querySelectorAll<HTMLElement>('.quote')] : [];
@@ -114,7 +111,8 @@ const slides: Slide[] = [...quotes.slice(0, 1), ...promos, ...quotes.slice(1)];
       dots.forEach((d, n) => d.setAttribute('aria-pressed', String(n === current)));
     };
     const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const start = () => { if (!still) timer = window.setInterval(() => show(current + 1), 9000); };
+    const ms = (Number(box.dataset.seconds) || 10) * 1000; // site.yaml: band_seconds
+    const start = () => { if (!still) timer = window.setInterval(() => show(current + 1), ms); };
     const stop = () => window.clearInterval(timer);
     dots.forEach((d, n) => d.addEventListener('click', () => { stop(); show(n); box.dataset.stopped = ''; }));
     box.addEventListener('mouseenter', stop);

@@ -1,6 +1,7 @@
 ---
-/* Publications as APA references. Under each: Abstract (opens in place), PDF when there
-   is one, and Cite, which downloads a citation file (RIS) for reference managers. */
+/* Publications as APA references. Under each: About this book (the featured book's page),
+   Abstract (opens in place), PDF when there is one, and Cite, which downloads a citation
+   file (RIS) for reference managers. */
 import type { Publication } from '../lib/data';
 import { apa } from '../lib/cite';
 
@@ -16,6 +17,8 @@ const { items } = Astro.props;
       <li>
         <p class="ref" set:html={apa(p)} />
         <div class="acts sans">
+          {/* the featured book has its own page */}
+          {p.data.type === 'book' && p.data.featured && <a href="/book/">About this book</a>}
           {abstract && (
             <button type="button" class="abs-toggle" aria-expanded="false" aria-controls={absId}>Abstract</button>
           )}

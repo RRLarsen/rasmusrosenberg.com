@@ -7,20 +7,25 @@ description: >-
   Psychopathy Unmasked (MIT Press, 2025).
 url: https://www.rasmusrosenberg.com
 
-# Quotes for the turquoise band on the home page. They rotate, and visitors can pick one with the dots below.
-quotes:
-  - >-
-    The responsible use of science in law begins with understanding the strengths and
-    limitations of scientific evidence, while recognizing the consequences of getting
-    it wrong.
-  - >-
-    If four decades of research on psychopathy have taught us anything, it is that
-    virtually all our most deeply held assumptions about the disorder have been called
-    into question by empirical evidence.
-  - >-
-    The primary task of a forensic epistemologist is to critically examine how scientific
-    knowledge is produced, with the aim of assessing its utility and limitations in legal
-    decision-making.
+# The rotating band on the home page, in this order (up to 8 slides). Each slide is a quote,
+# or a promotion of a media item (media: <id in media.yaml>) or a talk (talk: <id in talks.yaml>;
+# shown only until the talk's date). show: false keeps a slide here but out of the rotation.
+# Visitors can pick a slide with the dots. band_seconds: how long each slide is shown.
+band_seconds: 10
+band:
+  - quote: >-
+      The responsible use of science in law begins with understanding the strengths and
+      limitations of scientific evidence, while recognizing the consequences of getting
+      it wrong.
+  - media: 2026-cbc-ideas-are-psychopaths-real
+  - quote: >-
+      If four decades of research on psychopathy have taught us anything, it is that
+      virtually all our most deeply held assumptions about the disorder have been called
+      into question by empirical evidence.
+  - quote: >-
+      The primary task of a forensic epistemologist is to critically examine how scientific
+      knowledge is produced, with the aim of assessing its utility and limitations in legal
+      decision-making.
 # The line under the quote.
 intro: >-
   Rasmus Rosenberg Larsen, Ph.D., Associate Professor of Forensic Epistemology at

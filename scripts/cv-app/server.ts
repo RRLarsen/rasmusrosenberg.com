@@ -351,6 +351,33 @@ function addDoi(sectionId: string, id: string, doi: string) {
   return r.ok ? { ok: true, section: sectionId, id } : { ok: false, error: Object.values(r.errors ?? {}).join(' ') };
 }
 
+// ---------- thumbnail suggestions: the preview images a web page offers (og:image and the like)
+
+const BROWSER_UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36';
+async function suggestImages(page: string) {
+  if (!/^https?:\/\//.test(page)) return { ok: false, message: 'Add the web address first; suggestions come from that page.', images: [] };
+  let html = '', base = page;
+  try {
+    const r = await fetch(page, { headers: { 'User-Agent': BROWSER_UA, 'Accept-Language': 'en' }, redirect: 'follow', signal: AbortSignal.timeout(20000) });
+    if (!r.ok) return { ok: false, message: `The page answered ${r.status}; some sites block automated visits. Upload the image instead.`, images: [] };
+    html = await r.text(); base = r.url;
+  } catch { return { ok: false, message: 'The page could not be reached. Upload the image instead.', images: [] }; }
+  const found: string[] = [];
+  for (const tag of html.match(/<meta\b[^>]*>|<link\b[^>]*>/gi) ?? []) {
+    const key = tag.match(/\b(?:property|name|rel)\s*=\s*["']([^"']+)["']/i)?.[1]?.toLowerCase() ?? '';
+    const val = tag.match(/\b(?:content|href)\s*=\s*["']([^"']+)["']/i)?.[1];
+    if (val && /^(og:image(:url|:secure_url)?|twitter:image(:src)?|image_src)$/.test(key)) found.push(val);
+  }
+  // also the first few large images in the article
+  for (const m of html.matchAll(/<img\b[^>]*\bsrc\s*=\s*["']([^"']+)["'][^>]*>/gi)) {
+    const w = Number(m[0].match(/\bwidth\s*=\s*["']?(\d+)/i)?.[1] ?? 0);
+    if (w >= 400) found.push(m[1]);
+    if (found.length > 8) break;
+  }
+  const images = [...new Set(found.map((u) => { try { return new URL(u.replace(/&amp;/g, '&'), base).href; } catch { return ''; } }).filter(Boolean))].slice(0, 6);
+  return { ok: true, message: images.length ? '' : 'The page offers no preview image. Upload one instead.', images };
+}
+
 // ---------- the local website preview (astro dev), started from the dashboard
 
 const PREVIEW_URL = 'http://localhost:4321';
@@ -404,7 +431,7 @@ const json = (res: ServerResponse, status: number, body: unknown) => {
   res.writeHead(status, { 'Content-Type': 'application/json; charset=utf-8' });
   res.end(JSON.stringify(body));
 };
-const types: Record<string, string> = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.mjs': 'text/javascript; charset=utf-8', '.pdf': 'application/pdf', '.svg': 'image/svg+xml', '.png': 'image/png', '.woff2': 'font/woff2' };
+const types: Record<string, string> = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.mjs': 'text/javascript; charset=utf-8', '.pdf': 'application/pdf', '.svg': 'image/svg+xml', '.png': 'image/png', '.woff2': 'font/woff2', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp', '.gif': 'image/gif' };
 const sendFile = (res: ServerResponse, path: string) => {
   if (!existsSync(path) || !statSync(path).isFile()) return json(res, 404, { error: 'Not found' });
   res.writeHead(200, { 'Content-Type': types[extname(path)] ?? 'application/octet-stream', 'Cache-Control': 'no-store' });
@@ -424,6 +451,8 @@ createServer(async (req, res) => {
       if (file.includes('..')) return json(res, 400, { error: 'Bad path' });
       // pdf.js, for the PDF preview (so links in the CV open in a new tab)
       if (file.startsWith('vendor/pdfjs/')) return sendFile(res, join(ROOT, 'node_modules', 'pdfjs-dist', file.slice('vendor/pdfjs/'.length)));
+      // the site's own images (public/images), for thumbnail previews in the editor
+      if (file.startsWith('site/images/')) return sendFile(res, join(ROOT, 'public', decodeURIComponent(file.slice('site/'.length))));
       // the website's serif, for the name wordmark in the banner
       if (file.startsWith('vendor/newsreader/')) return sendFile(res, join(ROOT, 'node_modules', '@fontsource-variable', 'newsreader', file.slice('vendor/newsreader/'.length)));
       return sendFile(res, join(PUBLIC_DIR, file));
@@ -434,7 +463,13 @@ createServer(async (req, res) => {
       const tags = (parse(readFileSync(fileOf('tags'), 'utf8')) ?? []).map((t: any) => ({ id: t.id, label: t.label }));
       const pubs = (parse(readFileSync(fileOf('publications'), 'utf8')) ?? []).map((p: any) => ({ id: p.id, label: `${p.title} (${String(p.date ?? p.stage ?? '').slice(0, 4)})` }));
       const counts = Object.fromEntries(sections.filter((s) => s.mode === 'list').map((s) => [s.id, entriesOf(s).length]));
-      return json(res, 200, { sections, tags, publications: pubs, counts });
+      // media items and talks, newest first, for choosing promotions on the home page
+      const byDate = (a: any, b: any) => String(b.date ?? '').localeCompare(String(a.date ?? ''));
+      const media = (parse(readFileSync(fileOf('media'), 'utf8')) ?? []).filter((m: any) => m.status === 'published').sort(byDate)
+        .map((m: any) => ({ id: m.id, label: `${String(m.date).slice(0, 7)} · ${m.outlet}: ${String(m.title).replace(/\*/g, '')}` }));
+      const talks = (parse(readFileSync(fileOf('talks'), 'utf8')) ?? []).filter((t: any) => t.status === 'published').sort(byDate)
+        .map((t: any) => ({ id: t.id, label: `${String(t.date).slice(0, 10)} · ${t.event}: ${t.title}` }));
+      return json(res, 200, { sections, tags, publications: pubs, media, talks, counts });
     }
     if (what === 'section') {
       const s = sectionById(id);
@@ -468,6 +503,34 @@ createServer(async (req, res) => {
     if (what === 'checkpoint' && req.method === 'POST') {
       const body = await readBody(req);
       return json(res, 200, await checkpoint(String(body.message || 'Update CV data')));
+    }
+
+    // thumbnails: suggestions from a page, a proxy so the editor can crop remote images, and saving
+    if (what === 'image') {
+      if (id === 'fetch' && req.method === 'GET') {
+        const src = url.searchParams.get('url') ?? '';
+        if (!/^https?:\/\//.test(src)) throw new HttpError(400, 'Not a web address.');
+        const r = await fetch(src, { headers: { 'User-Agent': BROWSER_UA, Accept: 'image/*' }, signal: AbortSignal.timeout(20000) }).catch(() => null);
+        const type = r?.headers.get('content-type') ?? '';
+        if (!r?.ok || !type.startsWith('image/')) throw new HttpError(502, 'The image could not be downloaded (the site may block it).');
+        const buf = Buffer.from(await r.arrayBuffer());
+        if (buf.length > 15e6) throw new HttpError(413, 'The image is too large.');
+        res.writeHead(200, { 'Content-Type': type, 'Cache-Control': 'no-store' });
+        return res.end(buf);
+      }
+      if (id === 'suggest' && req.method === 'POST') {
+        const body = await readBody(req);
+        return json(res, 200, await suggestImages(String(body.url ?? '')));
+      }
+      if (id === 'save' && req.method === 'POST') {
+        const body = await readBody(req);
+        const name = String(body.name ?? '').toLowerCase().replace(/[^a-z0-9-]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 80);
+        const m = String(body.data ?? '').match(/^data:image\/jpeg;base64,([A-Za-z0-9+/=]+)$/);
+        if (!name || !m) throw new HttpError(400, 'Nothing to save.');
+        const rel = `/images/media/${name}.jpg`;
+        writeFileSync(join(ROOT, 'public', rel), Buffer.from(m[1], 'base64'));
+        return json(res, 200, { ok: true, path: rel });
+      }
     }
 
     // the dashboard's overview: build, git, inbox and local website

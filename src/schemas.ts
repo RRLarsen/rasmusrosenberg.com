@@ -50,6 +50,8 @@ export function makeSchemas(dataDir = join(process.cwd(), 'data')) {
   // Tags must come from the controlled list in data/tags.yaml.
   const tags = z.array(oneOf(idsIn('tags.yaml'), 'tag (add it to data/tags.yaml first)')).default([]);
   const publicationId = oneOf(idsIn('publications.yaml'), 'publication id');
+  const mediaId = oneOf(idsIn('media.yaml'), 'media id');
+  const talkId = oneOf(idsIn('talks.yaml'), 'talk id');
 
   return {
     profile: z.object({
@@ -75,7 +77,15 @@ export function makeSchemas(dataDir = join(process.cwd(), 'data')) {
       title: z.string(),
       description: z.string(),
       url: z.url(),
-      quotes: z.array(z.string()).min(1),
+      // the rotating band on the home page, in order: up to 8 quotes and promotions;
+      // show: false keeps a slide saved but out of the rotation
+      band: z.array(z.union([
+        z.object({ quote: z.string(), show: z.boolean().optional() }).strict(),
+        z.object({ media: mediaId, show: z.boolean().optional() }).strict(),
+        z.object({ talk: talkId, show: z.boolean().optional() }).strict(),
+      ])).min(1).max(8).refine((b) => b.some((x) => x.show !== false), { message: 'At least one slide must be shown' }),
+      // how long each slide is shown, in seconds
+      band_seconds: z.number().int().min(3).max(60).default(10),
       intro: z.string(),
       pages: z.record(z.string(), z.string()),
     }),
@@ -144,7 +154,7 @@ export function makeSchemas(dataDir = join(process.cwd(), 'data')) {
         // endorsements of a book, shown under "Praise" on the Book page
         praise: z.array(z.object({ quote: z.string(), name: z.string(), affiliation: z.string().optional() })).optional(),
         cover: z.string().optional(),
-        // thumbnail for op-eds and other writing on the Blog & Media page
+        // thumbnail for op-eds and other writing on the Media page
         image: z.string().optional(),
         links: z.array(link).optional(),
         tags,

@@ -23,9 +23,9 @@ const posts: MediaItem[] = (await getCollection('posts', isPublished)).sort(byDa
   title: p.data.title, outlet: 'Blog', date: p.data.date, summary: p.data.summary,
 }));
 ---
-<Base title="Blog & Media" description={site.pages.media}>
+<Base title="Media" description={site.pages.media}>
   <Fragment slot="band">
-    <PageHeading title="Blog & Media" intro={site.pages.media} />
+    <PageHeading title="Media" intro={site.pages.media} />
     <div class="wrap kit">
       <a class="kit-link sans" href={pressKitPath} download>Download press kit <span>(ZIP, {pressKitSize})</span></a>
       <p class="sans">Biographies, high-resolution photographs, and the book cover, for journalists and event organisers.</p>

@@ -1,5 +1,5 @@
 # Media appearances: interviews, podcasts, press coverage and reviews of the book (CV section C.8).
-# summary and image (a thumbnail in public/images/media/) are shown on the Blog & Media page.
+# summary and image (a thumbnail in public/images/media/) are shown on the Media page.
 # Thumbnails and most summaries come from each link's own preview data (its og:image and og:description).
 
 - id: 2026-the-myth-of-the-psychopathic-brain
@@ -9,7 +9,7 @@
   outlet: In Brief, The MIT Press Newsletter
   date: 2026-08-15
   url: https://us20.campaign-archive.com/?u=7946b0dd9aa4be20bd535d6b5&id=bb19dcbc85
-  image: /images/media/in brief.jpg
+  image: /images/media/2026-the-myth-of-the-psychopathic-brain.jpg
   publication: psychopathy-unmasked
 
 - id: 2021-the-hare-psychopathy-checklist-a-clinical-constr

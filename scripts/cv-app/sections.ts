@@ -5,6 +5,8 @@ export type FieldType =
   | 'text' | 'textarea' | 'date' | 'number' | 'select' | 'checkbox'
   | 'lines' // a list of short texts, one per line
   | 'authors' | 'links' | 'praise' | 'tags' | 'publication'
+  | 'band' // the home page's rotating slides: quotes and promotions of media items or talks
+  | 'thumbnail' // an image path with a 16:9 preview, suggestions from the link, upload and crop
   | 'yearmap' // numbers by year, one "2025: 81" per line
   | 'private-name'; // stored in private/, never in data/
 
@@ -72,7 +74,7 @@ const publicationFields = (type: string[]): Field[] => [
   { name: 'description', label: 'Book description (short)', type: 'textarea', help: 'Books only: shown on the home page, and as the abstract on the Research page when there is no abstract.' },
   { name: 'long_description', label: 'Book description (long, Book page)', type: 'textarea', help: 'Books only: shown on the Book page. Separate paragraphs with a blank line; the first paragraph is shown in bold, and *asterisks* mark italics (e.g. the book title). Without it, the Book page uses the short description.' },
   { name: 'note', label: 'Note', type: 'text', help: 'e.g. In Danish; Reprint of …' },
-  { name: 'image', label: 'Thumbnail (op-eds)', type: 'text', help: 'A file in public/, e.g. /images/media/x.jpg' },
+  { name: 'image', label: 'Thumbnail (op-eds)', type: 'thumbnail', help: 'Ideal size: 640 × 360 px (16:9), JPEG. A file in public/, e.g. /images/media/x.jpg. Use the buttons to find, upload, or crop one.' },
   tags, onWebsite, featured, status,
 ];
 
@@ -152,7 +154,7 @@ export const sections: Section[] = [
       date(),
       { name: 'url', label: 'Web address', type: 'text' },
       { name: 'summary', label: 'Short summary', type: 'textarea' },
-      { name: 'image', label: 'Thumbnail', type: 'text', help: 'A file in public/, e.g. /images/media/x.jpg' },
+      { name: 'image', label: 'Thumbnail', type: 'thumbnail', help: 'Ideal size: 640 × 360 px (16:9), JPEG. A file in public/, e.g. /images/media/x.jpg. Use the buttons to find, upload, or crop one.' },
       { name: 'publication', label: 'About which publication', type: 'publication', help: 'For reviews of a book or article' },
       tags, onWebsite, featured, status,
     ], defaults: { type: 'interview' } },
@@ -189,17 +191,18 @@ export const sections: Section[] = [
     filter: { field: 'kind', values: ['administrative'] }, defaults: { kind: 'administrative' }, summary: { title: 'role', meta: ['organization', 'start'] },
     fields: serviceFields(['administrative']) },
   // Website
-  { id: 'W.1', group: 'Website', title: 'Home page quotes and intro', collection: 'site', mode: 'object',
+  { id: 'W.1', group: 'Website', title: 'Home page: quotes, promotions, intro', collection: 'site', mode: 'object',
     fields: [
       { name: 'description', label: 'Site description (search engines and link previews)', type: 'textarea', required: true, help: 'Plain text, about two sentences.' },
-      { name: 'quotes', label: 'Quotes (rotating on the home page)', type: 'lines', help: 'One quote per line' },
+      { name: 'band', label: 'Rotating slides (up to 8, in this order)', type: 'band', required: true, help: 'Each slide is a quote, or a promotion of a media item or an upcoming talk. Untick "Show" to keep a slide here without showing it. Promoted talks disappear after their date.' },
+      { name: 'band_seconds', label: 'Seconds per slide', type: 'number', required: true, default: 10, help: 'How long each slide is shown before the next (3–60; standard 10).' },
       { name: 'intro', label: 'Line under the quote', type: 'textarea' },
     ] },
   { id: 'W.1b', group: 'Website', title: 'Page introductions', collection: 'site', mode: 'object', path: ['pages'],
     note: 'The short text under each page heading (and on the Contact and Expertise pages, the enquiry note).',
     fields: [
       { name: 'research', label: 'Research', type: 'textarea', required: true },
-      { name: 'media', label: 'Blog & Media', type: 'textarea', required: true },
+      { name: 'media', label: 'Media', type: 'textarea', required: true },
       { name: 'expertise', label: 'Expertise', type: 'textarea', required: true },
       { name: 'expertise_contact', label: 'Expertise: enquiry note', type: 'textarea', required: true },
       { name: 'about', label: 'About', type: 'textarea', required: true },

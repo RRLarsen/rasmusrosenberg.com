@@ -5,10 +5,10 @@ import Wordmark from './Wordmark.astro';
 const profile = await getProfile();
 const nav = [
   { href: '/research/', label: 'Research' },
-  { href: '/blog-media/', label: 'Blog & Media' },
   { href: '/expertise/', label: 'Expertise' },
-  { href: '/about/', label: 'About' },
+  { href: '/media/', label: 'Media' },
   { href: '/teaching/', label: 'Teaching' },
+  { href: '/about/', label: 'About' },
   { href: '/contact/', label: 'Contact' },
 ];
 const path = Astro.url.pathname;
@@ -17,6 +17,11 @@ const path = Astro.url.pathname;
   <Wordmark name={profile.name} />
   <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
   <nav id="site-nav" aria-label="Main">
+    {/* home: a house icon on wide screens, the word "Home" in the phone menu */}
+    <a class="home" href="/" aria-current={path === '/' ? 'page' : undefined}>
+      <svg aria-hidden="true" viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9v11.5h13V9"/><path d="M10 20.5v-6h4v6"/></svg>
+      <span class="home-label">Home</span>
+    </a>
     {nav.map((item) => (
       <a href={item.href} aria-current={path.startsWith(item.href) ? 'page' : undefined}>{item.label}</a>
     ))}
@@ -44,11 +49,17 @@ const path = Astro.url.pathname;
   }
   button:hover { color: var(--on-deep); border-color: rgb(255 255 255 / 0.5); }
   .menu-toggle { display: none; }
+  .home { display: inline-flex; align-items: center; gap: 0.4rem; }
+  .home svg { display: block; transform: translateY(-1px); }
+  /* on wide screens only the icon shows; the label stays for screen readers */
+  .home-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
   @media (max-width: 960px) {
     .menu-toggle { display: inline-block; }
     nav { display: none; flex-basis: 100%; flex-direction: column; align-items: flex-start; gap: 0.25rem; padding-top: 0.75rem; }
     nav.open { display: flex; }
     nav a { padding: 0.35rem 0; font-size: 1.0625rem; }
+    .home svg { display: none; }
+    .home-label { position: static; width: auto; height: auto; overflow: visible; clip: auto; }
   }
 </style>

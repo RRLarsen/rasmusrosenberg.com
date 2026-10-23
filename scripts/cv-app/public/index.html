@@ -80,6 +80,18 @@
     </form>
   </dialog>
 
+  <dialog id="crop-dialog" aria-labelledby="crop-title">
+    <h2 id="crop-title">Crop the thumbnail</h2>
+    <p class="help">Drag to position the image, and zoom with the slider. The frame is exactly what the website shows (16:9); it is saved at 640 × 360 px.</p>
+    <canvas id="crop-canvas" width="1280" height="720"></canvas>
+    <label class="zoom">Zoom <input type="range" id="crop-zoom" min="1" max="4" step="0.01" value="1" /></label>
+    <p class="quick-msg" id="crop-msg" role="status" aria-live="polite"></p>
+    <div class="actions">
+      <button type="button" class="primary" id="crop-save">Save thumbnail</button>
+      <button type="button" id="crop-cancel">Cancel</button>
+    </div>
+  </dialog>
+
   <script src="/app.js" type="module"></script>
 </body>
 </html>

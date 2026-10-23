@@ -153,12 +153,134 @@ const inputFor = (f, value) => {
       el('label', { class: 'check' }, el('input', { type: 'checkbox', name: f.name, value: t.id, checked: (value ?? []).includes(t.id) }), t.label)));
     case 'publication': return el('select', { id, name: f.name }, el('option', { value: '' }, '—'),
       state.config.publications.map((p) => el('option', { value: p.id, selected: value === p.id }, p.label)));
+    case 'thumbnail': return thumbnailField(f, value);
+    case 'band': return bandEditor(f, value ?? []);
     case 'authors': return rowsEditor(f, value ?? [], 'authors');
     case 'links': return rowsEditor(f, value ?? [], 'links');
     case 'praise': return rowsEditor(f, value ?? [], 'praise');
     default: return el('input', { id, name: f.name, type: 'text', value: value ?? '' });
   }
 };
+
+// ---------- the home page's rotating slides: up to 8 quotes and promotions, in order
+
+function bandEditor(f, slides) {
+  const MAX = 8;
+  const box = el('div', { class: 'band', id: `f-${f.name}`, 'data-band': '' });
+  const add = el('button', { type: 'button', onclick: () => { addSlot({ quote: '' }); changed(); } }, 'Add a slide');
+  const renumber = () => {
+    const slots = [...box.querySelectorAll('.slot')];
+    slots.forEach((s, i) => { s.querySelector('.slot-n').textContent = `Slide ${i + 1}`; s.querySelector('.up').disabled = i === 0; s.querySelector('.down').disabled = i === slots.length - 1; });
+    add.disabled = slots.length >= MAX;
+    add.textContent = slots.length >= MAX ? `Add a slide (at most ${MAX})` : 'Add a slide';
+  };
+  const choose = (list, current) => el('select', { class: 'slot-ref' },
+    el('option', { value: '' }, 'Choose…'), list.map((o) => el('option', { value: o.id, selected: o.id === current }, o.label)));
+  function addSlot(item) {
+    const kind = 'media' in item ? 'media' : 'talk' in item ? 'talk' : 'quote';
+    const body = el('div', { class: 'slot-body' });
+    const kindSel = el('select', { class: 'slot-kind' },
+      el('option', { value: 'quote', selected: kind === 'quote' }, 'Quote'),
+      el('option', { value: 'media', selected: kind === 'media' }, 'Promotion: media item'),
+      el('option', { value: 'talk', selected: kind === 'talk' }, 'Promotion: upcoming talk'));
+    const fill = (k, it = {}) => {
+      body.replaceChildren(k === 'quote'
+        ? el('textarea', { class: 'slot-quote', rows: 3, placeholder: 'The quote, without quotation marks' }, it.quote ?? '')
+        : choose(k === 'media' ? state.config.media : state.config.talks, it[k]));
+    };
+    kindSel.addEventListener('change', () => { fill(kindSel.value); changed(); });
+    fill(kind, item);
+    const showBox = el('input', { type: 'checkbox', class: 'slot-show', checked: item.show !== false });
+    const slot = el('div', { class: 'slot' },
+      el('div', { class: 'slot-head' },
+        el('strong', { class: 'slot-n' }), kindSel,
+        el('label', { class: 'slot-toggle', title: 'Untick to keep this slide here without showing it on the site' }, showBox, 'Show'),
+        el('span', { class: 'spacer' }),
+        el('button', { type: 'button', class: 'up', title: 'Move up', onclick: () => { slot.previousElementSibling && box.insertBefore(slot, slot.previousElementSibling); renumber(); changed(); } }, '↑'),
+        el('button', { type: 'button', class: 'down', title: 'Move down', onclick: () => { const n = slot.nextElementSibling; if (n && n.classList.contains('slot')) box.insertBefore(n, slot); renumber(); changed(); } }, '↓'),
+        el('button', { type: 'button', title: 'Remove this slide', onclick: () => { slot.remove(); renumber(); changed(); } }, '×')),
+      body);
+    const dim = () => slot.classList.toggle('off', !showBox.checked);
+    showBox.addEventListener('change', dim); dim();
+    box.insertBefore(slot, add);
+    renumber();
+  }
+  box.append(add);
+  for (const s of slides) addSlot(s);
+  return box;
+}
+
+// ---------- thumbnails: preview, suggestions from the link, upload, crop
+
+const previewSrc = (v) => (!v ? '' : v.startsWith('/') ? `/site${v}` : /^https?:/.test(v) ? `/api/image/fetch?url=${encodeURIComponent(v)}` : '');
+
+function thumbnailField(f, value) {
+  const input = el('input', { id: `f-${f.name}`, name: f.name, type: 'text', value: value ?? '', placeholder: '/images/media/….jpg' });
+  const img = el('img', { alt: '' });
+  const empty = el('span', { class: 'thumb-empty', text: 'No thumbnail: the site shows a turquoise tile with the outlet’s name.' });
+  const frame = el('div', { class: 'thumb-frame' }, img, empty);
+  const show = (bust) => {
+    const src = previewSrc(input.value.trim());
+    img.hidden = !src; empty.hidden = !!src;
+    if (src) img.src = src + (bust ? `${src.includes('?') ? '&' : '?'}t=${Date.now()}` : '');
+  };
+  input.addEventListener('input', () => show());
+  const strip = el('div', { class: 'thumb-suggest' });
+  const file = el('input', { type: 'file', accept: 'image/*', hidden: true });
+  file.addEventListener('change', () => { if (file.files[0]) openCrop(URL.createObjectURL(file.files[0]), input, show); file.value = ''; });
+  const linkOf = () => document.getElementById('f-url')?.value.trim() || document.getElementById('f-publisher_url')?.value.trim() || '';
+  const suggest = async () => {
+    strip.replaceChildren(el('span', { class: 'help', text: 'Looking at the page…' }));
+    const r = await api('image/suggest', { method: 'POST', body: { url: linkOf() } });
+    strip.replaceChildren(...[...(r.images.length ? r.images.map((u) => el('button', { type: 'button', class: 'thumb-option', title: 'Use and crop this image', onclick: () => openCrop(`/api/image/fetch?url=${encodeURIComponent(u)}`, input, show) },
+      el('img', { src: `/api/image/fetch?url=${encodeURIComponent(u)}`, alt: '', loading: 'lazy' }))) : []), r.message ? el('span', { class: 'help', text: r.message }) : null].filter(Boolean));
+  };
+  const box = el('div', { class: 'thumb' }, frame, input,
+    el('div', { class: 'thumb-actions' },
+      el('button', { type: 'button', onclick: suggest }, 'Suggestions from the link'),
+      el('button', { type: 'button', onclick: () => file.click() }, 'Upload image…'),
+      el('button', { type: 'button', onclick: () => { const src = previewSrc(input.value.trim()); if (src) openCrop(src, input, show); else setStatus('There is no thumbnail to crop yet.', 'error'); } }, 'Crop this image'),
+      file),
+    strip);
+  show();
+  return box;
+}
+
+/** The crop window: drag and zoom inside a 16:9 frame; saves a 640×360 JPEG named after the entry. */
+function openCrop(src, input, show) {
+  const dlg = $('#crop-dialog'), cv = $('#crop-canvas'), ctx = cv.getContext('2d'), zoom = $('#crop-zoom');
+  const W = cv.width, H = cv.height;
+  const img = new Image();
+  let base = 1, s = 1, x = 0, y = 0, drag = null;
+  const clamp = () => { const w = img.width * s, h = img.height * s; x = Math.min(0, Math.max(W - w, x)); y = Math.min(0, Math.max(H - h, y)); };
+  const draw = () => { clamp(); ctx.fillStyle = '#0f3b39'; ctx.fillRect(0, 0, W, H); ctx.drawImage(img, x, y, img.width * s, img.height * s); };
+  $('#crop-msg').textContent = 'Loading the image…'; $('#crop-msg').className = 'quick-msg';
+  img.onload = () => {
+    base = Math.max(W / img.width, H / img.height); // the smallest zoom that still fills the frame
+    s = base; zoom.value = 1; x = (W - img.width * s) / 2; y = (H - img.height * s) / 2; draw();
+    $('#crop-msg').textContent = img.width < 640 || img.height < 360 ? `This image is small (${img.width} × ${img.height} px), so the thumbnail may look soft.` : '';
+  };
+  img.onerror = () => { $('#crop-msg').textContent = 'The image could not be loaded (the site may block it). Download it yourself and use Upload image.'; $('#crop-msg').className = 'quick-msg error'; };
+  img.src = src;
+  zoom.oninput = () => { const cx = W / 2, cy = H / 2, old = s; s = base * Number(zoom.value); x = cx - (cx - x) * (s / old); y = cy - (cy - y) * (s / old); draw(); };
+  const scale = () => W / cv.getBoundingClientRect().width;
+  cv.onpointerdown = (e) => { drag = { px: e.clientX, py: e.clientY, x, y }; cv.setPointerCapture(e.pointerId); };
+  cv.onpointermove = (e) => { if (!drag) return; x = drag.x + (e.clientX - drag.px) * scale(); y = drag.y + (e.clientY - drag.py) * scale(); draw(); };
+  cv.onpointerup = () => { drag = null; };
+  $('#crop-cancel').onclick = () => dlg.close();
+  $('#crop-save').onclick = async () => {
+    const out = document.createElement('canvas'); out.width = 640; out.height = 360;
+    out.getContext('2d').drawImage(cv, 0, 0, 640, 360);
+    const title = document.getElementById('f-title')?.value || 'thumbnail';
+    const name = state.key && !state.key.startsWith('#') ? state.key : `${(document.getElementById('f-date')?.value || '').slice(0, 4)}-${title}`.toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g, '-').slice(0, 60);
+    try {
+      const r = await api('image/save', { method: 'POST', body: { name, data: out.toDataURL('image/jpeg', 0.86) } });
+      input.value = r.path; show(true); changed(); dlg.close();
+      setStatus('Thumbnail saved. Press Save to keep it on the entry.');
+    } catch (err) { $('#crop-msg').textContent = `Not saved: ${err.message}`; $('#crop-msg').className = 'quick-msg error'; }
+  };
+  dlg.showModal();
+}
 
 function rowsEditor(f, rows, kind) {
   const box = el('div', { class: 'rows', id: `f-${f.name}`, 'data-rows': kind });
@@ -267,6 +389,15 @@ function collect() {
       case 'lines': data[f.name] = box.value.split('\n').map((x) => x.trim()).filter(Boolean); break;
       case 'yearmap': data[f.name] = Object.fromEntries(box.value.split('\n').map((l) => l.match(/^\s*(\d{4})\s*:\s*(\d+)\s*$/)).filter(Boolean).map((m) => [m[1], Number(m[2])])); break;
       case 'tags': data[f.name] = [...box.querySelectorAll('input:checked')].map((i) => i.value); break;
+      case 'band':
+        data[f.name] = [...box.querySelectorAll('.slot')].map((s) => {
+          const k = s.querySelector('.slot-kind').value;
+          const off = s.querySelector('.slot-show').checked ? {} : { show: false };
+          if (k === 'quote') { const q = s.querySelector('.slot-quote').value.trim().replace(/^[“"]|[”"]$/g, ''); return q ? { quote: q, ...off } : null; }
+          const ref = s.querySelector('.slot-ref').value;
+          return ref ? { [k]: ref, ...off } : null;
+        }).filter(Boolean);
+        break;
       case 'authors':
       case 'links':
       case 'praise':

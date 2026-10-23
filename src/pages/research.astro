@@ -10,7 +10,7 @@ import { publication } from '../lib/jsonld';
 const site = await getSite();
 const pubs = (await getPublications()).filter(onWebsite);
 // Book reviews, op-eds and other non-peer-reviewed writing are left out here; op-eds
-// appear under Blog & Media, and everything is in the CV on the About page.
+// appear on the Media page, and everything is in the CV on the About page.
 const books = pubs.filter((p) => p.data.type === 'book');
 const peerReviewed = pubs.filter((p) => ['article', 'chapter', 'commentary'].includes(p.data.type));
 ---

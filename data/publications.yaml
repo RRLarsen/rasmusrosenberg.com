@@ -1,7 +1,7 @@
 # Publications, from the CV (sections C.2 and C.3).
 # Abstracts, open-access PDF links and OpenAlex ids were added by matching DOIs in OpenAlex.
 # Types: book, article, chapter, review, commentary, op-ed, other.
-# The Research page lists everything except op-eds and "other"; those appear under Blog & Media.
+# The Research page lists everything except op-eds and "other"; those appear on the Media page.
 
 - id: psychopathy-unmasked
   status: published

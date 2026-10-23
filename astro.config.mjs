@@ -16,5 +16,7 @@ export default defineConfig({
     '/services-7-1': '/tools/',
     '/publications': '/research/',
     '/cv': '/about/',
+    // renamed 2026-10-23
+    '/blog-media': '/media/',
   },
 });
