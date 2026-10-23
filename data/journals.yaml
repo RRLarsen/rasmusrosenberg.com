@@ -1,0 +1,15 @@
+# Journals and their pictures: a 640 × 360 tile (cover and name, see scripts/images/journal-tile.typ).
+# When a publication is promoted on the home page without a picture of its own, the picture of
+# its journal is used. Matched on the publication's venue: the name here, or one of its aliases.
+- id: psychology-public-policy-and-law
+  name: Psychology, Public Policy, and Law
+  image: /images/media/journal-psychology-public-policy-and-law.jpg
+
+- id: european-journal-of-analytic-philosophy
+  name: European Journal of Analytic Philosophy
+  image: /images/media/journal-european-journal-of-analytic-philosophy.jpg
+
+- id: the-journal-of-forensic-psychiatry-psychology
+  name: The Journal of Forensic Psychiatry & Psychology
+  aliases: [Journal of Forensic Psychiatry & Psychology]
+  image: /images/media/journal-the-journal-of-forensic-psychiatry-psychology.jpg

@@ -469,7 +469,10 @@ createServer(async (req, res) => {
         .map((m: any) => ({ id: m.id, label: `${String(m.date).slice(0, 7)} · ${m.outlet}: ${String(m.title).replace(/\*/g, '')}` }));
       const talks = (parse(readFileSync(fileOf('talks'), 'utf8')) ?? []).filter((t: any) => t.status === 'published').sort(byDate)
         .map((t: any) => ({ id: t.id, label: `${String(t.date).slice(0, 10)} · ${t.event}: ${t.title}` }));
-      return json(res, 200, { sections, tags, publications: pubs, media, talks, counts });
+      const research = (parse(readFileSync(fileOf('publications'), 'utf8')) ?? []).filter((p: any) => p.status === 'published')
+        .sort((a: any, b: any) => String(b.date ?? '9999').localeCompare(String(a.date ?? '9999')))
+        .map((p: any) => ({ id: p.id, label: `${String(p.date ?? p.stage ?? '').slice(0, 4)} · ${p.title}${p.venue ? ` (${p.venue})` : ''}` }));
+      return json(res, 200, { sections, tags, publications: pubs, research, media, talks, counts });
     }
     if (what === 'section') {
       const s = sectionById(id);

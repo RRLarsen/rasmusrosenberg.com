@@ -13,19 +13,17 @@ url: https://www.rasmusrosenberg.com
 # Visitors can pick a slide with the dots. band_seconds: how long each slide is shown.
 band_seconds: 10
 band:
-  - quote: >-
-      The responsible use of science in law begins with understanding the strengths and
+  - quote: The responsible use of science in law begins with understanding the strengths and
       limitations of scientific evidence, while recognizing the consequences of getting
       it wrong.
+  - publication: larsen-2025-canadian-case-law
   - media: 2026-cbc-ideas-are-psychopaths-real
-  - quote: >-
-      If four decades of research on psychopathy have taught us anything, it is that
+  - quote: If four decades of research on psychopathy have taught us anything, it is that
       virtually all our most deeply held assumptions about the disorder have been called
       into question by empirical evidence.
-  - quote: >-
-      The primary task of a forensic epistemologist is to critically examine how scientific
-      knowledge is produced, with the aim of assessing its utility and limitations in legal
-      decision-making.
+  - quote: The primary task of a forensic epistemologist is to critically examine how
+      scientific knowledge is produced, with the aim of assessing its utility and
+      limitations in legal decision-making.
 # The line under the quote.
 intro: >-
   Rasmus Rosenberg Larsen, Ph.D., Associate Professor of Forensic Epistemology at

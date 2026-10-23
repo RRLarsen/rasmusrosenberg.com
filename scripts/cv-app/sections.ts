@@ -74,7 +74,7 @@ const publicationFields = (type: string[]): Field[] => [
   { name: 'description', label: 'Book description (short)', type: 'textarea', help: 'Books only: shown on the home page, and as the abstract on the Research page when there is no abstract.' },
   { name: 'long_description', label: 'Book description (long, Book page)', type: 'textarea', help: 'Books only: shown on the Book page. Separate paragraphs with a blank line; the first paragraph is shown in bold, and *asterisks* mark italics (e.g. the book title). Without it, the Book page uses the short description.' },
   { name: 'note', label: 'Note', type: 'text', help: 'e.g. In Danish; Reprint of …' },
-  { name: 'image', label: 'Thumbnail (op-eds)', type: 'thumbnail', help: 'Ideal size: 640 × 360 px (16:9), JPEG. A file in public/, e.g. /images/media/x.jpg. Use the buttons to find, upload, or crop one.' },
+  { name: 'image', label: 'Thumbnail (op-eds, and promotions on the home page)', type: 'thumbnail', help: 'Ideal size: 640 × 360 px (16:9), JPEG. A file in public/, e.g. /images/media/x.jpg. Use the buttons to find, upload, or crop one.' },
   tags, onWebsite, featured, status,
 ];
 
@@ -194,8 +194,8 @@ export const sections: Section[] = [
   { id: 'W.1', group: 'Website', title: 'Home page: quotes, promotions, intro', collection: 'site', mode: 'object',
     fields: [
       { name: 'description', label: 'Site description (search engines and link previews)', type: 'textarea', required: true, help: 'Plain text, about two sentences.' },
-      { name: 'band', label: 'Rotating slides (up to 8, in this order)', type: 'band', required: true, help: 'Each slide is a quote, or a promotion of a media item or an upcoming talk. Untick "Show" to keep a slide here without showing it. Promoted talks disappear after their date.' },
-      { name: 'band_seconds', label: 'Seconds per slide', type: 'number', required: true, default: 10, help: 'How long each slide is shown before the next (3–60; standard 10).' },
+      { name: 'band', label: 'Rotating slides (up to 8, in this order)', type: 'band', required: true, help: 'Each slide is a quote, or a promotion of a media item, a research publication, or an upcoming talk. Untick "Show" to keep a slide here without showing it. Promoted talks disappear after their date.' },
+      { name: 'band_seconds', label: 'Seconds per slide', type: 'number', required: true, help: 'How long each slide is shown before the next (3–60; standard 10).' },
       { name: 'intro', label: 'Line under the quote', type: 'textarea' },
     ] },
   { id: 'W.1b', group: 'Website', title: 'Page introductions', collection: 'site', mode: 'object', path: ['pages'],
@@ -231,6 +231,13 @@ export const sections: Section[] = [
       { name: 'i10_index', label: 'i10-index', type: 'number' },
       { name: 'citations_per_year', label: 'Citations per year', type: 'yearmap', help: 'One year per line, e.g. 2025: 81' },
       date('as_of', 'As of'),
+    ] },
+  { id: 'W.6', group: 'Website', title: 'Journal pictures', collection: 'journals', mode: 'list', summary: { title: 'name', meta: [] },
+    note: 'The default picture when a publication in this journal is promoted on the home page (unless the publication has its own thumbnail). Matched on the publication’s journal name or an alias.',
+    fields: [
+      { name: 'name', label: 'Journal name', type: 'text', required: true, help: 'Exactly as in your publications, e.g. Psychology, Public Policy, and Law' },
+      { name: 'aliases', label: 'Other spellings', type: 'lines', help: 'One per line, e.g. without "The"' },
+      { name: 'image', label: 'Picture', type: 'thumbnail', help: 'Ideal size: 640 × 360 px (16:9), JPEG. A tile with the cover and name can be made with scripts/images/journal-tile.typ, or upload and crop a cover or logo here.' },
     ] },
   { id: 'W.5', group: 'Website', title: 'Topics (tags)', collection: 'tags', mode: 'list', summary: { title: 'label', meta: [] },
     fields: [{ name: 'label', label: 'Label', type: 'text', required: true }, { name: 'description', label: 'Description', type: 'text' }] },

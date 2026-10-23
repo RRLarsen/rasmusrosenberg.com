@@ -177,16 +177,17 @@ function bandEditor(f, slides) {
   const choose = (list, current) => el('select', { class: 'slot-ref' },
     el('option', { value: '' }, 'Choose…'), list.map((o) => el('option', { value: o.id, selected: o.id === current }, o.label)));
   function addSlot(item) {
-    const kind = 'media' in item ? 'media' : 'talk' in item ? 'talk' : 'quote';
+    const kind = 'media' in item ? 'media' : 'talk' in item ? 'talk' : 'publication' in item ? 'publication' : 'quote';
     const body = el('div', { class: 'slot-body' });
     const kindSel = el('select', { class: 'slot-kind' },
       el('option', { value: 'quote', selected: kind === 'quote' }, 'Quote'),
       el('option', { value: 'media', selected: kind === 'media' }, 'Promotion: media item'),
+      el('option', { value: 'publication', selected: kind === 'publication' }, 'Promotion: research publication'),
       el('option', { value: 'talk', selected: kind === 'talk' }, 'Promotion: upcoming talk'));
     const fill = (k, it = {}) => {
       body.replaceChildren(k === 'quote'
         ? el('textarea', { class: 'slot-quote', rows: 3, placeholder: 'The quote, without quotation marks' }, it.quote ?? '')
-        : choose(k === 'media' ? state.config.media : state.config.talks, it[k]));
+        : choose(k === 'media' ? state.config.media : k === 'publication' ? state.config.research : state.config.talks, it[k]));
     };
     kindSel.addEventListener('change', () => { fill(kindSel.value); changed(); });
     fill(kind, item);

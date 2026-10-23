@@ -28,4 +28,5 @@ export const collections = {
   supervision: list('supervision'),
   expertise: list('expertise'),
   tools: list('tools'),
+  journals: list('journals'),
 };

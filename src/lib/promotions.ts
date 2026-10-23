@@ -3,7 +3,7 @@
 // promotion uses the same template (src/components/Promo.astro). Titles, links and images always come from the record; the
 // short description is a standard sentence for the record's type.
 import { getCollection } from 'astro:content';
-import { formatDate, getProfile, getPublications, isPublished, onWebsite } from './data';
+import { formatDate, getProfile, getPublications, isPublished, onWebsite, linkFor, fullTitle } from './data';
 
 export interface Promotion {
   title: string;
@@ -32,12 +32,18 @@ const today = new Date().toISOString().slice(0, 10);
 /** The home page band: the slides in data/site.yaml (band), as quotes and promotions. */
 export type Slide = { kind: 'quote'; text: string } | { kind: 'promo'; promo: Promotion };
 
-export async function getBand(band: (({ quote: string } | { media: string } | { talk: string }) & { show?: boolean })[]): Promise<Slide[]> {
+export async function getBand(band: (({ quote: string } | { media: string } | { talk: string } | { publication: string }) & { show?: boolean })[]): Promise<Slide[]> {
   const profile = await getProfile();
   const name = `Dr. ${profile.family_name.split(' ').at(-1)}`; // "Dr. Larsen"
   const pubs = await getPublications();
   const titleOf = (id?: string) => pubs.find((p) => p.id === id)?.data.title;
   const media = await getCollection('media', onWebsite);
+  // a journal's picture, matched on the publication's venue (name or alias, ignoring case)
+  const journals = await getCollection('journals');
+  const journalImage = (venue?: string) => {
+    const v = venue?.trim().toLowerCase();
+    return v ? journals.find((j) => [j.data.name, ...j.data.aliases].some((n) => n.toLowerCase() === v))?.data.image : undefined;
+  };
   const talks = await getCollection('talks', isPublished);
 
   const sentence: Record<string, (source: string, extra?: string) => string> = {
@@ -62,6 +68,28 @@ export async function getBand(band: (({ quote: string } | { media: string } | { 
         source: m.data.outlet, date: m.data.date, image: m.data.image, url: m.data.url,
         action: actions[m.data.type] ?? 'Read more',
       } });
+    } else if ('publication' in item) {
+      // a research publication: the venue and date in a standard sentence, linked to the work
+      const p = pubs.find((x) => x.id === item.publication && isPublished(x));
+      if (p) {
+        const when = p.data.date ? formatDate(p.data.date) : p.data.stage ?? '';
+        const venue = p.data.venue ? `*${p.data.venue}*` : p.data.publisher ?? '';
+        const description: Record<string, string> = {
+          book: `A book by ${name}${p.data.publisher ? `, ${p.data.publisher}` : ''}${when ? `, ${when.slice(-4)}` : ''}.`,
+          article: `A research article in ${venue}, ${when}.`,
+          chapter: `A book chapter in ${venue}, ${when}.`,
+          commentary: `A commentary in ${venue}, ${when}.`,
+          review: `A review in ${venue}, ${when}.`,
+          'op-ed': `An essay in ${venue}, ${when}.`,
+          other: `Published in ${venue}, ${when}.`,
+        };
+        const action: Record<string, string> = { book: 'About the book', article: 'Read the article', chapter: 'Read the chapter', commentary: 'Read the commentary', 'op-ed': 'Read the essay' };
+        slides.push({ kind: 'promo', promo: {
+          title: fullTitle(p), description: description[p.data.type] ?? description.other,
+          source: p.data.venue ?? p.data.publisher ?? 'Publication', date: p.data.date ?? '', image: p.data.image ?? journalImage(p.data.venue),
+          url: p.data.type === 'book' && p.data.featured ? '/book/' : linkFor(p), action: action[p.data.type] ?? 'Read more',
+        } });
+      }
     } else {
       // talks are promoted only until the day they take place
       const t = talks.find((x) => x.id === item.talk);

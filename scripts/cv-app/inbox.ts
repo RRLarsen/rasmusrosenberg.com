@@ -78,9 +78,17 @@ async function getJson(url: string, accept = 'application/json') {
   return r.json();
 }
 async function getText(url: string) {
-  const r = await fetch(url, { headers: { 'User-Agent': UA }, signal: AbortSignal.timeout(20000) });
-  if (!r.ok) throw new Error(`${new URL(url).hostname} answered ${r.status}`);
-  return r.text();
+  // some feeds (YouTube's in particular) fail now and then for a few minutes: try three times
+  let last = '';
+  for (let attempt = 0; attempt < 3; attempt++) {
+    if (attempt) await new Promise((r) => setTimeout(r, 4000 * attempt));
+    try {
+      const r = await fetch(url, { headers: { 'User-Agent': UA }, signal: AbortSignal.timeout(20000) });
+      if (r.ok) return r.text();
+      last = `${new URL(url).hostname} answered ${r.status}`;
+    } catch { last = `${new URL(url).hostname} did not answer`; }
+  }
+  throw new Error(`${last} (three tries; usually temporary)`);
 }
 const pad = (n: number) => String(n).padStart(2, '0');
 const fromParts = (p?: number[]) => (p?.[0] ? [String(p[0]), p[1] ? pad(p[1]) : '', p[2] ? pad(p[2]) : ''].filter(Boolean).join('-') : undefined);

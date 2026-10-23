@@ -83,6 +83,7 @@ export function makeSchemas(dataDir = join(process.cwd(), 'data')) {
         z.object({ quote: z.string(), show: z.boolean().optional() }).strict(),
         z.object({ media: mediaId, show: z.boolean().optional() }).strict(),
         z.object({ talk: talkId, show: z.boolean().optional() }).strict(),
+        z.object({ publication: publicationId, show: z.boolean().optional() }).strict(),
       ])).min(1).max(8).refine((b) => b.some((x) => x.show !== false), { message: 'At least one slide must be shown' }),
       // how long each slide is shown, in seconds
       band_seconds: z.number().int().min(3).max(60).default(10),
@@ -109,6 +110,9 @@ export function makeSchemas(dataDir = join(process.cwd(), 'data')) {
     }),
 
     tags: z.object({ label: z.string(), description: z.string().optional() }),
+
+    // journals and their pictures, the default picture when one of their publications is promoted
+    journals: z.object({ name: z.string(), aliases: z.array(z.string()).default([]), image: z.string().optional() }),
 
     // The CV builder's suggestions inbox (data/inbox.yaml); not a site collection.
     inbox: z.object({
