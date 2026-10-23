@@ -14,6 +14,7 @@ import { sections, type Section, type Field } from './sections.ts';
 import { lookup, knownIndex, keysOf, LookupError } from './lookup.ts';
 import * as inbox from './inbox.ts';
 import * as scholar from './scholar.ts';
+import * as edtools from './tools.ts';
 
 const ROOT = process.cwd();
 const DATA = join(ROOT, 'data');
@@ -451,6 +452,9 @@ createServer(async (req, res) => {
       if (file.includes('..')) return json(res, 400, { error: 'Bad path' });
       // pdf.js, for the PDF preview (so links in the CV open in a new tab)
       if (file.startsWith('vendor/pdfjs/')) return sendFile(res, join(ROOT, 'node_modules', 'pdfjs-dist', file.slice('vendor/pdfjs/'.length)));
+      // educational tools, previewed from their local copies (/tools/exam-timer/)
+      const tm = file.match(/^tools\/([a-z0-9-]+)\/?(.*)$/);
+      if (tm && edtools.toolById(tm[1])) { const t = edtools.toolById(tm[1])!; return sendFile(res, join(t.dir, tm[2] || t.file)); }
       // the site's own images (public/images), for thumbnail previews in the editor
       if (file.startsWith('site/images/')) return sendFile(res, join(ROOT, 'public', decodeURIComponent(file.slice('site/'.length))));
       // the website's serif, for the name wordmark in the banner
@@ -536,6 +540,22 @@ createServer(async (req, res) => {
       }
     }
 
+    // educational tools: status, settings, publish
+    if (what === 'tools') {
+      if (!id && req.method === 'GET') return json(res, 200, { tools: await Promise.all(edtools.tools.map((t) => edtools.status(t))), fields: Object.fromEntries(edtools.tools.map((t) => [t.id, t.fields])) });
+      const t = edtools.toolById(id);
+      if (!t) throw new HttpError(404, 'No such tool.');
+      if (key === 'settings' && req.method === 'GET') return json(res, 200, { settings: edtools.readSettings(t) });
+      if (key === 'settings' && req.method === 'PUT') {
+        try { return json(res, 200, { ok: true, settings: edtools.writeSettings(t, (await readBody(req)).settings ?? {}) }); }
+        catch (e: any) { return json(res, 200, { ok: false, error: e.message }); }
+      }
+      if (key === 'publish' && req.method === 'POST') {
+        try { return json(res, 200, await edtools.publish(t, String((await readBody(req)).message || `Update ${t.name}`))); }
+        catch (e: any) { return json(res, 200, { ok: false, message: `Publishing ${t.name} failed: ${e.message}` }); }
+      }
+    }
+
     // the dashboard's overview: build, git, inbox and local website
     if (what === 'status' && req.method === 'GET') {
       const remote = await git(['remote', 'get-url', 'origin']).then((x) => x.trim()).catch(() => '');
@@ -551,6 +571,9 @@ createServer(async (req, res) => {
       if (changed) notes.push({ level: 'action', title: `${changed} changed file${changed > 1 ? 's' : ''} not yet saved in a checkpoint`, detail: 'A checkpoint keeps a copy you can return to.', action: 'checkpoint' });
       if (ahead) notes.push({ level: 'action', title: `${ahead} checkpoint${ahead > 1 ? 's' : ''} not yet published`, detail: 'Publish to update the live website.', action: 'publish' });
       for (const [src, msg] of Object.entries(box.problems ?? {})) notes.push({ level: 'error', title: `Could not reach ${src}`, detail: msg, action: 'check' });
+      for (const t of await Promise.all(edtools.tools.map((x) => edtools.status(x)))) {
+        if (t.installed && (t.changed || t.ahead)) notes.push({ level: 'action', title: `${t.name}: changes not yet published`, detail: 'Publish it from the Educational Tools tile.', href: '/#tools' });
+      }
       const sch = scholar.lastAttempt();
       if (sch && Date.now() - Date.parse(sch.at) < 14 * 24 * 3600 * 1000 && (!sch.ok || sch.changes?.length)) {
         notes.push(sch.ok

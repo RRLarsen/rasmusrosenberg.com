@@ -35,3 +35,16 @@ a.button { display: inline-block; cursor: pointer; border-radius: 4px; padding: 
 .count { background: var(--deep); color: var(--on-deep); border-radius: 1rem; padding: 0 0.5rem; font-family: system-ui, sans-serif; font-size: 0.78rem; }
 .bar button[disabled] { opacity: 0.45; cursor: not-allowed; }
 @media (max-width: 900px) { .dash .bar-left { width: auto; padding-right: 1rem; } .dash-layout { grid-template-columns: 1fr; } .feed { border-right: 0; border-bottom: 1px solid var(--rule); max-height: 45vh; } }
+
+/* educational tools */
+.tool { border-top: 1px solid var(--rule); padding-top: 0.75rem; margin-top: 0.5rem; }
+.tool h3 { margin: 0; font-size: 1.05rem; font-family: Georgia, serif; font-weight: 400; }
+.tool .actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem; }
+.tool .ghost { color: var(--ink); text-decoration: none; }
+.tool-form { display: grid; grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr)); gap: 0.6rem 1rem; margin-top: 0.75rem; padding: 0.75rem; background: white; border: 1px solid var(--rule); border-radius: 6px; }
+.tool-form .field { display: grid; gap: 0.2rem; font-size: 0.85rem; }
+.tool-form .field input { padding: 0.35rem 0.5rem; border: 1px solid var(--rule); border-radius: 4px; }
+.tool-form small { color: var(--muted); font-size: 0.75rem; }
+.tool-form .check { display: flex; gap: 0.4rem; align-items: center; font-size: 0.85rem; }
+.tool-form .actions, .tool-form .form-msg { grid-column: 1 / -1; }
+.tool-form .form-msg { margin: 0; font-size: 0.82rem; color: var(--muted); }
