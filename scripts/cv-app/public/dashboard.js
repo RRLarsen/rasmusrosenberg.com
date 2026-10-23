@@ -118,58 +118,15 @@ $('#open-site').addEventListener('click', async () => {
   if (tab) tab.location = st.preview.url; else window.open(st.preview.url, '_blank');
 });
 
-// ---------- educational tools: preview, settings, publish
+// ---------- educational tools: a count on the tile (the tools have their own page, /edtools)
 
-async function drawTools() {
-  const { tools, fields } = await api('tools');
-  const list = $('#tool-list');
-  list.replaceChildren();
-  for (const t of tools) {
-    const meta = el('p', { class: 'meta', text: !t.installed ? 'No local copy found.' : t.changed || t.ahead ? 'Changes not yet published.' : 'Up to date online.' });
-    const form = el('form', { class: 'tool-form', hidden: true });
-    const open = el('button', { type: 'button', class: 'ghost', onclick: async () => {
-      if (!form.hidden) { form.hidden = true; return; }
-      const { settings } = await api(`tools/${t.id}/settings`);
-      form.replaceChildren(...fields[t.id].map((f) => el('label', { class: f.type === 'checkbox' ? 'check' : 'field' },
-        f.type === 'checkbox' ? null : el('span', { text: f.label }),
-        el('input', { name: f.name, type: f.type, value: f.type === 'checkbox' ? undefined : settings[f.name] ?? '', checked: f.type === 'checkbox' ? settings[f.name] !== false : undefined, step: f.step, min: f.min, max: f.max }),
-        f.type === 'checkbox' ? f.label : null,
-        f.help ? el('small', { text: f.help }) : null)),
-        el('div', { class: 'actions' },
-          el('button', { type: 'submit', class: 'primary' }, 'Save settings'),
-          el('a', { class: 'ghost', href: `/tools/${t.id}/`, target: '_blank', rel: 'noopener' }, 'Preview')),
-        el('p', { class: 'form-msg' }));
-      form.hidden = false;
-    } }, 'Settings');
-    form.onsubmit = async (e) => {
-      e.preventDefault();
-      const data = {};
-      for (const f of fields[t.id]) { const i = form.elements[f.name]; data[f.name] = f.type === 'checkbox' ? i.checked : i.value; }
-      const r = await api(`tools/${t.id}/settings`, { method: 'PUT', body: { settings: data } });
-      form.querySelector('.form-msg').textContent = r.ok ? 'Saved. Use Preview to check, then Publish.' : r.error;
-      drawToolsMeta();
-      refresh();
-    };
-    list.append(el('div', { class: 'tool' },
-      el('h3', { text: t.name }), meta,
-      el('div', { class: 'actions' },
-        el('a', { class: 'ghost', href: `/tools/${t.id}/`, target: '_blank', rel: 'noopener' }, 'Open (local copy)'),
-        el('a', { class: 'ghost', href: t.live, target: '_blank', rel: 'noopener' }, 'Open live'),
-        open,
-        el('button', { type: 'button', class: 'primary', disabled: !(t.changed || t.ahead), onclick: async () => {
-          const message = prompt(`Describe the change to ${t.name}:`, `Update ${t.name}`);
-          if (message === null) return;
-          setStatus(`Publishing ${t.name}…`);
-          const r = await api(`tools/${t.id}/publish`, { method: 'POST', body: { message } });
-          setStatus(r.message, r.ok ? '' : 'error');
-          drawTools(); refresh();
-        } }, 'Publish')),
-      form));
-  }
+async function toolsMeta() {
+  const { tools } = await api('tools');
+  const pending = tools.filter((t) => t.changed || t.ahead).length;
+  $('#tools-meta').textContent = `${tools.length} tool${tools.length === 1 ? '' : 's'}${pending ? `; ${pending} with changes not yet published` : ''}.`;
 }
-const drawToolsMeta = () => drawTools();
 
 setStatus('');
-drawTools();
+toolsMeta();
 refresh();
 setInterval(refresh, 10000);

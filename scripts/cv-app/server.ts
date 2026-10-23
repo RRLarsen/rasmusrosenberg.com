@@ -447,7 +447,7 @@ createServer(async (req, res) => {
     if (parts[0] !== 'api') {
       if (url.pathname === '/pdf/public') return sendFile(res, join(ROOT, 'public', 'rasmus-rosenberg-larsen-cv.pdf'));
       if (url.pathname === '/pdf/private') return sendFile(res, join(ROOT, 'private', 'rasmus-rosenberg-larsen-cv-private.pdf'));
-      const pages: Record<string, string> = { '/': 'dashboard.html', '/cv': 'index.html', '/cv/': 'index.html', '/website': 'index.html', '/website/': 'index.html' };
+      const pages: Record<string, string> = { '/': 'dashboard.html', '/cv': 'index.html', '/cv/': 'index.html', '/website': 'index.html', '/website/': 'index.html', '/edtools': 'edtools.html', '/edtools/': 'edtools.html' };
       const file = pages[url.pathname] ?? url.pathname.slice(1);
       if (file.includes('..')) return json(res, 400, { error: 'Bad path' });
       // pdf.js, for the PDF preview (so links in the CV open in a new tab)
@@ -572,7 +572,7 @@ createServer(async (req, res) => {
       if (ahead) notes.push({ level: 'action', title: `${ahead} checkpoint${ahead > 1 ? 's' : ''} not yet published`, detail: 'Publish to update the live website.', action: 'publish' });
       for (const [src, msg] of Object.entries(box.problems ?? {})) notes.push({ level: 'error', title: `Could not reach ${src}`, detail: msg, action: 'check' });
       for (const t of await Promise.all(edtools.tools.map((x) => edtools.status(x)))) {
-        if (t.installed && (t.changed || t.ahead)) notes.push({ level: 'action', title: `${t.name}: changes not yet published`, detail: 'Publish it from the Educational Tools tile.', href: '/#tools' });
+        if (t.installed && (t.changed || t.ahead)) notes.push({ level: 'action', title: `${t.name}: changes not yet published`, detail: 'Open it under Educational Tools to publish.', href: `/edtools#${t.id}` });
       }
       const sch = scholar.lastAttempt();
       if (sch && Date.now() - Date.parse(sch.at) < 14 * 24 * 3600 * 1000 && (!sch.ok || sch.changes?.length)) {
