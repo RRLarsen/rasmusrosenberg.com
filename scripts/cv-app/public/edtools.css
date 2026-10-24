@@ -19,3 +19,9 @@ a.tool-card:hover { border-color: var(--deep); box-shadow: 0 6px 18px -12px rgb(
 .tool-form .check { display: flex; gap: 0.45rem; align-items: center; font-size: 0.88rem; }
 .tool-form .actions, .tool-form .form-msg { grid-column: 1 / -1; margin: 0; }
 .tool-form .form-msg { font-size: 0.85rem; color: var(--muted); }
+.course-files { list-style: none; margin: 0 0 0.9rem; padding: 0; max-width: 48rem; background: white; border: 1px solid var(--rule); border-radius: 8px; }
+.course-files li { display: flex; justify-content: space-between; gap: 1rem; padding: 0.45rem 0.9rem; font-size: 0.88rem; border-top: 1px solid var(--rule); }
+.course-files li:first-child { border-top: 0; }
+.course-files .state { color: var(--muted); font-size: 0.8rem; white-space: nowrap; }
+.course-files li:not(.published) .state { color: var(--deep); font-weight: 600; }
+.tool-page .help { max-width: 48rem; color: var(--muted); font-size: 0.85rem; }

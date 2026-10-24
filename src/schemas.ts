@@ -52,6 +52,7 @@ export function makeSchemas(dataDir = join(process.cwd(), 'data')) {
   const publicationId = oneOf(idsIn('publications.yaml'), 'publication id');
   const mediaId = oneOf(idsIn('media.yaml'), 'media id');
   const talkId = oneOf(idsIn('talks.yaml'), 'talk id');
+  const courseId = oneOf(idsIn('teaching.yaml'), 'course id');
 
   return {
     profile: z.object({
@@ -225,6 +226,24 @@ export function makeSchemas(dataDir = join(process.cwd(), 'data')) {
       terms: z.array(z.string()).default([]),
       description: z.string().optional(),
       syllabus_url: z.url().optional(),
+      // a course with open materials gets its own page, /teaching/<open_course>/, listing its
+      // modules (data/modules.yaml); the slides and syllabus are the files of the latest release
+      // in the GitHub repository materials_repo, named <open_course>-module-01.pptx etc.
+      open_course: z.string().regex(/^[a-z0-9-]+$/, 'Lowercase letters, digits and hyphens, e.g. psychopathy-and-crime').optional(),
+      materials_repo: z.string().regex(/^[\w.-]+\/[\w.-]+$/, 'owner/repository, e.g. RRLarsen/Course-Psychopathy-and-Crime').optional(),
+      materials_intro: z.string().optional(), // the course page's introduction; paragraphs separated by a blank line
+    }).refine((c) => !c.open_course || c.materials_repo, { message: 'A course with open materials needs the repository', path: ['materials_repo'] }),
+
+    // the modules of an open course (see teaching: open_course), in order of number
+    modules: z.object({
+      status,
+      course: courseId,
+      number: z.number().int().min(1),
+      title: z.string(),
+      question: z.string().optional(), // the module's guiding question, shown under the title
+      reading: z.string().optional(), // recommended reading; *asterisks* and [links](…) allowed
+      additional_reading: z.string().optional(),
+      aims: z.string().optional(), // focus and aims; paragraphs separated by a blank line
     }),
 
     // Research grants and other grants and scholarships (CV sections B.4 and B.5)

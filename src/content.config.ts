@@ -20,6 +20,7 @@ export const collections = {
   talks: list('talks'),
   media: list('media'),
   teaching: list('teaching'),
+  modules: list('modules'),
   grants: list('grants'),
   service: list('service'),
   awards: list('awards'),

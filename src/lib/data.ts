@@ -85,3 +85,16 @@ export const linkNames = {
   github: 'GitHub',
   bluesky: 'Bluesky',
 } as const;
+
+/** a course with open materials (teaching.yaml: open_course): its page and its downloads, the
+    files of the latest release in its GitHub repository (published from the dashboard) */
+export const coursePage = (c: { data: { open_course?: string } }) => `/teaching/${c.data.open_course}/`;
+export const courseFile = (c: { data: { open_course?: string; materials_repo?: string } }, file: string) =>
+  `https://github.com/${c.data.materials_repo}/releases/latest/download/${c.data.open_course}-${file}`;
+export const moduleSlides = (c: Parameters<typeof courseFile>[0], n: number) => courseFile(c, `module-${String(n).padStart(2, '0')}.pptx`);
+
+/** "Psychopathy and Crime: The Science, …" → ["Psychopathy and Crime", "The Science, …"] */
+export const splitTitle = (title: string) => {
+  const i = title.indexOf(': ');
+  return i < 0 ? [title, undefined] as const : [title.slice(0, i), title.slice(i + 2)] as const;
+};

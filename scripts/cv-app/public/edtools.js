@@ -21,8 +21,37 @@ const api = async (path, opts = {}) => {
   return j;
 };
 const setStatus = (text, kind = '') => { $('#status').textContent = text; $('#status').className = `status ${kind}`; };
-const blurbs = { 'exam-timer': 'A countdown clock for exams and teaching, with a large message field for announcements.' };
-const stateText = (t) => (!t.installed ? 'No local copy found.' : t.changed || t.ahead ? 'Changes not yet published.' : 'Up to date online.');
+const blurbs = {
+  'exam-timer': 'A countdown clock for exams and teaching, with a large message field for announcements.',
+  'psychopathy-and-crime': 'Slides and syllabus for the open course (CC BY 4.0), downloadable from the course page on the website.',
+};
+const stateText = (t) => (!t.installed ? 'No local copy found.' : t.kind === 'course' && !t.published ? 'Not yet published.' : t.changed || t.ahead ? 'Changes not yet published.' : 'Up to date online.');
+const stateLabel = { new: 'New', changed: 'Changed', removed: 'Removed', published: 'Published' };
+
+/** a course's page: its files, which ones changed since the last release, and Publish */
+function coursePage(tool) {
+  const published = tool.published ? `Last published ${new Date(tool.published).toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' })} (release ${tool.release}).` : 'Not yet published.';
+  return el('section', { class: 'tool-page' },
+    el('h1', { text: tool.name }),
+    el('p', { class: 'meta', text: `${blurbs[tool.id] ?? ''} ${published}` }),
+    el('div', { class: 'actions' },
+      el('button', { type: 'button', class: 'ghost', onclick: () => api(`tools/${tool.id}/open`, { method: 'POST' }) }, 'Open folder'),
+      el('a', { class: 'ghost button', href: tool.live, target: '_blank', rel: 'noopener' }, 'Open course page'),
+      el('button', { type: 'button', class: 'primary', disabled: !(tool.changed || tool.ahead || !tool.published), onclick: async (e) => {
+        const message = prompt(`Describe this release of the course materials:`, `Course materials, ${new Date().toLocaleDateString('en-CA', { year: 'numeric', month: 'long' })}`);
+        if (message === null) return;
+        e.target.disabled = true;
+        setStatus('Publishing: shrinking the pictures and uploading the files. This takes a few minutes…');
+        const r = await api(`tools/${tool.id}/publish`, { method: 'POST', body: { message } });
+        setStatus(r.message, r.ok ? '' : 'error');
+        render();
+      } }, 'Publish')),
+    el('h2', { text: 'Files' }),
+    el('ul', { class: 'course-files' }, tool.files.map((f) => el('li', { class: f.state },
+      el('span', { text: f.path.replace(/^slides\//, '').replace(/^syllabus\//, 'Syllabus: ') }),
+      el('span', { class: 'state', text: stateLabel[f.state] })))),
+    el('p', { class: 'help', text: 'To update a deck, replace its file in the slides folder, keeping "Module <number>" at the start of the name. Keep the syllabus in the syllabus folder as a Word file and a PDF (in Word: File › Save As › PDF). Publish shrinks the pictures and uploads each deck, the syllabus and one zip with everything as a new release; the download links on the website stay the same.' }));
+}
 
 function crumbs(tool) {
   const c = $('#crumbs');
@@ -45,6 +74,7 @@ async function render() {
         el('h2', { text: t.name }), el('p', { text: blurbs[t.id] ?? '' }), el('p', { class: 'meta', text: stateText(t) })))));
     return;
   }
+  if (tool.kind === 'course') { main.replaceChildren(coursePage(tool)); return; }
   const { settings } = await api(`tools/${tool.id}/settings`);
   const msg = el('p', { class: 'form-msg' });
   const form = el('form', { class: 'tool-form' },

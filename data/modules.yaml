@@ -1,0 +1,504 @@
+# The modules of open courses (teaching.yaml: open_course), shown on the course page,
+# /teaching/<open_course>/. Each module’s slides are the file <open_course>-module-NN.pptx
+# of the latest release in the course’s repository (teaching.yaml: materials_repo).
+
+- id: psychopathy-and-crime-module-01
+  status: published
+  course: fsc350-psychopathy-and-crime-the-science-ethics
+  number: 1
+  title: "Introduction"
+  question: "What is Psychopathy?"
+  reading: "“Introduction” in [*Psychopathy Unmasked*](/book/) (Larsen, 2025)"
+  aims: >-
+    The aim of this opening module is to orient students to the course while
+    establishing a shared conceptual foundation for the study of psychopathy in
+    psychological, forensic, and legal contexts. The module introduces the structure,
+    expectations, and assessment framework of the course.
+
+
+    The key aim of the module is to introduce students to the central question that
+    animates the course: What is psychopathy? Students are encouraged to reflect on
+    common stereotypes and cultural representations of psychopathy and to contrast these
+    with how the construct is defined and operationalized in contemporary psychological
+    research and diagnostic systems. The module introduces core definitional
+    distinctions (e.g., psychopathy as a clinical construct, its relationship to
+    antisocial personality disorder, and the use of terms such as “psychopathic traits”)
+    and situates psychopathy within broader psychiatric taxonomies (DSM and ICD).
+
+
+    By the end of the module, instructors should aim for students to appreciate that
+    psychopathy is not merely a descriptive label or pop-cultural trope, but a contested
+    construct with significant real-world implications. The module thus lays the
+    groundwork for the course’s overarching goal: developing students’ capacity to
+    critically evaluate how psychological concepts are constructed, validated, and
+    deployed within legal and institutional settings.
+
+- id: psychopathy-and-crime-module-02
+  status: published
+  course: fsc350-psychopathy-and-crime-the-science-ethics
+  number: 2
+  title: "The Problem of Psychopathy"
+  question: "Common Claims and Legal Influence"
+  reading: "“Chapter 1” in [*Psychopathy Unmasked*](/book/) (Larsen, 2025)"
+  additional_reading: "Robert Hare ([1996](https://www.researchgate.net/publication/280798957_Psychopathy_A_clinical_construct_whose_time_has_come)): Psychopathy: A Clinical Construct Whose Time Has Come"
+  aims: >-
+    The aim of this module is to review how the construct of psychopathy came to be
+    framed as a major social threat and a substantial influence in forensic clinical and
+    legal decision-making. Building on the definitional groundwork established in Module
+    1, this session shifts from what psychopathy is claimed to be to why those claims
+    should be critically scrutinized.
+
+
+    The module first introduces students to a brief intellectual history of psychopathy,
+    tracing its evolution from speculative moral–medical concepts in the late eighteenth
+    and nineteenth centuries to its contemporary status as an influential clinical
+    construct. Instructors should aim for students to understand that psychopathy did
+    not emerge from a linear accumulation of empirical evidence, but through shifting
+    clinical prototypes, theoretical speculation, and changing institutional priorities.
+    Particular attention is given to the role of key figures such as Cleckley and Hare,
+    and to how their conceptual frameworks shaped modern assessment practices.
+
+
+    The module then examines the development and dominance of psychopathy assessment
+    tools—especially the Hare Psychopathy Checklist–Revised (PCL-R)—and clarifies what
+    such instruments are designed to measure. Students are encouraged to distinguish
+    between measuring resemblance to a clinical prototype and diagnosing a disorder, and
+    to recognize the assumptions embedded in claims about dimensionality, thresholds,
+    and “gold-standard” status.
+
+
+    Finally, the module introduces the core “problem” of psychopathy: the widespread
+    assertion that psychopathy represents an alarming social danger and therefore
+    warrants significant legal attention. Instructors should aim for students to
+    critically assess the empirical and conceptual foundations of these claims,
+    particularly in light of the expanding legal use of psychopathy assessments in
+    sentencing, risk assessment, and parole decisions.
+
+- id: psychopathy-and-crime-module-03
+  status: published
+  course: fsc350-psychopathy-and-crime-the-science-ethics
+  number: 3
+  title: "Psychopathy and Forensic Risk"
+  question: "Are Psychopaths Extraordinarily Dangerous?"
+  reading: "“Chapter 2” in [*Psychopathy Unmasked*](/book/) (Larsen, 2025)"
+  aims: >-
+    The aim of this module is to critically examine the widely held assumption that
+    individuals labeled as psychopathic, or “diagnosed” with psychopathy, are
+    extraordinarily dangerous and therefore pose a uniquely high forensic risk. Building
+    on earlier modules that introduced the concept of psychopathy and its historical and
+    legal framing, this session focuses specifically on risk prediction: how the concept
+    of “dangerousness” and “forensic risk” is defined, measured, interpreted, and
+    translated into legal decision-making.
+
+
+    The module begins by situating psychopathy within broader discussions of violence
+    and social harm, explicitly challenging students’ intuitive and media-driven
+    assumptions about the sources of extreme violence. Instructors should aim for
+    students to recognize that violence is a pervasive social phenomenon that cannot be
+    straightforwardly explained by rare personality disorders alone. Against this
+    backdrop, the module introduces the mainstream forensic claim that psychopathy is a
+    strong predictor of chronic, severe, and instrumental violence.
+
+
+    A central pedagogical goal is to help students understand the logic and limitations
+    of risk prediction research. This includes clarifying what is meant by forensic
+    risk, distinguishing prognostic claims from descriptive ones, and introducing effect
+    sizes as the appropriate metric for evaluating claims about “extraordinary”
+    dangerousness. Through worked examples and thought experiments, students are guided
+    to interpret effect sizes in concrete terms and to appreciate the substantial
+    overlap between psychopathic and non-psychopathic groups in recidivism outcomes.
+
+
+    Finally, the module synthesizes findings from systematic reviews and meta-analyses
+    of PCL-based risk prediction studies. Instructors should aim for students to grasp
+    that observed associations are typically small to moderate, heavily moderated by
+    contextual factors (e.g., gender, country, ethnicity), and often driven by general
+    criminogenic factors rather than distinctive psychopathic traits. The module thus
+    prepares students to critically assess whether prevailing forensic and legal
+    narratives about psychopathy and dangerousness are empirically and conceptually
+    justified.
+
+- id: psychopathy-and-crime-module-04
+  status: published
+  course: fsc350-psychopathy-and-crime-the-science-ethics
+  number: 4
+  title: "Psychopathy and Treatment"
+  question: "Is Psychopathy a Chronic Condition?"
+  reading: "“Chapter 3” in [*Psychopathy Unmasked*](/book/) (Larsen, 2025)"
+  aims: >-
+    The aim of this module is to critically examine the widely held claim that
+    psychopathy is a chronic and fundamentally untreatable condition, and to assess the
+    scientific, ethical, and legal implications of this view. Building directly on the
+    preceding module’s analysis of risk prediction, this session shifts attention from
+    dangerousness to changeability: whether individuals labeled as psychopathic are
+    capable of meaningful therapeutic and rehabilitative improvement.
+
+
+    The module begins by introducing the dominant “untreatability” narrative, often
+    summarized by the slogan “nothing works.” Students are guided to understand how this
+    position emerged historically, how it became embedded in influential clinical texts
+    and assessment manuals, and how it contrasts sharply with established findings in
+    criminology and rehabilitation research showing that most justice-involved
+    individuals are responsive to intervention and tend to desist from crime over time.
+
+
+    A central instructional objective is to familiarize students with the empirical
+    treatment literature on psychopathy, particularly studies conducted in PCL-R
+    samples. Instructors should aim for students to appreciate that, contrary to common
+    claims, the overwhelming majority of systematic reviews reject categorical
+    untreatability. Evidence indicates that individuals classified as psychopathic do
+    engage with treatment, can benefit from standard rehabilitative programs (including
+    CBT-based interventions), and rarely show reliable adverse treatment effects.
+
+
+    The module also foregrounds the forensic consequences of labeling a group as
+    untreatable, including restricted access to rehabilitation, harsher sentencing
+    practices, and pessimistic risk evaluations. By the end of the module, students
+    should be able to critically evaluate whether the untreatability narrative is
+    scientifically warranted, and to reflect on how selective citation practices, weak
+    evidence, and institutional incentives have sustained a view with profound human and
+    legal consequences.
+
+- id: psychopathy-and-crime-module-05
+  status: published
+  course: fsc350-psychopathy-and-crime-the-science-ethics
+  number: 5
+  title: "Psychopathy and Moral Psychology"
+  question: "Are Psychopaths Morally Colorblind?"
+  reading: "“Chapter 4” in [*Psychopathy Unmasked*](/book/) (Larsen, 2025)"
+  aims: >-
+    The aim of this module is to critically evaluate the longstanding claim that
+    psychopathy is characterized by profound moral–psychological deficits, often
+    described using metaphors such as moral colorblindness or being without conscience.
+    Building on earlier modules that examined risk, treatment, and the legal influence
+    of psychopathy, this session focuses on the moral psychology literature that has
+    been central to portraying psychopathy as a uniquely dangerous and psychologically
+    abnormal condition.
+
+
+    The module begins by situating the “moral deficit” view within its historical and
+    philosophical roots, tracing how early moral-sense theories and clinical traditions
+    shaped contemporary assumptions about empathy, remorse, and moral understanding.
+    Instructors should aim for students to understand that these claims are stipulated
+    assumptions rather than established facts, and that they rely on specific, and often
+    contested, models of how moral psychology functions.
+
+
+    A central objective of the module is to familiarize students with the empirical
+    research on empathy and moral reasoning in PCL-based samples. Students are guided
+    through large-scale reviews of empathy research, distinguishing between cognitive
+    and affective empathy, including the examination of (theory of mind)
+    emotion-recognition tasks. Instructors must draw students’ attention to the fact
+    that the empirical record is dominated by null findings, with little reliable
+    evidence for systematic empathic impairments among individuals scoring high on PCL
+    psychopathy measures.
+
+
+    The module also critically assesses moral reasoning studies, including influential
+    moral/conventional and dilemma-based paradigms. By the end of the session, students
+    should appreciate that early supportive findings were methodologically weak and
+    largely unreplicated. Overall, the module aims to equip students to critically
+    assess whether claims about moral impairment in psychopathy are empirically
+    justified, conceptually coherent, or sustained by selective citation and scientific
+    spin.
+
+- id: psychopathy-and-crime-module-06
+  status: published
+  course: fsc350-psychopathy-and-crime-the-science-ethics
+  number: 6
+  title: "The Neuroscience of Psychopathy"
+  question: "Is Psychopathy a Brain Disorder?"
+  reading: "“Chapter 5” in [*Psychopathy Unmasked*](/book/) (Larsen, 2025)"
+  aims: >-
+    The aim of this module is to critically examine the influential claim that
+    psychopathy is primarily a brain-based or neurobiological disorder, and to evaluate
+    whether contemporary neuroscience provides reliable support for this view. Building
+    on earlier modules that addressed moral psychology, treatment, and forensic risk,
+    this session focuses on how biological explanations of psychopathy have been
+    developed, justified, and sustained within psychological and forensic research.
+
+
+    The module begins by situating neuroscience within a broader biopsychosocial
+    framework, emphasizing that biological research is one component of mental-health
+    inquiry rather than a reductionist alternative to psychological or social
+    explanations. Instructors should aim for students to understand both the motivations
+    behind biological research on psychopathy and the substantial conceptual and
+    methodological challenges inherent in studying complex personality constructs at the
+    neural/cellular level.
+
+
+    A central instructional goal is to familiarize students with neuroimaging
+    technologies (particularly structural and functional MRI), including what these
+    methods can and cannot tell us about brain structure and function. Undergraduate
+    students often have an inadequate understanding of these technologies and methods,
+    leading to exaggerated interpretation of MRI research. Therefore, the module
+    carefully unpacks common assumptions about brain localization and clarifies why
+    neuroimaging findings must be interpreted probabilistically and cautiously.
+
+
+    The core of the module critically reviews over two decades of MRI research in
+    PCL-based samples, with particular attention to hypotheses concerning the amygdala
+    and prefrontal cortex. Drawing on recent systematic reviews, students are guided to
+    recognize that the literature is dominated by null findings, extraordinary
+    heterogeneity, and frequent methodological problems, including low statistical power
+    and mislabeling of neural signals. By the end of the module, instructors should aim
+    for students to appreciate that there is no consistent or replicable neuroscientific
+    evidence supporting the claim that psychopathy is a discrete brain disorder, and to
+    reflect on how neuroscientific narratives can nonetheless acquire disproportionate
+    authority in forensic and legal contexts.
+
+- id: psychopathy-and-crime-module-07
+  status: published
+  course: fsc350-psychopathy-and-crime-the-science-ethics
+  number: 7
+  title: "Two Theories of Psychopathy"
+  question: "Has Psychopathy Been Validated?"
+  reading: "“Chapter 6” in [*Psychopathy Unmasked*](/book/) (Larsen, 2025)"
+  aims: >-
+    The aim of this module is to critically examine the two dominant theoretical
+    frameworks that have been used to explain psychopathy, and to assess whether either
+    theory has been empirically corroborated in a manner consistent with standard
+    scientific criteria. Building on earlier modules that evaluated psychopathy at the
+    levels of definition, risk, treatment, moral psychology, and neuroscience, this
+    session turns explicitly to theory evaluation as a core epistemic task.
+
+
+    The module begins by clarifying what a scientific theory is and what it is supposed
+    to accomplish—namely, to explain observed phenomena that are testable and
+    falsifiable. Instructors should aim for students to understand that theories are not
+    mere narratives or labels, but structured explanatory frameworks that must survive
+    sustained empirical testing. This methodological groundwork is then applied to
+    psychopathy research.
+
+
+    Students are introduced to the two most influential explanatory accounts of
+    psychopathy: the Emotion Theory, which attributes psychopathy to profound emotional
+    deficits, and the Cognitive Theory, which explains psychopathy in terms of
+    impairments in attention, executive control, and response modulation. The module
+    carefully reconstructs the core claims of each theory, the predictions they make,
+    and the types of empirical evidence that would count as corroborating or falsifying
+    them.
+
+
+    A central instructional goal is to guide students through the extensive empirical
+    literatures testing these theories, including psychophysiological, neuroimaging, and
+    behavioral studies. Instructors should guide students’ attention to the fact that,
+    despite decades of research, the evidence consistently fails to reveal the severe
+    emotional or cognitive deficits predicted by either theory. The module concludes
+    with critical reflections on analytic flexibility, theoretical retreat, and the
+    broader implications of maintaining theories that lack robust empirical support,
+    thereby sharpening students’ capacity for theory evaluation in applied psychological
+    science.
+
+- id: psychopathy-and-crime-module-08
+  status: published
+  course: fsc350-psychopathy-and-crime-the-science-ethics
+  number: 8
+  title: "Psychopathy and Scientific Spin"
+  question: "Is Rhetoric Eclipsing the Empirical Evidence?"
+  reading: "“Chapter 5, pp. 137–141” in [*Psychopathy Unmasked*](/book/) (Larsen, 2025)"
+  additional_reading: "Jarkko Jalava et al. ([2021](https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2021.654336/full)): Is the psychopathic brain an artifact of coding bias? A systematic review"
+  aims: >-
+    The aim of this module is to equip students with the conceptual tools needed to
+    identify, analyze, and critically evaluate scientific spin and questionable research
+    practices (QRPs) in psychopathy research, and to situate these practices within the
+    broader context of the replication crisis in the behavioral sciences. Building on
+    earlier modules that assessed empirical claims about risk, treatment, moral
+    psychology, neuroscience, and theory, this session shifts focus from what the
+    evidence shows to how that evidence has been produced, framed, and disseminated.
+
+
+    The module begins by introducing the replication crisis as a structural problem
+    affecting psychology and related disciplines, emphasizing the prevalence of
+    false-positive findings, non-replicable results, and overstated conclusions.
+    Instructors should aim for students to understand key mechanisms driving this
+    crisis, including academic incentive structures, publication bias, and analytic
+    flexibility. The module then provides a clear conceptual distinction between
+    scientific spin—the deliberate or strategic distortion of research claims during
+    dissemination—and QRPs, such as HARKing, p-hacking, selective reporting, and scale
+    redefinition, which often operate in ethical gray zones.
+
+
+    A central pedagogical objective is to apply these general concepts directly to
+    psychopathy research. Through detailed case studies of highly cited and influential
+    publications, students are guided to identify concrete examples of exaggerated
+    language, buried limitations, misleading abstracts, and biased review practices.
+    Particular attention is given to how null findings are systematically filtered out
+    of review literatures (e.g., Jalava et al., 2021), producing a distorted impression
+    of evidential consistency.
+
+
+    The module concludes by extending the analysis to public media representations of
+    psychopathy, highlighting how scientific spin is amplified through expert
+    commentary, documentaries, and popular outlets. By the end of the module,
+    instructors should aim for students to appreciate that the persistence and influence
+    of psychopathy as a construct arguably cannot be understood without close attention
+    to the epistemic and institutional dynamics that shape scientific credibility.
+
+- id: psychopathy-and-crime-module-09
+  status: published
+  course: fsc350-psychopathy-and-crime-the-science-ethics
+  number: 9
+  title: "Psychopathy and Ethics"
+  question: "Are Psychopathy Assessments Ethical?"
+  reading: "“Chapter 7” in [*Psychopathy Unmasked*](/book/) (Larsen, 2025)"
+  additional_reading: "DeMatteo et al. ([2020](https://joeldvoskin.com/wp-content/uploads/2024/06/PCL-R-Statement-DeMatteo-et-al.-2020.pdf)): Statement of Concerned Experts on the Use of the Hare Psychopathy Checklist—Revised"
+  aims: >-
+    The aim of this module is to evaluate whether the assessment and forensic use of
+    psychopathy—particularly via the PCL-R—can be ethically justified under established
+    principles of professional and research ethics. Building on earlier modules that
+    critically examined the empirical foundations of psychopathy claims, this session
+    shifts from questions of scientific validity to questions of normative
+    permissibility: even if PCL-psychopathy assessments were empirically robust, would
+    their use be ethically defensible?
+
+
+    The module begins by introducing the historical development of modern research and
+    professional ethics, situating contemporary ethical standards in response to
+    well-documented abuses in human experimentation and professional misconduct.
+    Instructors should aim for students to understand the role of foundational
+    frameworks such as the Nuremberg Code, the Declaration of Helsinki, the Belmont
+    Report, and Beauchamp and Childress’ four-principle model, as well as how these
+    frameworks inform contemporary professional codes such as the APA Ethics Code.
+
+
+    The core of the module applies these ethical principles—beneficence,
+    non-maleficence, respect for autonomy, and justice—to the practice of psychopathy
+    assessment in forensic settings. Students are guided to examine how high PCL-R
+    scores routinely influence sentencing, parole, treatment access, and long-term
+    liberty, often in ways that are punitive rather than therapeutic. Instructors should
+    emphasize that these outcomes raise serious ethical concerns, particularly given the
+    weak empirical support for the five core claims commonly used to justify psychopathy
+    assessments.
+
+
+    The module concludes by addressing common objections raised by forensic
+    practitioners and by encouraging critical reflection on whether continued use of
+    psychopathy assessments exposes professionals to ethical misconduct. Overall, the
+    aim is to equip students with a principled framework for evaluating ethical
+    responsibility in applied forensic psychology.
+
+- id: psychopathy-and-crime-module-10
+  status: published
+  course: fsc350-psychopathy-and-crime-the-science-ethics
+  number: 10
+  title: "Explaining a Lack of Evidence (Part I)"
+  question: "Reviewing Mainstream Perspectives"
+  reading: "“Chapter 8” in [*Psychopathy Unmasked*](/book/) (Larsen, 2025)"
+  aims: >-
+    The aim of this module is to systematically address a central anomaly in psychopathy
+    research: the persistent failure to empirically corroborate its most basic and
+    widely accepted claims about psychopathy, despite decades of intensive scientific
+    investigation. Building on the cumulative critiques developed in earlier modules,
+    this session shifts from evaluating individual domains of evidence to explaining why
+    the overall research program has failed to deliver robust support for the
+    psychopathy construct.
+
+
+    The module begins by revisiting the historical emergence of psychopathy as a
+    clinical prototype and its operationalization through the PCL assessment tools.
+    Instructors should aim for students to understand how a consensus around description
+    and measurement gave rise to a large and self-sustaining research paradigm, even in
+    the absence of strong empirical validation. The module then foregrounds the striking
+    disconnect between the alleged extremity of psychopathy—as a condition that
+    supposedly “stands out”—and the consistent lack of clear empirical signals across
+    research targeting risk, treatment, moral psychology, neuroscience, and theory.
+
+
+    The core pedagogical objective is to introduce and critically assess two mainstream
+    explanatory responses to this lack of evidence. The first attributes failure to the
+    intrinsic complexity of psychopathy, arguing that current scientific methods are
+    simply inadequate. The second locates the problem in measurement, suggesting that
+    tools such as the PCL-R fail to properly identify “true” psychopathic individuals.
+    Students are guided to evaluate the strengths and limitations of each explanation,
+    with particular attention to issues of falsifiability, ad hoc reasoning, and theory
+    protection.
+
+
+    By the end of the module, instructors should aim for students to appreciate that
+    these explanations, while superficially plausible, risk insulating weak scientific
+    ideas from meaningful empirical scrutiny, thereby challenging common assumptions
+    about scientific self-correction in applied psychological research.
+
+- id: psychopathy-and-crime-module-11
+  status: published
+  course: fsc350-psychopathy-and-crime-the-science-ethics
+  number: 11
+  title: "Explaining a Lack of Evidence (Part II)"
+  question: "Is Psychopathy a “Zombie Idea”?"
+  reading: "“Chapter 8” in [*Psychopathy Unmasked*](/book/) (Larsen, 2025)"
+  additional_reading: "Hervey Cleckley ([1976](https://gwern.net/doc/psychology/personality/psychopathy/1941-cleckley-maskofsanity.pdf), pp. 29–55; cases “Max” and “Roberta”): *The Mask of Sanity*"
+  aims: >-
+    The aim of this module is to advance a substantive alternative explanation for the
+    persistent lack of empirical support for psychopathy by introducing the concept of a
+    “zombie idea”—an idea that remains intuitively compelling despite having no referent
+    in reality. Building directly on, and in extension to Module 10, this session moves
+    beyond evaluating mainstream “excuses” for a lack of evidence and instead
+    interrogates whether the core idea of psychopathy itself is fundamentally mistaken.
+
+
+    The module begins by clarifying what it means for a scientific concept to be “not
+    real,” drawing on distinctions between particulars and universals. Instructors
+    should aim for students to understand that while assessment tools can reliably
+    identify real individuals who resemble a clinical prototype, this does not entail
+    that such individuals instantiate a genuine psychological kind. Through analogies
+    involving fictional or misinterpreted entities, students are guided to appreciate
+    how scientific “concepts” can persist even when they lack real-world “referents”.
+
+
+    A central pedagogical objective is to show how psychopathy meets the criteria of a
+    zombie idea: The idea of psychopathy is intuitively appealing, resistant to
+    falsification, and sustained by selective interpretation of evidence, vivid case
+    narratives, and cultural reinforcement rather than by robust empirical
+    corroboration. The module critically revisits the Cleckley–Hare prototype, arguing
+    that its purported “abductive trigger” was based on misrepresentative observations
+    rather than genuinely puzzling facts requiring novel theoretical explanation.
+
+
+    The module concludes by examining why zombie ideas are particularly difficult to
+    eliminate from scientific practice, including their alignment with institutional
+    incentives, pop-cultural fascination, and the illusion of cumulative progress. By
+    the end of the session, instructors should aim for students to appreciate how
+    psychopathy may exemplify a broader mode of epistemic failure in science—one in
+    which an idea outlives its evidential support and continues to shape research,
+    policy, and practice despite systematic disconfirmation.
+
+- id: psychopathy-and-crime-module-12
+  status: published
+  course: fsc350-psychopathy-and-crime-the-science-ethics
+  number: 12
+  title: "The Future of Psychopathy Research"
+  reading: "“Conclusion” in [*Psychopathy Unmasked*](/book/) (Larsen, 2025)"
+  additional_reading: "Shadd Maruna ([2025](https://onlinelibrary.wiley.com/doi/full/10.1111/1745-9125.12393)): Redeeming Desistance: From Individual Journeys to a Social Movement"
+  aims: >-
+    The aim of this final module is to synthesize the course’s cumulative critical
+    analysis and to assess what a scientifically responsible future for psychopathy
+    research might look like. Rather than introducing new empirical domains, the module
+    invites students to reflect on the implications of the evidence reviewed across the
+    course and to consider whether the psychopathy research program should be reformed,
+    radically revised, or abandoned altogether.
+
+
+    The module begins by consolidating the argument that psychopathy may constitute a
+    “zombie idea”—an intuitively appealing concept that persists despite the absence of
+    clear, replicated empirical support. Instructors should aim for students to
+    understand why this claim is both provocative and falsifiable: if psychopathy
+    genuinely exists as a distinct clinical entity affecting a non-trivial portion of
+    the population, it should be possible to identify clear, real-world cases that
+    instantiate the full prototype without recourse to ad hoc explanations. The failure
+    to do so is treated as an epistemic challenge rather than a rhetorical conclusion.
+
+
+    The module then engages with common objections to abandoning psychopathy, including
+    appeals to extreme offenders (e.g., serial killers) and claims of “some positive
+    evidence.” Students are guided to critically evaluate these objections in light of
+    methodological flexibility, false-positive findings, and the historical persistence
+    of null-effect research programs.
+
+
+    The concluding aim is forward-looking and reflective. Instructors should encourage
+    students to consider alternative research paths, the ethical and legal consequences
+    of retaining or discarding problematic constructs, and the broader lesson
+    psychopathy offers about scientific fallibility, institutional incentives, and the
+    difficulty of letting go of compelling but unsupported ideas. The module is designed
+    as a capstone discussion on critical inquiry in applied psychological science.

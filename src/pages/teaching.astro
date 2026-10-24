@@ -4,7 +4,7 @@ import Emph from '../components/Emph.astro';
 import Base from '../layouts/Base.astro';
 import PageHeading from '../components/PageHeading.astro';
 import Section from '../components/Section.astro';
-import { getSite, isPublished, onWebsite, byDateDesc, formatDate } from '../lib/data';
+import { getSite, isPublished, onWebsite, byDateDesc, formatDate, coursePage, courseFile, splitTitle } from '../lib/data';
 
 const site = await getSite();
 const all = await getCollection('teaching', onWebsite);
@@ -29,6 +29,8 @@ const groups = [
   { title: 'Science courses', items: university.filter((c) => c.data.code?.startsWith('FSC')).sort(graduateFirst) },
   { title: 'Philosophy courses', items: university.filter((c) => c.data.code?.startsWith('PHL')).sort(graduateFirst) },
 ].filter((g) => g.items.length > 0);
+// courses with open materials (slides, syllabus) get their own page and a section here
+const open = all.filter((c) => c.data.open_course);
 const continuing = all.filter((c) => c.data.level === 'continuing-education').sort(byDateDesc);
 ---
 <Base title="Teaching" description={site.pages.teaching}>
@@ -43,9 +45,10 @@ const continuing = all.filter((c) => c.data.level === 'continuing-education').so
             <li>
               <details>
                 <summary>
-                  <span>{c.data.title} ({c.data.code}){c.data.level === 'graduate' && <span class="tag sans">Graduate</span>}</span>
+                  <span>{c.data.title} ({c.data.code}){c.data.level === 'graduate' && <span class="tag sans">Graduate</span>}{c.data.open_course && <span class="tag open-tag sans">Open Access Course Materials</span>}</span>
                 </summary>
                 <p class="desc">{c.data.description ? <Emph text={c.data.description} /> : 'Course description coming soon.'}</p>
+                {c.data.open_course && <p class="desc-link sans"><a href={coursePage(c)}>Open course materials: slides and syllabus</a></p>}
               </details>
             </li>
           ))}
@@ -53,6 +56,23 @@ const continuing = all.filter((c) => c.data.level === 'continuing-education').so
       </>
     ))}
   </Section>
+
+  {open.length > 0 && (
+    <Section title="Open course" id="open-course">
+      {open.map((c) => (
+        <article class="open">
+          <h3><a href={coursePage(c)}>{splitTitle(c.data.title)[0]}</a></h3>
+          {splitTitle(c.data.title)[1] && <p class="open-sub">{splitTitle(c.data.title)[1]}</p>}
+          {c.data.description && <p class="open-desc"><Emph text={c.data.description} /></p>}
+          <p class="open-links sans">
+            <a href={coursePage(c)}>Course materials: modules and slides</a>
+            <a href={courseFile(c, 'syllabus.pdf')}>Sample syllabus (PDF)</a>
+          </p>
+          <p class="open-note sans">Free to use and adapt in your own teaching under a <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> licence.</p>
+        </article>
+      ))}
+    </Section>
+  )}
 
   <Section title="Continuing education" id="continuing-education">
     {continuing.length === 0 ? (
@@ -97,7 +117,19 @@ const continuing = all.filter((c) => c.data.level === 'continuing-education').so
   details[open] summary::after { content: "−"; }
   summary:hover { color: var(--link); }
   .tag { margin-left: 0.6rem; padding: 0.05rem 0.5rem; border: 1px solid var(--rule); border-radius: 2rem; font-size: 0.75rem; color: var(--muted); vertical-align: 0.15em; white-space: nowrap; }
+  .open-tag { border-color: color-mix(in srgb, var(--link) 45%, transparent); background: color-mix(in srgb, var(--link) 10%, transparent); color: var(--link); }
   .desc { margin: 0 0 1rem; max-width: var(--measure); color: var(--ink-soft); font-size: 1.0625rem; }
+
+  .desc-link { margin: -0.4rem 0 1rem; font-size: 0.9375rem; }
+
+  .open + .open { margin-top: 2.5rem; }
+  .open h3 { margin: 0; font-size: 1.375rem; font-weight: 500; }
+  .open h3 a { color: var(--ink); text-decoration: none; }
+  .open h3 a:hover { color: var(--link); }
+  .open-sub { margin: 0.2rem 0 0; font-style: italic; color: var(--ink-soft); }
+  .open-desc { margin: 1rem 0 0; max-width: var(--measure); color: var(--ink-soft); font-size: 1.0625rem; }
+  .open-links { display: flex; flex-wrap: wrap; gap: 0.5rem 1.75rem; margin: 1.1rem 0 0; }
+  .open-note { margin: 0.6rem 0 0; color: var(--muted); font-size: 0.875rem; }
 
   .plain { list-style: none; margin: 0; padding: 0; }
   .plain li { display: grid; grid-template-columns: 8rem minmax(0, 1fr); gap: 1rem; padding: 0.75rem 0; border-top: 1px solid var(--rule); }

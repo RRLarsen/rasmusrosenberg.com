@@ -545,7 +545,8 @@ createServer(async (req, res) => {
       if (!id && req.method === 'GET') return json(res, 200, { tools: await Promise.all(edtools.tools.map((t) => edtools.status(t))), fields: Object.fromEntries(edtools.tools.map((t) => [t.id, t.fields])) });
       const t = edtools.toolById(id);
       if (!t) throw new HttpError(404, 'No such tool.');
-      if (key === 'settings' && req.method === 'GET') return json(res, 200, { settings: edtools.readSettings(t) });
+      if (key === 'settings' && req.method === 'GET') return json(res, 200, { settings: t.kind === 'page' ? edtools.readSettings(t) : {} });
+      if (key === 'open' && req.method === 'POST') { await edtools.openFolder(t); return json(res, 200, { ok: true }); }
       if (key === 'settings' && req.method === 'PUT') {
         try { return json(res, 200, { ok: true, settings: edtools.writeSettings(t, (await readBody(req)).settings ?? {}) }); }
         catch (e: any) { return json(res, 200, { ok: false, error: e.message }); }
