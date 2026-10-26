@@ -61,8 +61,9 @@ Status as of 2026-10-21. Details of each are in the decisions below.
 ## Hosting and domains
 
 - Public GitHub repo (`rrlarsen/rasmusrosenberg.com`), deployed to GitHub Pages through Actions. The main address is **https://www.rasmusrosenberg.com** (`data/site.yaml: url`, `astro.config.mjs: site`); rasmusrosenberg.com without www redirects to it.
-- psychopathyunmasked.com stays on Wix until the book site is built.
-- The domains are registered with Wix and the subscriptions run for about another year. At launch, point the rasmusrosenberg.com DNS at GitHub Pages; transfer to a cheaper registrar at renewal.
+- DNS for both domains is on Cloudflare (free account; nameservers angelina/bowen.ns.cloudflare.com). rasmusrosenberg.com: A records to GitHub Pages and `www` CNAME to rrlarsen.github.io, all DNS only (grey cloud) so GitHub issues the HTTPS certificate; Cloudflare Email Routing forwards mail@rasmusrosenberg.com to Gmail (One.com mail is gone).
+- psychopathyunmasked.com (2026-10-26): no site of its own; proxied placeholder A records (`192.0.2.1`, `@` and `www`) and two Cloudflare redirect rules, in order: path starting `/course` → `/teaching/psychopathy-and-crime/`, everything else → `/book/` (301). No email. The book's `website` field was removed; a future book site would replace the redirects.
+- Registrations: rasmusrosenberg.com is transferring from Wix to Cloudflare Registrar (started 2026-10-26); psychopathyunmasked.com follows, before its 2027-01-30 expiry. ophep.com/.org stay at Wix and lapse.
 - Everything in the repo is public, so never commit drafts not meant for the public, credentials or private notes. API keys go in GitHub Actions secrets. `private/` (student names, the private PDF, the original CV document) is git-ignored and must be backed up separately.
 - Licence: code under MIT; content (texts, data, photographs, images) all rights reserved (`LICENSE`).
 
