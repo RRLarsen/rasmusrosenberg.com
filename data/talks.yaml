@@ -1,5 +1,16 @@
 # Conference presentations (C.5) and invited lectures and workshops (C.6). Shown in the CV only.
 
+- id: invited-2026-psychopathy-unmasked-the-rise-and-fall-of-a-dang
+  status: published
+  title: "Psychopathy Unmasked: The Rise and Fall of a Dangerous Diagnosis"
+  event: Third Age Learning York Region
+  date: 2026-11-02
+  format: lecture
+  category: invited
+  tags:
+    - psychopathy
+  location: Online Webinar
+
 - id: conference-2026-the-future-of-psychopathy-scientific-debate-clin
   status: published
   title: "The Future of Psychopathy: Scientific Debate, Clinical Utility, and Ethical
