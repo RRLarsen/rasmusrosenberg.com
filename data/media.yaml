@@ -2,6 +2,20 @@
 # summary and image (a thumbnail in public/images/media/) are shown on the Media page.
 # Thumbnails and most summaries come from each link's own preview data (its og:image and og:description).
 
+- id: 2025-psychopathy-unmasked
+  status: published
+  type: interview
+  title: Psychopathy Unmasked
+  outlet: Rorotoko.com
+  date: 2025-09-17
+  url: https://www.rorotoko.com/micro-interviews/20250915-larsen-rasmus-on-psychopathy-unmasked-1-1
+  summary: Psychopathy Unmasked is a book about “psychopaths.” But it’s not your ordinary
+    run-of-the-mill account that repeats the well-worn story of violent people naturally
+    disposed to wreak havoc in our society. Instead,...
+  image: /images/media/psychopathy-unmasked.jpg
+  tags:
+    - psychopathy
+
 - id: 2026-the-myth-of-the-psychopathic-brain
   status: published
   type: press
